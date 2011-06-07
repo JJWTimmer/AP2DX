@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package AP2DX.coordinator;
+
+/**
+ * @author Jasper Timmer
+ *
+ */
+public class coordinator {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
