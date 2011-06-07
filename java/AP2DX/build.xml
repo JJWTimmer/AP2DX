@@ -32,11 +32,10 @@
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<target name="compile" depends="clean, makedir">
-		<javac srcdir="${src.dir}" destdir="${build.dir}"
-			fork="true">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
 			<classpath refid="AP2DX.classpath" />
 		</javac>
-
+		<sleep seconds="2"/>
 	</target>
 
 	<!-- Run the JUnit Tests -->
@@ -51,6 +50,7 @@
 				</fileset>
 			</batchtest>
 		</junit>
+		<sleep seconds="2"/>
 	</target>
 
 	<target name="javadoc">
@@ -67,6 +67,7 @@
 	            <exclude name="AP2DX/test/**/*.java" />
 	        </fileset>
 	    </javadoc>
+		<sleep seconds="2"/>
 	</target>
 	
 	<target name="main" depends="compile, junit, javadoc">
