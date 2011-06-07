@@ -17,6 +17,8 @@ public class AP2DXBaseTest {
 	public void testNewInstance() {
 		AP2DXBaseConcrete test = new AP2DXBaseConcrete();
 		assertNotNull(test);
+		
+		System.exit(0);
 	}
 	
 	private class AP2DXBaseConcrete extends AP2DXBase  {
