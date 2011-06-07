@@ -32,7 +32,8 @@
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<target name="compile" depends="clean, makedir">
-		<javac srcdir="${src.dir}" destdir="${build.dir}">
+		<javac srcdir="${src.dir}" destdir="${build.dir}"
+			fork="true" memoryMaximumSize="384m" memoryInitialSize="128m">
 			<classpath refid="AP2DX.classpath" />
 		</javac>
 
@@ -41,7 +42,7 @@
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
 	<target name="junit" depends="compile">
-		<junit printsummary="on" fork="true" maxmemory="128M" haltonfailure="yes">
+		<junit printsummary="on" fork="true" maxmemory="256M" haltonfailure="no">
 			<classpath refid="AP2DX.classpath" />
 			<formatter type="xml" />
 			<batchtest todir="${test.report.dir}">
