@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename Java project &apos;coordinator&apos; to &apos;AP2DX&apos;&#x0D;&#x0A;- Original element: &apos;coordinator&apos;&#x0D;&#x0A;- Renamed element: &apos;coordinator&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;coordinator&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=coordinator" name="AP2DX" references="true" stamp="1307440625658" version="1.0"/>
-</session>
