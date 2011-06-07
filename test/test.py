@@ -8,8 +8,9 @@ class test:
     
 
     def __init__(self):
-        TCP_IP = "localhost"
-        TCP_PORT = 22 
+        #TCP_IP = "146.50.51.85"
+        TCP_IP = "146.50.51.85"
+        TCP_PORT = 3000
         BUFFER_SIZE = 1024
         spawnMessage = "INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}\r\n"
         forwardDriveMessage = "DRIVE {Left 1} {Right 1} {Normalized true}\r\n"
