@@ -6,7 +6,6 @@ package AP2DX;
 import java.io.*;
 import java.util.logging.*;
 import java.util.Map;
-import java.net.*;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -81,6 +80,7 @@ public abstract class AP2DXBase {
 		  }
 		  
 		  return jsonMap;
+	}
 	
 	/**
 	  * Fetch the entire contents of a text file, and return it in a String.

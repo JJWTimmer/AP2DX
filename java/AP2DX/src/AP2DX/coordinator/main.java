@@ -3,6 +3,9 @@
  */
 package AP2DX.coordinator;
 
+import java.net.*;
+import java.io.*;
+
 import AP2DX.AP2DXBase;
 
 
