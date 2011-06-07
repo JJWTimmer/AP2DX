@@ -13,6 +13,8 @@ import org.json.simple.parser.ParseException;
 
 /**
  * @author Jasper Timmer
+ * @author Wadi Assal
+ * 
  * Baseclass for AP2DX components
  * 
  * Can read config file
@@ -32,6 +34,9 @@ public abstract class AP2DXBase {
 	    try {
 	      boolean append = true;
 	      FileHandler fh = new FileHandler(config.get("logfile").toString(), append);
+	      
+	      //set logfile format:
+	      //date millis methodname level message
 	      fh.setFormatter(new Formatter() {
 	          public String format(LogRecord rec) {
 	             StringBuffer buf = new StringBuffer(1000);
@@ -57,15 +62,14 @@ public abstract class AP2DXBase {
 	    }
 	    
 	    logger.info("Package: " + this.getClass().getPackage().getName());
-	    
 	}
 	
 	/**
-	 * read hardcoded configfile
+	 * read configfile
 	 */
 	protected Map ReadConfig() {
 		  //get text contents of file config.json (hard-coded filename)
-		  String jsonText = getContents(new File("coordinator.json"));
+		  String jsonText = getContents(new File(this.getClass().getPackage().getName() + ".json"));
 		  Object jsonObj = null;
 		  Map jsonMap = null;
 		  JSONParser parser = new JSONParser();
