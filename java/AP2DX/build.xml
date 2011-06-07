@@ -41,7 +41,7 @@
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
 	<target name="junit" depends="compile">
-		<junit printsummary="on" fork="true" haltonfailure="yes">
+		<junit printsummary="on" fork="true" maxmemory="128M" haltonfailure="yes">
 			<classpath refid="AP2DX.classpath" />
 			<formatter type="xml" />
 			<batchtest todir="${test.report.dir}">
