@@ -1,0 +1,57 @@
+Volgorde van prioriteit
+
+- verbinding maken
+- sensoren uitlezen/schrijven
+    * Uitlezen
+    * Schrijven
+- Kaart maken
+
+Coordinator: 
+Taal: Java?
+Krijgt alle data van de wereld binnen en stuurt besturing door naar de server.
+
+Sensor: 
+Taal: Java? Python?
+Verwerkt de sensordata
+
+Motor abstractie:
+Taal: Java? Python?
+Verzint wat de motoren moeten doen
+
+Reflexen:
+Taal: Java?
+Zorgt ervoor dat je nergens tegenaan komt
+
+Planner: 
+Taal: Java? Prolog? Python?
+Verzint het pad
+
+Mapper:
+Taal: Java? Python?
+De mapper zorgt er ook voor dat de positie gecontrolleerd wordt aan de hand van
+de plaats van objecten in de omgeving.
+
+Testen:
+Er moet een test worden geschreven tegelijk met een programma. 
+
+
+
+Werkplan:
+* Specificatie van wat we aan het eind kunnen en zullen leveren.
+Algeheel:
+
+Milestone 0:
+Domme planner, motorbesturing, Coordinator, werkend
+Het hele ontwerp abstract geimplementeerd.
+
+Milestone 1:
+Een interface die USARSim P2DX kan besturen. 
+
+Milestone 2:
+
+Oplevering:
+
+* Bijpassend beredeneerd functioneel ontwerp.
+* Specificatie van wanneer en hoe de verschillende componenten zullen worden.
+* gerealiseerd en hoe je ze zal testen.
+* Daarmee samenhangend, welke producten je op de deliverables zal uitleveren.
