@@ -1,6 +1,6 @@
 package AP2DX.coordinator;
 
-public class Test
+public class Tryout
 {
     public static void main(String[] args)
     {
