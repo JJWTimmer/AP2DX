@@ -13,14 +13,14 @@ import AP2DX.AP2DXBase;
  * @author jjwt
  *
  */
-public class main extends AP2DXBase {
+public class Program extends AP2DXBase {
 	
 
 	/**
 	 * entrypoint of coordinator 
 	 */
 	public static void main (String[] args){
-		AP2DXBase instance = new main();
+		AP2DXBase instance = new Program();
 		
 		System.exit(0);
 	}
@@ -28,7 +28,7 @@ public class main extends AP2DXBase {
 	/**
 	 * constructor
 	 */
-	public main () {
+	public Program() {
 		System.out.println(" Running... ");
 		/* Connection data. */
 		String addr = "127.0.0.1";
