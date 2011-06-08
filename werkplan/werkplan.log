@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  8 JUN 2011 15:09
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  8 JUN 2011 16:51
 entering extended mode
  %&-line parsing enabled.
 **werkplan.tex
@@ -152,50 +152,40 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 14.
 
-<xymatrix
+(./milestones.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 23.
+(Font)              <9> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 23.
- 3x4 370> (./milestones.tex [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 29.
+(Font)              <5> on input line 9.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
  (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 29.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
+ [1
 
-Overfull \hbox (8.5839pt too wide) in paragraph at lines 65--67
-[]\OT1/cmr/m/n/10 We will work on a re-port, de-scrib-ing our progress, prob-le
-ms and (test)results. 
- []
-
-) [2] (./werkplan.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) [2] (./werkplan.aux) ) 
 Here is how much of TeX's memory you used:
- 2525 strings out of 495006
- 29999 string characters out of 1181410
- 126272 words of memory out of 3000000
- 5719 multiletter control sequences out of 15000+50000
- 8731 words of font info for 34 fonts, out of 3000000 for 9000
+ 2494 strings out of 495006
+ 29867 string characters out of 1181410
+ 113272 words of memory out of 3000000
+ 5685 multiletter control sequences out of 15000+50000
+ 9950 words of font info for 38 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
- 27i,11n,24p,167b,732s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pf
-b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/t
-ype1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texm
-f-texlive/fonts/type1/public/xypic/xyatip10.pfb></usr/share/texmf-texlive/fonts
-/type1/public/xypic/xybtip10.pfb></usr/share/texmf-texlive/fonts/type1/public/x
-ypic/xydash10.pfb>
-Output written on werkplan.pdf (2 pages, 135176 bytes).
+ 26i,8n,24p,176b,244s stack positions out of 5000i,500n,10000p,200000b,50000s
+</u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on werkplan.pdf (2 pages, 119026 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
+ 45 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

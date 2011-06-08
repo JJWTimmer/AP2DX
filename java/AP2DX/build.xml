@@ -28,6 +28,7 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${javadoc.dir}" />
 		<mkdir dir="${test.report.dir}" />
+		<mkdir dir="log" />
 	</target>
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
@@ -40,7 +41,7 @@
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
 	<target name="junit" depends="compile">
-		<junit printsummary="yes" haltonfailure="yes">
+		<junit printsummary="yes" haltonfailure="no">
 		  <classpath refid="AP2DX.classpath"/>
 		  <formatter type="xml"/>
 

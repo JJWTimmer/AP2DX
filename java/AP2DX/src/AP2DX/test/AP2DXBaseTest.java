@@ -3,8 +3,8 @@
  */
 package AP2DX.test;
 
-import AP2DX.AP2DXBase;
 import junit.framework.TestCase;
+import AP2DX.AP2DXBase;
 
 /**
  * @author Jasper
@@ -17,14 +17,14 @@ public class AP2DXBaseTest extends TestCase {
     }
     
     public void testConcreteClass() {
-    	AP2DXBase test = new ConcreteClass();
-    	assertNotNull(test);
+    	System.out.println("#Cur dir: " + System.getProperty("user.dir"));
     	
+    	ConcreteClass test = new ConcreteClass();
+    	assertNotNull(test);
     }
     
-    private class ConcreteClass extends AP2DXBase {
+    private class ConcreteClass extends AP2DX.AP2DXBase {
     	//empty
-    	
     }
     
 }
