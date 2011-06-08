@@ -8,7 +8,6 @@
 	<property name="javadoc.dir" location="${ant.dir}/javadoc" />
 
 	<!-- Variables used for JUnit testin -->
-	<property name="test.dir" location="${src.dir}/test" />
 	<property name="test.report.dir" location="${ant.dir}/testreport" />
 
 	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
@@ -41,19 +40,18 @@
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
 	<target name="junit" depends="compile">
-		<junit printsummary="on" haltonfailure="no">
+		<junit printsummary="on" fork="true" haltonfailure="no">
 			<classpath refid="AP2DX.classpath" />
-			<formatter type="xml" />.
+			<formatter type="xml" />
 			
 			<batchtest todir="${test.report.dir}">
 				<fileset dir="${src.dir}">
-					<include name="**/*Test.java" />
+					<include name="**/*Test*.java" />
 				</fileset>
 			</batchtest>
 		</junit>
 	</target>
 
-	
 	<target name="javadoc">
 	    <javadoc
 	           access="public"
