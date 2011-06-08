@@ -28,8 +28,7 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${javadoc.dir}" />
 		<mkdir dir="${test.report.dir}" />
-		<mkdir dir="${ant.dir}/log" />
-		<mkdir dir="${build.dir}/log" />
+		<mkdir dir="log" />
 	</target>
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
