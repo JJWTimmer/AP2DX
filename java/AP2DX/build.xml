@@ -57,7 +57,7 @@
 	<!-- Run Cobertura instruments -->
 	<target name="instrument" depends="compile">
 		<cobertura-instrument todir="${instrumented.dir}">
-			<fileset dir="${src.dir}">
+			<fileset dir="${build.dir}">
 				<include name="**/*.class" />
 				<exclude name="**/*Test.class" />
 			</fileset>
