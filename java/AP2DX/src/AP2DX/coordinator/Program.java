@@ -41,9 +41,6 @@ public class Program extends AP2DXBase {
         super(); // explicitly call base ctor for extra 
 		System.out.println(" Running... ");
 
-        // overridin' because we're still testin'
-		simulatorAddress = "127.0.0.1";
-		simulatorPort = 3000;
         String spawnMessage = "INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}\r\n";
 	  
         try 
@@ -80,5 +77,6 @@ public class Program extends AP2DXBase {
     {
         simulatorAddress = (config.get("sim_address")).toString();
         //simulatorPort = config.get("sim_port");
+        simulatorPort = 3000;
     }
 }
