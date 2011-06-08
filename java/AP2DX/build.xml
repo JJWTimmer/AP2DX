@@ -43,10 +43,9 @@
 		<junit printsummary="on" fork="true" haltonfailure="no">
 			<classpath refid="AP2DX.classpath" />
 			<formatter type="xml" />
-			
 			<batchtest todir="${test.report.dir}">
 				<fileset dir="${src.dir}">
-					<include name="**/*.java" />
+					<include name="**/*Test*.java" />
 				</fileset>
 			</batchtest>
 		</junit>
