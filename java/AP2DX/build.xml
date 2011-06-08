@@ -124,7 +124,7 @@
 	</target>
 	
 	<!-- Target to run -->
-	<target name="main" depends="compile, jar, coverage-report, javadoc">
+	<target name="main" depends="compile, coverage-report, javadoc">
 		<description>Main target</description>
 	</target>
 
