@@ -6,6 +6,7 @@
 	<property name="src.dir" location="src" />
 	<property name="build.dir" location="${ant.dir}/build" />
 	<property name="javadoc.dir" location="${ant.dir}/javadoc" />
+	<property name="log.dir" location="${ant.dir}/log" />
 
 	<!-- Variables used for JUnit testin -->
 	<property name="test.report.dir" location="${ant.dir}/testreport" />
@@ -28,6 +29,7 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${javadoc.dir}" />
 		<mkdir dir="${test.report.dir}" />
+		<mkdir dir="${log.dir}" />
 	</target>
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
