@@ -41,10 +41,7 @@
 	<!-- Output is XML, could also be plain-->
 	<target name="junit" depends="compile">
 		<junit printsummary="yes" haltonfailure="yes">
-		  <classpath>
-			<pathelement refid="AP2DX.classpath"/>
-		  </classpath>
-
+		  <classpath refid="AP2DX.classpath"/>
 		  <formatter type="xml"/>
 
 		  <batchtest fork="yes" todir="${reports.tests}">
