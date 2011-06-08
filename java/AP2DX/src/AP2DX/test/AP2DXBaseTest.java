@@ -19,7 +19,6 @@ public class AP2DXBaseTest extends TestCase {
     public void testConcreteClass() {
     	ConcreteClass test = new ConcreteClass();
     	assertNotNull(test);
-    	
     }
     
     private class ConcreteClass extends AP2DX.AP2DXBase {
