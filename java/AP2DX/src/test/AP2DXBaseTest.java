@@ -22,16 +22,5 @@ public class AP2DXBaseTest {
 		assertEquals(0, 0);
 		
 	}
-	
-	@Test
-	public void testNewInstance() {
-		//AP2DXBaseConcrete test = new AP2DXBaseConcrete();
-		//assertNotNull(test);
-		assertEquals(0, 0);
-	}
-	
-	private class AP2DXBaseConcrete extends AP2DXBase  {
-		//empty! :)
-	}
 
 }
