@@ -17,6 +17,8 @@ public class AP2DXBaseTest extends TestCase {
     }
     
     public void testConcreteClass() {
+    	System.out.println("#Cur dir: " + System.getProperty("user.dir"));
+    	
     	ConcreteClass test = new ConcreteClass();
     	assertNotNull(test);
     }

@@ -62,6 +62,7 @@ public abstract class AP2DXBase {
 	    }
 	    
 	    logger.info("Package: " + this.getClass().getPackage().getName());
+	    logger.info("Directory: " + System.getProperty("user.dir"));
 	}
 	
 	/**
