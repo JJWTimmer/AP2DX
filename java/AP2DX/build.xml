@@ -7,6 +7,7 @@
 	<property name="build.dir" location="${ant.dir}/build" />
 	<property name="javadoc.dir" location="${ant.dir}/javadoc" />
 	<property name="instrumented.dir" location="${ant.dir}/instrumented" />
+	<property name="jar.dir" location="${ant.dir}/jar" />
 
 	<!-- Variables used for JUnit testin -->
 	<property name="test.report.dir" location="${ant.dir}/testreport" />
@@ -30,8 +31,7 @@
         <pathelement location="lib/junit-4.9b2.jar"/>
 		<pathelement location="lib/cobertura/cobertura.jar"/>
     </path>
-
-
+	
 	<!-- Deletes the existing build, docs and dist directory-->
 	<target name="clean">
 		<delete dir="${ant.dir}" />
@@ -45,11 +45,12 @@
 		<mkdir dir="log" />
 		<mkdir dir="${instrumented.dir}" />
 		<mkdir dir="${coverage.dir}" />
+		<mkdir dir="${jar.dir}" />
 	</target>
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<target name="compile" depends="clean, makedir">
-		<javac srcdir="${src.dir}" destdir="${build.dir}">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" debuglevel="vars,lines,source">
 			<classpath refid="AP2DX.classpath" />
 		</javac>
 	</target>
@@ -71,6 +72,7 @@
 		<sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
 
 		  <classpath location="${instrumented.dir}" />
+		  <classpath location="lib/junit-4.9b2.jar" />
 		  <classpath refid="cobertura.classpath" />
 		  
 		  <formatter type="xml"/>
@@ -106,8 +108,23 @@
 	    </javadoc>
 	</target>
 	
+	<target name="jar" depends="compile">
+	  <jar destfile="${jar.dir}/coordinator.jar">
+		<fileset dir="${build.dir}/AP2DX/*.java" />
+		<fileset dir="${build.dir}/AP2DX/coordinator/*.java" />
+		<fileset file="lib/json_simple-1.1.jar"/>
+
+		<!-- now build the manifest file, using mf.classpath -->
+		<manifest>
+			<attribute name="Main-Class" value="Tryout"/>  
+			<attribute name="Class-Path" value="json_simple-1.1.jar" />
+		</manifest>
+
+	  </jar>
+	</target>
+	
 	<!-- Target to run -->
-	<target name="main" depends="compile, coverage-report, javadoc">
+	<target name="main" depends="compile, jar, coverage-report, javadoc">
 		<description>Main target</description>
 	</target>
 
