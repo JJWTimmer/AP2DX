@@ -44,7 +44,7 @@
 		  <classpath refid="AP2DX.classpath"/>
 		  <formatter type="xml"/>
 
-		  <batchtest fork="yes" todir="${reports.tests}">
+		  <batchtest fork="yes" todir="${test.report.dir}">
 			<fileset dir="${src.dir}">
 			  <include name="**/*Test*.java"/>
 			</fileset>
