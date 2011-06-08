@@ -12,7 +12,7 @@
 
 	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
     <path id="AP2DX.classpath">
-        <pathelement location="bin"/>
+        <pathelement location="${build.dir}"/>
         <pathelement location="lib/json_simple-1.1.jar"/>
         <pathelement location="lib/junit-4.9b2.jar"/>
     </path>
