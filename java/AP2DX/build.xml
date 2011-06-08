@@ -26,10 +26,10 @@
 	
 	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
     <path id="AP2DX.classpath">
-        <pathelement location="${build.dir}"/>
         <pathelement location="lib/json_simple-1.1.jar"/>
         <pathelement location="lib/junit-4.9b2.jar"/>
 		<pathelement location="lib/cobertura/cobertura.jar"/>
+		<pathelement location="${build.dir}"/>
     </path>
 
 
@@ -58,7 +58,7 @@
 
 	<!-- Run Cobertura instruments -->
 	<target name="instrument" depends="compile">
-		<cobertura-instrument todir="${instrumented.dir}">
+		<cobertura-instrument todir="${instrumented.dir}" datafile="${ant.dir}/cobertura.ser">
 			<fileset dir="${build.dir}">
 				<include name="**/*.class" />
 			</fileset>
@@ -72,9 +72,8 @@
 		<sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
 
 		  <classpath location="${instrumented.dir}" />
-		  <classpath refid="AP2DX.classpath" />
-		  <classpath location="lib/junit-4.9b2.jar" />
 		  <classpath refid="cobertura.classpath" />
+		  <classpath refid="AP2DX.classpath" />
 		  
 		  <formatter type="xml"/>
 		  
@@ -89,7 +88,7 @@
 	</target>
 	
 	<target name="coverage-report" depends="junit">
-		<cobertura-report srcdir="${src.dir}" destdir="${coverage.dir}" format="xml" />
+		<cobertura-report srcdir="${src.dir}" destdir="${coverage.dir}" format="xml" datafile="${ant.dir}/cobertura.ser" />
 	</target>
 
 	<!-- Create the javadocs -->
