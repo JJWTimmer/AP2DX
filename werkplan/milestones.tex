@@ -1,30 +1,30 @@
 This section will describe the milestones, and what deliverables we will provide. 
 
-\subsubsection*{Milestone \#0}
-This will describe what we have done by the end of week one.
-
-A list of deliverables:
-\begin{itemize}
-\boldItem{Working environment:} We will have set up a Git
+\subsection*{Milestone 0}
+This will describe what we will have done by the 10th of June. These are the
+deliverables:
+\begin{description}
+\vspace{0cm}
+\item[Working environment:] We will set up a Git
 repository\footnote{https://github.com/Y3PP3R/AP2DX} and a testing environment
-(using xUnit).
-\boldItem{Base class:} We will make an abstract base class, on which we can base
-all our Java classes. This will have all the standard things, like TCP/IP
+(using jUnit).
+\item[Base class:] We will make an abstract base class, on which we can base
+all our Java classes. This will contain all the standard methods, e.g. TCP/IP
 protocols.
-\end{itemize}
+\end{description}
 
-\subsubsection*{Milestone \#1}
-A list of deliverables:
-\begin{itemize}
-\boldItem{Drive around:} We want the program to be able to direct
+\subsection*{Milestone 1}
+This will describe which deliverables we will have done by the 
+\begin{description}
+\item[Drive:] We want the program to be able to direct
 the robot through the environment. We will not yet focus on the ability to
 follow lines or walls.
-\boldItem{Avoid collision:} The robot should be able to avoid collision with objects
+\item[Avoid collision:] The robot should be able to avoid collision with objects
 and walls. It will stop, turn a random corner, and drive on. This way it will
 cover most of the area without colliding.
-\end{itemize}
+\end{description}
 
-Classes needed to be implemented for this:
+Classes needed to be implemented for these goals:
 \begin{itemize}
 \item Co\"ordinator
 \item Sensor
@@ -32,41 +32,41 @@ Classes needed to be implemented for this:
 \item Motor
 \end{itemize}
 
-\subsubsection*{Milestone \#2}
+\subsection*{Milestone 2}
 A list of deliverables:
-\begin{itemize}
-\boldItem{Avoid obstacles:} The robot will be able to avoid the obstacles that
+\begin{description}
+\item[Avoid obstacles:] The robot will be able to avoid the obstacles that
 cross his path, in stead of stopping and turning a random corner.
-\boldItem{Navigate:} The robot will be able to navigate through the room.
-\end{itemize}
+\item[Navigate:] The robot will be able to navigate through the room.
+\end{description}
 
 What we will implement for this:
-\begin{itemize}
-\boldItem{Mapper:} A class that creates a map of the room out of the sensor
+\begin{description}
+\item[Mapper:] A class that creates a map of the room out of the sensor
 data. In the time of milestone 2 it does not have to be able to create an entire
 map and be very accurate, but it will be able to make some implementation.
-\boldItem{Improved Sensor:} The sensor class will be improved to be able to make
+\item[Improved Sensor:] The sensor class will be improved to be able to make
 an accurate map.
-\boldItem{Improved Reflexes:} The reflex class needs to be able to use some
+\item[Improved Reflexes:] The reflex class needs to be able to use some
 sensor data to be able to avoid objects appropriately. 
-\end{itemize}
+\end{description}
 
 
-\subsubsection*{Demonstration}
+\subsection*{Demonstration}
 Before the demonstration we will be able to do the following things:
-\begin{itemize}
-\boldItem{Planner:} We will have a planner class that can specify directions
+\begin{description}
+\item[Planner:] We will have a planner class that can specify directions
 based on the current map position and what part of the map we have not yet
 discovered.
-\boldItem{Improved Mapper:} The mapper will now be able to make an accurate map
+\item[Improved Mapper:] The mapper will now be able to make an accurate map
 and find our location on it, while taking the errors in sensor data into account.
-\boldItem{Tests:} Although we test all the time, we want to have tested
+\item[Tests:] Although we test all the time, we want to have tested
 everything good before the end.
-\boldItem{Report:} We will work on a report, describing our progress, problems
+\item[Report:] We will work on a report, describing our progress, problems
 and (test)results.
-\boldItem{Documentation:} We will work on a proper documentation of our code,
+\item[Documentation:] We will work on a proper documentation of our code,
 which is also finished before the end.
-\end{itemize}
+\end{description}
 
 The classes we will need to implement or improve for this are:
 \begin{itemize}
