@@ -9,10 +9,10 @@
 	<property name="instrumented.dir" location="${ant.dir}/instrumented" />
 	<property name="jar.dir" location="${ant.dir}/jar" />
 
-	<!-- Variables used for JUnit testin -->
+	<!-- Variables used for JUnit testing -->
 	<property name="test.report.dir" location="${ant.dir}/testreport" />
 	
-	<!-- Variables used for Cobertura testin -->
+	<!-- Variables used for Cobertura testing -->
 	<property name="cobertura.dir" value="lib/cobertura/" />
 	<property name="coverage.dir" location="${ant.dir}/coveragereport" />
 	
@@ -66,7 +66,6 @@
 	</target>
 	
 	<!-- Run the JUnit Tests -->
-	<!-- Output is XML, could also be plain-->
 	<target name="junit" depends="compile, instrument">
 		<junit printsummary="yes" haltonfailure="no" failureProperty="test.failed">
 		  <sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
@@ -87,6 +86,7 @@
 		</junit>
 	</target>
 	
+	<!-- Code test coverage report -->
 	<target name="coverage-report" depends="junit">
 		<cobertura-report srcdir="${src.dir}" destdir="${coverage.dir}" format="xml" datafile="${ant.dir}/cobertura.ser" />
 	</target>
@@ -108,8 +108,57 @@
 	    </javadoc>
 	</target>
 	
+	<!-- Create executables -->
+	<target name="jar" depends="compile">
+		<macrodef name="packaging">
+		    <attribute name="package"/>
+		    <sequential>
+		    	<mkdir dir="${jar.dir}/@{package}"/>
+		    	<mkdir dir="${jar.dir}/@{package}/lib"/>
+		    	<mkdir dir="${jar.dir}/@{package}/log"/>
+		    	
+		    	<copy file="lib/json_simple-1.1.jar" tofile="${jar.dir}/@{package}/lib/json_simple-1.1.jar"/>
+		    	<copy file="default.json" tofile="${jar.dir}/@{package}/AP2DX.@{package}.json"/>
+		    	<copy file="start.bat" tofile="${jar.dir}/@{package}/start.bat"/>
+		    	<copy file="start.sh" tofile="${jar.dir}/@{package}/start.sh"/>
+		    	
+		    	<replace 
+		    	    file="${jar.dir}/@{package}/start.sh"
+		    	    value="@{package}"
+		    	    >
+		    	  <replacefilter 
+		    	    token="@package@"/>
+		    	</replace>
+		    	
+		    	<replace 
+		    	    file="${jar.dir}/@{package}/start.bat"
+		    	    value="@{package}"
+		    	    >
+		    	  <replacefilter 
+		    	    token="@package@"/>
+		    	</replace>
+		    	
+		        <jar destfile="${jar.dir}/@{package}/@{package}.jar">
+		            <manifest>
+		                <attribute name="Built-By" value="${user.name}"/>
+		                <attribute name="Release-Version" value="${version}"/>
+		            	<attribute name="Main-Class" value="AP2DX/coordinator/Program"/>
+		            	<attribute name="Class-Path" value="lib/json_simple-1.1.jar" />
+		            </manifest>
+
+		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" />
+		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class" />
+		        </jar>
+		    	
+		    </sequential>
+		</macrodef>
+
+		<packaging package="coordinator"/>
+		<!--<packaging package="package2"/>-->
+	</target>
+	
 	<!-- Target to run -->
-	<target name="main" depends="compile, coverage-report, javadoc">
+	<target name="main" depends="compile, coverage-report, javadoc, jar">
 		<description>Main target</description>
 	</target>
 
