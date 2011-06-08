@@ -25,12 +25,16 @@ import org.json.simple.parser.ParseException;
 public abstract class AP2DXBase {
 	
 	public static Logger logger;
+    /** The configuration read from file and set by readConfig.*/
+    protected Map config;
+
 
 	/**
 	 * constructor
 	 */
 	public AP2DXBase() {
-		Map config = ReadConfig();
+		config = readConfig();
+        setConfig(); 
 	    try {
 	      boolean append = true;
 	      FileHandler fh = new FileHandler(config.get("logfile").toString(), append);
@@ -66,9 +70,9 @@ public abstract class AP2DXBase {
 	}
 	
 	/**
-	 * read configfile
+	 * read configfile. The config file is the package name with ".json" appended. 
 	 */
-	protected Map ReadConfig() {
+	protected Map readConfig() {
 		  //get text contents of file config.json (hard-coded filename)
 		  String jsonText = getContents(new File(this.getClass().getPackage().getName() + ".json"));
 		  Object jsonObj = null;
@@ -86,7 +90,11 @@ public abstract class AP2DXBase {
 		  
 		  return jsonMap;
 	}
-	
+
+    /** A method that reads the configurations and sets variables to the correct 
+    value.*/
+    protected abstract void setConfig();
+
 	/**
 	  * Fetch the entire contents of a text file, and return it in a String.
 	  * This style of implementation does not throw Exceptions to the caller.

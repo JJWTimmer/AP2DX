@@ -25,6 +25,8 @@ public class AP2DXBaseTest extends TestCase {
     
     private class ConcreteClass extends AP2DX.AP2DXBase {
     	//empty
+
+        protected void setConfig() {}    
     }
-    
+
 }
