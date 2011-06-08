@@ -1,18 +1,29 @@
 \documentclass[a4paper, notitlepage]{article}
 
-\title{Werkplan Draft}
+\usepackage[all]{xy}
+\usepackage{verbatim}
+
+
+\title{Draft Workplan}
 \author{Waddie Assal \and Jeroen Rooijmans \and Jasper Timmer \and Maarten de Waard \and Maarten Inja}
 
 \begin{document}
 
 \maketitle
 
-\section{Specificatie}
+\section{Specification}
+\xymatrix{
+ & SIM \ar@/_/[d] &  \\
+ & Coordinator \ar@/_/[u] \ar[dr] & \\
+Abstract Motor \ar[ur] & Reflex \ar[l]  & Sensor \ar[l] \ar[d] \\
+& Planner \ar[u] & Mapper \ar[l] }
 
-\section{Functioneel Ontwerp}
+\section{Planning}
+\input{milestones}
 
-\section{Verschillende Componenten en Testen}
+\section{Functionial Design}
 
-\section{Producten Als Deliverables}
+\section{Different Components and Test}
 
+\section{Deliverables}
 \end{document}
