@@ -31,7 +31,8 @@
         <pathelement location="lib/junit-4.9b2.jar"/>
 		<pathelement location="lib/cobertura/cobertura.jar"/>
     </path>
-	
+
+
 	<!-- Deletes the existing build, docs and dist directory-->
 	<target name="clean">
 		<delete dir="${ant.dir}" />
@@ -50,7 +51,7 @@
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<target name="compile" depends="clean, makedir">
-		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" debuglevel="vars,lines,source">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
 			<classpath refid="AP2DX.classpath" />
 		</javac>
 	</target>
@@ -60,7 +61,6 @@
 		<cobertura-instrument todir="${instrumented.dir}">
 			<fileset dir="${build.dir}">
 				<include name="**/*.class" />
-				<exclude name="**/*Test.class" />
 			</fileset>
 		</cobertura-instrument>
 	</target>
@@ -72,6 +72,7 @@
 		<sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
 
 		  <classpath location="${instrumented.dir}" />
+		  <classpath refid="AP2DX.classpath" />
 		  <classpath location="lib/junit-4.9b2.jar" />
 		  <classpath refid="cobertura.classpath" />
 		  
@@ -106,21 +107,6 @@
 	            <exclude name="AP2DX/test/**/*.java" />
 	        </fileset>
 	    </javadoc>
-	</target>
-	
-	<target name="jar" depends="compile">
-	  <jar destfile="${jar.dir}/coordinator.jar">
-		<fileset dir="${build.dir}/AP2DX/*.java" />
-		<fileset dir="${build.dir}/AP2DX/coordinator/*.java" />
-		<fileset file="lib/json_simple-1.1.jar"/>
-
-		<!-- now build the manifest file, using mf.classpath -->
-		<manifest>
-			<attribute name="Main-Class" value="Tryout"/>  
-			<attribute name="Class-Path" value="json_simple-1.1.jar" />
-		</manifest>
-
-	  </jar>
 	</target>
 	
 	<!-- Target to run -->
