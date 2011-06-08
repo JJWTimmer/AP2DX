@@ -3,6 +3,8 @@
 \usepackage[all]{xy}
 \usepackage{verbatim}
 
+%\renewcommand{\item[]}{\textbf{}}
+\newcommand{\boldItem}[1]{\item[\textbf{#1}]}
 
 \title{Draft Workplan}
 \author{Waddie Assal \and Jeroen Rooijmans \and Jasper Timmer \and Maarten de Waard \and Maarten Inja}
@@ -12,18 +14,16 @@
 \maketitle
 
 \section{Specification}
+
+\section{Functionial Design}
 \xymatrix{
- & SIM \ar@/_/[d] &  \\
+ & USARSim \ar@/_/[d] &  \\
  & Coordinator \ar@/_/[u] \ar[dr] & \\
 Abstract Motor \ar[ur] & Reflex \ar[l]  & Sensor \ar[l] \ar[d] \\
 & Planner \ar[u] & Mapper \ar[l] }
 
-\section{Planning}
-\input{milestones}
-
-\section{Functionial Design}
-
 \section{Different Components and Test}
 
 \section{Deliverables}
+\input{milestones}
 \end{document}
