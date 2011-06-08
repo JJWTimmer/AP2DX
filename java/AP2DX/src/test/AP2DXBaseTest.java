@@ -15,12 +15,9 @@ import static org.junit.Assert.assertEquals;
  * @author Jasper
  *
  */
-public class AP2DXBaseTest {
-	
-	@Test
-	public void testVeryBasicTest() {
-		assertEquals(0, 0);
-		
-	}
+	public class AP2DXBaseTest extends junit.framework.TestCase {
 
-}
+	    public void testNothing() {
+	    }
+	    
+	}
