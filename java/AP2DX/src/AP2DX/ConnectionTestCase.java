@@ -53,11 +53,11 @@ public class ConnectionTestCase extends TestCase {
 	public void testConnection() {
 		Connection conn = null;
 		try {
-			conn = new Connection("localhost", 9999);
+			conn = new Connection("127.0.0.1", 9999, Module.USARSIM);
 			assertNotNull(conn);
 		}
 		catch (Exception ex) {
-			fail("Constructor of Connection failed");
+			fail(ex.getMessage());
 		}
 	}
 
