@@ -123,7 +123,7 @@
 		    	<copy file="start.bat" tofile="${jar.dir}/@{package}/start.bat"/>
 		    	<copy file="start.sh" tofile="${jar.dir}/@{package}/start.sh"/>
 		    	
-		    	<chmod file="${jar.dir}/@{package}/start.sh" perm="u+x"/>
+		    	<chmod file="${jar.dir}/@{package}/start.sh" perm="ug+x"/>
 
 		    	<replace 
 		    	    file="${jar.dir}/@{package}/start.sh"
