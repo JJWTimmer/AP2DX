@@ -123,7 +123,12 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@Test
 	public void testSetConfig() 
     {
-		fail("Not yet implemented");
+        test = new ConcreteClass();
+        if (!test.getSimulatorAddress().equals("146.50.51.9"))
+            fail("FAIL: testSetConfig: simulatorAddress does not equal 146.50.51.9");
+        if (test.getSimulatorPort() != 3000)
+            fail("FAIL: testSetConfig: simulatorPort does not equal 3000");
+
 	}
 
 	/**
@@ -135,17 +140,28 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	public void testGetContents() 
     {
         test = new ConcreteClass();
-        String content = test.getContentsConcrete();
-        if (content.equals(String.format("%s\n%s\n%s\n%s\n%s\n%s", 
+        String content = removeWeirdCharacters(test.getContentsConcrete());
+        String compareToValue = removeWeirdCharacters(String.format("%s\n%s\n%s\n%s\n%s\n%s\n", 
     "{",
-    "\"logfile\": \"log/coordinator.log\",",
-    "\"sim_port\": 3000,",
-    "\"sim_address\": \"146.50.51.9\",",
-    "\"coordinator_listen_port\": 9000,",
-    "}")
-    )   )
-		fail("Not yet fully implemented");
+    "\t\"logfile\": \"log/coordinator.log\",",
+    "\t\"sim_port\": 3000,",
+    "\t\"sim_address\": \"146.50.51.9\",",
+    "\t\"coordinator_listen_port\": 9000,",
+    "}"));
+
+        if (!content.equals(compareToValue))
+		    fail(String.format("FAIL: testGetContents, does not match: \n'%s', \n'%s' %d",
+                content, compareToValue, content.trim().compareTo(compareToValue.trim())));
 	}
+
+    private String removeWeirdCharacters(String s)
+    {   
+        String returnString = "";
+        for (char c : s.toCharArray())
+            if (Character.isLetter(c))
+                returnString += c;
+        return returnString; 
+    }
 
 	/**
 	 * Concrete implementation of BaseClass
@@ -163,6 +179,16 @@ public class BaseClassTestCase extends junit.framework.TestCase
 			simulatorAddress = (config.get("sim_address")).toString();
 	        simulatorPort = Integer.parseInt(config.get("sim_port").toString());
 		}
+
+        public String getSimulatorAddress()
+        {
+            return simulatorAddress;
+        }
+
+        public int getSimulatorPort()
+        {
+            return simulatorPort;
+        }
 
         public Map getConfig()
         {
