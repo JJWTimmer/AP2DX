@@ -5,6 +5,7 @@ package AP2DX.coordinator;
 
 import static org.junit.Assert.*;
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,7 +18,7 @@ import org.junit.Test;
  * @author jjwt
  *
  */
-public class coordinatorTestCase {
+public class coordinatorTestCase extends TestCase {
 	
 	/**
 	 * @throws java.lang.Exception
