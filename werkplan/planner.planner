@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="" company="" manager="" phase="" project-start="20110609T000000Z" mrproject-version="2" calendar="1">
+<project name="AP2DX" company="UvA" manager="AP2DX" phase="" project-start="20110606T000000Z" mrproject-version="2" calendar="1">
   <properties/>
   <phases/>
   <calendars>
@@ -20,116 +20,161 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="Presentation and demo" note="" work="28800" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-    <task id="2" name="Create working environment" note="" work="86400" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="3" name="Set up Git" note="" work="28800" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="4" name="Set up testing software (jUnit" note="" work="28800" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="5" name="Set up test server" note="" work="28800" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    <task id="1" name="Create working environment" note="" work="86400" start="20110606T000000Z" end="20110606T170000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="Set up Git" note="" work="28800" start="20110606T000000Z" end="20110606T170000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="3" name="Set up testing software (jUnit" note="" work="28800" start="20110606T000000Z" end="20110606T170000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="4" name="Set up test server" note="" work="28800" start="20110606T000000Z" end="20110606T170000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
     </task>
-    <task id="6" name="Base class" note="" work="56700" start="20110609T000000Z" end="20110610T164500Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="7" name="Create class" note="" work="28800" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="8" name="Create Test class" note="" work="27900" start="20110609T170000Z" end="20110610T164500Z" work-start="20110610T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="5" name="Base class" note="" work="56700" start="20110606T170000Z" end="20110608T164500Z" work-start="20110607T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="6" name="Create class" note="" work="28800" start="20110606T170000Z" end="20110607T170000Z" work-start="20110607T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="7" type="FS"/>
+          <predecessor id="1" predecessor-id="2" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="7" name="Create Test class" note="" work="27900" start="20110607T170000Z" end="20110608T164500Z" work-start="20110608T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="6" type="FS"/>
         </predecessors>
       </task>
     </task>
-    <task id="9" name="Work Plan" note="" work="86400" start="20110609T000000Z" end="20110614T000000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="10" name="Make Work Plan" note="" work="86400" start="20110609T000000Z" end="20110613T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    <task id="8" name="Work Plan" note="" work="86400" start="20110606T000000Z" end="20110614T000000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="9" name="Draft work plan" note="" work="0" start="20110608T000000Z" end="20110608T000000Z" work-start="20110608T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20110608T000000Z"/>
+      </task>
+      <task id="10" name="Make Work Plan" note="" work="86400" start="20110606T000000Z" end="20110608T170000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
       <task id="11" name="Turn in Work Plan" note="" work="0" start="20110614T000000Z" end="20110614T000000Z" work-start="20110614T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110614T000000Z"/>
         <predecessors>
           <predecessor id="1" predecessor-id="10" type="FS"/>
         </predecessors>
       </task>
-      <task id="12" name="Draft work plan" note="" work="0" start="20110609T000000Z" end="20110609T000000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
-        <constraint type="must-start-on" time="20110608T000000Z"/>
-      </task>
     </task>
-    <task id="13" name="Drive and avoid collision" note="" work="406800" start="20110609T000000Z" end="20110620T120000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="14" name="Make Coordinator Class'" note="" work="57600" start="20110609T000000Z" end="20110610T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="15" name="Make Abstract Motor Class" note="" work="86400" start="20110610T170000Z" end="20110615T170000Z" work-start="20110613T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="12" name="Drive and avoid collision" note="" work="406800" start="20110609T000000Z" end="20110620T120000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="13" name="Make Coordinator Class" note="" work="57600" start="20110609T000000Z" end="20110610T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20110609T000000Z"/>
+      </task>
+      <task id="14" name="Make Abstract Motor Class" note="" work="86400" start="20110610T170000Z" end="20110615T170000Z" work-start="20110613T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="14" type="FS"/>
+          <predecessor id="1" predecessor-id="13" type="FS"/>
         </predecessors>
       </task>
-      <task id="16" name="Make Sensor Class" note="" work="81000" start="20110610T170000Z" end="20110615T153000Z" work-start="20110613T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="15" name="Make Sensor Class" note="" work="81000" start="20110610T170000Z" end="20110615T153000Z" work-start="20110613T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="14" type="FS"/>
+          <predecessor id="1" predecessor-id="13" type="FS"/>
         </predecessors>
       </task>
-      <task id="17" name="Make Reflexes class" note="" work="81000" start="20110610T170000Z" end="20110615T153000Z" work-start="20110613T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="16" name="Make Reflexes class" note="" work="81000" start="20110610T170000Z" end="20110615T153000Z" work-start="20110613T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="14" type="FS"/>
+          <predecessor id="1" predecessor-id="13" type="FS"/>
         </predecessors>
       </task>
-      <task id="18" name="Test everything" note="" work="43200" start="20110615T170000Z" end="20110617T120000Z" work-start="20110616T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="17" name="Test everything" note="" work="43200" start="20110615T170000Z" end="20110617T120000Z" work-start="20110616T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
+          <predecessor id="1" predecessor-id="14" type="FS"/>
           <predecessor id="1" predecessor-id="15" type="FS"/>
           <predecessor id="1" predecessor-id="16" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="18" name="Improve Sensor Class" note="" work="28800" start="20110617T120000Z" end="20110620T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
           <predecessor id="1" predecessor-id="17" type="FS"/>
         </predecessors>
       </task>
-      <task id="19" name="Improve Sensor Class" note="" work="28800" start="20110617T120000Z" end="20110620T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="19" name="Improve Reflexes Class" note="" work="28800" start="20110617T120000Z" end="20110620T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="18" type="FS"/>
-        </predecessors>
-      </task>
-      <task id="20" name="Improve Reflexes Class" note="" work="28800" start="20110617T120000Z" end="20110620T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="18" type="FS"/>
+          <predecessor id="1" predecessor-id="17" type="FS"/>
         </predecessors>
       </task>
     </task>
-    <task id="21" name="Milestone 1" note="" work="0" start="20110617T000000Z" end="20110617T000000Z" work-start="20110617T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+    <task id="20" name="Milestone 1" note="" work="0" start="20110617T000000Z" end="20110617T000000Z" work-start="20110617T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110617T000000Z"/>
       <predecessors>
-        <predecessor id="1" predecessor-id="18" type="FS"/>
+        <predecessor id="1" predecessor-id="17" type="FS"/>
       </predecessors>
     </task>
-    <task id="22" name="Navigation and Paths" note="" work="259200" start="20110615T153000Z" end="20110623T120000Z" work-start="20110615T153000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="23" name="Start on Mapper" note="" work="28800" start="20110615T153000Z" end="20110616T153000Z" work-start="20110615T153000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="21" name="Navigation and Paths" note="" work="259200" start="20110615T153000Z" end="20110623T120000Z" work-start="20110615T153000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="22" name="Start on Mapper" note="" work="28800" start="20110615T153000Z" end="20110616T153000Z" work-start="20110615T153000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="16" type="FS"/>
+          <predecessor id="1" predecessor-id="15" type="FS"/>
         </predecessors>
       </task>
-      <task id="24" name="Make Planner" note="" work="115200" start="20110617T120000Z" end="20110623T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="23" name="Make Planner" note="" work="115200" start="20110617T120000Z" end="20110623T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="18" type="FS"/>
+          <predecessor id="1" predecessor-id="17" type="FS"/>
         </predecessors>
       </task>
-      <task id="25" name="Make Mapper" note="" work="115200" start="20110617T120000Z" end="20110623T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="24" name="Make Mapper" note="" work="115200" start="20110617T120000Z" end="20110623T120000Z" work-start="20110617T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="23" type="FS"/>
-          <predecessor id="1" predecessor-id="18" type="FS"/>
+          <predecessor id="1" predecessor-id="22" type="FS"/>
+          <predecessor id="1" predecessor-id="17" type="FS"/>
         </predecessors>
       </task>
     </task>
-    <task id="26" name="Milestone 2" note="" work="0" start="20110624T000000Z" end="20110624T000000Z" work-start="20110624T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+    <task id="25" name="Milestone 2" note="" work="0" start="20110624T000000Z" end="20110624T000000Z" work-start="20110624T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110624T000000Z"/>
       <predecessors>
+        <predecessor id="1" predecessor-id="23" type="FS"/>
         <predecessor id="1" predecessor-id="24" type="FS"/>
-        <predecessor id="1" predecessor-id="25" type="FS"/>
       </predecessors>
     </task>
-    <task id="27" name="Final report" note="" work="348300" start="20110609T000000Z" end="20110624T084500Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="28" name="Make draft of final report" note="" work="28800" start="20110609T000000Z" end="20110609T170000Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="29" name="Make and fill contents" note="" work="231300" start="20110609T000000Z" end="20110621T081500Z" work-start="20110609T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="30" name="Finish report" note="" work="88200" start="20110621T081500Z" end="20110624T084500Z" work-start="20110621T081500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="26" name="Perfection and tests" note="" work="230400" start="20110623T120000Z" end="20110630T120000Z" work-start="20110623T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="27" name="Improve Planner" note="" work="86400" start="20110623T120000Z" end="20110628T120000Z" work-start="20110623T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="29" type="FS"/>
+          <predecessor id="1" predecessor-id="23" type="FS"/>
         </predecessors>
       </task>
-      <task id="31" name="Specify experiment and contents" note="" work="0" start="20110621T000000Z" end="20110621T000000Z" work-start="20110621T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
-        <constraint type="must-start-on" time="20110621T000000Z"/>
+      <task id="28" name="Improve Mapper" note="" work="86400" start="20110623T120000Z" end="20110628T120000Z" work-start="20110623T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="24" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="29" name="Test and fix everything" note="" work="57600" start="20110628T120000Z" end="20110630T120000Z" work-start="20110628T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="28" type="FS"/>
+          <predecessor id="1" predecessor-id="27" type="FS"/>
         </predecessors>
       </task>
-      <task id="32" name="Turn in a draft" note="" work="0" start="20110624T000000Z" end="20110624T000000Z" work-start="20110624T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+    </task>
+    <task id="30" name="Final report" note="" work="549900" start="20110606T000000Z" end="20110701T000000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="31" name="Make draft of final report" note="" work="28800" start="20110606T000000Z" end="20110606T170000Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="32" name="Make and fill contents" note="" work="231300" start="20110606T000000Z" end="20110616T081500Z" work-start="20110606T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="33" name="Specify experiment and contents" note="" work="0" start="20110621T000000Z" end="20110621T000000Z" work-start="20110621T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20110621T000000Z"/>
+        <predecessors>
+          <predecessor id="1" predecessor-id="31" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="34" name="Finish draft report" note="" work="88200" start="20110616T081500Z" end="20110621T084500Z" work-start="20110616T081500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="32" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="35" name="Turn in a draft" note="" work="0" start="20110624T000000Z" end="20110624T000000Z" work-start="20110624T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110624T000000Z"/>
         <predecessors>
-          <predecessor id="1" predecessor-id="30" type="FS"/>
+          <predecessor id="1" predecessor-id="34" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="36" name="Finish report" note="" work="144000" start="20110621T084500Z" end="20110628T084500Z" work-start="20110621T084500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="34" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="37" name="Turn in report" note="" work="0" start="20110701T000000Z" end="20110701T000000Z" work-start="20110701T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20110701T000000Z"/>
+        <predecessors>
+          <predecessor id="1" predecessor-id="29" type="FS"/>
+          <predecessor id="1" predecessor-id="36" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="38" name="Make presentation" note="" work="57600" start="20110628T000000Z" end="20110629T170000Z" work-start="20110628T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20110628T000000Z"/>
+      </task>
+      <task id="39" name="Do presentation and demo" note="" work="0" start="20110630T000000Z" end="20110630T000000Z" work-start="20110630T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20110630T000000Z"/>
+        <predecessors>
+          <predecessor id="1" predecessor-id="29" type="FS"/>
+          <predecessor id="1" predecessor-id="38" type="FS"/>
         </predecessors>
       </task>
     </task>
