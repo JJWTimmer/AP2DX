@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<project name="AP2DX" default="main" basedir=".">
+	<!-- Sets variables which can later be used. -->
+	<!-- The value of a property is accessed via ${} -->
+	<property name="ant.dir" location="ant" />
+	<property name="src.dir" location="src" />
+	<property name="build.dir" location="${ant.dir}/build" />
+	<property name="javadoc.dir" location="${ant.dir}/javadoc" />
+	<property name="instrumented.dir" location="${ant.dir}/instrumented" />
+	<property name="jar.dir" location="${ant.dir}/jar" />
+
+	<!-- Variables used for JUnit testing -->
+	<property name="test.report.dir" location="${ant.dir}/testreport" />
+	
+	<!-- Variables used for Cobertura testing -->
+	<property name="cobertura.dir" value="lib/cobertura/" />
+	<property name="coverage.dir" location="${ant.dir}/coveragereport" />
+	
+	<path id="cobertura.classpath">
+		<fileset dir="${cobertura.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+	
+	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
+    <path id="AP2DX.classpath">
+        <pathelement location="lib/json_simple-1.1.jar"/>
+        <pathelement location="lib/junit-4.9b2.jar"/>
+		<pathelement location="lib/cobertura/cobertura.jar"/>
+		<pathelement location="${build.dir}"/>
+    </path>
+
+
+	<!-- Deletes the existing build, docs and dist directory-->
+	<target name="clean">
+		<delete dir="${ant.dir}" />
+	</target>
+
+	<!-- Creates the  build, docs and dist directory-->
+	<target name="makedir">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${javadoc.dir}" />
+		<mkdir dir="${test.report.dir}" />
+		<mkdir dir="log" />
+		<mkdir dir="${instrumented.dir}" />
+		<mkdir dir="${coverage.dir}" />
+		<mkdir dir="${jar.dir}" />
+	</target>
+
+	<!-- Compiles the java code (including the usage of library for JUnit -->
+	<target name="compile" depends="clean, makedir">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" debuglevel="vars,lines,source">
+			<classpath refid="AP2DX.classpath" />
+		</javac>
+	</target>
+
+	<!-- Run Cobertura instruments -->
+	<target name="instrument" depends="compile">
+		<cobertura-instrument todir="${instrumented.dir}" datafile="${ant.dir}/cobertura.ser">
+			<fileset dir="${build.dir}">
+				<include name="**/*.class" />
+				<exclude name="**/*TestCase.class" />
+			</fileset>
+		</cobertura-instrument>
+	</target>
+	
+	<!-- Run the JUnit Tests -->
+	<target name="junit" depends="compile, instrument">
+		<junit printsummary="yes" haltonfailure="no" failureProperty="test.failed">
+		  <sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
+
+		  <classpath location="${instrumented.dir}" />
+		  <classpath refid="cobertura.classpath" />
+		  <classpath refid="AP2DX.classpath" />
+		  
+		  <formatter type="xml"/>
+		  
+		  <test name="${testcase}" todir="${test.report.dir}" if="testcase" />
+		  
+		  <batchtest fork="yes" todir="${test.report.dir}" unless="testcase">
+			<fileset dir="${src.dir}">
+			  <include name="**/*TestCase.java"/>
+			</fileset>
+		  </batchtest>
+		</junit>
+	</target>
+	
+	<!-- Code test coverage report -->
+	<target name="coverage-report" depends="junit">
+		<cobertura-report srcdir="${src.dir}" destdir="${coverage.dir}" format="xml" datafile="${ant.dir}/cobertura.ser" />
+	</target>
+
+	<!-- Create the javadocs -->
+	<target name="javadoc">
+	    <javadoc
+	           access="public"
+	           destdir="${javadoc.dir}"
+	           author="true"
+	           version="true"
+	           use="true"
+	       >
+
+	        <fileset dir="${src.dir}" defaultexcludes="yes">
+	            <include name="**/*.java"/>
+	            <exclude name="AP2DX/**/*TestCase.java" />
+	        </fileset>
+	    </javadoc>
+	</target>
+	
+	<!-- Create executables -->
+	<target name="jar" depends="compile">
+		<macrodef name="packaging">
+		    <attribute name="package"/>
+		    <sequential>
+		    	<mkdir dir="${jar.dir}/@{package}"/>
+		    	<mkdir dir="${jar.dir}/@{package}/lib"/>
+		    	<mkdir dir="${jar.dir}/@{package}/log"/>
+		    	
+		    	<copy file="lib/json_simple-1.1.jar" tofile="${jar.dir}/@{package}/lib/json_simple-1.1.jar"/>
+		    	<copy file="default.json" tofile="${jar.dir}/@{package}/AP2DX.@{package}.json"/>
+		    	<copy file="start.bat" tofile="${jar.dir}/@{package}/start.bat"/>
+		    	<copy file="start.sh" tofile="${jar.dir}/@{package}/start.sh"/>
+
+		    	<replace 
+		    	    file="${jar.dir}/@{package}/start.sh"
+		    	    value="@{package}"
+		    	    >
+		    	  <replacefilter 
+		    	    token="@package@"/>
+		    	</replace>
+		    	
+		    	<chmod file="${jar.dir}/@{package}/start.sh" perm="ug+x"/>
+		    	
+		    	<replace 
+		    	    file="${jar.dir}/@{package}/start.bat"
+		    	    value="@{package}"
+		    	    >
+		    	  <replacefilter 
+		    	    token="@package@"/>
+		    	</replace>
+		    	
+		        <jar destfile="${jar.dir}/@{package}/@{package}.jar">
+		            <manifest>
+		                <attribute name="Built-By" value="${user.name}"/>
+		                <attribute name="Release-Version" value="${version}"/>
+		            	<attribute name="Main-Class" value="AP2DX/coordinator/Program"/>
+		            	<attribute name="Class-Path" value="lib/json_simple-1.1.jar" />
+		            </manifest>
+
+		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" excludes="AP2DX/@{package}/*TestCase.class" />
+		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class"  excludes="AP2DX/*TestCase.class" />
+		        </jar>
+		    	
+		    </sequential>
+		</macrodef>
+
+		<packaging package="coordinator"/>
+		<!--<packaging package="package2"/>-->
+	</target>
+	
+	<!-- Target to run -->
+	<target name="main" depends="compile, coverage-report, javadoc, jar">
+		<description>Main target</description>
+	</target>
+
+</project>

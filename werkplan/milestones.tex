@@ -1,0 +1,85 @@
+This section will describe the milestones, and what deliverables we will provide. 
+
+\subsection*{Milestone 0}
+This will describe what we will have done by the 10th of June. These are the
+deliverables:
+\begin{description}
+\addtolength{\itemsep}{-0.5\baselineskip}
+
+\item[Working environment:] We will set up a Git
+repository\footnote{https://github.com/Y3PP3R/AP2DX} and a testing environment
+(using jUnit).
+\item[Base class:] We will make an abstract base class, on which we can base
+all our Java classes. This will contain all the standard methods, e.g. TCP/IP
+protocols.
+\item[Work plan:] We will make a work plan, consisting of our planning and
+description.
+\end{description}
+
+\subsection*{Milestone 1}
+This will describe which deliverables we will have done by the 17th of June.
+\begin{description}
+\addtolength{\itemsep}{-0.5\baselineskip}
+
+\item[Drive:] We want the program to be able to direct
+the robot through the environment. We will not yet focus on the ability to
+follow lines or walls.
+\item[Avoid collision:] The robot should be able to avoid collision with objects
+and walls. It will stop, turn a random corner, and drive on. This way it will
+cover most of the area without colliding. 
+\item[Experiment and content of final report:] We will have a draft of the final
+report, containing a description of the experiment and its contents.
+\end{description}
+
+% I'm not sure if we need to mention this every time
+Classes needed to be implemented for these goals:
+\begin{itemize}
+\item Co\"ordinator
+\item Sensor
+\item Reflexes
+\item Motor
+\end{itemize}
+
+\subsection*{Milestone 2}
+This is what we will have finished before the 23rd of June.
+\begin{description}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item[Avoid obstacles:] The robot will be able to avoid the obstacles that
+cross its path, in stead of stopping and turning a random corner.
+\item[Navigate:] The robot will be able to navigate through the room.
+\end{description}
+
+What we will implement for this:
+\begin{description}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item[Mapper:] A class that creates a map of the room out of the sensor
+data. In the time of milestone 2 it does not have to be able to create an entire
+map and be very accurate, but it will be able to make some implementation.
+\item[Improved Sensor:] The sensor class will be improved to be able to make
+an accurate map.
+\item[Improved Reflexes:] The reflex class needs to be able to use some
+sensor data to be able to avoid objects appropriately. 
+\end{description}
+
+
+\subsection*{Demonstration}
+Before the demonstration we will be able to do the following things:
+\begin{description}
+\addtolength{\itemsep}{-0.5\baselineskip}
+\item[Planner:] We will have a planner class that can specify directions
+based on the current map position and what part of the map we have not yet
+discovered.
+\item[Improved Mapper:] The mapper will now be able to make an accurate map
+and find our location on it, while taking the errors in sensor data into account.
+\item[Tests:] We will test everything thoroughly.
+\item[Report:] We will work on a report, describing our progress, problems
+and (test)results.
+\item[Documentation:] We will work on a proper documentation of our code.
+\end{description}
+
+These classes we will be implemented to achieve our goals:
+\begin{itemize}
+\item Mapper
+\item Planner
+\item All test classes
+\end{itemize}
