@@ -1,0 +1,2 @@
+The json files in this directory are for the jUnit tests, except for default.json which is copied to the jar directory on build..
+The logdirectory in this directory is also used by the jUnit tests.

@@ -1,9 +1,11 @@
 /**
  * 
  */
-package AP2DX.test;
+package AP2DX.coordinator;
 
 import static org.junit.Assert.*;
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,12 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+
 /**
  * @author jjwt
  *
  */
-public class coordinatorTestCase {
-
+public class coordinatorTestCase extends TestCase {
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -50,7 +53,13 @@ public class coordinatorTestCase {
 	 */
 	@Test
 	public void testSetConfig() {
-		fail("Not yet implemented");
+		try {
+			Program coordinator = new Program();
+			coordinator.setConfig();
+		}
+		catch (Exception ex) {
+			fail("Error in setConfig");
+		}
 	}
 
 	/**
@@ -58,7 +67,13 @@ public class coordinatorTestCase {
 	 */
 	@Test
 	public void testMain() {
-		fail("Not yet implemented");
+		try {
+			String[] args = new String[0];
+			Program.main(args);
+		}
+		catch (Exception ex) {
+			fail("Error constructing Coordinator");
+		}
 	}
 
 	/**
@@ -66,7 +81,13 @@ public class coordinatorTestCase {
 	 */
 	@Test
 	public void testProgram() {
-		fail("Not yet implemented");
+		try {
+			Program test = new Program();
+			assertNotNull(test);
+		}
+		catch (Exception ex) {
+			fail("Error constructing Coordinator");
+		}
 	}
 
 }
