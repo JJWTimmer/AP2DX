@@ -4,10 +4,12 @@
 package AP2DX.coordinator;
 
 import java.net.*;
+import java.util.ArrayList;
 import java.io.*;
 
 import AP2DX.AP2DXBase;
 import AP2DX.Connection;
+import AP2DX.Message;
 
 
 /**
@@ -48,4 +50,11 @@ public class Program extends AP2DXBase {
         //simulatorPort = config.get("sim_port");
         simulatorPort = 3000;
     }
+
+
+	@Override
+	public ArrayList<Message> ComponentLogic(Message msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

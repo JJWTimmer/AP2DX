@@ -2,12 +2,13 @@ package AP2DX;
 
 
 import java.lang.Thread;
+import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /** 
  * This class defines the Logic engine of each module. It calls the ``processLogic'' module of a class, to think of a reaction.
  */
-public Class Logic extends Thread
+public class Logic extends Thread
 {
     /** The base class, in which we can run the componentLogic */
     private AP2DXBase base;
@@ -28,13 +29,13 @@ public Class Logic extends Thread
         //Get the message from the base
         Message message = base.receiveQueue.take();
         // run componentLogic with the message
-        ArrayList<Message> actions = componentLogic(message);
+        ArrayList<Message> actions = base.ComponentLogic(message);
         if (!actions.isEmpty())
         {
-            for (action:actions)
+            for (Message action : actions)
             {
-                ConnectionHandler connection = base.getSendConnection(action.destinationModuleId);
-                connection.sendMessage(action)
+                ConnectionHandler connection = base.getSendConnection(action.getDesitinationModuleId());
+                connection.sendMessage(action);
             }
 
         }

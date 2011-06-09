@@ -1,5 +1,6 @@
 package AP2DX;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -62,7 +63,7 @@ public class ConnectionHandler extends Thread
         this.moduleID = firstIncomingMessage.getSourceModuleId();
         
         out = new PrintWriter(socket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        in = new MessageReader(new InputStreamReader(socket.getInputStream()));
     }
 
     /** Thread logic. */

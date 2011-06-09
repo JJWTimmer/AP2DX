@@ -36,7 +36,7 @@ public abstract class AP2DXBase {
     private ArrayList<ConnectionHandler> inConnections = new ArrayList<ConnectionHandler>();
     private ArrayList<ConnectionHandler> outConnections = new ArrayList<ConnectionHandler>();
 
-    public ArrayBlockingQueue<Message> ReceiveQueue = new ArrayBlockingQueue<Message>(128);
+    public ArrayBlockingQueue<Message> receiveQueue = new ArrayBlockingQueue<Message>(128);
     
 	/**
 	 * constructor
@@ -204,7 +204,7 @@ public abstract class AP2DXBase {
 	}
 	
 	
-	public ConnectionHandler GetSendConnection (Module module) throws Exception{
+	public ConnectionHandler getSendConnection (Module module) throws Exception{
 		ConnectionHandler conn;
 		for (int i = 0; i < outConnections.size(); i++) {
 			conn = outConnections.get(i);
