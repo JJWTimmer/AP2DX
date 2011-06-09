@@ -26,7 +26,7 @@ public class ConnectionHandler extends Thread
     public final Module moduleID;
 
     private PrintWriter out;
-    private BufferedReader in;
+    private MessageReader in;
 
    
     /**
@@ -43,7 +43,7 @@ public class ConnectionHandler extends Thread
         this.socket = socket;
         this.moduleID = moduleID;
         out = new PrintWriter(socket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        in = new MessageReader(new InputStreamReader(socket.getInputStream()));
     }
     
     /**
@@ -59,7 +59,7 @@ public class ConnectionHandler extends Thread
         this.base = base;
         this.socket = socket;
         
-        Message firstIncomingMessage = in.readLine();
+        Message firstIncomingMessage = in.readMessage();
         this.moduleID = (Module)firstIncomingMessage.get("component");
         
         out = new PrintWriter(socket.getOutputStream(), true);
