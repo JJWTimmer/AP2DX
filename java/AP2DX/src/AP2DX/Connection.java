@@ -26,17 +26,17 @@ public class Connection
     }
 
     /** Sends a message to whatever this thing is connected to. */
-    public void sendMessage(String message)
+    public Boolean sendMessage(String message)
     {
-        //try 
-        //{
+        try 
+        {
         out.print(message);
-        //    return true;
-        //} 
-        //catch (Exception e) 
-        //{
-        //    return false;
-        //}
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            return false;
+        }
     }    
 
     public String readMessage()
