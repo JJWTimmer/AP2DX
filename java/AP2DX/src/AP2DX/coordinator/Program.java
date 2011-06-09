@@ -30,7 +30,7 @@ public class Program extends AP2DXBase {
 	public static void main (String[] args){
 		AP2DXBase instance = new Program();
 		
-		//System.exit(0);
+		System.exit(0);
 	}
 
 	
