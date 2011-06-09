@@ -12,15 +12,16 @@ import org.json.simple.parser.ParseException;
 
 
 /**
- * @author Jasper Timmer
- * @author Wadi Assal
- * 
  * Baseclass for AP2DX components
  * 
  * Can read config file
  * Can write logfile
  * Can listen at socket
  * Can send to socket[s]
+
+ * @author Jasper Timmer
+ * @author Wadi Assal
+ * 
  */
 public abstract class AP2DXBase {
 	
@@ -73,7 +74,7 @@ public abstract class AP2DXBase {
 	 * read configfile. The config file is the package name with ".json" appended. 
 	 */
 	protected Map readConfig() {
-		  //get text contents of file config.json (hard-coded filename)
+		  //get text contents of file <packagename>.json
 		  String jsonText = getContents(new File(this.getClass().getPackage().getName() + ".json"));
 		  Object jsonObj = null;
 		  Map jsonMap = null;
