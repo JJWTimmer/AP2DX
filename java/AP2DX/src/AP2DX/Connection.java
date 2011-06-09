@@ -16,9 +16,11 @@ public class Connection
 
     private PrintWriter out;
     private BufferedReader in;
+    private Module module;
 
-    public Connection(String addressString, int port) throws Exception
+    public Connection(String addressString, int port, Module module) throws Exception
     {
+    	this.module = module;
         address = InetAddress.getByName(addressString);
         socket = new Socket(address, port);
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -26,17 +28,17 @@ public class Connection
     }
 
     /** Sends a message to whatever this thing is connected to. */
-    public void sendMessage(String message)
+    public boolean sendMessage(String message)
     {
-        //try 
-        //{
-        out.print(message);
-        //    return true;
-        //} 
-        //catch (Exception e) 
-        //{
-        //    return false;
-        //}
+        try 
+        {
+        	out.print(message);
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            return false;
+        }
     }    
 
     public String readMessage()
@@ -67,5 +69,9 @@ public class Connection
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public Module GetModule () {
+    	return module;
     }
 }

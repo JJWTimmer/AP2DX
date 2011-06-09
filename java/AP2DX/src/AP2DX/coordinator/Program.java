@@ -15,9 +15,8 @@ import AP2DX.Connection;
  *
  */
 public class Program extends AP2DXBase {
-	
 
-    /** The port of the simulator. Reaf from the configuration file. */
+    /** The port of the simulator. Read from the configuration file. */
     private int simulatorPort;
     /** The IP address of the simulator. Read from the configuration file. */
     private String simulatorAddress;
