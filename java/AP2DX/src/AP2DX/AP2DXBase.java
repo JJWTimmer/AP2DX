@@ -6,29 +6,31 @@ package AP2DX;
 import java.io.*;
 import java.util.logging.*;
 import java.util.Map;
+import java.util.ArrayList;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
 /**
+ * @author Jasper Timmer
+ * @author Wadie Assal
+ * 
  * Baseclass for AP2DX components
  * 
  * Can read config file
  * Can write logfile
  * Can listen at socket
  * Can send to socket[s]
-
- * @author Jasper Timmer
- * @author Wadi Assal
- * 
  */
-public abstract class AP2DXBase {
+
+public abstract class AP2DXBase extends Thread{
 	
 	public static Logger logger;
     /** The configuration read from file and set by readConfig.*/
     protected Map config;
-
+    
+    static private ArrayList<Connection> connections = new ArrayList<Connection>();
 
 	/**
 	 * constructor
@@ -68,19 +70,25 @@ public abstract class AP2DXBase {
 	    
 	    logger.info("Package: " + this.getClass().getPackage().getName());
 	    logger.info("Directory: " + System.getProperty("user.dir"));
+	    
+	    /**
+	     * Establish all the connections.
+	     */
+	    //CODE
 	}
+	
 	
 	/**
 	 * read configfile. The config file is the package name with ".json" appended. 
 	 */
 	protected Map readConfig() {
-		  //get text contents of file <packagename>.json
+		  //get text contents of file config.json (hard-coded filename)
 		  String jsonText = getContents(new File(this.getClass().getPackage().getName() + ".json"));
 		  Object jsonObj = null;
 		  Map jsonMap = null;
 		  JSONParser parser = new JSONParser();
 		                
-		  try{
+		  try {
 			  jsonObj = parser.parse(jsonText);
 			  jsonMap = (Map)jsonObj;
 		  }
@@ -133,5 +141,38 @@ public abstract class AP2DXBase {
 	    
 	    return contents.toString();
 	  }
-
+	
+	
+	public boolean UpdateConnection (Connection connection) {
+		Connection conn;
+		for (int i = 0; i < connections.size(); i++) {
+			conn = connections.get(i);
+			if (conn.GetModule().compareTo(connection.GetModule()) == 0) {
+				connections.set(i, connection);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Connection GetConnection (Module module) throws Exception{
+		Connection conn;
+		for (int i = 0; i < connections.size(); i++) {
+			conn = connections.get(i);
+			if (conn.GetModule().compareTo(module) == 0) {
+				return conn;
+			}
+		}
+		return null;
+	}
+	
+	private boolean AddConnection (String ipaddress, int port, Module module){
+		try {
+			Connection conn = new Connection(ipaddress, port, module);
+			connections.add(conn);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
