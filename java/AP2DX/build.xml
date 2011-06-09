@@ -122,8 +122,6 @@
 		    	<copy file="default.json" tofile="${jar.dir}/@{package}/AP2DX.@{package}.json"/>
 		    	<copy file="start.bat" tofile="${jar.dir}/@{package}/start.bat"/>
 		    	<copy file="start.sh" tofile="${jar.dir}/@{package}/start.sh"/>
-		    	
-		    	<chmod file="${jar.dir}/@{package}/start.sh" perm="u+x"/>
 
 		    	<replace 
 		    	    file="${jar.dir}/@{package}/start.sh"
@@ -132,6 +130,8 @@
 		    	  <replacefilter 
 		    	    token="@package@"/>
 		    	</replace>
+		    	
+		    	<chmod file="${jar.dir}/@{package}/start.sh" perm="ug+x"/>
 		    	
 		    	<replace 
 		    	    file="${jar.dir}/@{package}/start.bat"
