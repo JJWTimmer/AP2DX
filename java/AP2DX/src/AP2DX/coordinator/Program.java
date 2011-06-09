@@ -40,36 +40,6 @@ public class Program extends AP2DXBase {
         super(); // explicitly call base ctor for extra 
 		System.out.println(" Running... ");
 
-        String spawnMessage = "INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}\r\n";
-	  
-        try 
-        { 
-            connection = new Connection(simulatorAddress, simulatorPort);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            logger.severe("Connection refused: " + e.getMessage());
-            return;
-        }
-        connection.sendMessage(spawnMessage);
-      
-        while (true)
-        {   
-            String msg = connection.readMessage();
-            if (msg != null)
-                System.out.println(msg);
-            else 
-            {      
-                logger.severe("Error in reading from connection.");
-                break;
-            }
-        } 
-        if (connection.close())
-            System.out.println("Closed successfully!");
-        else
-            logger.severe("Error in closing the connection.");
-
 	}
 
     protected void setConfig() 
