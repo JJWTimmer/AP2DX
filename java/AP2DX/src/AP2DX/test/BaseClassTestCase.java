@@ -20,7 +20,7 @@ import java.util.Map;
  * @author Maarten Inja
  *
  */
-public class baseClassTestCase extends junit.framework.TestCase
+public class BaseClassTestCase extends junit.framework.TestCase
 {
     /** The port of the simulator. Reaf from the configuration file. */
     private int simulatorPort;
