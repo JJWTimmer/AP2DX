@@ -104,7 +104,7 @@
 
 	        <fileset dir="${src.dir}" defaultexcludes="yes">
 	            <include name="**/*.java"/>
-	            <exclude name="AP2DX/test/**/*.java" />
+	            <exclude name="AP2DX/**/*TestCase.java" />
 	        </fileset>
 	    </javadoc>
 	</target>
@@ -147,8 +147,8 @@
 		            	<attribute name="Class-Path" value="lib/json_simple-1.1.jar" />
 		            </manifest>
 
-		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" />
-		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class" />
+		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" excludes="AP2DX/@{package}/*TestCase.class" />
+		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class"  excludes="AP2DX/*TestCase.class" />
 		        </jar>
 		    	
 		    </sequential>
