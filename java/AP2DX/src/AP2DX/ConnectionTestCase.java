@@ -51,7 +51,14 @@ public class ConnectionTestCase extends TestCase {
 	 */
 	@Test
 	public void testConnection() {
-		fail("Not yet implemented");
+		Connection conn = null;
+		try {
+			conn = new Connection("localhost", 9999);
+			assertNotNull(conn);
+		}
+		catch (Exception ex) {
+			fail("Constructor of Connection failed");
+		}
 	}
 
 	/**
