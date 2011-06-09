@@ -61,6 +61,7 @@
 		<cobertura-instrument todir="${instrumented.dir}" datafile="${ant.dir}/cobertura.ser">
 			<fileset dir="${build.dir}">
 				<include name="**/*.class" />
+				<exclude name="**/*TestCase.class" />
 			</fileset>
 		</cobertura-instrument>
 	</target>
@@ -80,7 +81,7 @@
 		  
 		  <batchtest fork="yes" todir="${test.report.dir}" unless="testcase">
 			<fileset dir="${src.dir}">
-			  <include name="**/*Test*.java"/>
+			  <include name="**/*TestCase.java"/>
 			</fileset>
 		  </batchtest>
 		</junit>
@@ -103,7 +104,7 @@
 
 	        <fileset dir="${src.dir}" defaultexcludes="yes">
 	            <include name="**/*.java"/>
-	            <exclude name="AP2DX/test/**/*.java" />
+	            <exclude name="AP2DX/**/*TestCase.java" />
 	        </fileset>
 	    </javadoc>
 	</target>
@@ -121,7 +122,7 @@
 		    	<copy file="default.json" tofile="${jar.dir}/@{package}/AP2DX.@{package}.json"/>
 		    	<copy file="start.bat" tofile="${jar.dir}/@{package}/start.bat"/>
 		    	<copy file="start.sh" tofile="${jar.dir}/@{package}/start.sh"/>
-		    	
+
 		    	<replace 
 		    	    file="${jar.dir}/@{package}/start.sh"
 		    	    value="@{package}"
@@ -129,6 +130,8 @@
 		    	  <replacefilter 
 		    	    token="@package@"/>
 		    	</replace>
+		    	
+		    	<chmod file="${jar.dir}/@{package}/start.sh" perm="ug+x"/>
 		    	
 		    	<replace 
 		    	    file="${jar.dir}/@{package}/start.bat"
@@ -146,8 +149,8 @@
 		            	<attribute name="Class-Path" value="lib/json_simple-1.1.jar" />
 		            </manifest>
 
-		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" />
-		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class" />
+		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" excludes="AP2DX/@{package}/*TestCase.class" />
+		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class"  excludes="AP2DX/*TestCase.class" />
 		        </jar>
 		    	
 		    </sequential>
