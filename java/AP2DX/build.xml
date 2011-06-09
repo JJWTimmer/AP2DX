@@ -127,7 +127,7 @@
 		    	<mkdir dir="${jar.dir}/@{package}/log"/>
 		    	
 		    	<copy file="lib/json_simple-1.1.jar" tofile="${jar.dir}/@{package}/lib/json_simple-1.1.jar"/>
-		    	<copy file="default.json" tofile="${jar.dir}/@{package}/AP2DX.@{package}.json"/>
+		    	<copy file="AP2DX.@{package}.json" tofile="${jar.dir}/@{package}/AP2DX.@{package}.json"/>
 		    	<copy file="start.bat" tofile="${jar.dir}/@{package}/start.bat"/>
 		    	<copy file="start.sh" tofile="${jar.dir}/@{package}/start.sh"/>
 
