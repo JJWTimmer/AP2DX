@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Map;
+import java.io.File;
 
 /**
  * Test class for our abstract baselcass
@@ -31,7 +32,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	public static void setUpBeforeClass() throws Exception 
+    {
 			//pass
 	}
 	
@@ -39,7 +41,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @throws java.lang.Exception
 	 */
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	public static void tearDownAfterClass() throws Exception 
+    {
 		//pass
 	}
 
@@ -55,9 +58,13 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @throws java.lang.Exception
 	 */
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception 
+    {
 		//pass
 	}
+
+    
+    private ConcreteClass test;
 
 	/**
 	 * Test method for {@link AP2DX.AP2DXBase#AP2DXBase()}.
@@ -65,11 +72,13 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@Test
 	public void testAP2DXBase() 
     {
-		try {
-			ConcreteClass test = new ConcreteClass();
+		try 
+        {
+			test = new ConcreteClass();
             assertNotNull(test);
 		}
-		catch (Exception ex) {
+		catch (Exception ex) 
+        {
 		    fail(ex.getMessage());	
 		}
 	}
@@ -82,7 +91,7 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	public void testReadConfig() 
     {
         // readConfig is called in the ctor of the base class
-        ConcreteClass test = new ConcreteClass();
+        test = new ConcreteClass();
         Map config = test.getConfig();
 
         compareString("logfile", "log/coordinator.log", config);
@@ -112,17 +121,47 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * Test method for {@link AP2DX.AP2DXBase#setConfig()}.
 	 */
 	@Test
-	public void testSetConfig() {
-		fail("Not yet implemented");
+	public void testSetConfig() 
+    {
+        test = new ConcreteClass();
+        if (!test.getSimulatorAddress().equals("146.50.51.9"))
+            fail("FAIL: testSetConfig: simulatorAddress does not equal 146.50.51.9");
+        if (test.getSimulatorPort() != 3000)
+            fail("FAIL: testSetConfig: simulatorPort does not equal 3000");
+
 	}
 
 	/**
-	 * Test method for {@link AP2DX.AP2DXBase#getContents(java.io.File)}.
+	 * Test method for {@link AP2DX.AP2DXBase#getContents(java.io.File)}. 
+     * WATCH IT! Make sure the method ConcreteClass.getContentsConcrete calls 
+     * the abstract getContents method correctly.
 	 */
 	@Test
-	public void testGetContents() {
-		fail("Not yet implemented");
+	public void testGetContents() 
+    {
+        test = new ConcreteClass();
+        String content = removeWeirdCharacters(test.getContentsConcrete());
+        String compareToValue = removeWeirdCharacters(String.format("%s\n%s\n%s\n%s\n%s\n%s\n", 
+    "{",
+    "\t\"logfile\": \"log/coordinator.log\",",
+    "\t\"sim_port\": 3000,",
+    "\t\"sim_address\": \"146.50.51.9\",",
+    "\t\"coordinator_listen_port\": 9000,",
+    "}"));
+
+        if (!content.equals(compareToValue))
+		    fail(String.format("FAIL: testGetContents, does not match: \n'%s', \n'%s' %d",
+                content, compareToValue, content.trim().compareTo(compareToValue.trim())));
 	}
+
+    private String removeWeirdCharacters(String s)
+    {   
+        String returnString = "";
+        for (char c : s.toCharArray())
+            if (Character.isLetter(c))
+                returnString += c;
+        return returnString; 
+    }
 
 	/**
 	 * Concrete implementation of BaseClass
@@ -130,19 +169,35 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 *
 	 */
 	private class ConcreteClass extends AP2DX.AP2DXBase {
+
 		/**
 		 * Concrete implementation of setConfig
 		 */
 		@Override
-		protected void setConfig() {
+		protected void setConfig() 
+        {
 			simulatorAddress = (config.get("sim_address")).toString();
 	        simulatorPort = Integer.parseInt(config.get("sim_port").toString());
-			
 		}
+
+        public String getSimulatorAddress()
+        {
+            return simulatorAddress;
+        }
+
+        public int getSimulatorPort()
+        {
+            return simulatorPort;
+        }
 
         public Map getConfig()
         {
             return config;
+        }
+
+        public String getContentsConcrete()
+        {
+            return getContents(new File(this.getClass().getPackage().getName() + ".json"));
         }
 		
 	}
