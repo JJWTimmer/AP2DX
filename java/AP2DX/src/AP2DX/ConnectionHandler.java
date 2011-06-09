@@ -1,6 +1,5 @@
 package AP2DX;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -60,7 +59,7 @@ public class ConnectionHandler extends Thread
         this.socket = socket;
         
         Message firstIncomingMessage = in.readMessage();
-        this.moduleID = (Module)firstIncomingMessage.get("component");
+        this.moduleID = firstIncomingMessage.getSourceModuleId();
         
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -69,14 +68,17 @@ public class ConnectionHandler extends Thread
     /** Thread logic. */
     public void run()
     {
-        try
+        while(true) // TODO: make interupt variable or something 
         {
-            String plainIncomingMessage = in.readLine();
-            base.getBlockingQueue().put(plainIncomingMessage);
-        }    
-        catch (Exception e)
-        {
-            base.logger.severe(e.getMessage() + " IN ConnectionHandler.run, attempting to read message.");
+            try
+            {
+                Message incomingMessage = in.readMessage();
+                base.getBlockingQueue().put(incomingMessage);
+            }    
+            catch (Exception e)
+            {
+                base.logger.severe(e.getMessage() + " IN ConnectionHandler.run, attempting to read message.");
+            }
         }
     } 
 
