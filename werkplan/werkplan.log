@@ -1,11 +1,13 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  8 JUN 2011 22:49
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.3.8)  9 JUN 2011 10:01
 entering extended mode
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **werkplan.tex
 (./werkplan.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, dutch, loaded.
+yphenation, dutch, french, basque, ngerman, german, german-x-2009-06-19, ngerma
+n-x-2009-06-19, loaded.
 (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size10.clo
@@ -171,10 +173,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  3x4 370> [2] (./milestones.tex [3]
 [4]) [5] (./werkplan.aux) ) 
 Here is how much of TeX's memory you used:
- 2528 strings out of 495006
- 30028 string characters out of 1181410
- 126272 words of memory out of 3000000
- 5722 multiletter control sequences out of 15000+50000
+ 2528 strings out of 494942
+ 30028 string characters out of 1178710
+ 126363 words of memory out of 3000000
+ 5742 multiletter control sequences out of 15000+50000
  9038 words of font info for 35 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
  27i,12n,24p,187b,824s stack positions out of 5000i,500n,10000p,200000b,50000s
