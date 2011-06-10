@@ -363,8 +363,14 @@ public abstract class AP2DXBase {
 		
 		/** The module to connect to */
 		private Module module;
+		
+		/** Reference to the baseclass */
 		private AP2DXBase base;
 
+		/**
+		 * Constructor
+		 * Only sets variables
+		 **/
 		public Connector(AP2DXBase base, String address, int port, Module module) {
 			this.address = address;
 			this.port = port;
@@ -372,6 +378,10 @@ public abstract class AP2DXBase {
 			this.base = base;
 		}
 
+		/**
+		 * the body of the thread,
+		 * tries until forever to connect to the given computer
+		 */
 		@Override
 		public void run() {
 			Socket conn = null;
@@ -399,6 +409,7 @@ public abstract class AP2DXBase {
 			}
 
 			ConnectionHandler connHandler = null;
+			
 			try {
 				connHandler = new ConnectionHandler(base, conn, this.module);
 			} catch (Exception e) {
@@ -406,8 +417,10 @@ public abstract class AP2DXBase {
 				e.printStackTrace();
 			}
 
+			// add the connectionhandler to the list of connections
 			outConnections.add(connHandler);
 			
+			// decrement the runningthread counter
 			this.base.threadCounter.decrementAndGet();
 		}
 	}
@@ -419,14 +432,24 @@ public abstract class AP2DXBase {
 	 * 
 	 */
 	private class Listener implements Runnable {
+		/** Socket to listen on */
 		private ServerSocket server;
+		/** Reference to the base */
 		private AP2DXBase base;
 
+		/**
+		 * Sets variables
+		 * @param svr
+		 * @param base
+		 */
 		public Listener(ServerSocket svr, AP2DXBase base) {
 			this.server = svr;
 			this.base = base;
 		}
 
+		/**
+		 * Listen and accept connections forever
+		 */
 		@Override
 		public void run() {
 			while (true) {
