@@ -5,7 +5,7 @@
 	<property name="ant.dir" location="ant" />
 	<property name="src.dir" location="src" />
 	<property name="build.dir" location="${ant.dir}/build" />
-	<property name="debug.dir" location="${ant.dir}/build" />
+	<property name="debug.dir" location="${ant.dir}/debug" />
 	<property name="javadoc.dir" location="${ant.dir}/javadoc" />
 	<property name="instrumented.dir" location="${ant.dir}/instrumented" />
 	<property name="jar.dir" location="${ant.dir}/jar" />
@@ -42,6 +42,7 @@
 	<!-- Creates the  build, docs and dist directory-->
 	<target name="makedir">
 		<mkdir dir="${build.dir}" />
+		<mkdir dir="${debug.dir}" />
 		<mkdir dir="${javadoc.dir}" />
 		<mkdir dir="${test.report.dir}" />
 		<mkdir dir="log" />
