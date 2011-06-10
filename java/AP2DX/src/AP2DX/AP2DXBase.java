@@ -399,7 +399,6 @@ public abstract class AP2DXBase {
 					e.printStackTrace();
 				}
 			}
-
 		}
 
 	}

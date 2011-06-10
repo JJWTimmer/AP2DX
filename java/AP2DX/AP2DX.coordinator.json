@@ -9,6 +9,11 @@
 			   "component": "MAPPER",
 			   "address": "localhost",
 			   "port": 3001
+			 },
+			 {
+			   "component": "REFLEX",
+			   "address": "localhost",
+			   "port": 3002
 			 }
 		 ]
 }
