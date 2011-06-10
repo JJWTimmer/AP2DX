@@ -4,9 +4,10 @@ import java.net.*;
 import java.io.*;
 
 /*
- * @author Maarten Inja
  * A class that should handle all a socket connection to both send and receive messages. The receiving part might be difficult
  * since this could happen all the time, or not at all.
+ * 
+ * @author Maarten Inja
  */
 public class Connection {
 
