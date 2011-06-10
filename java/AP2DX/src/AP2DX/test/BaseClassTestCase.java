@@ -26,6 +26,12 @@ import java.io.File;
  */
 public class BaseClassTestCase extends junit.framework.TestCase
 {
+    public void testietest()
+    {   
+        ConcreteClass t = new ConcreteClass();
+    }
+
+
     /** The port of the simulator. Reaf from the configuration file. */
     private int simulatorPort;
     /** The IP address of the simulator. Read from the configuration file. */
@@ -169,7 +175,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @author jjwt
 	 *
 	 */
-	private class ConcreteClass extends AP2DX.AP2DXBase {
+	public class ConcreteClass extends AP2DX.AP2DXBase 
+    {
 
 		/**
 		 * Concrete implementation of setConfig
@@ -202,7 +209,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
         }
 
 		@Override
-		public ArrayList<Message> componentLogic(Message msg) {
+		public ArrayList<Message> componentLogic(Message msg) 
+        {
 			// TODO Auto-generated method stub
 			return null;
 		}

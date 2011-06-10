@@ -44,7 +44,8 @@ public abstract class AP2DXBase {
 	/**
 	 * constructor
 	 */
-	public AP2DXBase() {
+	public AP2DXBase() 
+    {
 		config = readConfig();
         
 		setConfig();
@@ -56,19 +57,21 @@ public abstract class AP2DXBase {
 	    
 	    BaseLogic = new Logic(this);
 	    
-	    BaseLogic.run();
+	    BaseLogic.start();
+
 	    
 	    ServerSocket svr = null;
-		try {
-			svr = new ServerSocket(Integer.parseInt(config.get("port").toString()));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
+		try 
+        {
+			svr = new ServerSocket(Integer.parseInt(config.get("sim_port").toString()));
+		} 
+        catch (Exception e) 
+        {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            logger.severe("Couldn't create server socket(" + e.getMessage() + "), quitin'");
+            System.exit(0);
 		}
-	    Listener conn_c= new Listener(svr, this);
+	    Listener conn_c = new Listener(svr, this);
         Thread t = new Thread(conn_c);
         t.start();
 	    
@@ -251,6 +254,7 @@ public abstract class AP2DXBase {
 		return receiveQueue;
 	}
 
+    
 	private class Listener implements Runnable {
 		private ServerSocket server;
 		private AP2DXBase base;
@@ -278,6 +282,6 @@ public abstract class AP2DXBase {
 			}
 			
 		}
-		
 	}
+    
 }
