@@ -53,8 +53,9 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
-		//pass
+	public void setUp() throws Exception 
+    {
+        test = new ConcreteClass();
 	}
 
 	/**
@@ -94,7 +95,6 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	public void testReadConfig() 
     {
         // readConfig is called in the ctor of the base class
-        test = new ConcreteClass();
         Map config = test.getConfig();
 
         compareString("logfile", "log/coordinator.log", config);
@@ -126,7 +126,6 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@Test
 	public void testSetConfig() 
     {
-        test = new ConcreteClass();
         if (!test.getSimulatorAddress().equals("146.50.51.9"))
             fail("FAIL: testSetConfig: simulatorAddress does not equal 146.50.51.9");
         if (test.getSimulatorPort() != 3000)
@@ -142,7 +141,6 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@Test
 	public void testGetContents() 
     {
-        test = new ConcreteClass();
         String content = removeWeirdCharacters(test.getContentsConcrete());
         String compareToValue = removeWeirdCharacters(String.format("%s\n%s\n%s\n%s\n%s\n%s\n", 
     "{",
