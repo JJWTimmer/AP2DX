@@ -89,7 +89,7 @@ public abstract class AP2DXBase {
 				int port = Integer.parseInt(((JSONObject)out.get(i)).get("port").toString());
 				String address = ((JSONObject)out.get(i)).get("address").toString();
 				Module module = Module.valueOf(((JSONObject)out.get(i)).get("component").toString());
-				
+				System.out.println("Address: " + address + " Port: " + port);
 				Socket conn = new Socket(address, port);
 				ConnectionHandler connHandler = new ConnectionHandler(this, conn, module);
 				
