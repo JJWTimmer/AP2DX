@@ -17,12 +17,6 @@ import AP2DX.Message;
  *
  */
 public class Program extends AP2DXBase {
-
-    /** The port of the simulator. Read from the configuration file. */
-    private int simulatorPort;
-    /** The IP address of the simulator. Read from the configuration file. */
-    private String simulatorAddress;
-
     private Connection connection;
 
 	/**
@@ -49,13 +43,6 @@ public class Program extends AP2DXBase {
 	protected void doOverride() {
 		System.out.println("Warning, security override in progress");
 	}
-
-    protected void setConfig() 
-    {
-        simulatorAddress = (config.get("sim_address")).toString();
-        //simulatorPort = config.get("sim_port");
-        simulatorPort = 3000;
-    }
 
 
 	@Override
