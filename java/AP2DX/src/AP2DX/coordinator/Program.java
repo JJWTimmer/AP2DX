@@ -38,10 +38,16 @@ public class Program extends AP2DXBase {
 	/**
 	 * constructor
 	 */
-	public Program() {
+	public Program() 
+    {
         super(); // explicitly call base ctor for extra 
 		System.out.println(" Running... ");
 
+	}
+	
+	@Override
+	protected void doOverride() {
+		System.out.println("Warning, security override in progress");
 	}
 
     protected void setConfig() 
