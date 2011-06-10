@@ -4,10 +4,11 @@
 package AP2DX;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -39,6 +40,9 @@ public abstract class AP2DXBase {
 	protected Map config;
 	private Logic BaseLogic;
 
+	//threadcounter for outgoing connections
+	private AtomicInteger threadCounter = new AtomicInteger();
+
 	private ArrayList<ConnectionHandler> inConnections = new ArrayList<ConnectionHandler>();
 	private ArrayList<ConnectionHandler> outConnections = new ArrayList<ConnectionHandler>();
 
@@ -50,8 +54,6 @@ public abstract class AP2DXBase {
 	 */
 	public AP2DXBase() {
 		config = readConfig();
-
-		setConfig();
 
 		initLogger();
 
@@ -83,31 +85,49 @@ public abstract class AP2DXBase {
 
 		// Outgoing connections
 		List out = (List) config.get("outgoing");
+
 		for (int i = 0; i < out.size(); i++) {
-			//((JSONObject)out.get(i)).get("component");
+			int port = Integer.parseInt(((JSONObject) out.get(i)).get("port")
+					.toString());
+			String address = ((JSONObject) out.get(i)).get("address")
+					.toString();
+			Module module = Module.valueOf(((JSONObject) out.get(i)).get(
+					"component").toString());
+
+			Connector connector = new Connector(this, address, port, module);
+			Thread t1 = new Thread(connector);
+			
 			try {
-				int port = Integer.parseInt(((JSONObject)out.get(i)).get("port").toString());
-				String address = ((JSONObject)out.get(i)).get("address").toString();
-				Module module = Module.valueOf(((JSONObject)out.get(i)).get("component").toString());
-				
-				Socket conn = new Socket(address, port);
-				ConnectionHandler connHandler = new ConnectionHandler(this, conn, module);
-				
-				outConnections.add(connHandler);
-				
-			} catch (NumberFormatException e) {
+				t1.start();
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
+				System.exit(1);
+			}
+			threadCounter.incrementAndGet();
+		}
+
+		while (this.threadCounter.get() != 0) {
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		System.out.println("hoi");
 
+		this.doOverride();
+		
+		try {
+			BaseLogic.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	protected void doOverride() {
+		// override this for extra behaviour in concrete class.
 	}
 
 	/**
@@ -171,9 +191,9 @@ public abstract class AP2DXBase {
 
 		try {
 			jsonObj = parser.parse(jsonText);
-			
+
 			jsonMap = (Map) jsonObj;
-			
+
 			Iterator iter = jsonMap.entrySet().iterator();
 
 		} catch (ParseException pe) {
@@ -183,12 +203,6 @@ public abstract class AP2DXBase {
 
 		return jsonMap;
 	}
-
-	/**
-	 * A method that reads the configurations and sets variables to the correct
-	 * value.
-	 */
-	protected abstract void setConfig();
 
 	/**
 	 * Fetch the entire contents of a text file, and return it in a String. This
@@ -295,6 +309,71 @@ public abstract class AP2DXBase {
 		return receiveQueue;
 	}
 
+	/**
+	 * Class to create outgoing connection
+	 * 
+	 * @author jjwt
+	 * 
+	 */
+	private class Connector implements Runnable {
+		private String address;
+		private int port;
+		private Module module;
+		private AP2DXBase base;
+
+		public Connector(AP2DXBase base, String address, int port, Module module) {
+			this.address = address;
+			this.port = port;
+			this.module = module;
+			this.base = base;
+		}
+
+		@Override
+		public void run() {
+			Socket conn = null;
+			boolean success = false;
+
+			while (!success) {
+				try {
+					conn = new Socket(this.address, this.port);
+					success = true;
+				}
+				catch (ConnectException e2) {
+					// keep trying!
+				}
+				catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.exit(1);
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			ConnectionHandler connHandler = null;
+			try {
+				connHandler = new ConnectionHandler(base, conn, this.module);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			outConnections.add(connHandler);
+			
+			this.base.threadCounter.decrementAndGet();
+		}
+	}
+
+	/**
+	 * Class for listening at specified port and accepting connections.
+	 * 
+	 * @author jjwt
+	 * 
+	 */
 	private class Listener implements Runnable {
 		private ServerSocket server;
 		private AP2DXBase base;
