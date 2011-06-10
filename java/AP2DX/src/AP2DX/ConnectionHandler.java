@@ -60,11 +60,13 @@ public class ConnectionHandler extends Thread
         this.base = base;
         this.socket = socket;
         
+        out = new PrintWriter(socket.getOutputStream(), true);
+        in = new MessageReader(new InputStreamReader(socket.getInputStream()));   
+        
         Message firstIncomingMessage = in.readMessage();
         this.moduleID = firstIncomingMessage.getSourceModuleId();
         
-        out = new PrintWriter(socket.getOutputStream(), true);
-        in = new MessageReader(new InputStreamReader(socket.getInputStream()));
+
     }
 
     /** Thread logic. */
