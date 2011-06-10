@@ -55,8 +55,6 @@ public abstract class AP2DXBase {
 	public AP2DXBase() {
 		config = readConfig();
 
-		setConfig();
-
 		initLogger();
 
 		logger.info("Package: " + this.getClass().getPackage().getName());
@@ -205,12 +203,6 @@ public abstract class AP2DXBase {
 
 		return jsonMap;
 	}
-
-	/**
-	 * A method that reads the configurations and sets variables to the correct
-	 * value.
-	 */
-	protected abstract void setConfig();
 
 	/**
 	 * Fetch the entire contents of a text file, and return it in a String. This
