@@ -233,11 +233,6 @@ public abstract class AP2DXBase {
 		}
 		return null;
 	}
-
-    public ArrayBlockingQueue<Message> getReceiveQueue()
-    {
-        return receiveQueue;
-    }
 	
 	private boolean addSendConnection (String ipaddress, int port, Module module){
 		try {
