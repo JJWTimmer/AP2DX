@@ -222,7 +222,8 @@ public abstract class AP2DXBase {
 	}
 	
 	
-	public ConnectionHandler getSendConnection (Module module) throws Exception{
+	public ConnectionHandler getSendConnection (Module module) throws Exception
+    {
 		ConnectionHandler conn;
 		for (int i = 0; i < outConnections.size(); i++) {
 			conn = outConnections.get(i);
@@ -232,8 +233,13 @@ public abstract class AP2DXBase {
 		}
 		return null;
 	}
+
+    public ArrayBlockingQueue<Message> getReceiveQueue()
+    {
+        return receiveQueue;
+    }
 	
-	private boolean AddSendConnection (String ipaddress, int port, Module module){
+	private boolean addSendConnection (String ipaddress, int port, Module module){
 		try {
 			Socket sock = new Socket(ipaddress, port);
 			ConnectionHandler conn = new ConnectionHandler(this, sock, module);
@@ -244,7 +250,7 @@ public abstract class AP2DXBase {
 		}
 	}
 	
-	public abstract ArrayList<Message> ComponentLogic(Message msg);
+	public abstract ArrayList<Message> componentLogic(Message msg);
 	
 	public ArrayBlockingQueue<Message> getReceiveQueue() {
 		return receiveQueue;
