@@ -43,6 +43,11 @@ public class Program extends AP2DXBase {
 		System.out.println(" Running... ");
 
 	}
+	
+	@Override
+	protected void doOverride() {
+		System.out.println("Warning, security override in progress");
+	}
 
     protected void setConfig() 
     {
