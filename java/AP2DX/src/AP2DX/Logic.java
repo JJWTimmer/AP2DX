@@ -30,7 +30,7 @@ public class Logic extends Thread
         //Get the message from the base
         try
         {
-            message = base.receiveQueue.take();
+            message = base.getReceiveQueue().take();
         }
         catch(Exception e)
         {

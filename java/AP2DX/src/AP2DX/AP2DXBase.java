@@ -4,6 +4,7 @@
 package AP2DX;
 
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.*;
@@ -15,15 +16,17 @@ import org.json.simple.parser.ParseException;
 
 
 /**
- * @author Jasper Timmer
- * @author Wadie Assal
- * 
  * Baseclass for AP2DX components
  * 
  * Can read config file
  * Can write logfile
  * Can listen at socket
  * Can send to socket[s]
+ * 
+ * @author Jasper Timmer
+ * @author Wadie Assal
+ * 
+
  */
 
 public abstract class AP2DXBase {
@@ -36,12 +39,12 @@ public abstract class AP2DXBase {
     private ArrayList<ConnectionHandler> inConnections = new ArrayList<ConnectionHandler>();
     private ArrayList<ConnectionHandler> outConnections = new ArrayList<ConnectionHandler>();
 
-    public ArrayBlockingQueue<Message> receiveQueue = new ArrayBlockingQueue<Message>(128);
+    private ArrayBlockingQueue<Message> receiveQueue = new ArrayBlockingQueue<Message>(128);
     
 	/**
 	 * constructor
 	 */
-	public AP2DXBase(Module module) {
+	public AP2DXBase() {
 		config = readConfig();
         
 		setConfig();
@@ -55,14 +58,29 @@ public abstract class AP2DXBase {
 	    
 	    BaseLogic.run();
 	    
+	    ServerSocket svr = null;
+		try {
+			svr = new ServerSocket(Integer.parseInt(config.get("port").toString()));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    Listener conn_c= new Listener(svr, this);
+        Thread t = new Thread(conn_c);
+        t.start();
 	    
 	    /**
 	     * Establish all the connections.
 	     */
+	    //Incoming connections
+	    
+	    	    
 	    //Outgoing connections
 	    	    
 	    
-	    //Incoming connections
 	}
 	
 	/**
@@ -215,11 +233,6 @@ public abstract class AP2DXBase {
 		}
 		return null;
 	}
-
-    public ArrayBlockingQueue<Message> getReceiveQueue()
-    {
-        return receiveQueue;
-    }
 	
 	private boolean addSendConnection (String ipaddress, int port, Module module){
 		try {
@@ -233,4 +246,38 @@ public abstract class AP2DXBase {
 	}
 	
 	public abstract ArrayList<Message> componentLogic(Message msg);
+	
+	public ArrayBlockingQueue<Message> getReceiveQueue() {
+		return receiveQueue;
+	}
+
+	private class Listener implements Runnable {
+		private ServerSocket server;
+		private AP2DXBase base;
+		
+		public Listener(ServerSocket svr, AP2DXBase base) {
+			this.server = svr;
+			this.base = base;
+		}
+		
+		@Override
+		public void run() {
+			while (true) {
+				ConnectionHandler connHandler = null;
+				Socket conn = null;
+				try {
+					conn = this.server.accept();
+					connHandler = new ConnectionHandler(base, conn);
+					
+					connHandler.start();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+	}
 }

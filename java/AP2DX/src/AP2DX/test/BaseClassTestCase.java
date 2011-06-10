@@ -11,6 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import AP2DX.Message;
+
+import java.util.ArrayList;
 import java.util.Map;
 import java.io.File;
 
@@ -197,6 +200,12 @@ public class BaseClassTestCase extends junit.framework.TestCase
         {
             return getContents(new File(this.getClass().getPackage().getName() + ".json"));
         }
+
+		@Override
+		public ArrayList<Message> componentLogic(Message msg) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 	}
 }
