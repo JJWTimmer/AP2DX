@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.io.File;
 
+import java.net.*;
+
 /**
  * Test class for our abstract baselcass
  *
@@ -26,10 +28,20 @@ import java.io.File;
  */
 public class BaseClassTestCase extends junit.framework.TestCase
 {
+    /*
+    public void testietest()
+    {   
+        ConcreteClass t = new ConcreteClass();
+    }
+    */
+
     /** The port of the simulator. Reaf from the configuration file. */
     private int simulatorPort;
     /** The IP address of the simulator. Read from the configuration file. */
     private String simulatorAddress;
+
+    public static ServerSocket serverSocket;
+    public static Socket socket;
     
 	/**
 	 * @throws java.lang.Exception
@@ -37,7 +49,17 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
     {
-			//pass
+	/*	try 
+        {
+            // TODO: check at whatever port this server socket should listen to
+			serverSocket = new ServerSocket(3000);
+            socket = serverSocket.accept();
+        } 
+        catch (Exception e) 
+        {
+			e.printStackTrace();
+            System.out.println("ERROR in setting up socket server: " + e.getMessage());
+        }*/
 	}
 	
 	/**
@@ -56,6 +78,9 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	public void setUp() throws Exception 
     {
         test = new ConcreteClass();
+        
+        
+        System.out.println("Created ConcreteClass");
 	}
 
 	/**
@@ -169,17 +194,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @author jjwt
 	 *
 	 */
-	private class ConcreteClass extends AP2DX.AP2DXBase {
-
-		/**
-		 * Concrete implementation of setConfig
-		 */
-		@Override
-		protected void setConfig() 
-        {
-			simulatorAddress = (config.get("sim_address")).toString();
-	        simulatorPort = Integer.parseInt(config.get("sim_port").toString());
-		}
+	public class ConcreteClass extends AP2DX.AP2DXBase 
+    {
 
         public String getSimulatorAddress()
         {
@@ -202,7 +218,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
         }
 
 		@Override
-		public ArrayList<Message> componentLogic(Message msg) {
+		public ArrayList<Message> componentLogic(Message msg) 
+        {
 			// TODO Auto-generated method stub
 			return null;
 		}

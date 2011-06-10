@@ -23,11 +23,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * Baseclass for AP2DX components
- * 
- * Can read config file Can write logfile Can listen at socket Can send to
- * socket[s]
- * 
+ * Baseclass for AP2DX components<br>
+ * <br>
+ * Can read config file<br>
+ * Can write logfile<br>
+ * Can listen at socket<br>
+ * Can send to socket[s]<br>
+ *
  * @author Jasper Timmer
  * @author Wadie Assal
  * 
@@ -35,22 +37,42 @@ import org.json.simple.parser.ParseException;
 
 public abstract class AP2DXBase {
 
+	/** Log object */
 	public static Logger logger;
-	/** The configuration read from file and set by readConfig. */
+	
+	/** The configuration read from file and set by readConfig */
 	protected Map config;
-	private Logic BaseLogic;
+	
+	/** The read message queue logic that calls the concrete logic */
+	private Logic baseLogic;
 
-	//threadcounter for outgoing connections
+	/** Threadcounter for outgoing connections */
 	private AtomicInteger threadCounter = new AtomicInteger();
 
+	
+	// TODO check if connection closes
+	/** list containing all incoming connections that are active */
 	private ArrayList<ConnectionHandler> inConnections = new ArrayList<ConnectionHandler>();
+	/** list containing all outgoing connections that are active */
 	private ArrayList<ConnectionHandler> outConnections = new ArrayList<ConnectionHandler>();
 
-	private ArrayBlockingQueue<Message> receiveQueue = new ArrayBlockingQueue<Message>(
-			128);
+	/** all received AP2DX.Messages will be stored here */
+	private ArrayBlockingQueue<Message> receiveQueue = new ArrayBlockingQueue<Message>(128);
 
 	/**
-	 * constructor
+	 * Where everything happens:
+	 * <ul>
+	 * 	<li>Read the config file</li>
+	 *  <li>Init the logger</li>
+	 *  <li>Start the logic thread</li>
+	 *  <li>Read the config file</li>
+	 *  <li>Establish incoming connections</li>
+	 *  <li>Start outgoing connections</li>
+	 *  <li>And if defined, execute extra logic</li>
+	 * </ul>
+	 * 
+	 * @author Jasper Timmer
+	 *
 	 */
 	public AP2DXBase() {
 		config = readConfig();
@@ -60,32 +82,33 @@ public abstract class AP2DXBase {
 		logger.info("Package: " + this.getClass().getPackage().getName());
 		logger.info("Directory: " + System.getProperty("user.dir"));
 
-		BaseLogic = new Logic(this);
+		baseLogic = new Logic(this);
 
-		BaseLogic.start();
+		baseLogic.start();
 
-		/**
-		 * Establish all the connections.
-		 */
+		
+		// Establish all the connections.
+		
 		// Incoming connections
 		ServerSocket svr = null;
 		try {
-			svr = new ServerSocket(Integer.parseInt(config.get("listen_port")
-					.toString()));
-		} catch (NumberFormatException e) {
+			svr = new ServerSocket(Integer.parseInt(config.get("listen_port").toString()));
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.exit(1);
 		}
+		// start new thread that accepts all connections and creates connectionhandlers
 		Listener conn_c = new Listener(svr, this);
 		Thread t = new Thread(conn_c);
 		t.start();
 
+		
 		// Outgoing connections
+		// Get the list of outgoing connections from the configfile
 		List out = (List) config.get("outgoing");
 
+		// for every connection, start a connector thread
 		for (int i = 0; i < out.size(); i++) {
 			int port = Integer.parseInt(((JSONObject) out.get(i)).get("port")
 					.toString());
@@ -107,6 +130,7 @@ public abstract class AP2DXBase {
 			threadCounter.incrementAndGet();
 		}
 
+		// wait for all the connectors to connect
 		while (this.threadCounter.get() != 0) {
 			try {
 				Thread.sleep(100);
@@ -116,28 +140,34 @@ public abstract class AP2DXBase {
 			}
 		}
 
+		// run the extra logic
 		this.doOverride();
 		
 		try {
-			BaseLogic.wait();
+			baseLogic.join();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * If needed, extra logic for the constructor of the concrete class can be added here.
+	 * This is nessecary because the component constructor calls super() but will
+	 * never return. It waits for the BaseLogic to return.
+	 */
 	protected void doOverride() {
 		// override this for extra behaviour in concrete class.
 	}
 
 	/**
-	 * starts a logger, defines a format
+	 * Starts a logger and defines the log format. Gets the logfile location
+	 * from the configfile variable "logfile".
 	 */
 	private void initLogger() {
 		try {
 			boolean append = true;
-			FileHandler fh = new FileHandler(config.get("logfile").toString(),
-					append);
+			FileHandler fh = new FileHandler(config.get("logfile").toString(), append);
 
 			// set logfile format:
 			// date millis methodname level message
@@ -168,33 +198,25 @@ public abstract class AP2DXBase {
 	/**
 	 * read configfile. The config file is the package name with ".json"
 	 * appended.
+	 * 
+	 * @return jsonMap A raw key/value map with the values from the jsonfile.
 	 */
 	protected Map readConfig() {
-		// get text contents of file config.json (hard-coded filename)
-		String jsonText = getContents(new File(this.getClass().getPackage()
-				.getName()
-				+ ".json"));
+		String jsonText = getContents(new File(
+				this.getClass()
+					.getPackage()
+					.getName() + ".json"
+			));
+		
 		Object jsonObj = null;
 		Map jsonMap = null;
+		
 		JSONParser parser = new JSONParser();
-
-		ContainerFactory containerFactory = new ContainerFactory() {
-			public List creatArrayContainer() {
-				return new LinkedList();
-			}
-
-			public Map createObjectContainer() {
-				return new LinkedHashMap();
-			}
-
-		};
 
 		try {
 			jsonObj = parser.parse(jsonText);
 
 			jsonMap = (Map) jsonObj;
-
-			Iterator iter = jsonMap.entrySet().iterator();
 
 		} catch (ParseException pe) {
 			System.out.println("position: " + pe.getPosition());
@@ -267,7 +289,7 @@ public abstract class AP2DXBase {
 	 * 
 	 * @author Wadie Assal
 	 * @param connection
-	 * @return
+	 * @return bool update succeeded
 	 */
 	public boolean UpdateOutgoingConnection(ConnectionHandler connection) {
 		ConnectionHandler conn;
@@ -280,7 +302,14 @@ public abstract class AP2DXBase {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * return the ConnectionHandler for the requested module.
+	 * 
+	 * @author Wadie Assal
+	 * @param module The module to get connection for
+	 * @return conn The requested connection object or null
+	 */
 	public ConnectionHandler getSendConnection(Module module) throws Exception {
 		ConnectionHandler conn;
 		for (int i = 0; i < outConnections.size(); i++) {
@@ -292,6 +321,14 @@ public abstract class AP2DXBase {
 		return null;
 	}
 
+	/**
+	 * Establishes a new connection and adds it to the outConnections list
+	 * 
+	 * @param ipaddress
+	 * @param port
+	 * @param module
+	 * @return true if operation succeeded false otherwise
+	 */
 	private boolean addSendConnection(String ipaddress, int port, Module module) {
 		try {
 			Socket sock = new Socket(ipaddress, port);
@@ -303,6 +340,7 @@ public abstract class AP2DXBase {
 		}
 	}
 
+	/** List with received messages */
 	public abstract ArrayList<Message> componentLogic(Message msg);
 
 	public ArrayBlockingQueue<Message> getReceiveQueue() {
@@ -312,12 +350,18 @@ public abstract class AP2DXBase {
 	/**
 	 * Class to create outgoing connection
 	 * 
-	 * @author jjwt
+	 * @author Jasper Timmer
 	 * 
 	 */
 	private class Connector implements Runnable {
+		
+		/** Ipaddress of the connection */
 		private String address;
+		
+		/** Port of the connection */
 		private int port;
+		
+		/** The module to connect to */
 		private Module module;
 		private AP2DXBase base;
 
@@ -399,7 +443,6 @@ public abstract class AP2DXBase {
 					e.printStackTrace();
 				}
 			}
-
 		}
 
 	}
