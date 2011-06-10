@@ -28,12 +28,12 @@ import java.net.*;
  */
 public class BaseClassTestCase extends junit.framework.TestCase
 {
-    /*
+    
     public void testietest()
     {   
         ConcreteClass t = new ConcreteClass();
     }
-    */
+    
 
     /** The port of the simulator. Reaf from the configuration file. */
     private int simulatorPort;
@@ -77,7 +77,7 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@Before
 	public void setUp() throws Exception 
     {
-        test = new ConcreteClass();
+        //test = new ConcreteClass();
         
         
         System.out.println("Created ConcreteClass");
@@ -104,11 +104,12 @@ public class BaseClassTestCase extends junit.framework.TestCase
 		try 
         {
 			test = new ConcreteClass();
-            assertNotNull(test);
+            //assertNotNull(test);
 		}
 		catch (Exception ex) 
         {
-		    fail(ex.getMessage());	
+            
+		    fail("CTOR TEST FAIL: " + ex.getMessage() + ", " + (test == null));	
 		}
 	}
 
@@ -125,7 +126,7 @@ public class BaseClassTestCase extends junit.framework.TestCase
         compareString("logfile", "log/coordinator.log", config);
         compareString("sim_address", "146.50.51.9", config); 
         compareInt("sim_port", 3000, config);
-        compareInt("coordinator_listen_port", 9000, config);
+        compareInt("coordinator_listen_port", 3000, config);
 	}
   
     /** Help method for testReadConfig. */  
@@ -221,7 +222,7 @@ public class BaseClassTestCase extends junit.framework.TestCase
 		public ArrayList<Message> componentLogic(Message msg) 
         {
 			// TODO Auto-generated method stub
-			return null;
+			return new ArrayList<Message>();
 		}
 		
 	}

@@ -52,6 +52,8 @@ public class Logic extends Thread {
 					}
 				}
 			}
+            else
+                break;
 		}
 	}
 }
