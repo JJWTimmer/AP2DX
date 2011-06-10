@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.io.File;
 
+import java.net.*;
+
 /**
  * Test class for our abstract baselcass
  *
@@ -37,6 +39,9 @@ public class BaseClassTestCase extends junit.framework.TestCase
     private int simulatorPort;
     /** The IP address of the simulator. Read from the configuration file. */
     private String simulatorAddress;
+
+    public static ServerSocket serverSocket;
+    public static Socket socket;
     
 	/**
 	 * @throws java.lang.Exception
@@ -44,7 +49,17 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
     {
-			//pass
+	/*	try 
+        {
+            // TODO: check at whatever port this server socket should listen to
+			serverSocket = new ServerSocket(3000);
+            socket = serverSocket.accept();
+        } 
+        catch (Exception e) 
+        {
+			e.printStackTrace();
+            System.out.println("ERROR in setting up socket server: " + e.getMessage());
+        }*/
 	}
 	
 	/**
