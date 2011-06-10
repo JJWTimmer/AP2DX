@@ -65,7 +65,7 @@
 	</target>
 
 	<!-- Run Cobertura instruments -->
-	<target name="instrument" depends="compile">
+	<target name="instrument" depends="compile-debug">
 		<cobertura-instrument todir="${instrumented.dir}" datafile="${ant.dir}/cobertura.ser">
 			<fileset dir="${debug.dir}">
 				<include name="**/*.class" />
@@ -75,7 +75,7 @@
 	</target>
 	
 	<!-- Run the JUnit Tests -->
-	<target name="junit" depends="compile, instrument">
+	<target name="junit" depends="instrument">
 		<junit printsummary="yes" haltonfailure="no" failureProperty="test.failed">
 		  <sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
 

@@ -4,16 +4,16 @@
 	"sim_address": "146.50.51.9",
 	"listen_port": 9000,
 	"outgoing" :
-	[
-         {
-           "component": "mapper",
-           "address": "localhost",
-		   "port": 3000
-         },
-         {
-           "component": "reflexen",
-           "address": "localhost",
-		   "port": 3000
-         }
-     ]
+		[
+			 {
+			   "component": "MAPPER",
+			   "address": "localhost",
+			   "port": 3000
+			 },
+			 {
+			   "component": "REFLEX",
+			   "address": "localhost",
+			   "port": 3000
+			 }
+		 ]
 }
