@@ -24,20 +24,36 @@ public class Logic extends Thread
     /**
      * Where the magic happens. This will be on all the time, calling componentLogic to find a reaction
      */
-    public void run()
+    public void run() 
     {   
+        Message message = null;
         //Get the message from the base
-        Message message = base.receiveQueue.take();
+        try
+        {
+            message = base.receiveQueue.take();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            base.logger.severe("Error in Logic.run, attempted to retrieve item out base.receiveQueue"); 
+        }
         // run componentLogic with the message
-        ArrayList<Message> actions = base.ComponentLogic(message);
+        ArrayList<Message> actions = base.componentLogic(message);
         if (!actions.isEmpty())
         {
             for (Message action : actions)
             {
-                ConnectionHandler connection = base.getSendConnection(action.getDesitinationModuleId());
-                connection.sendMessage(action);
+                try
+                {
+                    ConnectionHandler connection = base.getSendConnection(action.getDestinationModuleId());
+                    connection.sendMessage(action);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    base.logger.severe("Error in Logic.run, attempted get the connection of action: " + action);
+                }
             }
-
         }
     }
 }

@@ -7,7 +7,8 @@ import java.io.PrintWriter;
 import java.lang.Thread;
 import java.net.Socket;
 
-import com.sun.xml.internal.ws.api.message.Message;
+//import com.sun.xml.internal.ws.api.message.Message;
+
 
 /**
  * 
@@ -74,7 +75,7 @@ public class ConnectionHandler extends Thread
             try
             {
                 Message incomingMessage = in.readMessage();
-                base.getBlockingQueue().put(incomingMessage);
+                base.getReceiveQueue().put(incomingMessage);
             }    
             catch (Exception e)
             {

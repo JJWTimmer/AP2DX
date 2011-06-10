@@ -2,6 +2,7 @@ package AP2DX;
 
 import java.io.BufferedReader;
 import java.io.Reader;
+import java.io.IOException;
 
 /** Specialized bufferedReader to directly parse messages from a (in our case) 
 * sockets. 
@@ -18,9 +19,9 @@ public class MessageReader extends BufferedReader
     /** Reads and parses a message. */
     public Message readMessage() throws IOException
     {
-        String line = super.readMessage();
+        String line = readLine();
         Message message = new Message(line);
-        message.parse();
+        //message.parseMessage();
         return message;
     } 
 

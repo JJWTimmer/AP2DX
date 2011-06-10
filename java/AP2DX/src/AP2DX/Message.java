@@ -10,6 +10,8 @@ public class Message
     private Module destinationModuleId;
     private String messageString;
 
+    private boolean isReceived;
+
     public Message(String in)
     {
         this.messageString = in; 
@@ -25,11 +27,16 @@ public class Message
     {
         return sourceModuleId;
     } 
-
-    public Module getDesitinationModuleId()
+    public Module getDestinationModuleId()
     {
         return destinationModuleId;
     }
+
+    public void setIsReceived(boolean value)
+    {
+        isReceived = value;    
+    }
+
 }
 
 
