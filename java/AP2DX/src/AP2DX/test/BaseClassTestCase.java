@@ -3,7 +3,11 @@
  */
 package AP2DX.test;
 
-import static org.junit.Assert.*;
+import java.io.File;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,58 +15,43 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import AP2DX.Message;
-
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-
-import java.net.*;
+import AP2DX.*;
 
 /**
  * Test class for our abstract baselcass
  *
- * @author jjwt
+ * @author Jasper Timmer
  * @author Maarten Inja
  *
  */
 public class BaseClassTestCase extends junit.framework.TestCase
 {
-    
-    public void testietest()
-    {   
-        ConcreteClass t = new ConcreteClass();
-    }
-    
-
-    /** The port of the simulator. Reaf from the configuration file. */
-    private int simulatorPort;
-    /** The IP address of the simulator. Read from the configuration file. */
-    private String simulatorAddress;
-
     public static ServerSocket serverSocket;
     public static Socket socket;
     
 	/**
+	 * is called before all the tests
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
     {
-	/*	try 
+		try 
         {
             // TODO: check at whatever port this server socket should listen to
-			serverSocket = new ServerSocket(3000);
+			serverSocket = new ServerSocket(3001);
             socket = serverSocket.accept();
         } 
         catch (Exception e) 
         {
 			e.printStackTrace();
             System.out.println("ERROR in setting up socket server: " + e.getMessage());
-        }*/
+        }
 	}
 	
 	/**
+	 * is called after all tests
 	 * @throws java.lang.Exception
 	 */
 	@AfterClass
@@ -72,6 +61,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	}
 
 	/**
+	 * is called before each test
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -84,6 +75,8 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	}
 
 	/**
+	 * is called after each test
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@After
@@ -92,7 +85,6 @@ public class BaseClassTestCase extends junit.framework.TestCase
 		//pass
 	}
 
-    
     private ConcreteClass test;
 
 	/**
@@ -144,20 +136,6 @@ public class BaseClassTestCase extends junit.framework.TestCase
         if (value != compareToValue)
             fail(String.format("FAIL: testReadConfig, variable '%s' with value '%s' does not match actual value '%s'", jsonValue, value, compareToValue));
     }
-    
-
-	/**
-	 * Test method for {@link AP2DX.AP2DXBase#setConfig()}.
-	 */
-	@Test
-	public void testSetConfig() 
-    {
-        if (!test.getSimulatorAddress().equals("146.50.51.9"))
-            fail("FAIL: testSetConfig: simulatorAddress does not equal 146.50.51.9");
-        if (test.getSimulatorPort() != 3000)
-            fail("FAIL: testSetConfig: simulatorPort does not equal 3000");
-
-	}
 
 	/**
 	 * Test method for {@link AP2DX.AP2DXBase#getContents(java.io.File)}. 
@@ -195,23 +173,12 @@ public class BaseClassTestCase extends junit.framework.TestCase
 	 * @author jjwt
 	 *
 	 */
-	public class ConcreteClass extends AP2DX.AP2DXBase 
+	public class ConcreteClass extends AP2DXBase 
     {
-
-        public String getSimulatorAddress()
-        {
-            return simulatorAddress;
-        }
-
-        public int getSimulatorPort()
-        {
-            return simulatorPort;
-        }
-
-        public Map getConfig()
-        {
-            return config;
-        }
+		
+		public Map getConfig() {
+			return config;
+		}
 
         public String getContentsConcrete()
         {

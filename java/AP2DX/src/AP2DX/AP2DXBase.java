@@ -428,7 +428,7 @@ public abstract class AP2DXBase {
 	/**
 	 * Class for listening at specified port and accepting connections.
 	 * 
-	 * @author jjwt
+	 * @author Jasper Timmer
 	 * 
 	 */
 	private class Listener implements Runnable {

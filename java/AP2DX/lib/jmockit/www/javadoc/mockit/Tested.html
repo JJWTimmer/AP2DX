@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+Tested (JMockit Toolkit API Documentation)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Tested (JMockit Toolkit API Documentation)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+
+            <a href=http://code.google.com/p/jmockit target=_top>JMockit Home</a>
+         </EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../mockit/NonStrictExpectations.html" title="class in mockit"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../mockit/UsingMocksAndStubs.html" title="annotation in mockit"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../index.html?mockit/Tested.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Tested.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;REQUIRED&nbsp;|&nbsp;OPTIONAL</FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;ELEMENT</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+mockit</FONT>
+<BR>
+Annotation Type Tested</H2>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Documented.html?is-external=true" title="class or interface in java.lang.annotation">@Documented</A>
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/annotation/ElementType.html?is-external=true#FIELD" title="class or interface in java.lang.annotation">FIELD</A>)
+</FONT>public @interface <B>Tested</B></DL>
+</PRE>
+
+<P>
+Indicates a class to be tested in isolation from selected dependencies.
+ This annotation is only applicable to instance fields of a test class.
+ <p/>
+ If the tested class has a super-class (apart from <code>Object</code>), it's also considered to be tested,
+ <em>provided</em> both classes have the same <A HREF="http://download.oracle.com/javase/6/docs/api/java/security/ProtectionDomain.html?is-external=true" title="class or interface in java.security">protection domain</A>.
+ This also applies to the super-class of the super-class, up to but not including the first super-class with a
+ different protection domain.
+ (In practice, this rule about protection domains means that super-classes defined by the JRE or by a third-party
+ library will be excluded from consideration, as they should be.)
+ <p/>
+ If the tested field is not <code>final</code> and its value remains <code>null</code> at the time a test method is about to be
+ executed, then a suitable instance of the tested class will be created and assigned to the field.
+ The instantiation will only succeed if the tested class has a single public constructor, and all parameters to this
+ constructor (if any) can be satisfied with the instances available in <A HREF="../mockit/Injectable.html" title="annotation in mockit">injectable</A> mock fields
+ of the test class.
+ <p/>
+ Whenever the tested object is created automatically, <em>field injection</em> is also performed.
+ Only non-<code>final</code> fields which remain <code>null</code> at this time are considered, between those declared in the
+ tested class itself or in a tested super-class.
+ For each such field, the mock instance currently available in an <A HREF="../mockit/Injectable.html" title="annotation in mockit">injectable</A> mock field of the
+ <em>same</em> type will be injected.
+ If there is more than one field of a given type, then the field to be injected is matched to a suitable mock field
+ <em>by name</em>.
+ If no matching injectable mock field exists in the test class, the target field in the tested class will be left
+ with the <code>null</code> reference.
+<P>
+
+<P>
+
+<P>
+
+<P>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+
+            <a href=http://code.google.com/p/jmockit target=_top>JMockit Home</a>
+         </EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../mockit/NonStrictExpectations.html" title="class in mockit"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../mockit/UsingMocksAndStubs.html" title="annotation in mockit"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../index.html?mockit/Tested.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Tested.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;REQUIRED&nbsp;|&nbsp;OPTIONAL</FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;ELEMENT</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+<font size=-1>© 2006-2011 Rogério Liesenfeld</font>
+</BODY>
+</HTML>

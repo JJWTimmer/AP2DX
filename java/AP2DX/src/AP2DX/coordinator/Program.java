@@ -7,8 +7,7 @@ import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
 
-import AP2DX.AP2DXBase;
-import AP2DX.Message;
+import AP2DX.*;
 
 
 /**
@@ -74,6 +73,6 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Message>();
 	}
 }
