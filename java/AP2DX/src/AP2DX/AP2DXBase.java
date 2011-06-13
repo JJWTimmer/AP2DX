@@ -340,7 +340,11 @@ public abstract class AP2DXBase {
 		}
 	}
 
-	/** List with received messages */
+	/**
+	 *  List with received messages
+	 *  @param msg
+	 *  @return
+	 */
 	public abstract ArrayList<Message> componentLogic(Message msg);
 
 	public ArrayBlockingQueue<Message> getReceiveQueue() {
