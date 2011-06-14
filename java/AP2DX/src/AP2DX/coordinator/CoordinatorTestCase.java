@@ -62,25 +62,10 @@ public class CoordinatorTestCase extends TestCase {
 	public void testProgram() {
 		Mockit.setUpMocks(FakeBase.class);
 
-		Program test = new Program();
+		CoordinatorMain test = new CoordinatorMain();
 		assertNotNull(test);
 
-		/**
-		 * Inline mockup class
-		 */
-		new MockUp<Message>() {
-			
-			/**
-			 * override constructor
-			 * @param msg
-			 */
-			@Mock
-			void $init(String msg) {
-				assertEquals("test", msg);
-			}
-		};
-
-		Message msg = new Message("test");
+		Message msg = new UsarSimMessage("SEN {Time 395.3833} {Type GroundTruth} {Name GroundTruth} {Location 4.50,1.90,1.85} {Orientation 0.00,6.28,6.28}", Module.UNDEFINED);
 		test.componentLogic(msg);
 	}
 
@@ -91,14 +76,7 @@ public class CoordinatorTestCase extends TestCase {
 	 * 
 	 */
 	@MockClass(realClass = AP2DXBase.class)
-	public static final class FakeBase {
-
-		/**
-		 * Automagic field must be called 'it'.
-		 * 'it' represents the class and can be used to call and check methods and fields.
-		 */
-		//AP2DXBase it;
-		
+	public static final class FakeBase {		
 		/**
 		 * Override the constructor of AP2DXBase to do nothing.
 		 */
