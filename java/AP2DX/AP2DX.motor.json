@@ -1,0 +1,12 @@
+{
+	"logfile": "log/motor.log",
+	"listen_port": 5002,
+	"outgoing" :
+		[
+			 {
+			   "component": "COORDINATOR",
+			   "address": "127.0.0.1",
+			   "port": 5000
+			 }
+		]
+}

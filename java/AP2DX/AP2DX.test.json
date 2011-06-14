@@ -1,13 +1,13 @@
 {
 	"logfile": "log/coordinator.log",
 	"sim_port": 3000,
-	"sim_address": "146.50.51.9",
-	"listen_port": 3002,
+	"sim_address": "127.0.0.1",
+	"listen_port": 5999,
 	"outgoing" :
 		[
 			 {
 			   "component": "MAPPER",
-			   "address": "localhost",
+			   "address": "127.0.0.1",
 			   "port": 3001
 			 },
         ]
