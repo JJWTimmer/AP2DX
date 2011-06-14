@@ -75,6 +75,7 @@ public abstract class AP2DXBase {
 	 *
 	 */
 	public AP2DXBase() {
+        System.out.println("Starting AP2DXBase");
 		config = readConfig();
 
 		initLogger();
@@ -140,12 +141,13 @@ public abstract class AP2DXBase {
 			}
 		}
 
+        System.out.println("Before override");
 		// run the extra logic
 		this.doOverride();
 		
 		try {
 			baseLogic.join();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
