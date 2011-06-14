@@ -14,12 +14,12 @@ import AP2DX.*;
  * @author jjwt
  *
  */
-public class Main extends AP2DXBase {
+public class CoordinatorMain extends AP2DXBase {
     /**
 	 * entrypoint of coordinator 
 	 */
 	public static void main (String[] args){
-		new Program();
+		new CoordinatorMain();
 		
 		System.exit(0);
 	}
@@ -28,9 +28,9 @@ public class Main extends AP2DXBase {
 	/**
 	 * constructor
 	 */
-	public Program() 
+	public CoordinatorMain() 
     {
-        super(); // explicitly call base ctor for extra 
+        super(); // Explicitly calls base constructor
 		System.out.println(" Running Coordinator... ");
 
 	}
