@@ -31,6 +31,11 @@ import AP2DX.*;
 public class BaseClassTestCase extends junit.framework.TestCase {
 
 
+    public void testietest()
+    {
+        new ConcreteBase();
+    }
+
 	/**
 	 * is called before all the tests
 	 * 

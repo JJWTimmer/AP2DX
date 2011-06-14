@@ -9,6 +9,6 @@
 			   "component": "MAPPER",
 			   "address": "localhost",
 			   "port": 3001
-			 },
+			 }
         ]
 }
