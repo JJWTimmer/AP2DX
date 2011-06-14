@@ -10,6 +10,9 @@ If you test a method that calls methods of another class, you are also testing t
 What is line-coverage (Cobertura):
 How much executable code is tested by the unittests. It can tell if some code is never reached. It does not guarantee that the code is correct and will function properly if you cover 100%.
 
+What is a continuous integration server (Jenkins):
+Jenkins is a fully customizable webapplication that can do multiple steps to help developers test and deploy their code. Jenkins does a checkout of the git repository, executes an Ant buildfile and then publishes testreports. The Ant buildfile does a couple of steps, including compiling, testing, javadoc and making jars.
+
 ---
 jMockit & jUnit
 
@@ -33,6 +36,4 @@ Possible asserts:
     assertTrue([String failMessage], boolean condition)
     fail()
     fail(String Message)
-    
-How to mock:
-    
+  

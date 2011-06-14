@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import AP2DX.AP2DXBase;
 import AP2DX.Message;
+import AP2DX.Module;
 
 public class MotorMain extends AP2DXBase {
     /**
@@ -21,7 +22,7 @@ public class MotorMain extends AP2DXBase {
 	 */
 	public MotorMain() 
     {
-        super(); // explicitly calls base constructor
+        super(Module.ABSTRACTMOTOR); // explicitly calls base constructor
 		System.out.println(" Running Motor... ");
 
 	}

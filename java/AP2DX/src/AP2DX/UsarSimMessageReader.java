@@ -10,7 +10,7 @@ import java.io.IOException;
  * 
  * @author Maarten Inja
  */
-public class UsarSimMessageReader<E extends Message> extends BufferedReader {
+public class UsarSimMessageReader extends BufferedReader implements IMessageReader {
 	/**
 	 * origin of messages of the stream
 	 */

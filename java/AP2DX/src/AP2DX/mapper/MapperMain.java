@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import AP2DX.AP2DXBase;
 import AP2DX.Message;
+import AP2DX.Module;
 
 public class MapperMain extends AP2DXBase {
     /**
@@ -21,7 +22,7 @@ public class MapperMain extends AP2DXBase {
 	 */
 	public MapperMain() 
     {
-        super(); // explicitly calls base constructor
+        super(Module.MAPPER); // explicitly calls base constructor
 		System.out.println(" Running Mapper... ");
 
 	}

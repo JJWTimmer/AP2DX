@@ -30,7 +30,7 @@ public class CoordinatorMain extends AP2DXBase {
 	 */
 	public CoordinatorMain() 
     {
-        super(); // Explicitly calls base constructor
+        super(Module.COORDINATOR); // Explicitly calls base constructor
 		System.out.println(" Running Coordinator... ");
 
 	}

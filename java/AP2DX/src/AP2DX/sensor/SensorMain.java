@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import AP2DX.AP2DXBase;
 import AP2DX.Message;
+import AP2DX.Module;
 
 public class SensorMain extends AP2DXBase {
     /**
@@ -21,7 +22,7 @@ public class SensorMain extends AP2DXBase {
 	 */
 	public SensorMain() 
     {
-        super(); // explicitly calls base constructor
+        super(Module.SENSOR); // explicitly calls base constructor
 		System.out.println(" Running Sensor... ");
 
 	}
