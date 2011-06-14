@@ -62,7 +62,7 @@ public class CoordinatorTestCase extends TestCase {
 	public void testProgram() {
 		Mockit.setUpMocks(FakeBase.class);
 
-		Program test = new Program();
+		CoordinatorMain test = new CoordinatorMain();
 		assertNotNull(test);
 
 		/**
