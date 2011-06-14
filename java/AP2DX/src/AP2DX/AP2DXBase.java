@@ -49,7 +49,8 @@ public abstract class AP2DXBase {
 	/** Threadcounter for outgoing connections */
 	private AtomicInteger threadCounter = new AtomicInteger();
 
-	
+	/** This is module... */
+	private Module IAM;
 	// TODO check if connection closes
 	/** list containing all incoming connections that are active */
 	private ArrayList<ConnectionHandler> inConnections = new ArrayList<ConnectionHandler>();
@@ -74,7 +75,8 @@ public abstract class AP2DXBase {
 	 * @author Jasper Timmer
 	 *
 	 */
-	public AP2DXBase() {
+	public AP2DXBase(Module myModule) {
+		IAM = myModule;
 		config = readConfig();
 
 		initLogger();
@@ -326,13 +328,13 @@ public abstract class AP2DXBase {
 	 * 
 	 * @param ipaddress
 	 * @param port
-	 * @param module
+	 * @param module Module it connects to
 	 * @return true if operation succeeded false otherwise
 	 */
-	private boolean addSendConnection(String ipaddress, int port, Module module) {
+	private boolean addSendConnection(String ipaddress, int port, Module destination) {
 		try {
 			Socket sock = new Socket(ipaddress, port);
-			ConnectionHandler conn = new ConnectionHandler(this, sock, module);
+			ConnectionHandler conn = new ConnectionHandler(this, sock, IAM, destination);
 			outConnections.add(conn);
 			return true;
 		} catch (Exception e) {

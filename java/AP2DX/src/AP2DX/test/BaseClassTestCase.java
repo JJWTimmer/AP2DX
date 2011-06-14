@@ -77,6 +77,9 @@ public class BaseClassTestCase extends junit.framework.TestCase {
 	@Test
 	@Ignore("freezes test")
 	public void testAP2DXBase() {
+		/**
+		 * empty socket mockup
+		 */
 		new MockUp<Socket>() {
 			@Mock
 			void $init(String host, int port) {
@@ -84,6 +87,9 @@ public class BaseClassTestCase extends junit.framework.TestCase {
 			}
 		};
 		
+		/**
+		 * empty thread mockup
+		 */
 		new MockUp<Thread>() {
 			@Mock
 			void join() {

@@ -37,16 +37,16 @@ public class ConnectionHandler extends Thread
      * from the socket.
      * 
      * This constructor is for the base-class self-started connections.
-     * 
+     *
      * @throws IOException 
      */ 
-    public ConnectionHandler(AP2DXBase base, Socket socket, Module moduleID) throws IOException
+    public ConnectionHandler(AP2DXBase base, Socket socket, Module origin, Module destination) throws IOException
     {
         this.base = base;
         this.socket = socket;
         this.moduleID = moduleID;
         out = new PrintWriter(socket.getOutputStream(), true);
-        in = new MessageReader(new InputStreamReader(socket.getInputStream()));
+        in = new MessageReader(new InputStreamReader(socket.getInputStream()), origin, destination);
     }
     
     /**
@@ -63,7 +63,7 @@ public class ConnectionHandler extends Thread
         this.socket = socket;
         
         out = new PrintWriter(socket.getOutputStream(), true);
-        in = new MessageReader(new InputStreamReader(socket.getInputStream()));   
+        in = new MessageReader(new InputStreamReader(socket.getInputStream()), );   
         
         Message firstIncomingMessage = in.readMessage();
         this.moduleID = firstIncomingMessage.getSourceModuleId();
