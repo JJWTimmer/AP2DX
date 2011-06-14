@@ -11,6 +11,10 @@ import java.io.IOException;
 */ 
 public class MessageReader extends BufferedReader
 {
+	/**
+	 * 
+	 * @param in
+	 */
     public MessageReader(Reader in)
     {
        super(in);
@@ -21,7 +25,8 @@ public class MessageReader extends BufferedReader
     {
         String line = readLine();
         Message message = new Message(line);
-        //message.parseMessage();
+        
+        message.parseMessage();
         return message;
     } 
 

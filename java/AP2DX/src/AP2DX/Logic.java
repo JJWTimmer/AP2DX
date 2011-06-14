@@ -35,8 +35,10 @@ public class Logic extends Thread {
 				base.logger
 						.severe("Error in Logic.run, attempted to retrieve item out base.receiveQueue");
 			}
+
 			// run componentLogic with the message
 			ArrayList<Message> actions = base.componentLogic(message);
+
 			if (!actions.isEmpty()) {
 				for (Message action : actions) {
 					try {
@@ -51,9 +53,8 @@ public class Logic extends Thread {
 										+ action);
 					}
 				}
-			}
-            else
-                break;
+			} else
+				break;
 		}
 	}
 }

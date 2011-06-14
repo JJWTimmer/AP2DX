@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+Overview (JMockit Toolkit API Documentation)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Overview (JMockit Toolkit API Documentation)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Overview</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Package</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+
+            <a href=http://code.google.com/p/jmockit target=_top>JMockit Home</a>
+         </EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html?overview-summary.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="overview-summary.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+JMockit: a Java toolkit for developer testing.
+<P>
+<B>See:</B>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#overview_description"><B>Description</B></A>
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Packages</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="20%"><B><A HREF="mockit/package-summary.html">mockit</A></B></TD>
+<TD>Provides the classes and annotations used when writing tests with the JMockit mocking APIs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="20%"><B><A HREF="mockit/integration/logging/package-summary.html">mockit.integration.logging</A></B></TD>
+<TD>Provides integration with logging frameworks such as Log4j, SLF4j, and standard JDK logging, with the purpose of
+ isolating code under test from them.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="20%"><B><A HREF="mockit/integration/testng/package-summary.html">mockit.integration.testng</A></B></TD>
+<TD>Provides integration with <em>TestNG</em> test runners, for versions 5.14+.</TD>
+</TR>
+</TABLE>
+
+<P>
+&nbsp;<A NAME="overview_description"><!-- --></A>
+<P>
+<h1>JMockit: a Java toolkit for developer testing.</h1>
+<p>
+   The figure below provides an overview of the available testing APIs.
+   Clicking on individual items will navigate to the corresponding API documentation.
+</p>
+<div align="center">
+   <map name="figure1">
+      <area shape="rect" coords="15,12,165,33" href="../tutorial/BehaviorBasedTesting.html">
+      <area shape="rect" coords="45,92,179,125" href="mockit/Expectations.html"
+         title="Base class whose subclasses are defined in test code, and whose instances define a set of expected method/constructor invocations on the mocked types (classes or interfaces) declared through one or more mock fields and/or mock parameters.">
+      <area shape="rect" coords="9,174,215,207" href="mockit/NonStrictExpectations.html"
+         title="An Expectations subclass where all expectations are automatically non-strict.">
+      <area shape="rect" coords="460,92,592,125" href="mockit/Verifications.html"
+         title="Base class whose subclasses are defined in test code, and whose instances define a set of invocations on mocked types/instances to be verified against the actual invocations executed during the replay phase of the test.">
+      <area shape="rect" coords="234,174,428,207" href="mockit/VerificationsInOrder.html"
+         title="Same as Verifications, but checking that invocations in the replay phase occurred in the same order as specified in this ordered verification block.">
+      <area shape="rect" coords="447,174,605,207" href="mockit/FullVerifications.html"
+         title="Same as Verifications, but checking that all invocations in the replay phase are explicitly verified in this verification block.">
+      <area shape="rect" coords="624,174,845,207" href="mockit/FullVerificationsInOrder.html"
+         title="A combination of FullVerifications and VerificationsInOrder.">
+      <area shape="rect" coords="743,10,845,43" href="mockit/Delegate.html"
+         title="An empty interface to be used with the Expectations#returns(Object) method, in order to allow test code to define invocation results (return values or thrown errors/exceptions) based on test-specific logic.">
+      <area shape="rect" coords="726,59,845,92" href="mockit/Invocation.html"
+         title="A context object representing the current invocation to a mocked method or constructor.">
+      <area shape="rect" coords="9,223,96,256" href="mockit/Tested.html"
+         title="Indicates a class to be tested in isolation from selected dependencies.">
+      <area shape="rect" coords="117,223,231,256" href="mockit/Injectable.html"
+         title="Indicates an instance field of the test class or a parameter of the test method whose value will be an injectable mocked instance.">
+      <area shape="rect" coords="252,223,346,256" href="mockit/Mocked.html"
+         title="Indicates an instance field or test method parameter whose value will be a mocked instance.">
+      <area shape="rect" coords="368,223,475,256" href="mockit/NonStrict.html"
+         title="For tests using Expectations, indicates a non-strict mocked type for an instance field or test method parameter.">
+      <area shape="rect" coords="499,223,577,256" href="mockit/Input.html"
+         title="Indicates an instance field holding either a default return value for a given return type, or a checked exception instance to be thrown for a given checked exception type.">
+      <area shape="rect" coords="599,223,713,256" href="mockit/Cascading.html"
+         title="Indicates a mocked type where the return types of non-void methods, excluding primitives, String, and collection types, will be mocked automatically if and when an invocation to the method occurs.">
+      <area shape="rect" coords="733,223,845,256" href="mockit/Capturing.html"
+         title="Indicates a test class, an instance field declared in a test class, or a test method parameter which will capture all implementations of a given base type (usually an interface or abstract class).">
+
+      <area shape="rect" coords="10,282,133,300" href="../tutorial/StateBasedTesting.html">
+      <area shape="rect" coords="10,305,95,338" href="mockit/Mockit.html"
+         title="Provides static methods for the mocking and stubbing of arbitrary classes from production code, according to specified mock classes defined in test code.">
+      <area shape="rect" coords="102,305,232,338" href="mockit/MockUp.html"
+         title="A mock-up for a class or interface, to be used in state-based tests.">
+      <area shape="rect" coords="241,305,316,338" href="mockit/Mock.html"
+         title="Used inside a mock class to indicate a mock method or mock constructor, with optional expectations on the number of invocations while the mock is in effect.">
+      <area shape="rect" coords="324,305,439,338" href="mockit/MockClass.html"
+         title="Indicates a mock class containing one or more mock methods/constructors, each one of them properly indicated as such.">
+      <area shape="rect" coords="448,305,583,338" href="mockit/Instantiation.html"
+         title="Defines the lifetime of the instances automatically created for a mock class.">
+
+      <area shape="rect" coords="9,365,127,381" href="../tutorial/ReflectionUtilities.html">
+      <area shape="rect" coords="10,389,172,423" href="mockit/Deencapsulation.html"
+         title='Provides utility methods that enable access to (ie "de-encapsulate") otherwise non-accessible fields, methods and constructors belonging to code under test.'>
+
+      <area shape="rect" coords="644,286,837,301" href="../tutorial/UsingMocksAndStubs.html">
+      <area shape="rect" coords="645,307,846,340" href="mockit/UsingMocksAndStubs.html"
+         title="Indicates one or more classes to be mocked or stubbed out.">
+
+      <area shape="rect" coords="211,389,373,422" href="../tutorial/CodeCoverage.html"
+         title="An external tool which generates an XHTML report with code coverage metrics for the production code exercised during a test run.">
+      <area shape="rect" coords="381,389,562,422" href="../tutorial/IncrementalTests.html">
+   </map>
+   <img src="../toolkit.png" style="border: none;" usemap="overview.html#figure1">
+   <br>
+   <span>Figure 1. Overview of JMockit APIs</span>
+</div>
+<p>
+   For a quick introduction to JMockit go to this page:
+   <a href="http://jmockit.googlecode.com/svn/trunk/www/gettingStarted.html"
+      target="gettingStarted">Getting started</a>.
+   For the motivations that led to the creation of the toolkit and a brief introduction (with examples) to the main
+   APIs, check out the
+   <a href="http://jmockit.googlecode.com/svn/trunk/www/about.html" target="homepage">About JMockit</a> page.
+</p>
+<p>
+   The <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial.html" target="tutorial">JMockit Tutorial</a>
+   contains an extensive description of all the available tools and APIs, with plenty of example code.
+</p>
+<p>
+   The full distribution (in a zip file) contains several
+   <a href="http://jmockit.googlecode.com/svn/trunk/www/samples.html" target="samples">sample test suites</a> written
+   with the toolkit APIs.
+   There are individual test suites for comparison with other popular mocking tools, with the JMockit versions of the
+   official example tests found on the Web for each other tool.
+</p>
+<p>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD><a href="mailto:rliesenfeld@gmail.com">Rogério Liesenfeld</a>
+</p>
+<p>
+   Questions and feedback should be posted on the
+   <a href="http://groups.google.com/group/jmockit-users">JMockit Users</a> discussion group.
+</p>
+<p>
+   Bug reports, feature/enhancement requests and other issues should be posted on the
+   <a href="http://code.google.com/p/jmockit/issues/list" target="issues">Issue Tracker</a>.
+   A code contribution can be attached to the corresponding issue as an SVN patch file.
+</p></DD>
+</DL>
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Overview</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Package</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+
+            <a href=http://code.google.com/p/jmockit target=_top>JMockit Home</a>
+         </EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html?overview-summary.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="overview-summary.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+<font size=-1>© 2006-2011 Rogério Liesenfeld</font>
+</BODY>
+</HTML>

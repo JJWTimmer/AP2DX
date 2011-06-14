@@ -1,0 +1,38 @@
+What are unit tests (jUnit):
+Tests that test the smallest possible piece of software, a 'unit'. In OO this mostly means a method or constructor of a class.
+
+What are integration tests (jUnit):
+Tests that verify if the whole of components works good together.
+
+Why do we need mock-objects (jMockit):
+If you test a method that calls methods of another class, you are also testing the other class. This is not what you want, see definition of 'unit' above. By mocking a class, you create a dummy version of it. Most mocking libraries have methods to tell what the dummy should return on invocation, or to tell if a specific method was called on the mock-class and what data was passed to it.
+
+What is line-coverage (Cobertura):
+How much executable code is tested by the unittests. It can tell if some code is never reached. It does not guarantee that the code is correct and will function properly if you cover 100%.
+
+---
+jMockit & jUnit
+
+Conventions:
+    *Testclasses end in *TestCase
+    *TestCases extend from TestCase
+    *every test starts with test*, followed by the method to be tested
+    *every test has annotation @Test
+    *if a test raises an error, the TestCase wil produce an error
+    *if a test calls fail(message), the test fails
+    *if an assert fails, the test fails
+
+Possible asserts:
+    assertEquals([String failMessage], object, object)
+    assertFalse([String failMessage], boolean condition)
+    assertNotNull([String failMessage], object)
+    assertNotSame([String failMessage], object, object) // not same reference
+    assertNull([String failMessage], object)
+    assertSame([String failMessage], object, object) //same reference
+    assertThat([String failMessage], T object, Matcher<T> matcher) // for difficult conditions, use google :) 
+    assertTrue([String failMessage], boolean condition)
+    fail()
+    fail(String Message)
+    
+How to mock:
+    

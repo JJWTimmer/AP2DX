@@ -25,11 +25,19 @@
 
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	
+	<!-- Variables used for jmockit  -->
+	<property name="jmockit.dir" value="lib/jmockit" />
+	
+	<path id="jmockit.classpath">
+		<fileset file="${jmockit.dir}/jmockit.jar" />
+	</path>	
+	
 	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
     <path id="AP2DX.classpath">
         <pathelement location="lib/json_simple-1.1.jar"/>
         <pathelement location="lib/junit-4.9b2.jar"/>
 		<pathelement location="lib/cobertura/cobertura.jar"/>
+    	<pathelement location="lib/jmockit/jmockit.jar"/>
 		<pathelement location="${build.dir}"/>
     </path>
 
@@ -79,7 +87,8 @@
 	<target name="junit" depends="instrument">
 		<junit printsummary="yes" haltonfailure="no" failureProperty="test.failed">
 		  <sysproperty key="net.sourceforge.cobertura.datafile" file="${ant.dir}/cobertura.ser" />
-
+		  <jvmarg value="-javaagent:${jmockit.dir}/jmockit.jar"/>
+	      <classpath refid="jmockit.classpath" />
 		  <classpath location="${instrumented.dir}" />
 		  <classpath refid="cobertura.classpath" />
 		  <classpath refid="AP2DX.classpath" />
