@@ -50,7 +50,8 @@ public abstract class AP2DXBase {
 	private AtomicInteger threadCounter = new AtomicInteger();
 
 	/** This is module... */
-	private Module IAM;
+	private final Module IAM;
+	
 	// TODO check if connection closes
 	/** list containing all incoming connections that are active */
 	private ArrayList<ConnectionHandler> inConnections = new ArrayList<ConnectionHandler>();
@@ -338,7 +339,9 @@ public abstract class AP2DXBase {
 	private boolean addSendConnection(String ipaddress, int port, Module destination) {
 		try {
 			Socket sock = new Socket(ipaddress, port);
-			ConnectionHandler conn = new ConnectionHandler(this, sock, IAM, destination);
+			
+			// not a usar sim connection, so first value is false
+			ConnectionHandler conn = new ConnectionHandler(false, this, sock, IAM, destination);
 			outConnections.add(conn);
 			return true;
 		} catch (Exception e) {
@@ -421,7 +424,7 @@ public abstract class AP2DXBase {
 			ConnectionHandler connHandler = null;
 			
 			try {
-				connHandler = new ConnectionHandler(base, conn, this.module);
+				connHandler = new ConnectionHandler(false, base, conn, IAM, this.module);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -467,7 +470,7 @@ public abstract class AP2DXBase {
 				Socket conn = null;
 				try {
 					conn = this.server.accept();
-					connHandler = new ConnectionHandler(base, conn);
+					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
 

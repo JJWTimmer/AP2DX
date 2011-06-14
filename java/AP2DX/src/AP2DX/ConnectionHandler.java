@@ -29,7 +29,7 @@ public class ConnectionHandler extends Thread
     public final Module moduleID;
 
     private PrintWriter out;
-    private MessageReader in;
+    private IMessageReader in;
 
    
     /**
@@ -37,16 +37,22 @@ public class ConnectionHandler extends Thread
      * from the socket.
      * 
      * This constructor is for the base-class self-started connections.
-     *
+     * @param usar If true, handle a USARsim Connection
      * @throws IOException 
      */ 
-    public ConnectionHandler(AP2DXBase base, Socket socket, Module origin, Module destination) throws IOException
+    public ConnectionHandler(boolean usar, AP2DXBase base, Socket socket, Module origin, Module destination) throws IOException
     {
         this.base = base;
         this.socket = socket;
-        this.moduleID = moduleID;
+        this.moduleID = destination;
         out = new PrintWriter(socket.getOutputStream(), true);
-        in = new MessageReader(new InputStreamReader(socket.getInputStream()), origin, destination);
+        
+        if (usar){
+        	in = new UsarSimMessageReader(new InputStreamReader(socket.getInputStream()), origin, destination);
+        }
+        else {
+        	in = new AP2DXMessageReader(new InputStreamReader(socket.getInputStream()), origin, destination);
+        }
     }
     
     /**
@@ -54,21 +60,21 @@ public class ConnectionHandler extends Thread
      * from the socket.
      * 
      * This constructor is for the incoming connections.
-     * 
+     * @param usar If true, handle a USARsim Connection
      * @throws IOException 
      */ 
-    public ConnectionHandler(AP2DXBase base, Socket socket) throws IOException
+    public ConnectionHandler(AP2DXBase base, Socket socket, Module origin) throws IOException
     {
         this.base = base;
         this.socket = socket;
         
         out = new PrintWriter(socket.getOutputStream(), true);
-        in = new MessageReader(new InputStreamReader(socket.getInputStream()), );   
+        
+        in = new AP2DXMessageReader(new InputStreamReader(socket.getInputStream()), origin);
         
         Message firstIncomingMessage = in.readMessage();
         this.moduleID = firstIncomingMessage.getSourceModuleId();
         
-
     }
 
     /** Thread logic. */
