@@ -62,7 +62,7 @@ public class CoordinatorTestCase extends TestCase {
 	public void testProgram() {
 		Mockit.setUpMocks(FakeBase.class);
 
-		CoordinatorMain test = new CoordinatorMain();
+		Program test = new Program();
 		assertNotNull(test);
 
 		Message msg = new UsarSimMessage("SEN {Time 395.3833} {Type GroundTruth} {Name GroundTruth} {Location 4.50,1.90,1.85} {Orientation 0.00,6.28,6.28}", Module.UNDEFINED);
