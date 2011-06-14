@@ -10,7 +10,7 @@ import java.io.IOException;
  * 
  * @author Maarten Inja
  */
-public class AP2DXMessageReader<E extends Message> extends BufferedReader {
+public class AP2DXMessageReader extends BufferedReader implements IMessageReader {
 	/**
 	 * origin of messages of the stream
 	 */
