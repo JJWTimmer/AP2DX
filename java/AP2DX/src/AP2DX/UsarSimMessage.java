@@ -12,12 +12,9 @@ import java.util.regex.Pattern;
  */
 public class UsarSimMessage extends Message {
 	
-	public UsarSimMessage(String in, Module origin, Module destination) {
-		super(in, origin, destination);
-	}
 	
-	public UsarSimMessage(String in, Module origin) {
-		super(in, origin);
+	public UsarSimMessage(String in) {
+		super(in, Module.UNDEFINED);
 	}
 
 	/**

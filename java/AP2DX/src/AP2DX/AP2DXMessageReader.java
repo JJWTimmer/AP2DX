@@ -1,6 +1,8 @@
 package AP2DX;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.IOException;
 
@@ -25,8 +27,8 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
 	 * 
 	 * @param in
 	 */
-	public AP2DXMessageReader(Reader in, Module origin) {
-		super(in);
+	public AP2DXMessageReader(InputStream in, Module origin) {
+		super(new InputStreamReader(in));
 		this.origin = origin;
 	}
 	
@@ -34,8 +36,8 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
 	 * 
 	 * @param in
 	 */
-	public AP2DXMessageReader(Reader in, Module origin, Module destination) {
-		super(in);
+	public AP2DXMessageReader(InputStream in, Module origin, Module destination) {
+		super(new InputStreamReader(in));
 		this.origin = origin;
 		this.destination = destination;
 	}
