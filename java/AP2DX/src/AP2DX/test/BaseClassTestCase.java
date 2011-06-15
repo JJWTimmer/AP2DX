@@ -104,7 +104,7 @@ public class BaseClassTestCase
                     }
             };*/
             AP2DXBase newTest = new ConcreteBase(Module.TEST);
-            assertNotNull(test);
+            assertNotNull(newTest);
         }
 
     /**
