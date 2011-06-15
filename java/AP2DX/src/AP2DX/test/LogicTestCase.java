@@ -4,6 +4,10 @@ package AP2DX.test;
 import AP2DX.*;
 // The junit framework stuff, for testing
 import junit.framework.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 // Arraylist, needed for our concrete class
 import java.util.ArrayList;
 
@@ -28,7 +32,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
+	//@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		// pass
 	}
@@ -38,7 +42,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@AfterClass
+	//@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		// pass
 	}
@@ -48,7 +52,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 		// pass
 	}
@@ -58,7 +62,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@After
+	//@After
 	public void tearDown() throws Exception {
 		// pass
 	}

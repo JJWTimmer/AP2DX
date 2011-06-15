@@ -3,16 +3,16 @@
  */
 package AP2DX;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * @author Jasper Timmer
- *
+ * 
  */
 public class UsarSimMessage extends Message {
-	
-	
+
 	public UsarSimMessage(String in) {
 		super(in, Module.UNDEFINED);
 	}
@@ -22,15 +22,26 @@ public class UsarSimMessage extends Message {
 	 */
 	@Override
 	public void parseMessage() {
-		Pattern pattern = 
-            Pattern.compile("(\\w+)\\s({[\\w\\s]+})+");
+		String startPatternStr = "^[A-Z]+";
+		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
 
-            Matcher matcher = pattern.matcher(this.getMessageString());
+		Pattern startPattern = Pattern.compile(startPatternStr);
 
-            int groups = matcher.groupCount();
-            System.out.println(matcher.group(0));
-            for (int i = 1; i < groups; i++) {
-            	System.out.println(matcher.group(0));
-            }
+		Pattern groupPattern = Pattern.compile(groupPatternStr);
+
+		Matcher startMatcher = startPattern.matcher(this.getMessageString());
+		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
+
+		Map<String, String> dict = this.getValues();
+		
+		if (startMatcher.find())
+			dict.put("type", startMatcher.group(0));
+
+		while (groupMatcher.find()) {
+			String group = groupMatcher.group(1);
+			int space = group.indexOf(' ');
+			dict.put(group.substring(0,space), group.substring(space, group.length()));
+		}
+		this.setValues(dict);
 	}
 }

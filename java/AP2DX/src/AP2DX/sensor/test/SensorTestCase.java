@@ -1,7 +1,7 @@
 /**
  * 
  */
-package AP2DX.coordinator;
+package AP2DX.sensor.test;
 
 import static org.junit.Assert.*;
 import junit.framework.Assert;
@@ -20,53 +20,25 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import AP2DX.*;
+import AP2DX.sensor.*;
 
 /**
  * @author Jasper Timmer
- * 
  */
-public class CoordinatorTestCase extends TestCase {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
+public class SensorTestCase {
+	
+    /**
 	 * Test method for {@link AP2DX.coordinator.Program#Program()}.
 	 */
 	@Test
 	public void testProgram() {
+        System.out.println("Before setUpMocks");
 		Mockit.setUpMocks(FakeBase.class);
-
+        System.out.println("After SetUpMocks, Before new Program()");
 		Program test = new Program();
+        System.out.println("After new program");
 		assertNotNull(test);
-
-		Message msg = new UsarSimMessage("SEN {Time 395.3833} {Type GroundTruth} {Name GroundTruth} {Location 4.50,1.90,1.85} {Orientation 0.00,6.28,6.28}", Module.UNDEFINED);
-		test.componentLogic(msg);
+        System.out.println("after assertNotNull()");
 	}
 
 	/**
@@ -81,9 +53,14 @@ public class CoordinatorTestCase extends TestCase {
 		 * Override the constructor of AP2DXBase to do nothing.
 		 */
 		@Mock
-		public void $init() {
+		public void $init(Module module) {
+            System.out.printf("Module: %s\n", module);
 			//instead of connecting and configuring, do nothing
 		}
 	}
 
 }
+
+
+
+

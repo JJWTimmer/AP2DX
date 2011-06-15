@@ -48,10 +48,10 @@ public class ConnectionHandler extends Thread
         out = new PrintWriter(socket.getOutputStream(), true);
         
         if (usar){
-        	in = new UsarSimMessageReader(new InputStreamReader(socket.getInputStream()), origin, destination);
+        	in = new UsarSimMessageReader(socket.getInputStream());
         }
         else {
-        	in = new AP2DXMessageReader(new InputStreamReader(socket.getInputStream()), origin, destination);
+        	in = new AP2DXMessageReader(socket.getInputStream(), origin, destination);
         }
     }
     
@@ -70,7 +70,7 @@ public class ConnectionHandler extends Thread
         
         out = new PrintWriter(socket.getOutputStream(), true);
         
-        in = new AP2DXMessageReader(new InputStreamReader(socket.getInputStream()), origin);
+        in = new AP2DXMessageReader(socket.getInputStream(), origin);
         
         Message firstIncomingMessage = in.readMessage();
         this.moduleID = firstIncomingMessage.getSourceModuleId();
@@ -84,7 +84,7 @@ public class ConnectionHandler extends Thread
         {
             try
             {
-                Message incomingMessage = in.readMessage();
+            	AP2DXMessage incomingMessage = (AP2DXMessage) in.readMessage();
                 base.getReceiveQueue().put(incomingMessage);
             }    
             catch (Exception e)

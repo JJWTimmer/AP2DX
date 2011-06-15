@@ -3,6 +3,7 @@ package AP2DX.reflex;
 import java.util.ArrayList;
 
 import AP2DX.AP2DXBase;
+import AP2DX.AP2DXMessage;
 import AP2DX.Message;
 import AP2DX.Module;
 
