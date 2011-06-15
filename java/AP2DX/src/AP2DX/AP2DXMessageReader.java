@@ -42,6 +42,7 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
     {
 		String line = readLine();
 		Message message = new AP2DXMessage(line, origin);
+        message = message.initType();
 
 		return message;
 	}

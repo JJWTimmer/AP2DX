@@ -11,6 +11,10 @@ import java.util.Map;
  */
 public abstract class Message
 {
+
+    /** A type that identifies a message. We might want to change this 
+    * to an enum in the future, but for now String will do. */
+    protected String type;
 	/**
 	 * the module that has sent this message
 	 */
@@ -29,7 +33,7 @@ public abstract class Message
     /**
      * dictionary with key-value pairs of incoming data
      */
-    protected Map<String, String> values = null;
+    protected Map<String, Object> values = null;
     
     /**
      * constructor without destination, for received messages
@@ -62,7 +66,16 @@ public abstract class Message
      */
     protected abstract void parseMessage();
 
+    /**
+    * When the map of this message is filled we can compile a string that can be 
+    * send (and parsed once received on the other side).
+    */
     protected abstract void compileMessage();
+
+    /** 
+    * We can create a specialized type of message instance from the type. The 
+    */
+    protected abstract Message initType();
 
     /**
      * getter for sending module
@@ -89,10 +102,16 @@ public abstract class Message
 	public String getMessageString() {
 		return messageString;
 	}
-	
-	public Map<String, String> getValues() {
-		return values;
-	}
+
+    public Map<String, Object> getValues()
+    {
+        return values;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
 }
 
 

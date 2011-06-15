@@ -13,7 +13,6 @@ public class Program extends AP2DXBase {
 	 */
 	public static void main (String[] args){
 		new Program();
-		
 		System.exit(0);
 	}
 
@@ -24,19 +23,22 @@ public class Program extends AP2DXBase {
 	public Program() 
     {
         super(Module.ABSTRACTMOTOR); // explicitly calls base constructor
+        Actions motor = new Actions();
 		System.out.println(" Running Motor... ");
-
 	}
 	
 	@Override
 	protected void doOverride() {
-
+		
 	}
 
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
-		// TODO Auto-generated method stub
+		
+		
+		
+		
 		return new ArrayList<Message>();
 	}
 }
