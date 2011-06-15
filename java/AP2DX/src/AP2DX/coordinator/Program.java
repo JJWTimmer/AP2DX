@@ -58,7 +58,7 @@ public class Program extends AP2DXBase {
 			out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
 			//out.flush();
 			Message msg = in.readMessage();
-			System.out.println(msg.getSourceModuleId());
+			System.out.println(msg.getValues().get("type"));
 			Thread.sleep(10);
 			out.println("DRIVE {Left -1.0} {Right 1.0}");
 			Thread.sleep(5000);
