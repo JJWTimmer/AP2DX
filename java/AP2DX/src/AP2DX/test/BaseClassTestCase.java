@@ -43,6 +43,7 @@ public class BaseClassTestCase
             new MockUp<Socket>() {
                 @Mock
                     void $init(String host, int port) {
+                        System.out.printf("Host: %s, Port: %d\n");
                         //pass
                     }
             };

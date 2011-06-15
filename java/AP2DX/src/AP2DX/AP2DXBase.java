@@ -102,7 +102,7 @@ public abstract class AP2DXBase {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.exit(1);
+			//System.exit(1);
 		}
 		// start new thread that accepts all connections and creates connectionhandlers
 		Listener conn_c = new Listener(svr, this);
@@ -131,7 +131,7 @@ public abstract class AP2DXBase {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.exit(1);
+				//System.exit(1);
 			}
 			threadCounter.incrementAndGet();
 		}
@@ -411,7 +411,7 @@ public abstract class AP2DXBase {
 				catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-					System.exit(1);
+					//System.exit(1);
 				}
 				try {
 					Thread.sleep(1000);
