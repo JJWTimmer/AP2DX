@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import AP2DX.*;
 import AP2DX.specializedMessages.*;
 
+/**
+ * 
+ * 
+ * @author Wadie Assal
+ * 
+ */
 public class Program extends AP2DXBase {
 	
 	Actions motor = new Actions();
