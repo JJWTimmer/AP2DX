@@ -1,5 +1,7 @@
 package AP2DX;
 
+import java.util.ArrayList;
+
 /**
  * 
  * Interface for the actions that can be applied to the robot.
@@ -13,15 +15,15 @@ package AP2DX;
 
 public interface InterfaceActions {
 	
-	public boolean forward(int meter);
+	public ArrayList<Message> forward(int meter);
 	
-	public boolean backward(int meter);
+	public ArrayList<Message> backward(int meter);
 	
-	public boolean left(int meter);
+	public ArrayList<Message> left(int meter);
 	
-	public boolean right(int meter);
+	public ArrayList<Message> right(int meter);
 	
-	public boolean turn(int degree);
+	public ArrayList<Message> turn(int degree);
 	
-	public boolean stop();
+	public ArrayList<Message> stop();
 }
