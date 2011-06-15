@@ -2,9 +2,7 @@ package AP2DX.mapper;
 
 import java.util.ArrayList;
 
-import AP2DX.AP2DXBase;
-import AP2DX.Message;
-import AP2DX.Module;
+import AP2DX.*;
 
 public class Program extends AP2DXBase {
     /**
@@ -12,7 +10,6 @@ public class Program extends AP2DXBase {
 	 */
 	public static void main (String[] args){
 		new Program();
-		
 		System.exit(0);
 	}
 

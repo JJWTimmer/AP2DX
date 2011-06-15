@@ -4,6 +4,10 @@ package AP2DX.test;
 import AP2DX.*;
 // The junit framework stuff, for testing
 import junit.framework.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 // Arraylist, needed for our concrete class
 import java.util.ArrayList;
 
