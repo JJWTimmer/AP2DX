@@ -1,6 +1,5 @@
 package AP2DX;
 
-import java.util.Dictionary;
 import java.util.Map;
 
 /**
@@ -15,17 +14,17 @@ public abstract class Message
 	/**
 	 * the module that has sent this message
 	 */
-    private Module sourceModuleId;
+    protected Module sourceModuleId;
     
     /**
      * the module that should receive this message
      */
-    private Module destinationModuleId;
+    protected Module destinationModuleId;
     
     /**
      * raw message data
      */
-    private String messageString;
+    protected String messageString;
 
     /**
      * dictionary with key-value pairs of incoming data
@@ -62,6 +61,8 @@ public abstract class Message
      * override this to parse specific messagetypes
      */
     protected abstract void parseMessage();
+
+    protected abstract void compileMessage();
 
     /**
      * getter for sending module
