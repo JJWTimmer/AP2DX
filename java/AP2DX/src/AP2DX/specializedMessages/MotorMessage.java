@@ -19,6 +19,6 @@ public class MotorMessage extends SpecializedMessage
     * using this, but proof concept. */
     public double getRightWheelSpeed()
     {
-        return null;
+        return 0;
     }
 }
