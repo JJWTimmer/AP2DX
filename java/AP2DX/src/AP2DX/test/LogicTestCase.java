@@ -28,7 +28,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
+	//@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		// pass
 	}
@@ -38,7 +38,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@AfterClass
+	//@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		// pass
 	}
@@ -48,7 +48,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 		// pass
 	}
@@ -58,7 +58,7 @@ public class LogicTestCase extends TestCase
 	 * 
 	 * @throws java.lang.Exception
 	 */
-	@After
+	//@After
 	public void tearDown() throws Exception {
 		// pass
 	}

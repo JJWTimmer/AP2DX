@@ -6,7 +6,7 @@ public class Tryout2
 {
     public static void main(String[] args)
     {
-        BaseClassTestCase b = new BaseClassTestCase();
-        b.testietest();
+        //BaseClassTestCase b = new BaseClassTestCase();
+        //b.testietest();
     }
 }
