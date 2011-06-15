@@ -3,7 +3,10 @@
  */
 package AP2DX.reflex;
 
+import java.util.ArrayList;
+
 import AP2DX.InterfaceActions;
+import AP2DX.Message;
 
 /**
  * @author Wadie
@@ -23,54 +26,54 @@ public class Actions implements InterfaceActions {
 	 * @see AP2DX.InterfaceActions#forward(int)
 	 */
 	@Override
-	public boolean forward(int meter) {
+	public ArrayList<Message> forward(int meter) {
 		
-		return false;
+		return new ArrayList<Message>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#backward(int)
 	 */
 	@Override
-	public boolean backward(int meter) {
+	public ArrayList<Message> backward(int meter) {
 		
-		return false;
+		return new ArrayList<Message>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#left(int)
 	 */
 	@Override
-	public boolean left(int meter) {
+	public ArrayList<Message> left(int meter) {
 		
-		return false;
+		return new ArrayList<Message>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#right(int)
 	 */
 	@Override
-	public boolean right(int meter) {
+	public ArrayList<Message> right(int meter) {
 		
-		return false;
+		return new ArrayList<Message>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#turn(int)
 	 */
 	@Override
-	public boolean turn(int degree) {
+	public ArrayList<Message> turn(int degree) {
 		
-		return false;
+		return new ArrayList<Message>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#stop()
 	 */
 	@Override
-	public boolean stop() {
+	public ArrayList<Message> stop() {
 		
-		return false;
+		return new ArrayList<Message>();
 	}
 
 }
