@@ -2,12 +2,12 @@ package AP2DX.motor;
 
 import java.util.ArrayList;
 
-import AP2DX.AP2DXBase;
-import AP2DX.AP2DXMessage;
-import AP2DX.Message;
-import AP2DX.Module;
+import AP2DX.*;
 
 public class Program extends AP2DXBase {
+	
+	Actions motor = new Actions();
+	
     /**
 	 * Entrypoint of motor
 	 */
@@ -23,7 +23,6 @@ public class Program extends AP2DXBase {
 	public Program() 
     {
         super(Module.ABSTRACTMOTOR); // explicitly calls base constructor
-        Actions motor = new Actions();
 		System.out.println(" Running Motor... ");
 	}
 	
@@ -35,7 +34,28 @@ public class Program extends AP2DXBase {
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
+		ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
 		
+		switch (action) {
+		case FORWARD :
+			return motor.forward();
+			break;
+		case BACKWARD :
+			return motor.backward();
+			break;
+		case LEFT :
+			return motor.left();
+			break;
+		case RIGHT :
+			return motor.right();
+			break;
+		case TURN :
+			return motor.turn();
+		case STOP :
+			return motor.stop();
+			break;
+			
+		}
 		
 		
 		
