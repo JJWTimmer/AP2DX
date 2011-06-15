@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.io.*;
 
 import AP2DX.*;
+import AP2DX.usarsim.UsarSimMessageReader;
 
 
 /**
@@ -58,7 +59,7 @@ public class Program extends AP2DXBase {
 			out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
 			//out.flush();
 			Message msg = in.readMessage();
-			System.out.println(msg.getValues().get("type"));
+			System.out.println(msg.getValues().get("msgtype"));
 			Thread.sleep(10);
 			out.println("DRIVE {Left -1.0} {Right 1.0}");
 			Thread.sleep(5000);

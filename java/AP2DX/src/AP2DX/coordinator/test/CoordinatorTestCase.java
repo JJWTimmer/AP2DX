@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import AP2DX.*;
 import AP2DX.coordinator.*;
+import AP2DX.usarsim.UsarSimMessage;
 
 /**
  * @author Jasper Timmer

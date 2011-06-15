@@ -3,11 +3,15 @@
  */
 package AP2DX;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import AP2DX.specializedMessages.*;
 
 /**
  * @author Jasper Timmer
@@ -32,9 +36,9 @@ public class AP2DXMessage extends Message {
 		JSONParser parser = new JSONParser();
 		try 
         {
-			values = (Map)parser.parse(jsonText);
-            destination = Module.valueOf(values.get("destinationModuleId").toString());
-            source = Module.valueOf(values.get("sourceModuleId").toString());
+			values = (Map)parser.parse(messageString);
+            destinationModuleId = Module.valueOf(values.get("destinationModuleId").toString());
+            sourceModuleId = Module.valueOf(values.get("sourceModuleId").toString());
         }
         catch (ParseException pe) 
         {   

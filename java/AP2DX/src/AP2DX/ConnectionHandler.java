@@ -8,6 +8,7 @@ import java.lang.Thread;
 import java.net.Socket;
 
 import AP2DX.*;
+import AP2DX.usarsim.UsarSimMessageReader;
 
 //import com.sun.xml.internal.ws.api.message.Message;
 

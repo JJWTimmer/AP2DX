@@ -1,10 +1,13 @@
-package AP2DX;
+package AP2DX.usarsim;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.IOException;
+
+import AP2DX.IMessageReader;
+import AP2DX.Message;
 
 /**
  * Specialized bufferedReader to directly parse messages from a (in our case)
