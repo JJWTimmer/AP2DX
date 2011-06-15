@@ -2,26 +2,67 @@ package AP2DX.test;
 
 // The package
 import AP2DX.*;
+
+import java.util.Map;
+import java.net.*;
+
 // The junit framework stuff, for testing
 import junit.framework.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.Ignore;
+import static org.junit.Assert.*;
+
+
+
+import mockit.Expectations;
+import mockit.Mock;
+import mockit.MockClass;
+import mockit.MockUp;
+import mockit.Mockit;
+
 // Arraylist, needed for our concrete class
 import java.util.ArrayList;
 
-public class LogicTestCase extends TestCase
+public class LogicTestCase 
 {
-    public void testConstructor()
+
+    private AP2DXBase base;
+    
+    @Test
+    public void testLogic()
     {
-        fail("LogicTestCase.testConstructor net yet implemented");
+        Logic test = new Logic(base);
+        assertNotNull("LogicTestCase.testLogic, things go south", test); 
     }
 
-
+    @Test
     public void testRun()
     {
         fail("LogicTestCase.testRun not yet implemented");
+    }
+
+    public class ConcreteBase extends AP2DXBase 
+    {
+
+        public ConcreteBase(Module module)
+        {
+            super(module);
+        }
+
+        public Map getConfig() {
+            return this.config;
+        }
+
+        @Override
+            public ArrayList<Message> componentLogic(Message msg) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
     }
 
      
@@ -33,8 +74,21 @@ public class LogicTestCase extends TestCase
 	 * @throws java.lang.Exception
 	 */
 	//@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		// pass
+	public static void setUpBeforeClass() throws Exception 
+    {
+        new MockUp<Socket>() {
+            @Mock
+                void $init(String host, int port) {
+                    System.out.printf("Host: %s, Port: %d\n");
+                    //pass
+                }
+        };
+
+        new MockUp<Thread>() {
+            @Mock void join(){}
+            @Mock void run(){}
+            @Mock void start(){}
+        };
 	}
 
 	/**
@@ -53,8 +107,9 @@ public class LogicTestCase extends TestCase
 	 * @throws java.lang.Exception
 	 */
 	//@Before
-	public void setUp() throws Exception {
-		// pass
+	public void setUp() throws Exception 
+    {
+        base = new ConcreteBase(Module.TEST);
 	}
 
 	/**
