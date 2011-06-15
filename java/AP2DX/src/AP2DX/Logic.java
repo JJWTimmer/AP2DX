@@ -37,7 +37,7 @@ public class Logic extends Thread {
 			}
 
 			// run componentLogic with the message
-			ArrayList<Message> actions = base.componentLogic(message);
+			ArrayList<AP2DXMessage> actions = base.componentLogic(message);
 
 			if (!actions.isEmpty()) {
 				for (Message action : actions) {

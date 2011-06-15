@@ -22,8 +22,10 @@ public class UsarSimMessage extends Message {
 	 */
 	@Override
 	public void parseMessage() {
+		String sPattern = "([\\w+]{1})[\\s]{1}([{]{1}[\\w\\s]+[}]{1})+";
+		System.out.println(sPattern);
 		Pattern pattern = 
-            Pattern.compile("(\\w+)\\s({[\\w\\s]+})+");
+            Pattern.compile(sPattern);
 
             Matcher matcher = pattern.matcher(this.getMessageString());
 
