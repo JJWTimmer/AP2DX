@@ -49,10 +49,9 @@ public class BaseClassTestCase
             };
 
             new MockUp<Thread>() {
-                @Mock
-                    void join() {
-                        //pass
-                    }
+                @Mock void join(){}
+                @Mock void run(){}
+                @Mock void start(){}
             };
         }
 
@@ -91,7 +90,7 @@ public class BaseClassTestCase
      */
     @Test
         public void testAP2DXBase() {
-            new MockUp<Socket>() {
+            /*new MockUp<Socket>() {
                 @Mock
                     void $init(String host, int port) {
                         //pass
@@ -103,9 +102,8 @@ public class BaseClassTestCase
                     void join() {
                         //pass
                     }
-            };
-            System.out.println("Startin!");
-            System.out.println("Before assertNotNull");
+            };*/
+            AP2DXBase newTest = new ConcreteBase(Module.TEST);
             assertNotNull(test);
         }
 
