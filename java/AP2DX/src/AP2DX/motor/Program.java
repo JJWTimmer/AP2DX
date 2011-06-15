@@ -3,6 +3,7 @@ package AP2DX.motor;
 import java.util.ArrayList;
 
 import AP2DX.*;
+import AP2DX.specializedMessages.*;
 
 public class Program extends AP2DXBase {
 	
@@ -34,6 +35,11 @@ public class Program extends AP2DXBase {
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
+		if (msg.getType().equals("motor"))
+		{
+			MotorMessage motorMessage = (MotorMessage) msg;
+			msg.
+		}
 		ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
 		
 		switch (action) {
