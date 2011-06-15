@@ -22,17 +22,24 @@ public class UsarSimMessage extends Message {
 	 */
 	@Override
 	public void parseMessage() {
-		String sPattern = "([\\w+]{1})[\\s]{1}([{]{1}[\\w\\s]+[}]{1})+";
-		System.out.println(sPattern);
-		Pattern pattern = 
-            Pattern.compile(sPattern);
+		System.out.println(this.getMessageString());
+		String startPatternStr = "^[A-Z]+";
+		String groupPatternStr = "\\{[a-zA-Z0-9 .,_\\-]+\\}";
 
-            Matcher matcher = pattern.matcher(this.getMessageString());
+		Pattern startPattern = 
+            Pattern.compile(startPatternStr);
+		
+		Pattern groupPattern = 
+            Pattern.compile(groupPatternStr);
 
-            int groups = matcher.groupCount();
-            System.out.println(matcher.group(0));
-            for (int i = 1; i < groups; i++) {
-            	System.out.println(matcher.group(0));
+            Matcher startMatcher = startPattern.matcher(this.getMessageString());
+            Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
+
+            if (startMatcher.find())
+            	System.out.println(startMatcher.group(0));
+            
+            while (groupMatcher.find()) {
+	            System.out.println(groupMatcher.group(0));
             }
 	}
 }
