@@ -1,6 +1,7 @@
 package AP2DX;
 
 import java.util.Dictionary;
+import java.util.Map;
 
 /**
  * In the future we can imagine specialized messages that extend this 
@@ -29,7 +30,7 @@ public abstract class Message
     /**
      * dictionary with key-value pairs of incoming data
      */
-    private Dictionary<String, Object> values = null;
+    private Map<String, String> values = null;
     
     /**
      * constructor without destination, for received messages
@@ -86,6 +87,14 @@ public abstract class Message
      */
 	protected String getMessageString() {
 		return messageString;
+	}
+	
+	public Map<String, String> getValues() {
+		return values;
+	}
+	
+	protected void setValues(Map<String, String> value) {
+		values = value;
 	}
 
 }

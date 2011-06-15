@@ -3,16 +3,16 @@
  */
 package AP2DX;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * @author Jasper Timmer
- *
+ * 
  */
 public class UsarSimMessage extends Message {
-	
-	
+
 	public UsarSimMessage(String in) {
 		super(in, Module.UNDEFINED);
 	}
@@ -22,24 +22,26 @@ public class UsarSimMessage extends Message {
 	 */
 	@Override
 	public void parseMessage() {
-		System.out.println(this.getMessageString());
 		String startPatternStr = "^[A-Z]+";
-		String groupPatternStr = "\\{[a-zA-Z0-9 .,_\\-]+\\}";
+		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
 
-		Pattern startPattern = 
-            Pattern.compile(startPatternStr);
+		Pattern startPattern = Pattern.compile(startPatternStr);
+
+		Pattern groupPattern = Pattern.compile(groupPatternStr);
+
+		Matcher startMatcher = startPattern.matcher(this.getMessageString());
+		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
+
+		Map<String, String> dict = this.getValues();
 		
-		Pattern groupPattern = 
-            Pattern.compile(groupPatternStr);
+		if (startMatcher.find())
+			dict.put("type", startMatcher.group(0));
 
-            Matcher startMatcher = startPattern.matcher(this.getMessageString());
-            Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
-
-            if (startMatcher.find())
-            	System.out.println(startMatcher.group(0));
-            
-            while (groupMatcher.find()) {
-	            System.out.println(groupMatcher.group(0));
-            }
+		while (groupMatcher.find()) {
+			String group = groupMatcher.group(1);
+			int space = group.indexOf(' ');
+			dict.put(group.substring(0,space), group.substring(space, group.length()));
+		}
+		this.setValues(dict);
 	}
 }
