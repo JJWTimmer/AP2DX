@@ -86,10 +86,13 @@ public abstract class Message
      * 
      * @return raw data
      */
-	protected String getMessageString() {
+	public String getMessageString() {
 		return messageString;
 	}
-
+	
+	public Map<String, String> getValues() {
+		return values;
+	}
 }
 
 
