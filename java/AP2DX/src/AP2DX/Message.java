@@ -72,10 +72,6 @@ public abstract class Message
     */
     protected abstract void compileMessage();
 
-    /** 
-    * We can create a specialized type of message instance from the type. The 
-    */
-    protected abstract Message initType();
 
     /**
      * getter for sending module
