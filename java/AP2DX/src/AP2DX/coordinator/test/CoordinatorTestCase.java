@@ -1,7 +1,7 @@
 /**
  * 
  */
-package AP2DX.coordinator;
+package AP2DX.coordinator.test;
 
 import static org.junit.Assert.*;
 import junit.framework.Assert;
@@ -20,6 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import AP2DX.*;
+import AP2DX.coordinator.*;
 
 /**
  * @author Jasper Timmer
@@ -65,7 +66,7 @@ public class CoordinatorTestCase extends TestCase {
 		Program test = new Program();
 		assertNotNull(test);
 
-		Message msg = new UsarSimMessage("SEN {Time 395.3833} {Type GroundTruth} {Name GroundTruth} {Location 4.50,1.90,1.85} {Orientation 0.00,6.28,6.28}", Module.UNDEFINED);
+		Message msg = new UsarSimMessage("SEN {Time 395.3833} {Type GroundTruth} {Name GroundTruth} {Location 4.50,1.90,1.85} {Orientation 0.00,6.28,6.28}");
 		test.componentLogic(msg);
 	}
 

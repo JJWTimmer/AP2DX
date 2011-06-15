@@ -25,7 +25,7 @@ public class Logic extends Thread {
 	 * componentLogic to find a reaction
 	 */
 	public void run() {
-		while (true) {
+		/*while (true) {
 			Message message = null;
 			// Get the message from the base
 			try {
@@ -55,6 +55,6 @@ public class Logic extends Thread {
 				}
 			} else
 				break;
-		}
+		}*/
 	}
 }
