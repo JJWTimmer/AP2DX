@@ -1,6 +1,8 @@
 package AP2DX;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.IOException;
 
@@ -12,40 +14,20 @@ import java.io.IOException;
  */
 public class UsarSimMessageReader extends BufferedReader implements IMessageReader {
 	/**
-	 * origin of messages of the stream
-	 */
-	private Module origin = null;
-	
-	/**
-	 * destinatnion of messages of the stream, should be component self.
-	 */
-	private Module destination = null;
-
-	/**
 	 * 
-	 * @param in
+	 * @param in Streamreader to read from
 	 */
-	public UsarSimMessageReader(Reader in, Module origin) {
-		super(in);
-		this.origin = origin;
-	}
-	
-	/**
-	 * 
-	 * @param in
-	 */
-	public UsarSimMessageReader(Reader in, Module origin, Module destination) {
-		super(in);
-		this.origin = origin;
-		this.destination = destination;
+	public UsarSimMessageReader(InputStream in) {
+		super(new InputStreamReader(in));
 	}
 
 	/**
-	 * Reads oen message and parses it.
+	 * Reads a message from the stream
 	 */
 	public Message readMessage() throws IOException {
 		String line = readLine();
-		Message message = new UsarSimMessage(line , origin);
+		
+		Message message = new UsarSimMessage(line);
 
 		return message;
 	}

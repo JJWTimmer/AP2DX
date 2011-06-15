@@ -12,12 +12,9 @@ import java.util.regex.Pattern;
  */
 public class UsarSimMessage extends Message {
 	
-	public UsarSimMessage(String in, Module origin, Module destination) {
-		super(in, origin, destination);
-	}
 	
-	public UsarSimMessage(String in, Module origin) {
-		super(in, origin);
+	public UsarSimMessage(String in) {
+		super(in, Module.UNDEFINED);
 	}
 
 	/**
@@ -25,8 +22,10 @@ public class UsarSimMessage extends Message {
 	 */
 	@Override
 	public void parseMessage() {
+		String sPattern = "([\\w+]{1})[\\s]{1}([{]{1}[\\w\\s]+[}]{1})+";
+		System.out.println(sPattern);
 		Pattern pattern = 
-            Pattern.compile("(\\w+)\\s({[\\w\\s]+})+");
+            Pattern.compile(sPattern);
 
             Matcher matcher = pattern.matcher(this.getMessageString());
 

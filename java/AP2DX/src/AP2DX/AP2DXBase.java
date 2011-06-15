@@ -50,7 +50,7 @@ public abstract class AP2DXBase {
 	private AtomicInteger threadCounter = new AtomicInteger();
 
 	/** This is module... */
-	private final Module IAM;
+	protected final Module IAM;
 	
 	// TODO check if connection closes
 	/** list containing all incoming connections that are active */
@@ -59,7 +59,7 @@ public abstract class AP2DXBase {
 	private ArrayList<ConnectionHandler> outConnections = new ArrayList<ConnectionHandler>();
 
 	/** all received AP2DX.Messages will be stored here */
-	private ArrayBlockingQueue<Message> receiveQueue = new ArrayBlockingQueue<Message>(128);
+	private ArrayBlockingQueue<AP2DXMessage> receiveQueue = new ArrayBlockingQueue<AP2DXMessage>(128);
 
 	/**
 	 * Where everything happens:
@@ -137,14 +137,14 @@ public abstract class AP2DXBase {
 		}
 
 		// wait for all the connectors to connect
-		while (this.threadCounter.get() != 0) {
-			try {
-				Thread.sleep(100);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		while (this.threadCounter.get() != 0) {
+//			try {
+//				Thread.sleep(100);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 
         System.out.println("Before override");
 		// run the extra logic
@@ -354,9 +354,9 @@ public abstract class AP2DXBase {
 	 *  @param msg
 	 *  @return
 	 */
-	public abstract ArrayList<Message> componentLogic(Message msg);
+	public abstract ArrayList<AP2DXMessage> componentLogic(Message msg);
 
-	public ArrayBlockingQueue<Message> getReceiveQueue() {
+	public ArrayBlockingQueue<AP2DXMessage> getReceiveQueue() {
 		return receiveQueue;
 	}
 
