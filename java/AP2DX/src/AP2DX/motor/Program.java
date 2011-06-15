@@ -42,7 +42,7 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
 		/* Checks from witch module the message comes from */
-		if (msg.getType().equals("planner")) {
+		if (msg.getType().equals("reflex")) {
 			/* 
 			 * Probably have to be changed in the future. 
 			 * Assumes there is an action value. 
