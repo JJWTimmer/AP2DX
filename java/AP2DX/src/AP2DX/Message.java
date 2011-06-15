@@ -29,7 +29,7 @@ public abstract class Message
     /**
      * dictionary with key-value pairs of incoming data
      */
-    private Map<String, String> values = null;
+    protected Map<String, String> values = null;
     
     /**
      * constructor without destination, for received messages
@@ -88,14 +88,6 @@ public abstract class Message
      */
 	protected String getMessageString() {
 		return messageString;
-	}
-	
-	public Map<String, String> getValues() {
-		return values;
-	}
-	
-	protected void setValues(Map<String, String> value) {
-		values = value;
 	}
 
 }
