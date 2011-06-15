@@ -25,12 +25,12 @@ public final class StateMessage extends UsarSimMessage {
 
 	private void parseValues() {
 		this.type = (values.get("type").toString());
-		this.time = Float.parseFloat(values.get("Time"));
-		this.frontSteer = Float.parseFloat(values.get("FrontSteer"));
-		this.rearSteer = Float.parseFloat(values.get("RearSteer"));
-		this.lightToggle = Boolean.parseBoolean(values.get("LightToggle"));
-		this.lightIntensity = Integer.parseInt(values.get("LightIntensity"));
-		this.battery = Integer.parseInt(values.get("Battery"));	
+		this.time = Float.parseFloat(values.get("Time").toString());
+		this.frontSteer = Float.parseFloat(values.get("FrontSteer").toString());
+		this.rearSteer = Float.parseFloat(values.get("RearSteer").toString());
+		this.lightToggle = Boolean.parseBoolean(values.get("LightToggle").toString());
+		this.lightIntensity = Integer.parseInt(values.get("LightIntensity").toString());
+		this.battery = Integer.parseInt(values.get("Battery").toString());	
 	}
 
 	/**
