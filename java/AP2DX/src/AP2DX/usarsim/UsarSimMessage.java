@@ -1,11 +1,15 @@
 /**
  * 
  */
-package AP2DX;
+package AP2DX.usarsim;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import AP2DX.Message;
+import AP2DX.Module;
 
 /**
  * @author Jasper Timmer
@@ -31,17 +35,27 @@ public class UsarSimMessage extends Message {
 
 		Matcher startMatcher = startPattern.matcher(this.getMessageString());
 		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
-
-		Map<String, String> dict = this.getValues();
 		
 		if (startMatcher.find())
-			dict.put("type", startMatcher.group(0));
+			this.values.put("msgtype", startMatcher.group(0));
 
 		while (groupMatcher.find()) {
 			String group = groupMatcher.group(1);
 			int space = group.indexOf(' ');
-			dict.put(group.substring(0,space), group.substring(space, group.length()));
+			this.values.put(group.substring(0,space), group.substring(space, group.length()));
 		}
-		this.setValues(dict);
+	}
+
+	@Override
+	protected void compileMessage() {
+		String output = "";
+		output += values.get("msgtype");
+		Iterator it = values.entrySet().iterator();
+		while(it.hasNext()) {
+			Map.Entry<String, String> pair = (Map.Entry<String, String>)it.next();
+			output += " " + pair.getKey() + " " + pair.getValue();
+		}
+		
+		this.messageString = output;
 	}
 }

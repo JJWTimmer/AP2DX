@@ -108,7 +108,6 @@ public abstract class Message
     {
         return type;
     }
-
 }
 
 
