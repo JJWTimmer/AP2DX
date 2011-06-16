@@ -48,8 +48,7 @@ public class PlannerTestCase {
     /**
 	 * Test method for {@link AP2DX.planner.Program#Program()}.
 	 */
-	@Test
-	public void program() {
+	@Test public void program() {
 		Program myTest = new Program();
         System.out.println("After new program");
 		assertNotNull(myTest);
@@ -62,15 +61,13 @@ public class PlannerTestCase {
      * Test method for {@link AP2DX.planner.Program#componentLogic()}
      * @author Maarten de Waard
      */
-    @Test
-    public void componentLogic()
+    @Test public void componentLogic()
     {
         test.componentLogic(new AP2DXMessage("Hoi", Module.TEST));
     }
 
 
-    @Test
-    public void override()
+    @Test public void override()
     {   
         invoke(test, "doOverride");
         //test.doOverride();

@@ -36,18 +36,15 @@ public final class StateMessage extends UsarSimMessage {
 	 */
 	@Override
 	public void parseMessage() {
-		String startPatternStr = "^[A-Z]+";
+
 		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
 
-		Pattern startPattern = Pattern.compile(startPatternStr);
 
 		Pattern groupPattern = Pattern.compile(groupPatternStr);
 
-		Matcher startMatcher = startPattern.matcher(this.getMessageString());
+
 		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
 		
-		if (startMatcher.find())
-			this.values.put("msgtype", startMatcher.group(0));
 
 		while (groupMatcher.find()) {
 			String group = groupMatcher.group(1);
@@ -81,10 +78,6 @@ public final class StateMessage extends UsarSimMessage {
 			output.append(String.format(" {LightIntensity %s}", this.lightIntensity));
 		
 		this.messageString = output.toString();
-	}
-	
-	public String getMessageType() {
-		return values.get("msgtype").toString();
 	}
 
 	/**

@@ -96,9 +96,7 @@
 		  
 		  <formatter type="xml"/>
 		  
-		  <test name="${testcase}" todir="${test.report.dir}" if="testcase" />
-		  
-		  <batchtest fork="yes" todir="${test.report.dir}" unless="testcase">
+		  <batchtest fork="yes" todir="${test.report.dir}">
 			<fileset dir="${src.dir}">
 			  <include name="**/*TestCase.java"/>
 			</fileset>
