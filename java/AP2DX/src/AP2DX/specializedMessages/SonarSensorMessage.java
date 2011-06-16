@@ -23,9 +23,9 @@ public class SonarSensorMessage extends SpecializedMessage
         super(message);
     }
 
-    public boolean getTime()
+    public double getTime()
     {
-        return Double.parseDouble(values.get("time").toString);
+        return Double.parseDouble(values.get("time").toString());
     }
 
     /** The array of Sonar data.*/
