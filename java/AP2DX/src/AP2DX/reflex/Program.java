@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import AP2DX.AP2DXBase;
 import AP2DX.AP2DXMessage;
-import AP2DX.ActionType;
 import AP2DX.Message;
 import AP2DX.Module;
+import AP2DX.specializedMessages.ActionMotorMessage;
 
 public class Program extends AP2DXBase {
 	
@@ -40,13 +40,13 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
 		/* Checks from witch module the message comes from */
-		if (msg.getType().equals("planner")) {
+		if (msg.getType().equals("")) {
 			/* 
 			 * Probably have to be changed in the future. 
 			 * Assumes there is an action value. 
 			 * Then converts it form string to enum ActionType.
 			 */
-			ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
+			ActionMotorMessage.ActionType action = ActionMotorMessage.ActionType.valueOf(msg.getValues().get("action").toString());
 			
 			/* 
 			 * Switches to decide witch action to take.

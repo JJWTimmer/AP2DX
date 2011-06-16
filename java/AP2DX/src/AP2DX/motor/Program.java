@@ -42,13 +42,13 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
 		/* Checks witch type of message it is */
-		if (msg.getType().equals("AP2DX_MOTOR")) {
+		if (msg.getType().equals("AP2DX_MOTOR_ACTION")) {
 			/* 
 			 * Probably have to be changed in the future. 
 			 * Assumes there is an action value. 
 			 * Then converts it form string to enum ActionType.
 			 */
-			MotorMessage.ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
+			ActionMotorMessage.ActionType action = ActionMotorMessage.ActionType.valueOf(msg.getValues().get("action").toString());
 			
 			/* 
 			 * Switches to decide witch action to take.
@@ -56,15 +56,15 @@ public class Program extends AP2DXBase {
 			 */
 			switch (action) {
 			case FORWARD :
-				return motor.forward(0);
+				return motor.forward(Integer.getInteger(msg.getValues().get("value").toString()));
 			case BACKWARD :
-				return motor.backward(0);
+				return motor.backward(Integer.getInteger(msg.getValues().get("value").toString()));
 			case LEFT :
-				return motor.left(0);
+				return motor.left(Integer.getInteger(msg.getValues().get("value").toString()));
 			case RIGHT :
-				return motor.right(0);
+				return motor.right(Integer.getInteger(msg.getValues().get("value").toString()));
 			case TURN :
-				return motor.turn(0);
+				return motor.turn(Integer.getInteger(msg.getValues().get("value").toString()));
 			case STOP :
 				return motor.stop();
 			}
