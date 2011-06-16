@@ -165,7 +165,7 @@
 		            <manifest>
 		                <attribute name="Built-By" value="${user.name}"/>
 		                <attribute name="Release-Version" value="${version}"/>
-		            	<attribute name="Main-Class" value="AP2DX/coordinator/Program"/>
+		            	<attribute name="Main-Class" value="AP2DX/@{package}/Program"/>
 		            	<attribute name="Class-Path" value="lib/json_simple-1.1.jar" />
 		            </manifest>
 
@@ -177,6 +177,11 @@
 		</macrodef>
 
 		<packaging package="coordinator"/>
+		<packaging package="mapper"/>
+		<packaging package="motor"/>
+		<packaging package="planner"/>
+		<packaging package="reflex"/>
+		<packaging package="sensor"/>
 		<!--<packaging package="package2"/>-->
 	</target>
 	

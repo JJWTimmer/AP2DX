@@ -46,16 +46,29 @@ public class UsarSimMessage extends Message {
 		super(in, Module.UNDEFINED);
 	}
 	
-	public Message.MessageType getMessageType() {
+	/**
+	 * @see AP2DX.Message#parseMessage()
+	 */
+	@Override
+	public void parseMessage() {
 		String startPatternStr = "^[A-Z]+";
+		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
 
 		Pattern startPattern = Pattern.compile(startPatternStr);
-		
+
+		Pattern groupPattern = Pattern.compile(groupPatternStr);
+
 		Matcher startMatcher = startPattern.matcher(this.getMessageString());
+		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
 		
 		if (startMatcher.find())
-			return this.messageTypeDict.get(startMatcher.group(0));
-		else
-			return null;
-	}	
+			this.values.put("msgtype", startMatcher.group(0));
+
+		while (groupMatcher.find()) {
+			String group = groupMatcher.group(1);
+			int space = group.indexOf(' ');
+			this.values.put(group.substring(0,space), group.substring(space, group.length()));
+		}
+	}
+
 }
