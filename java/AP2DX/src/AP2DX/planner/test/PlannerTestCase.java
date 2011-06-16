@@ -36,6 +36,7 @@ public class PlannerTestCase {
             Mockit.setUpMocks(FakeBase.class);
             Mockit.setUpMocks(FakeAP2DXMessage.class);
             System.out.println("After SetUpMocks");
+            
         }
 
     @Before
@@ -75,15 +76,7 @@ public class PlannerTestCase {
 
     @Test public void plannerMain()
     {
-        try
-        {
-            test.main(new String[0]);
-        }
-        catch (junit.framework.AssertionFailedError e)
-        {
-            //pass, this is supposed to happen.
-        }
-
+        test.main(new String[0]);
     }
 
 	/**
