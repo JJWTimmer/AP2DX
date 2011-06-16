@@ -122,12 +122,12 @@ public class BaseClassTestCase
             };*/
 
             // readConfig is called in the ctor of the base class
-            //Map config = test.getConfig();
+            Map config = test.getConfig();
 
-            //myCompareString("logfile", "log/coordinator.log", config);
-            //myCompareString("sim_address", "127.0.0.1", config);
-            //myCompareInt("sim_port", 3000, config);
-            //myCompareInt("listen_port", 5009, config);
+            myCompareString("logfile", "log/coordinator.log", config);
+            myCompareString("sim_address", "127.0.0.1", config);
+            myCompareInt("sim_port", 3000, config);
+            myCompareInt("listen_port", 5009, config);
         }
 
     /** Help method for testReadConfig. */
