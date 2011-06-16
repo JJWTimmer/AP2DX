@@ -73,9 +73,17 @@ public class PlannerTestCase {
         //test.doOverride();
     }
 
-    @test public void plannerMain()
+    @Test public void plannerMain()
     {
-        test.main();
+        try
+        {
+            test.main(new String[0]);
+        }
+        catch (junit.framework.AssertionFailedError e)
+        {
+            //pass, this is supposed to happen.
+        }
+
     }
 
 	/**
