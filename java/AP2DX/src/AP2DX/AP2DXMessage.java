@@ -21,10 +21,12 @@ public class AP2DXMessage extends Message {
 	
 	public AP2DXMessage(String in, Module source, Module destination) {
 		super(in, source, destination);
+        parseMessage();
 	}
 	
 	public AP2DXMessage(String in, Module source) {
 		super(in, source);
+        parseMessage();
 	}
 
 	/**
