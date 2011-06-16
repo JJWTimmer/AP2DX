@@ -74,9 +74,7 @@ public abstract class Message
      * TODO: find a better solution to fix this.
      * @throws Exception 
      */
-    protected void parseMessage() throws Exception {
-    	throw new Exception("Can only call this method from specialized messages.");
-    }
+    protected abstract void parseMessage() throws Exception;
    
     ///** Parses the <String, Object> values to compile a String messageString 
     //* which makes this object ready to send. */

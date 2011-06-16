@@ -46,29 +46,25 @@ public class UsarSimMessage extends Message {
 		super(in, Module.UNDEFINED);
 	}
 	
-	/**
-	 * @see AP2DX.Message#parseMessage()
-	 */
 	@Override
-	public void parseMessage() {
+	public Message.MessageType getType() {
 		String startPatternStr = "^[A-Z]+";
-		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
-
 		Pattern startPattern = Pattern.compile(startPatternStr);
-
-		Pattern groupPattern = Pattern.compile(groupPatternStr);
-
 		Matcher startMatcher = startPattern.matcher(this.getMessageString());
-		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
-		
-		if (startMatcher.find())
-			this.values.put("msgtype", startMatcher.group(0));
-
-		while (groupMatcher.find()) {
-			String group = groupMatcher.group(1);
-			int space = group.indexOf(' ');
-			this.values.put(group.substring(0,space), group.substring(space, group.length()));
+	
+		if (startMatcher.find()) {
+			this.type = UsarSimMessage.messageTypeDict.get(startMatcher.group(0));
 		}
+		else{
+			this.type = null;
+		}
+		return this.type;
+	}
+
+
+	@Override
+	protected void parseMessage() throws Exception {
+		throw new Exception("Not possible on this class, try casting to a specialized message type.");
 	}
 
 }
