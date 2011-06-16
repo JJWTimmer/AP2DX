@@ -31,7 +31,7 @@ public class PlannerTestCase {
     private Program test;
 	
     @BeforeClass 
-        public static void setUpBeforeClass() throws Exception {
+        public static void beforeClass() throws Exception {
             System.out.println("Before setUpMocks");
             Mockit.setUpMocks(FakeBase.class);
             Mockit.setUpMocks(FakeAP2DXMessage.class);
@@ -39,7 +39,7 @@ public class PlannerTestCase {
         }
 
     @Before
-        public void setUp() throws Exception
+        public void before() throws Exception
         {
             test = new Program();
         }
@@ -49,7 +49,7 @@ public class PlannerTestCase {
 	 * Test method for {@link AP2DX.planner.Program#Program()}.
 	 */
 	@Test
-	public void testProgram() {
+	public void program() {
 		Program myTest = new Program();
         System.out.println("After new program");
 		assertNotNull(myTest);
@@ -63,14 +63,14 @@ public class PlannerTestCase {
      * @author Maarten de Waard
      */
     @Test
-    public void testComponentLogic()
+    public void componentLogic()
     {
         test.componentLogic(new AP2DXMessage("Hoi", Module.TEST));
     }
 
 
     @Test
-    public void testOverride()
+    public void override()
     {   
         invoke(test, "doOverride");
         //test.doOverride();
