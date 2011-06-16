@@ -1,4 +1,4 @@
-package AP2DX;
+ package AP2DX;
 
 import java.util.Map;
 
@@ -18,9 +18,8 @@ public abstract class Message
     public enum MessageType 
     {
         AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
-        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR,
-        AP2DX_MOTOR,
-        USAR_STATE, USAR_MISSIONSTATE
+        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR, 
+        USAR_STATE, USAR_MISSIONSTATE, AP2DX_MOTOR_ACTION
     }
 
     /** A type that identifies a message. We might want to change this 
@@ -87,7 +86,9 @@ public abstract class Message
     * When the map of this message is filled we can compile a string that can be 
     * send (and parsed once received on the other side).
     */
-    protected abstract void compileMessage();
+    protected void compileMessage()  throws Exception {
+    	throw new Exception("Can only call this method from specialized messages.");
+    }
 
 
     /**
@@ -97,7 +98,7 @@ public abstract class Message
     public Module getSourceModuleId()
     {
         return sourceModuleId;
-    } 
+    }
     
     /**
      * getter for receiving side of message
