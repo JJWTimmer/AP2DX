@@ -73,6 +73,11 @@ public class PlannerTestCase {
         //test.doOverride();
     }
 
+    @test public void plannerMain()
+    {
+        test.main();
+    }
+
 	/**
 	 * This is the mocked AP2DXBase.
 	 * 
