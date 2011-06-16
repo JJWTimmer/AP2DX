@@ -36,6 +36,7 @@ public class PlannerTestCase {
             Mockit.setUpMocks(FakeBase.class);
             Mockit.setUpMocks(FakeAP2DXMessage.class);
             System.out.println("After SetUpMocks");
+            
         }
 
     @Before
@@ -73,9 +74,9 @@ public class PlannerTestCase {
         //test.doOverride();
     }
 
-    @test public void plannerMain()
+    @Test public void plannerMain()
     {
-        test.main();
+        test.main(new String[0]);
     }
 
 	/**
