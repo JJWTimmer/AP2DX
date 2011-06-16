@@ -41,6 +41,9 @@
 		<pathelement location="${build.dir}"/>
     </path>
 
+	<target name="version">
+		<echo message="The Ant version is: ${ant.version}"/>
+	</target>
 
 	<!-- Deletes the existing build, docs and dist directory-->
 	<target name="clean">
@@ -178,7 +181,7 @@
 	</target>
 	
 	<!-- Target to run -->
-	<target name="main" depends="compile, coverage-report, javadoc, jar">
+	<target name="main" depends="version, compile, coverage-report, javadoc, jar">
 		<description>Main target</description>
 	</target>
 
