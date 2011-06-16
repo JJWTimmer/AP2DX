@@ -41,14 +41,20 @@ public class Program extends AP2DXBase {
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
+		
 		/* Checks witch type of message it is */
 		if (msg.getType().equals("AP2DX_MOTOR_ACTION")) {
+			ActionMotorMessage specializedMessage = (ActionMotorMessage) msg;
+			
+			
+			
 			/* 
 			 * Probably have to be changed in the future. 
 			 * Assumes there is an action value. 
 			 * Then converts it form string to enum ActionType.
 			 */
-			ActionMotorMessage.ActionType action = ActionMotorMessage.ActionType.valueOf(msg.getValues().get("action").toString());
+			ActionMotorMessage.ActionType action = specializedMessage.getActionType();
+				ActionMotorMessage.ActionType.valueOf(msg.getValues().get("action").toString());
 			
 			/* 
 			 * Switches to decide witch action to take.
