@@ -37,20 +37,6 @@ public final class StateMessage extends UsarSimMessage {
 	@Override
 	public void parseMessage() {
 
-		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
-
-
-		Pattern groupPattern = Pattern.compile(groupPatternStr);
-
-
-		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
-		
-
-		while (groupMatcher.find()) {
-			String group = groupMatcher.group(1);
-			int space = group.indexOf(' ');
-			this.values.put(group.substring(0,space), group.substring(space, group.length()));
-		}
 	}
 	
 	@Override
