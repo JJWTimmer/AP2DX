@@ -12,9 +12,17 @@ import java.util.Map;
 public abstract class Message
 {
 
+    /*
+     * Enum type for the different types of messages between modules.
+     */
+    public enum MessageType 
+    {
+        AP2DX_SENSOR, AP2DX_MOTOR
+    }
+
     /** A type that identifies a message. We might want to change this 
     * to an enum in the future, but for now String will do. */
-    protected String type;
+    protected MessageType type;
 	/**
 	 * the module that has sent this message
 	 */
@@ -104,7 +112,7 @@ public abstract class Message
         return values;
     }
 
-    public String getType()
+    public MessageType getType()
     {
         return type;
     }
