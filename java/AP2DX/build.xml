@@ -79,6 +79,7 @@
 			<fileset dir="${debug.dir}">
 				<include name="**/*.class" />
 				<exclude name="**/*TestCase.class" />
+				<exclude name="**/*TestCase$*.class" />
 			</fileset>
 		</cobertura-instrument>
 	</target>

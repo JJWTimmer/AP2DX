@@ -48,14 +48,14 @@ public class UsarSimMessage extends Message {
 
 	@Override
 	protected void compileMessage() {
-		String output = "";
+		String output = "{";
 		output += values.get("msgtype");
 		Iterator it = values.entrySet().iterator();
 		while(it.hasNext()) {
 			Map.Entry<String, String> pair = (Map.Entry<String, String>)it.next();
 			output += " " + pair.getKey() + " " + pair.getValue();
 		}
-		
+
 		this.messageString = output;
 	}
 }
