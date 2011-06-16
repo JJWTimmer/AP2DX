@@ -12,7 +12,7 @@ import java.util.Map;
 public abstract class Message
 {
 
-    /*
+    /**
      * Enum type for the different types of messages between modules.
      */
     public enum MessageType 
@@ -20,6 +20,7 @@ public abstract class Message
         AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
         AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_INS, AP2DX_SENSOR_SONAR,
         AP2DX_MOTOR
+        USAR_STATE, USAR_MISSIONSTATE
     }
 
     /** A type that identifies a message. We might want to change this 
@@ -53,7 +54,7 @@ public abstract class Message
     public Message(String in, Module origin)
     {
         this(in, origin, Module.UNDEFINED);
-        parseMessage();
+        //parseMessage();
     }
     
     /**
@@ -67,14 +68,17 @@ public abstract class Message
         this.messageString = in; 
         this.sourceModuleId = origin;
         this.destinationModuleId = destination;
-        this.parseMessage();
-        parseMessage();
+
+        //parseMessage();
     }
 
     /**
      * override this to parse specific messagetypes
+     * @throws Exception 
      */
-    protected abstract void parseMessage();
+    protected void parseMessage() throws Exception {
+    	throw new Exception("Can only call this method from specialized messages.");
+    }
 
     /**
     * When the map of this message is filled we can compile a string that can be 

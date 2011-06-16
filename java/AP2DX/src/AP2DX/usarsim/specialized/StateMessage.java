@@ -5,7 +5,10 @@ package AP2DX.usarsim.specialized;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import AP2DX.Message;
 import AP2DX.usarsim.UsarSimMessage;
 
 /**
@@ -13,7 +16,7 @@ import AP2DX.usarsim.UsarSimMessage;
  * 
  */
 public final class StateMessage extends UsarSimMessage {
-	private String type;
+	private Message.MessageType type;
 	private float time;
 	private float frontSteer;
 	private float rearSteer;
@@ -25,42 +28,40 @@ public final class StateMessage extends UsarSimMessage {
 
 	public StateMessage(UsarSimMessage msg) {
 		super(msg.getMessageString());
-		this.parseValues();
+		this.parseMessage();
 	}
 
-	private void parseValues() {
-		if (values.containsKey("Type"))
-			this.type = values.get("Type").toString();
-		if (values.containsKey("Time"))
-			this.time = Float.parseFloat(values.get("Time").toString());
-		if (values.containsKey("FrontSteer"))
-			this.frontSteer = Float.parseFloat(values.get("FrontSteer")
-					.toString());
-		if (values.containsKey("RearSteer"))
-			this.rearSteer = Float.parseFloat(values.get("RearSteer")
-					.toString());
-		if (values.containsKey("LightToggle"))
-			this.lightToggle = Boolean.parseBoolean(values.get("LightToggle")
-					.toString());
-		if (values.containsKey("LightIntensity"))
-			this.lightIntensity = Integer.parseInt(values.get("LightIntensity")
-					.toString());
-		if (values.containsKey("Battery"))
-			this.battery = Integer.parseInt(values.get("Battery").toString());
-		if (values.containsKey("SternPlaneAngle "))
-			this.sternPlaneAngle = Integer.parseInt(values.get(
-					"SternPlaneAngle ").toString());
-		if (values.containsKey("RudderAngle"))
-			this.rudderAngle = Integer.parseInt(values.get("RudderAngle")
-					.toString());
+	/**
+	 * @see AP2DX.Message#parseMessage()
+	 */
+	@Override
+	public void parseMessage() {
+		String startPatternStr = "^[A-Z]+";
+		String groupPatternStr = "\\{([a-zA-Z0-9 .,_\\-]+)\\}";
+
+		Pattern startPattern = Pattern.compile(startPatternStr);
+
+		Pattern groupPattern = Pattern.compile(groupPatternStr);
+
+		Matcher startMatcher = startPattern.matcher(this.getMessageString());
+		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
+		
+		if (startMatcher.find())
+			this.values.put("msgtype", startMatcher.group(0));
+
+		while (groupMatcher.find()) {
+			String group = groupMatcher.group(1);
+			int space = group.indexOf(' ');
+			this.values.put(group.substring(0,space), group.substring(space, group.length()));
+		}
 	}
 	
 	@Override
 	protected void compileMessage() {
 		StringBuilder output = new StringBuilder();
 		
-		if (this.type.length() != 0)
-			output.append(String.format(" {Type %s}", this.type));
+		output.append(String.format(" {Type %s}", this.type));
+		
 		if (this.time != 0)
 			output.append(String.format(" {Time %s}", this.time));
 		if (this.frontSteer != 0)
@@ -145,8 +146,8 @@ public final class StateMessage extends UsarSimMessage {
 	/**
 	 * @return the type
 	 */
-	public String getType() {
-		return type;
+	public Message.MessageType getType() {
+		return this.type;
 	}
 
 	/**
@@ -159,7 +160,7 @@ public final class StateMessage extends UsarSimMessage {
 	/**
 	 * @param type the type to set
 	 */
-	public void setType(String type) {
+	public void setType(Message.MessageType type) {
 		this.type = type;
 	}
 
