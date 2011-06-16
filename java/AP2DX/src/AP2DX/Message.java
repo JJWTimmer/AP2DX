@@ -17,7 +17,9 @@ public abstract class Message
      */
     public enum MessageType 
     {
-        AP2DX_SENSOR, AP2DX_MOTOR
+        AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
+        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_INS, AP2DX_SENSOR_SONAR,
+        AP2DX_MOTOR
     }
 
     /** A type that identifies a message. We might want to change this 
