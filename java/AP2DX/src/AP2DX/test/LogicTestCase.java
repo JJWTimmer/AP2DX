@@ -31,18 +31,29 @@ public class LogicTestCase
 {
 
     private AP2DXBase base;
+    private Logic logic;
     
     @Test
     public void testLogic()
-    {
-        Logic test = new Logic(base);
-        assertNotNull("LogicTestCase.testLogic, things go south", test); 
+    {   
+        logic = new Logic(base);
+        assertNotNull("LogicTestCase.testLogic, things go south", logic); 
     }
 
     @Test
     public void testRun()
     {
-        fail("LogicTestCase.testRun not yet implemented");
+        boolean running = true;
+        try
+        {
+            logic.run();
+        }
+        catch(Exception e)
+        {
+            running = false;
+            e.printStackTrace();
+        }
+        assertTrue("LogicTestCase.testRun, exception caught", running);
     }
 
     public class ConcreteBase extends AP2DXBase 
@@ -110,6 +121,7 @@ public class LogicTestCase
 	public void setUp() throws Exception 
     {
         base = new ConcreteBase(Module.TEST);
+        logic = new Logic(base);
 	}
 
 	/**
