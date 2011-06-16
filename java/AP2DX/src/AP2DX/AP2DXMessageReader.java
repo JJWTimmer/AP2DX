@@ -54,12 +54,16 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
     {
 		String line = readLine();
 		AP2DXMessage message = new AP2DXMessage(line, source);
-        if (message.getType() == "sensor")
-            return new SensorMessage(message);
-        if (message.getType() == "motor")
-            return new MotorMessage(message);
-        System.out.println("No specialized message could be parsed!"); 
-		return message;
+        switch(message.getType())
+        {
+            case AP2DX_SENSOR:
+                return new SensorMessage(message); 
+            case AP2DX_MOTOR:
+                return new MotorMessage(message);
+            default:
+                System.out.println("AP2DX.readMessage(), no specialized message could be parsed!"); 
+		        return message;
+        }
 	}
 }
 
