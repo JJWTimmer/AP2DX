@@ -58,8 +58,8 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
         {
             case AP2DX_SENSOR_SONAR:
                 return new SonarSensorMessage(message); 
-            case AP2DX_MOTOR:
-                return new MotorMessage(message);
+            case AP2DX_MOTOR_ACTION:
+                return new ActionMotorMessage(message);
             default:
                 System.out.println("AP2DX.readMessage(), no specialized message could be parsed!"); 
 		        return message;

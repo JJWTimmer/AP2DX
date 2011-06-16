@@ -9,7 +9,7 @@ import AP2DX.InterfaceActions;
 import AP2DX.Message;
 
 /**
- * @author Wadie
+ * @author Wadie Assal
  * @author Jeroen Rooijmans
  */
 public class Actions implements InterfaceActions {

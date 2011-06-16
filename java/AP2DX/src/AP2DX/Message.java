@@ -1,4 +1,4 @@
-package AP2DX;
+ package AP2DX;
 
 import java.util.Map;
 
@@ -18,9 +18,8 @@ public abstract class Message
     public enum MessageType 
     {
         AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
-        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR,
-        AP2DX_MOTOR,
-        USAR_STATE, USAR_MISSIONSTATE
+        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR, 
+        USAR_STATE, USAR_MISSIONSTATE, AP2DX_MOTOR_ACTION
     }
 
     /** A type that identifies a message. We might want to change this 
@@ -41,44 +40,47 @@ public abstract class Message
      */
     protected String messageString;
 
-    /**
-     * dictionary with key-value pairs of incoming data
-     */
-    protected Map<String, Object> values = null;
+
+    public Message(Module source, Module destination)
+    {
+        this(null, source, destination);
+    }
     
     /**
      * constructor without destination, for received messages
      * @param in raw data
-     * @param origin sender
+     * @param source sender
      */
-    public Message(String in, Module origin)
+    public Message(String in, Module source)
     {
-        this(in, origin, Module.UNDEFINED);
-        //parseMessage();
+        this(in, source, Module.UNDEFINED);
     }
     
     /**
      * constructor with sender and receiver defined
      * @param in raw data
-     * @param origin sending module
+     * @param source sending module
      * @param destination receiving module
      */
-    public Message(String in, Module origin, Module destination)
+    public Message(String in, Module source, Module destination)
     {
         this.messageString = in; 
-        this.sourceModuleId = origin;
+        this.sourceModuleId = source;
         this.destinationModuleId = destination;
-
-        //parseMessage();
     }
 
     /**
      * override this to parse specific messagetypes
+     * TODO: find a better solution to fix this.
      * @throws Exception 
      */
     protected void parseMessage() throws Exception {
     	throw new Exception("Can only call this method from specialized messages.");
     }
+   
+    ///** Parses the <String, Object> values to compile a String messageString 
+    //* which makes this object ready to send. */
+    //protected abstract void parseMessage(); // I do not know why one would throw an exception here... 
 
     /**
     * When the map of this message is filled we can compile a string that can be 
@@ -115,10 +117,6 @@ public abstract class Message
 		return messageString;
 	}
 
-    public Map<String, Object> getValues()
-    {
-        return values;
-    }
 
     public MessageType getType()
     {
