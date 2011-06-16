@@ -43,7 +43,7 @@ public class Program extends AP2DXBase {
 		
 		/* Checks witch type of message it is */
 		if (msg.getType().equals("AP2DX_MOTOR_ACTION")) {
-			ActionMotorMessage specializedMessage = (ActionMotorMessage) msg;
+			ActionMotorMessage actionMotorMessage = (ActionMotorMessage) msg;
 			
 			
 			
@@ -52,26 +52,28 @@ public class Program extends AP2DXBase {
 			 * Assumes there is an action value. 
 			 * Then converts it form string to enum ActionType.
 			 */
-			ActionMotorMessage.ActionType action = specializedMessage.getActionType();
-				ActionMotorMessage.ActionType.valueOf(msg.getValues().get("action").toString());
+			ActionMotorMessage.ActionType action = actionMotorMessage.getActionType();
 			
 			/* 
 			 * Switches to decide witch action to take.
 			 * Uses the enum ActionType to switch.
 			 */
-			switch (action) {
-			case FORWARD :
-				return motor.forward(Integer.getInteger(msg.getValues().get("value").toString()));
-			case BACKWARD :
-				return motor.backward(Integer.getInteger(msg.getValues().get("value").toString()));
-			case LEFT :
-				return motor.left(Integer.getInteger(msg.getValues().get("value").toString()));
-			case RIGHT :
-				return motor.right(Integer.getInteger(msg.getValues().get("value").toString()));
-			case TURN :
-				return motor.turn(Integer.getInteger(msg.getValues().get("value").toString()));
-			case STOP :
-				return motor.stop();
+			switch (action) 
+            {
+			    case FORWARD:
+                    return motor.forward(actionMotorMessage.getValue());
+			    case BACKWARD:
+			    	return motor.backward(actionMotorMessage.getValue());
+			    case LEFT:
+			    	return motor.left(actionMotorMessage.getValue());
+			    case RIGHT:
+			    	return motor.right(actionMotorMessage.getValue());
+			    case TURN:
+			    	return motor.turn(actionMotorMessage.getValue());
+			    case STOP:
+			    	return motor.stop();
+                default:
+                    System.out.println("Error in motor.program.componentlogic");
 			}
 			
 			return new ArrayList<Message>();
