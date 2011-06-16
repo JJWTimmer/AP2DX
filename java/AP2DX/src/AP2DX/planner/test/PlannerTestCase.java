@@ -3,9 +3,8 @@
  */
 package AP2DX.planner.test;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
-import junit.framework.TestCase;
+//import junit.framework.Assert;
+//import junit.framework.TestCase;
 
 import mockit.Expectations;
 import mockit.Mock;
@@ -19,6 +18,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import AP2DX.*;
 import AP2DX.planner.*;
@@ -31,7 +31,7 @@ public class PlannerTestCase {
     private Program test;
 	
     @BeforeClass 
-        public static void setUpBeforeClass() throws Exception {
+        public static void beforeClass() throws Exception {
             System.out.println("Before setUpMocks");
             Mockit.setUpMocks(FakeBase.class);
             Mockit.setUpMocks(FakeAP2DXMessage.class);
@@ -39,7 +39,7 @@ public class PlannerTestCase {
         }
 
     @Before
-        public void setUp() throws Exception
+        public void before() throws Exception
         {
             test = new Program();
         }
@@ -48,8 +48,7 @@ public class PlannerTestCase {
     /**
 	 * Test method for {@link AP2DX.planner.Program#Program()}.
 	 */
-	@Test
-	public void testProgram() {
+	@Test public void program() {
 		Program myTest = new Program();
         System.out.println("After new program");
 		assertNotNull(myTest);
@@ -62,18 +61,21 @@ public class PlannerTestCase {
      * Test method for {@link AP2DX.planner.Program#componentLogic()}
      * @author Maarten de Waard
      */
-    @Test
-    public void testComponentLogic()
+    @Test public void componentLogic()
     {
         test.componentLogic(new AP2DXMessage("Hoi", Module.TEST));
     }
 
 
-    @Test
-    public void testOverride()
+    @Test public void override()
     {   
         invoke(test, "doOverride");
         //test.doOverride();
+    }
+
+    @test public void plannerMain()
+    {
+        test.main();
     }
 
 	/**

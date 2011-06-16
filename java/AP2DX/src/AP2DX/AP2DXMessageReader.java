@@ -56,8 +56,8 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
 		AP2DXMessage message = new AP2DXMessage(line, source);
         switch(message.getType())
         {
-            case AP2DX_SENSOR:
-                return new SensorMessage(message); 
+            case AP2DX_SENSOR_SONAR:
+                return new SonarSensorMessage(message); 
             case AP2DX_MOTOR:
                 return new MotorMessage(message);
             default:

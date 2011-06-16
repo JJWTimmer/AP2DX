@@ -11,15 +11,14 @@ SEN {Time 395.38} {Type RangeScanner} {Name Scanner1} {Resolution 0.0174} {FOV 3
 */
 
 /**
-* Specialized message send to sensor from the coordinator module
-* 
+* Specialized message for sensor data
 * @author Maarten Inja
 */
-public class SensorMessage extends SpecializedMessage 
+public class GpsSensorMessage extends SpecializedMessage 
 {
     /** Creates a specialized message from a standard AP2DXMessage.
     * This constructor could be used to clone an AP2DXMessage. */
-    public SensorMessage(AP2DXMessage message)
+    public GpsSensorMessage(AP2DXMessage message)
     {
         super(message);
     }
