@@ -17,12 +17,11 @@ public abstract class Message
      */
     public enum MessageType 
     {
-        AP2DX_SENSOR, AP2DX_MOTOR,
+        AP2DX_SENSOR, AP2DX_MOTOR, AP2DX_REFLEX,
         USAR_STATE, USAR_MISSIONSTATE
     }
 
-    /** A type that identifies a message. We might want to change this 
-    * to an enum in the future, but for now String will do. */
+    /** A type that identifies a message. */
     protected MessageType type;
 	/**
 	 * the module that has sent this message

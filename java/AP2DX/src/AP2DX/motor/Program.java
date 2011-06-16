@@ -42,13 +42,13 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
 		/* Checks from witch module the message comes from */
-		if (msg.getType().equals("reflex")) {
+		if (msg.getType().equals("AP2DX_MOTOR")) {
 			/* 
 			 * Probably have to be changed in the future. 
 			 * Assumes there is an action value. 
 			 * Then converts it form string to enum ActionType.
 			 */
-			ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
+			MotorMessage.ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
 			
 			/* 
 			 * Switches to decide witch action to take.

@@ -11,7 +11,8 @@ SEN {Time 395.38} {Type RangeScanner} {Name Scanner1} {Resolution 0.0174} {FOV 3
 */
 
 /**
-* Specialized message for sensor data. 
+* Specialized message send to sensor from the coordinator module
+* 
 * @author Maarten Inja
 */
 public class SensorMessage extends SpecializedMessage 
