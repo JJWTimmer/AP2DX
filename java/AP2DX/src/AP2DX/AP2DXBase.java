@@ -61,7 +61,6 @@ public abstract class AP2DXBase {
 	/** all received AP2DX.Messages will be stored here */
 	private ArrayBlockingQueue<AP2DXMessage> receiveQueue = new ArrayBlockingQueue<AP2DXMessage>(128);
     
-    public static void main(String[] args){};
 
 	/**
 	 * Where everything happens:

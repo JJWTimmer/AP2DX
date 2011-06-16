@@ -1,91 +1,41 @@
-/**
- * 
- */
 package AP2DX.coordinator.test;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
-import mockit.Expectations;
-import mockit.Mock;
-import mockit.MockClass;
-import mockit.MockUp;
-import mockit.Mockit;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import AP2DX.*;
+import AP2DX.test.*;
 import AP2DX.coordinator.*;
-import AP2DX.usarsim.UsarSimMessage;
 
-/**
- * @author Jasper Timmer
- * 
- */
-public class CoordinatorTestCase extends TestCase {
+import org.junit.*;
+import static org.junit.Assert.*;
 
-	/**
-	 * @throws java.lang.Exception
+public class CoordinatorTestCase extends AbstractTestCase
+{
+    @Before
+        public void before() throws Exception
+        {
+            test = new Program();
+        }
+
+
+    /**
+	 * default test method for the Program() class in the package.
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+    @Override
+	@Test public void program() {
+		Program myTest = new Program();
+        System.out.println("After new program");
+		assertNotNull(myTest);
+        System.out.println("after assertNotNull()");
+    }
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link AP2DX.coordinator.Program#Program()}.
-	 */
-	@Test
-	public void testProgram() {
-		Mockit.setUpMocks(FakeBase.class);
-
-		Program test = new Program();
-		assertNotNull(test);
-
-		Message msg = new UsarSimMessage("SEN {Time 395.3833} {Type GroundTruth} {Name GroundTruth} {Location 4.50,1.90,1.85} {Orientation 0.00,6.28,6.28}");
-		test.componentLogic(msg);
-	}
-
-	/**
-	 * This is the mocked AP2DXBase.
-	 * 
-	 * @author Jasper
-	 * 
-	 */
-	@MockClass(realClass = AP2DXBase.class)
-	public static final class FakeBase {		
-		/**
-		 * Override the constructor of AP2DXBase to do nothing.
-		 */
-		@Mock
-		public void $init() {
-			//instead of connecting and configuring, do nothing
-		}
-	}
-
+   
+    
+    /**
+     * default test method for the classMain()
+     */ 
+    @Override
+    @Test public void classMain()
+    {   
+        Program myTest = new Program();
+        myTest.main(new String[0]);
+    }
 }

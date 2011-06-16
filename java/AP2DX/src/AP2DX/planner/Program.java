@@ -8,10 +8,11 @@ import AP2DX.Message;
 import AP2DX.Module;
 
 public class Program extends AP2DXBase {
+
     /**
 	 * Entrypoint of planner
 	 */
-	public static void main (String[] args){
+	public static void main(String[] args){
 		new Program();
 	}
 

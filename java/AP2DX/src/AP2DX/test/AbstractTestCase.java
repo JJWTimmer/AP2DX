@@ -77,13 +77,11 @@ public abstract class AbstractTestCase {
         invoke(test, "doOverride");
         //test.doOverride();
     }
+
     /**
      * Default test method for testing the main class
      */
-    @Test public void classMain()
-    {
-        test.main(new String[0]);
-    }
+    @Test abstract public void classMain();
 
 	/**
 	 * This is the mocked AP2DXBase.

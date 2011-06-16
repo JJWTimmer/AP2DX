@@ -25,7 +25,17 @@ public class PlannerTestCase extends AbstractTestCase
         System.out.println("After new program");
 		assertNotNull(myTest);
         System.out.println("after assertNotNull()");
+    }
 
-	}
-
+   
+    
+    /**
+     * default test method for the classMain()
+     */ 
+    @Override
+    @Test public void classMain()
+    {   
+        Program myTest = new Program();
+        myTest.main(new String[0]);
+    }
 }
