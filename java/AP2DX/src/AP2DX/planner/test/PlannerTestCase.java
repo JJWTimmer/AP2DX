@@ -5,7 +5,7 @@ package AP2DX.planner.test;
 
 import static org.junit.Assert.*;
 import junit.framework.Assert;
-import junit.framework.TestCase;
+//import junit.framework.TestCase;
 
 import mockit.Expectations;
 import mockit.Mock;
