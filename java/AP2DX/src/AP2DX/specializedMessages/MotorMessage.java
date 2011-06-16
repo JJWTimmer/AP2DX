@@ -9,8 +9,8 @@ import AP2DX.*;
 public class MotorMessage extends SpecializedMessage 
 {
 	private ActionType action;
-	private int meter;
-	private int degree;
+	private int meter = 0;
+	private int degree = 0;
 	
 	public enum ActionType {
 		FORWARD, BACKWARD, LEFT, RIGHT, TURN, STOP
@@ -21,6 +21,18 @@ public class MotorMessage extends SpecializedMessage
     public MotorMessage(AP2DXMessage message)
     {
         super(message);
+    }
+    
+    public MotorMessage(Module sourceId, Module destinationId, int meter)
+    {
+    	super(sourceId, destinationId);
+    	this.meter = meter;
+    }
+    
+    public MotorMessage(Module sourceId, Module destinationId, int degree)
+    {
+    	super(sourceId, destinationId);
+    	this.degree = degree;
     }
 
     public ActionType getActionType() {

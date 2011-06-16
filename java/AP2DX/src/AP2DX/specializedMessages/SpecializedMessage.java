@@ -11,6 +11,16 @@ import AP2DX.*;
 */
 public abstract class SpecializedMessage extends AP2DXMessage
 {
+	/** We do not have an "in" value when we construct a specialize message. This is
+	 * only the case when a message is received over the network from another module. 
+	 * 
+	 * @param sourceId
+	 * @param destinationId
+	 */
+	public SpecializedMessage(Module sourceId, Module destinationId)
+	{
+		super(sourceId, destinationId);
+	}
 
     /** 
      * Creates a specialized message from a standard AP2DXMessage.

@@ -41,7 +41,7 @@ public class Program extends AP2DXBase {
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
-		/* Checks from witch module the message comes from */
+		/* Checks witch type of message it is */
 		if (msg.getType().equals("AP2DX_MOTOR")) {
 			/* 
 			 * Probably have to be changed in the future. 
