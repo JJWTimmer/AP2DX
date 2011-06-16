@@ -40,32 +40,40 @@ public class Program extends AP2DXBase {
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
-		/* Checks from witch module the message comes from */
-		if (msg.getType().equals("reflex")) {
+		
+		/* Checks witch type of message it is */
+		if (msg.getType().equals("AP2DX_MOTOR_ACTION")) {
+			ActionMotorMessage actionMotorMessage = (ActionMotorMessage) msg;
+			
+			
+			
 			/* 
 			 * Probably have to be changed in the future. 
 			 * Assumes there is an action value. 
 			 * Then converts it form string to enum ActionType.
 			 */
-			ActionType action = ActionType.valueOf(msg.getValues().get("action").toString());
+			ActionMotorMessage.ActionType action = actionMotorMessage.getActionType();
 			
 			/* 
 			 * Switches to decide witch action to take.
 			 * Uses the enum ActionType to switch.
 			 */
-			switch (action) {
-			case FORWARD :
-				return motor.forward(0);
-			case BACKWARD :
-				return motor.backward(0);
-			case LEFT :
-				return motor.left(0);
-			case RIGHT :
-				return motor.right(0);
-			case TURN :
-				return motor.turn(0);
-			case STOP :
-				return motor.stop();
+			switch (action) 
+            {
+			    case FORWARD:
+                    return motor.forward(actionMotorMessage.getValue());
+			    case BACKWARD:
+			    	return motor.backward(actionMotorMessage.getValue());
+			    case LEFT:
+			    	return motor.left(actionMotorMessage.getValue());
+			    case RIGHT:
+			    	return motor.right(actionMotorMessage.getValue());
+			    case TURN:
+			    	return motor.turn(actionMotorMessage.getValue());
+			    case STOP:
+			    	return motor.stop();
+                default:
+                    System.out.println("Error in motor.program.componentlogic");
 			}
 			
 			return new ArrayList<Message>();

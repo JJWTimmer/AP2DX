@@ -54,17 +54,17 @@ public class Program extends AP2DXBase {
 		
 		
 		try {
-			out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
-			//out.flush();
-			Message msg = in.readMessage();
-			System.out.println(msg.getValues().get("msgtype"));
-			Thread.sleep(10);
-			out.println("DRIVE {Left -1.0} {Right 1.0}");
-			Thread.sleep(5000);
-			out.println("DRIVE {Left 1.0} {Right -1.0}");
-			System.out.println(in.readLine());
+            // TODO: this was once used to test drive P2DX, but now it can not be used any longer
+			//out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
+			////out.flush();
+			//Message msg = in.readMessage();
+			//System.out.println(msg.getValues().get("msgtype"));
+			//Thread.sleep(10);
+			//out.println("DRIVE {Left -1.0} {Right 1.0}");
+			//Thread.sleep(5000);
+			//out.println("DRIVE {Left 1.0} {Right -1.0}");
+			//System.out.println(in.readLine());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
