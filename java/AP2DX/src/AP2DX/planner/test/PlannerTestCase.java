@@ -3,8 +3,7 @@
  */
 package AP2DX.planner.test;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
+//import junit.framework.Assert;
 //import junit.framework.TestCase;
 
 import mockit.Expectations;
@@ -19,6 +18,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import AP2DX.*;
 import AP2DX.planner.*;
