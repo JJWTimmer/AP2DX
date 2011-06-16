@@ -16,8 +16,6 @@ public class Program extends AP2DXBase {
 	 */
 	public static void main (String[] args){
 		new Program();
-		
-		System.exit(0);
 	}
 
 	
