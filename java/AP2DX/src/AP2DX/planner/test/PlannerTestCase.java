@@ -54,6 +54,7 @@ public class PlannerTestCase {
         System.out.println("After new program");
 		assertNotNull(myTest);
         System.out.println("after assertNotNull()");
+
 	}
 
 
