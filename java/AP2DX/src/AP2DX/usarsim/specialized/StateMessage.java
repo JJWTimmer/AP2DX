@@ -10,20 +10,36 @@ import java.util.regex.Pattern;
 
 import AP2DX.Message;
 import AP2DX.usarsim.UsarSimMessage;
+import AP2DX.usarsim.UsarSimMessage.UsarMessageField;
 
 /**
  * @author Jasper Timmer
  * 
  */
 public final class StateMessage extends UsarSimMessage {
-	private Message.MessageType type;
+
+	@UsarMessageField(name = "Time")
 	private float time;
+
+	@UsarMessageField(name = "FrontSteer")
 	private float frontSteer;
+
+	@UsarMessageField(name = "RearSteer")
 	private float rearSteer;
+
+	@UsarMessageField(name = "LightToggle")
 	private boolean lightToggle;
+
+	@UsarMessageField(name = "LightIntensity")
 	private int lightIntensity;
+
+	@UsarMessageField(name = "Battery")
 	private int battery;
+
+	@UsarMessageField(name = "SternPlaneAngle")
 	private float sternPlaneAngle;
+
+	@UsarMessageField(name = "RudderAngle")
 	private float rudderAngle;
 
 	public StateMessage(UsarSimMessage msg) {
@@ -36,34 +52,13 @@ public final class StateMessage extends UsarSimMessage {
 	 */
 	@Override
 	public void parseMessage() {
+		String groupPatternStr = "\\{(\\w+) ([a-zA-Z0-9,._\\-]+)\\}";
+		Pattern groupPattern = Pattern.compile(groupPatternStr);
+		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
 
-	}
-	
-	@Override
-	protected void compileMessage() {
-		StringBuilder output = new StringBuilder();
-		
-		output.append(String.format(" {Type %s}", this.type));
-		
-		if (this.time != 0)
-			output.append(String.format(" {Time %s}", this.time));
-		if (this.frontSteer != 0)
-			output.append(String.format(" {FrontSteer %s}", this.frontSteer));
-		if (this.rearSteer != 0)
-			output.append(String.format(" {RearSteer %s}", this.rearSteer));
-		if (this.sternPlaneAngle != 0)
-			output.append(String.format(" {SternPlaneAngle %s}", this.sternPlaneAngle));
-		if (this.rudderAngle != 0)
-			output.append(String.format(" {RudderAngle %s}", this.rudderAngle));
-		if (this.battery != 0)
-			output.append(String.format(" {Battery %s}", this.battery));
-		
-		output.append(String.format(" {LightToggle %s}", this.lightToggle));
-		
-		if (this.lightIntensity != 0)
-			output.append(String.format(" {LightIntensity %s}", this.lightIntensity));
-		
-		this.messageString = output.toString();
+		if (groupMatcher.find()) {
+			//this.links.add(new MissionStateLink(groupMatcher.group(1), groupMatcher.group(2), groupMatcher.group(3)));
+		}
 	}
 
 	/**

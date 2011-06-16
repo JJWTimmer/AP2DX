@@ -63,8 +63,10 @@ public class ConnectionHandler extends Thread
      * This constructor is for the incoming connections.
      * @param usar If true, handle a USARsim Connection
      * @throws IOException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
      */ 
-    public ConnectionHandler(AP2DXBase base, Socket socket, Module origin) throws IOException
+    public ConnectionHandler(AP2DXBase base, Socket socket, Module origin) throws IOException, InstantiationException, IllegalAccessException
     {
         this.base = base;
         this.socket = socket;

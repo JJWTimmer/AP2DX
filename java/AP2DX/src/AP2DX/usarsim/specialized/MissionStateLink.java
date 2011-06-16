@@ -8,19 +8,27 @@ package AP2DX.usarsim.specialized;
  *
  */
 public class MissionStateLink {
+	private int link;
 	private float value;
 	private float torque;
 	
-	public MissionStateLink(float value, float torque) {
+	public MissionStateLink(int link, float value, float torque) {
+		this.setLink(link);
 		this.setValue(value);
 		this.setTorque(torque);
 		
 	}
 	
-	public MissionStateLink(String value, String torque) {
+	public MissionStateLink(String link, String value, String torque) {
+		this.setLink(Integer.parseInt(link));
 		this.setValue(Float.parseFloat(value));
 		this.setTorque(Float.parseFloat(torque));
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		return String.format(" {Link %s} {Value %s} {Torque %s}", link, value, torque);
+	}
 
 	/**
 	 * @param torque the torque to set
@@ -48,6 +56,14 @@ public class MissionStateLink {
 	 */
 	public float getValue() {
 		return value;
+	}
+
+	public void setLink(int link) {
+		this.link = link;
+	}
+
+	public int getLink() {
+		return link;
 	}
 
 }

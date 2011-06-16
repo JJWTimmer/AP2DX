@@ -6,9 +6,9 @@ package AP2DX;
 import java.io.IOException;
 
 /**
- * @author jjwt
+ * @author Jasper Timmer
  *
  */
 public interface IMessageReader {
-	public Message readMessage() throws IOException;
+	public Message readMessage() throws IOException, InstantiationException, IllegalAccessException;
 }

@@ -4,12 +4,19 @@
 package AP2DX;
 
 import static org.junit.Assert.*;
+
+import java.net.Socket;
+
 import junit.framework.TestCase;
+
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -51,6 +58,13 @@ public class ConnectionTestCase extends TestCase {
 	 */
 	@Test
 	public void testConnection() {
+		new MockUp<Socket>() {
+			@Mock
+			void $init(String host, int port) {
+				//pass
+			}
+		};
+		
 		Connection conn = null;
 		try {
 			conn = new Connection("127.0.0.1", 9999, Module.USARSIM);
@@ -65,6 +79,7 @@ public class ConnectionTestCase extends TestCase {
 	 * Test method for {@link AP2DX.Connection#sendMessage(java.lang.String)}.
 	 */
 	@Test
+	@Ignore("Not implemented")
 	public void testSendMessage() {
 		fail("Not yet implemented");
 	}
@@ -73,6 +88,7 @@ public class ConnectionTestCase extends TestCase {
 	 * Test method for {@link AP2DX.Connection#readMessage()}.
 	 */
 	@Test
+	@Ignore("Not implemented")
 	public void testReadMessage() {
 		fail("Not yet implemented");
 	}
@@ -81,6 +97,7 @@ public class ConnectionTestCase extends TestCase {
 	 * Test method for {@link AP2DX.Connection#close()}.
 	 */
 	@Test
+	@Ignore("Not implemented")
 	public void testClose() {
 		fail("Not yet implemented");
 	}

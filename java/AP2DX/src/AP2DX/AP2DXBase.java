@@ -138,14 +138,14 @@ public abstract class AP2DXBase {
 		}
 
 		// wait for all the connectors to connect
-//		while (this.threadCounter.get() != 0) {
-//			try {
-//				Thread.sleep(100);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		while (this.threadCounter.get() != 0) {
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         System.out.println("Before override");
 		// run the extra logic
@@ -475,7 +475,7 @@ public abstract class AP2DXBase {
 
 					connHandler.start();
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
