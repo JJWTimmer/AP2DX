@@ -82,7 +82,9 @@ public abstract class Message
     * When the map of this message is filled we can compile a string that can be 
     * send (and parsed once received on the other side).
     */
-    protected abstract void compileMessage();
+    protected void compileMessage()  throws Exception {
+    	throw new Exception("Can only call this method from specialized messages.");
+    }
 
 
     /**
@@ -92,7 +94,7 @@ public abstract class Message
     public Module getSourceModuleId()
     {
         return sourceModuleId;
-    } 
+    }
     
     /**
      * getter for receiving side of message
