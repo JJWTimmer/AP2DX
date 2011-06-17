@@ -134,8 +134,9 @@ public final class StateMessage extends UsarSimMessage {
 	/**
 	 * @param type the type to set
 	 */
-	public void setType(Message.MessageType type) {
+	public MessageType setType(Message.MessageType type) {
 		this.type = type;
+		return type;
 	}
 
 	/**
