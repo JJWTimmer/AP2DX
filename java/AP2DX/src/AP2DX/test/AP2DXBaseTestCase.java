@@ -29,7 +29,7 @@ import AP2DX.*;
  * @author Maarten Inja
  * 
  */
-public class BaseClassTestCase 
+public class AP2DXBaseTestCase 
 {
 
     private ConcreteBase test;
@@ -43,11 +43,18 @@ public class BaseClassTestCase
             new MockUp<Socket>() {
                 @Mock
                     void $init(String host, int port) {
-                        System.out.printf("Host: %s, Port: %d\n");
+                        System.out.printf("Host: %s, Port: %d\n", host, port);
                         //pass
                     }
             };
 
+            new MockUp<ServerSocket>() {
+                @Mock
+                    void $init(int port) {
+                        System.out.printf("Port: %d\n", port);
+                        //pass
+                    }
+            };
             new MockUp<Thread>() {
                 @Mock void join(){}
                 @Mock void run(){}
@@ -83,6 +90,7 @@ public class BaseClassTestCase
     @After
         public void tearDown() throws Exception {
             // pass
+
         }
 
     /**
@@ -90,19 +98,6 @@ public class BaseClassTestCase
      */
     @Test
         public void testAP2DXBase() {
-            /*new MockUp<Socket>() {
-                @Mock
-                    void $init(String host, int port) {
-                        //pass
-                    }
-            };
-
-            new MockUp<Thread>() {
-                @Mock
-                    void join() {
-                        //pass
-                    }
-            };*/
             AP2DXBase newTest = new ConcreteBase(Module.TEST);
             assertNotNull(newTest);
         }
@@ -114,20 +109,13 @@ public class BaseClassTestCase
     @Test
         public void testReadConfig() {
             System.out.print("Startin' testReadConfig!");
-            /*new MockUp<Thread>() {
-                @Mock
-                    void join() {
-                        //pass
-                    }
-            };*/
-
             // readConfig is called in the ctor of the base class
             Map config = test.getConfig();
 
             myCompareString("logfile", "log/coordinator.log", config);
             myCompareString("sim_address", "127.0.0.1", config);
             myCompareInt("sim_port", 3000, config);
-            myCompareInt("listen_port", 5009, config);
+            myCompareInt("listen_port", 5999, config);
         }
 
     /** Help method for testReadConfig. */
