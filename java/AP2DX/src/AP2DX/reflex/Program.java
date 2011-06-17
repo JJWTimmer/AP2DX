@@ -41,7 +41,7 @@ public class Program extends AP2DXBase {
 		if (msg.getType().equals("")) {
 			
 			return new ArrayList<Message>();			
-		} else if (msg.getType().equals("sensor")) {
+		} else if (msg.getMsgType().equals("sensor")) {
 			return new ArrayList<Message>();
 		} else {
 			return new ArrayList<Message>();			

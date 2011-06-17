@@ -18,9 +18,9 @@ public abstract class Message
     public enum MessageType 
     {
         AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
-        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR, 
-        USAR_STATE, USAR_MISSIONSTATE, AP2DX_MOTOR_ACTION, AP2DX_COORDINATOR_DRIVE, 
-        AP2DX_COORDINATOR_SENSOR
+        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR, AP2DX_MOTOR_ACTION, AP2DX_COORDINATOR_DRIVE, 
+        AP2DX_COORDINATOR_SENSOR, 
+        USAR_STATE, USAR_MISSIONSTATE
     }
 
     /** A type that identifies a message. We might want to change this 
@@ -55,6 +55,13 @@ public abstract class Message
     public Message(String in, Module source)
     {
         this(in, source, Module.UNDEFINED);
+    }
+    
+    /**
+     * constructor for new messages
+     */
+    public Message()
+    {
     }
     
     /**
@@ -133,7 +140,7 @@ public abstract class Message
 	}
 
 
-    public MessageType getType()
+    public MessageType getMsgType()
     {
         return type;
     }
