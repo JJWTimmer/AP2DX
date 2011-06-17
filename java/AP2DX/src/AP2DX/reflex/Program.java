@@ -10,7 +10,6 @@ import AP2DX.specializedMessages.ActionMotorMessage;
 
 public class Program extends AP2DXBase {
 	
-	Actions reflex = new Actions();
     /**
 	 * Entrypoint of reflex
 	 */

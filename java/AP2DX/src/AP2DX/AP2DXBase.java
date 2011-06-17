@@ -360,7 +360,7 @@ public abstract class AP2DXBase {
 	 */
 	public abstract ArrayList<AP2DXMessage> componentLogic(Message msg);
 
-	public ArrayBlockingQueue<AP2DXMessage> getReceiveQueue() {
+	public DelayQueue<AP2DXMessage> getReceiveQueue() {
 		return receiveQueue;
 	}
 

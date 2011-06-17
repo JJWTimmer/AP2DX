@@ -76,9 +76,9 @@ public class Program extends AP2DXBase {
                     System.out.println("Error in motor.program.componentlogic");
 			}
 			
-			return new ArrayList<Message>();
+			return new ArrayList<AP2DXMessage>();
 		} else {
-			return new ArrayList<Message>();
+			return new ArrayList<AP2DXMessage>();
 		}
 	}
 }
