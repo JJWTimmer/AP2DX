@@ -37,6 +37,8 @@ public abstract class Message
         AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), 
         USAR_STATE("STA", true), 
         USAR_MISSIONSTATE("MISTA", true), 
+        USAR_INIT("INIT", true),
+        USAR_DRIVE("DRIVE",true),
         UNKNOWN("unknown");
 
         /** The string that defines the type when a message is being send as JSON/USAR. */
@@ -111,8 +113,10 @@ public abstract class Message
     /**
      * constructor for new messages
      */
-    public Message()
+    public Message(MessageType type)
     {
+        this.type = type;
+        //this.messageString = this.compileMessage();
     }
     
     /**

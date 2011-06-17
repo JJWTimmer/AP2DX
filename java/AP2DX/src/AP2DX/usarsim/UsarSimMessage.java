@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.reflect.Field;
+//import .Retention;
+//import .Target;
+import java.lang.annotation.*;
 
 import AP2DX.Message;
 import AP2DX.Module;
@@ -33,24 +36,27 @@ public class UsarSimMessage extends Message {
     /**
      * make a new UsarSimMessage
      */
-	public UsarSimMessage() {
-		super();
+	public UsarSimMessage(MessageType type) {
+		super(type);
 	}
 	
 	@Override
-	public Message.MessageType getMsgType() {
-		String startPatternStr = "^[A-Z]+";
-		Pattern startPattern = Pattern.compile(startPatternStr);
-		Matcher startMatcher = startPattern.matcher(this.getMessageString());
-	
-		if (startMatcher.find()) {
-			this.type = Message.MessageType.valueOf(startMatcher.group(0));
-		}
-		else{
-			this.type = null;
-		}
-		return this.type;
-	}
+        public Message.MessageType getMsgType() {
+            if(this.type == null)
+            {
+                String startPatternStr = "^[A-Z]+";
+                Pattern startPattern = Pattern.compile(startPatternStr);
+                Matcher startMatcher = startPattern.matcher(this.getMessageString());
+
+                if (startMatcher.find()) {
+                    this.type = UsarSimMessage.MessageType.getEnumByString(startMatcher.group(0));
+                }
+                else{
+                    this.type = null;
+                }
+            }
+            return this.type;
+        }
 
 	@Override
 	protected void parseMessage() throws Exception {
@@ -68,22 +74,38 @@ public class UsarSimMessage extends Message {
 		
 		output.append(this.getMsgType());
 		
-		for (Field field : this.getClass().getDeclaredFields()) {
-		    if (field.isAnnotationPresent(UsarMessageField.class)) {
-		    	output.append(String.format(" {%s %s}", field.getAnnotation(UsarMessageField.class).name(), field.toString()));
-		    
-		    } else if (field.isAnnotationPresent(UsarMessageIteratorField.class)) {
-	    		Iterator it = List.class.cast(field).iterator();
-	    		
-	    		while (it.hasNext()) {
-	    			Object entry = it.next();
-	    			output.append(entry.toString());
-	    		}
-	    	}
-		}
+        for (Field field : this.getClass().getDeclaredFields()) {
+            System.out.println("In for loop");
+            if (field.isAnnotationPresent(UsarMessageField.class)) {
+                System.out.println("after if");
+                try{
+                    field.setAccessible(true);
+                    output.append(String.format(" {%s %s}", field.getAnnotation(UsarMessageField.class).name(), field.get(this)));
+                    field.setAccessible(false);
+                }
+                catch(Exception e)
+                {
+                    System.err.print(e.getMessage());
+                }
+
+            } else if (field.isAnnotationPresent(UsarMessageIteratorField.class)) {
+                System.out.println("After else");
+                Iterator it = List.class.cast(field).iterator();
+
+                while (it.hasNext()) {
+                    Object entry = it.next();
+                    output.append(entry.toString());
+                }
+            }
+        }
 		
 		return output.toString();
 	}
+
+    public String toString()
+    {
+        return compileMessage();
+    }
 	
 	/**
 	 * override getMessageString to execute compile before getting string.
@@ -101,6 +123,8 @@ public class UsarSimMessage extends Message {
 	 * @author Jasper Timmer
 	 *
 	 */
+     @Retention(RetentionPolicy.RUNTIME)
+     @Target(ElementType.FIELD)
 	public @interface UsarMessageField {
 		String name();
 	};
@@ -113,5 +137,7 @@ public class UsarSimMessage extends Message {
 	 * @author Jasper Timmer
 	 *
 	 */
+     @Retention(RetentionPolicy.RUNTIME)
+     @Target(ElementType.FIELD)
 	public @interface UsarMessageIteratorField {};
 }
