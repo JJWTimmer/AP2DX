@@ -105,6 +105,7 @@ public abstract class AP2DXBase {
 			e.printStackTrace();
 			//System.exit(1);
 		}
+        System.out.println("After ServerSocket");
 		// start new thread that accepts all connections and creates connectionhandlers
 		Listener conn_c = new Listener(svr, this);
 		Thread t = new Thread(conn_c);
@@ -157,6 +158,7 @@ public abstract class AP2DXBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        System.out.println("End of constructor!");
 	}
 
 	/**
