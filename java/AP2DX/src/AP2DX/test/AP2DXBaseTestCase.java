@@ -29,7 +29,7 @@ import AP2DX.*;
  * @author Maarten Inja
  * 
  */
-public class BaseClassTestCase 
+public class AP2DXBaseTestCase 
 {
 
     private ConcreteBase test;

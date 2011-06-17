@@ -5,10 +5,5 @@
 	"listen_port": 5999,
 	"outgoing" :
 		[
-			 {
-			   "component": "MAPPER",
-			   "address": "localhost",
-			   "port": 3001
-			 }
         ]
 }
