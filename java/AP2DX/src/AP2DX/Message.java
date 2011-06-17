@@ -14,13 +14,34 @@ public abstract class Message
 
     /**
      * Enum type for the different types of messages between modules.
+     * We can both define enums here and the string we use as value in a JSON string message.
+     * @author Maarten Inja
      */
     public enum MessageType 
     {
-        AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
-        AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR, 
-        USAR_STATE, USAR_MISSIONSTATE, AP2DX_MOTOR_ACTION, AP2DX_COORDINATOR_DRIVE, 
-        AP2DX_COORDINATOR_SENSOR
+        AP2DX_SENSOR_ENCODER("sensorEncoder"), APD2X_SENSOR_GPS("sensorGps"), AP2DX_SENSOR_GROUNDTRUTH("sensorGroundTruth"), AP2DX_SENSOR_INS("sensorIns"), 
+        AP2DX_SENSOR_ODOMETRY("sensorOdometry"), AP2DX_SENSOR_RANGESCANNER("sensorRangeScanner"), AP2DX_SENSOR_SONAR("sensorSonar"), 
+        USAR_STATE("STA"), USAR_MISSIONSTATE("MISTA"), AP2DX_MOTOR_ACTION("motorAction"), AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
+        AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), UNKNOWN("unknown");
+
+        /** The string that defines the type when a message is being send as JSON/USAR. */
+        public final String typeString;
+
+        private MessageType(String typeString)
+        {
+            this.typeString = typeString;
+        }
+
+        /** Finds an enum by a String.
+        * TODO: change this to a map for performance increase */
+        public static MessageType getEnumByString(String typeString)
+        {
+            for(MessageType possibleType : MessageType.values())
+                if (possibleType.typeString.equals(typeString))
+                    return possibleType;
+            return MessageType.UNKNOWN;
+        }
+
     }
 
     /** A type that identifies a message. We might want to change this 

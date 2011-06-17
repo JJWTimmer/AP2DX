@@ -59,6 +59,7 @@ public class AP2DXMessage extends Message implements Delayed {
 			values = (Map)parser.parse(messageString);
             destinationModuleId = Module.valueOf(values.get("destinationModuleId").toString());
             sourceModuleId = Module.valueOf(values.get("sourceModuleId").toString());
+            type = MessageType.getEnumByString(values.get("type").toString());
         }
         catch (ParseException pe) 
         {   

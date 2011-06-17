@@ -7,7 +7,7 @@ public class SensorCoordinatorMessage extends CoordinatorMessage {
 	private boolean activateSensor ;
 
 	public SensorCoordinatorMessage(AP2DXMessage message, Command command, boolean activateSendor) {
-		super(message, command);
+        super(message);
 		this.activateSensor = activateSensor;
 	}
 	
