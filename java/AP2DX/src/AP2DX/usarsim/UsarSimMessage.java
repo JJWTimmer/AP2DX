@@ -77,7 +77,7 @@ public class UsarSimMessage extends Message {
 	 * field.toString() is the value of the field like so: {name value}.
 	 */
 	@Override
-	protected void compileMessage() {
+	protected String compileMessage() {
 		StringBuilder output = new StringBuilder();
 		
 		output.append(this.getType());
@@ -96,7 +96,17 @@ public class UsarSimMessage extends Message {
 	    	}
 		}
 		
-		this.messageString = output.toString();
+		return output.toString();
+	}
+	
+	/**
+	 * override getMessageString to execute compile before getting string.
+	 * Best practice is to store this string in a local variable instead of
+	 * repeatedly calling this function.
+	 */
+	@Override
+	public String getMessageString() {
+		return this.messageString;
 	}
 	
 	/**
