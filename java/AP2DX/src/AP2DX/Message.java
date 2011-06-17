@@ -14,6 +14,8 @@ public abstract class Message
 
     /**
      * Enum type for the different types of messages between modules.
+     * We can both define enums here and the string we use as value in a JSON string message.
+     * @author Maarten Inja
      */
     public enum MessageType 
     {
@@ -22,6 +24,7 @@ public abstract class Message
         USAR_STATE("STA"), USAR_MISSIONSTATE("MISTA"), AP2DX_MOTOR_ACTION("motorAction"), AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
         AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), UNKNOWN("unknown");
 
+        /** The string that defines the type when a message is being send as JSON/USAR. */
         public final String typeString;
 
         private MessageType(String typeString)
@@ -29,8 +32,9 @@ public abstract class Message
             this.typeString = typeString;
         }
 
-        /** TODO: change this to a map for performance increase */
-        public MessageType getEnumByString(String typeString)
+        /** Finds an enum by a String.
+        * TODO: change this to a map for performance increase */
+        public static MessageType getEnumByString(String typeString)
         {
             for(MessageType possibleType : MessageType.values())
                 if (possibleType.typeString.equals(typeString))
