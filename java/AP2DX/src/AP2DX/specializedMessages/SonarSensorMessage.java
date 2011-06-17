@@ -22,7 +22,7 @@ public class SonarSensorMessage extends SpecializedMessage
 
 	public SonarSensorMessage(Module sourceId, Module destinationId)
 	{
-		super(sourceId, destinationId);
+		super(Message.MessageType.AP2DX_SENSOR_SONAR, sourceId, destinationId);
 	}
 
     /** Creates a specialized message from a standard AP2DXMessage.
