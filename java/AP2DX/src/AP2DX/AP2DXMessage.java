@@ -1,4 +1,4 @@
-/**
+ /**
  * 
  */
 package AP2DX;
@@ -27,9 +27,9 @@ public class AP2DXMessage extends Message {
      */
     protected Map<String, Object> values;
 
-    public AP2DXMessage(Module source, Module destination)
+    public AP2DXMessage(Message.MessageType type, Module source, Module destination)
     {
-        super(source, destination);
+        super(type, source, destination);
     }
 	
 	public AP2DXMessage(String in, Module source, Module destination) 

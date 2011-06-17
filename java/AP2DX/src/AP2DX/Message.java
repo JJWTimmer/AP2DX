@@ -19,7 +19,8 @@ public abstract class Message
     {
         AP2DX_SENSOR_ENCODER, APD2X_SENSOR_GPS, AP2DX_SENSOR_GROUNDTRUTH, AP2DX_SENSOR_INS, 
         AP2DX_SENSOR_ODOMETRY, AP2DX_SENSOR_RANGESCANNER, AP2DX_SENSOR_SONAR, 
-        USAR_STATE, USAR_MISSIONSTATE, AP2DX_MOTOR_ACTION
+        USAR_STATE, USAR_MISSIONSTATE, AP2DX_MOTOR_ACTION, AP2DX_COORDINATOR_DRIVE, 
+        AP2DX_COORDINATOR_SENSOR
     }
 
     /** A type that identifies a message. We might want to change this 
@@ -41,9 +42,9 @@ public abstract class Message
     protected String messageString;
 
 
-    public Message(Module source, Module destination)
+    public Message(MessageType type, Module source, Module destination)
     {
-        this(null, source, destination);
+        this(null, source, destination, type);
     }
     
     /**
@@ -54,6 +55,21 @@ public abstract class Message
     public Message(String in, Module source)
     {
         this(in, source, Module.UNDEFINED);
+    }
+    
+    /**
+     * constructor with sender and receiver defined
+     * @param in raw data
+     * @param source sending module
+     * @param destination receiving module
+     * @param sets the message type
+     */
+    public Message(String in, Module source, Module destination, MessageType type)
+    {
+        this.messageString = in; 
+        this.sourceModuleId = source;
+        this.destinationModuleId = destination;
+        this.type = type;
     }
     
     /**
@@ -119,6 +135,45 @@ public abstract class Message
 
     public MessageType getType()
     {
+        return type;
+    }
+    
+    /**
+     * setter for sending module
+     * @return Module
+     */
+    public Module setSourceModuleId(Module sourceModuleId)
+    {
+    	this.sourceModuleId = sourceModuleId;
+        return sourceModuleId;
+    }
+    
+    /**
+     * setter for receiving side of message
+     * @return Module
+     */
+    public Module setDestinationModuleId(Module destinationModuleId)
+    {
+    	this.destinationModuleId = destinationModuleId;
+        return destinationModuleId;
+    }
+
+    /**
+     * Sets the messageString if needed. Probably not smart to use it. Hmmm let me think.
+     * Yeeeh very stupid to use this. But already wrote it so here it is :-).
+     * 
+     */
+	public String setMessageString(String messageString) {
+		this.messageString = messageString;
+		return messageString;
+	}
+
+	/**
+	 * @param type sets the type
+	 */
+    public MessageType setType(MessageType type)
+    {	
+    	this.type = type;
         return type;
     }
 }
