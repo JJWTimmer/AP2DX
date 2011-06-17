@@ -49,7 +49,7 @@ public class UsarSimMessage extends Message {
                 Matcher startMatcher = startPattern.matcher(this.getMessageString());
 
                 if (startMatcher.find()) {
-                    this.type = UsarSimMessage.messageTypeDict.get(startMatcher.group(0));
+                    this.type = UsarSimMessage.MessageType.getEnumByString(startMatcher.group(0));
                 }
                 else{
                     this.type = null;
