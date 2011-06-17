@@ -26,7 +26,7 @@ public class ActionMotorMessage extends SpecializedMessage
     
     public ActionMotorMessage(Module sourceId, Module destinationId, int value)
     {
-    	super(sourceId, destinationId);
+    	super(Message.MessageType.AP2DX_MOTOR_ACTION, sourceId, destinationId);
     	this.value = value;
     }
 

@@ -17,9 +17,9 @@ public abstract class SpecializedMessage extends AP2DXMessage
 	 * @param sourceId
 	 * @param destinationId
 	 */
-	public SpecializedMessage(Module sourceId, Module destinationId)
+	public SpecializedMessage(Message.MessageType type, Module sourceId, Module destinationId)
 	{
-		super(sourceId, destinationId);
+		super(type, sourceId, destinationId);
 	}
 
     /** 
