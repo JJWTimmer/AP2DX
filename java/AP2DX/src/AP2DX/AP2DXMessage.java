@@ -13,13 +13,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
+
 import AP2DX.specializedMessages.*;
 
 /**
  * @author Jasper Timmer
  * @author Maarten Inja
  */
-public class AP2DXMessage extends Message {
+public class AP2DXMessage extends Message implements Delayed {
 
 
     /**
@@ -96,6 +99,18 @@ public class AP2DXMessage extends Message {
     {
         return values;
     }
+
+	@Override
+	public int compareTo(Delayed o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getDelay(TimeUnit unit) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 
 

@@ -8,6 +8,7 @@ import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.*;
 import java.util.Iterator;
@@ -59,7 +60,7 @@ public abstract class AP2DXBase {
 	private ArrayList<ConnectionHandler> outConnections = new ArrayList<ConnectionHandler>();
 
 	/** all received AP2DX.Messages will be stored here */
-	private ArrayBlockingQueue<AP2DXMessage> receiveQueue = new ArrayBlockingQueue<AP2DXMessage>(128);
+	private DelayQueue<AP2DXMessage> receiveQueue = new DelayQueue<AP2DXMessage>();
     
 
 	/**
@@ -357,7 +358,7 @@ public abstract class AP2DXBase {
 	 *  @param msg
 	 *  @return
 	 */
-	public abstract ArrayList<Message> componentLogic(Message msg);
+	public abstract ArrayList<AP2DXMessage> componentLogic(Message msg);
 
 	public ArrayBlockingQueue<AP2DXMessage> getReceiveQueue() {
 		return receiveQueue;

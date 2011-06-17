@@ -16,7 +16,7 @@ public class Program extends AP2DXBase {
 	Actions motor = new Actions();
 	
     /**
-	 * Entrypoint of motor
+	 * Entry point of motor
 	 */
 	public static void main (String[] args){
 		new Program();
@@ -39,7 +39,7 @@ public class Program extends AP2DXBase {
 
 
 	@Override
-	public ArrayList<Message> componentLogic(Message msg) {
+	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
 		
 		/* Checks witch type of message it is */
 		if (msg.getType().equals("AP2DX_MOTOR_ACTION")) {
