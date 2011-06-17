@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.io.*;
 
 import AP2DX.*;
-import AP2DX.usarsim.UsarSimMessageReader;
+import AP2DX.usarsim.*;
+import AP2DX.usarsim.specialized.*;
 
 
 /**
@@ -16,6 +17,10 @@ import AP2DX.usarsim.UsarSimMessageReader;
  *
  */
 public class Program extends AP2DXBase {
+    PrintWriter out;
+	UsarSimMessageReader in;
+
+
     /**
 	 * entrypoint of coordinator 
 	 */
@@ -37,18 +42,22 @@ public class Program extends AP2DXBase {
 	@Override
 	protected void doOverride() {
 		System.out.println("Warning, security override in progress");
+        config = readConfig();
+        System.out.println("Config: " + config.get("sim_port"));
+            UsarSimMessage message = new InitMessage();
+            System.out.println("Message: " + message.toString());
 		
 		String address = config.get("sim_address").toString();
 		int port = Integer.parseInt(config.get("sim_port").toString());
-		PrintWriter out = null;
-		UsarSimMessageReader in = null;
 		
-		try {
+		try 
+        {
 			Socket socket = new Socket(address, port);
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new UsarSimMessageReader(socket.getInputStream());
 		}
-		catch (Exception ex) {
+		catch (Exception ex) 
+        {
 			ex.printStackTrace();
 		}
 		
@@ -64,6 +73,7 @@ public class Program extends AP2DXBase {
 			//Thread.sleep(5000);
 			//out.println("DRIVE {Left 1.0} {Right -1.0}");
 			//System.out.println(in.readLine());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,7 +82,6 @@ public class Program extends AP2DXBase {
 
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
-		// TODO Auto-generated method stub
-		return new ArrayList<Message>();
+		return null;
 	}
 }

@@ -74,6 +74,7 @@ public abstract class AbstractTestCase {
      */
     @Test public void override()
     {   
+        System.out.println("Testin' doOverride");
         invoke(test, "doOverride");
         //test.doOverride();
     }
