@@ -173,7 +173,8 @@
 		            </manifest>
 
 		            <zipfileset dir="${build.dir}" includes="AP2DX/@{package}/**" excludes="AP2DX/@{package}/*TestCase.class" />
-		        	<zipfileset dir="${build.dir}" includes="AP2DX/usarsim" excludes="AP2DX/@{package}/*TestCase.class" />
+		        	<zipfileset dir="${build.dir}" includes="AP2DX/usarsim/**" excludes="**/*TestCase.class" />
+		        	<zipfileset dir="${build.dir}" includes="AP2DX/specializedMessages/**" excludes="**/*TestCase.class" />
 		        	<zipfileset dir="${build.dir}" includes="AP2DX/*.class"  excludes="AP2DX/*TestCase.class" />
 		        </jar>
 		    	
