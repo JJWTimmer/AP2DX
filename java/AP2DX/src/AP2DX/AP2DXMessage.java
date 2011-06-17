@@ -22,10 +22,6 @@ import AP2DX.specializedMessages.*;
 public class AP2DXMessage extends Message {
 
 
-    /**
-     * dictionary with key-value pairs of incoming data
-     */
-    protected Map<String, Object> values;
 
     public AP2DXMessage(Message.MessageType type, Module source, Module destination)
     {
