@@ -38,7 +38,7 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<Message> componentLogic(Message msg) {
 		/* Checks from witch module the message comes from */
-		if (msg.getType().equals("")) {
+		if (msg.getMsgType().equals("")) {
 			
 			return new ArrayList<Message>();			
 		} else if (msg.getMsgType().equals("sensor")) {
