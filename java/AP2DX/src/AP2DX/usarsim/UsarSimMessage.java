@@ -22,27 +22,6 @@ import AP2DX.Module;
  * 
  */
 public class UsarSimMessage extends Message {
-	/**
-	 * The translation of messagetype in messages to our enum, for example:
-	 * "STA" -> Message.MessageType.USAR_STATE
-	 */
-	public static final Map<String, Message.MessageType> messageTypeDict = createMap();
-
-	/**
-	 * Constructor for the messageTypeDict
-	 * @return HashMap with the string to MessageType table
-	 */
-    private static Map<String, Message.MessageType> createMap() {
-        Map<String, Message.MessageType> result = new HashMap<String, Message.MessageType>();
-        
-        result.put("STA", Message.MessageType.USAR_STATE);
-        result.put("MISSTA", Message.MessageType.USAR_MISSIONSTATE);
-        //TODO: Add other usarmessagetypes here
-        
-        return Collections.unmodifiableMap(result);
-    }
-
-
     /**
      * make a new UsarSimMessage
      * @param in
@@ -65,14 +44,13 @@ public class UsarSimMessage extends Message {
 		Matcher startMatcher = startPattern.matcher(this.getMessageString());
 	
 		if (startMatcher.find()) {
-			this.type = UsarSimMessage.messageTypeDict.get(startMatcher.group(0));
+			this.type = Message.MessageType.valueOf(startMatcher.group(0));
 		}
 		else{
 			this.type = null;
 		}
 		return this.type;
 	}
-
 
 	@Override
 	protected void parseMessage() throws Exception {
