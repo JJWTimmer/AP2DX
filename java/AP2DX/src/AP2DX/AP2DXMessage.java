@@ -25,7 +25,7 @@ public class AP2DXMessage extends Message {
     /**
      * dictionary with key-value pairs of incoming data
      */
-    protected Map<String, Object> values = null;
+    protected Map<String, Object> values;
 
     public AP2DXMessage(Module source, Module destination)
     {
@@ -44,6 +44,7 @@ public class AP2DXMessage extends Message {
 	}
 
 	/**
+     * Sets the destination and source module ID. 
 	 * @see AP2DX.Message#parseMessage()
 	 */
 	@Override
@@ -64,7 +65,7 @@ public class AP2DXMessage extends Message {
 		}
 	}
 
-    public void compileMessage()
+    public String compileMessage()
     {   
         //try
         //{
@@ -87,6 +88,7 @@ public class AP2DXMessage extends Message {
             }
         }
         messageString = jsonObject.toString();
+        return messageString;
     }
 
 
