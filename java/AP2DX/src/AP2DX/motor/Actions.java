@@ -30,7 +30,7 @@ public class Actions implements InterfaceActions {
 	@Override
 	public ArrayList<AP2DXMessage> forward(int meter) {
 		DriveCoordinatorMessage forward = 
-			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 1, 1);
+			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 20, 20);
 		DriveCoordinatorMessage stop = 
 			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 0, 0);
 		
@@ -87,9 +87,12 @@ public class Actions implements InterfaceActions {
 	 */
 	@Override
 	public ArrayList<AP2DXMessage> stop() {
+		DriveCoordinatorMessage stop = 
+			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 0, 0);
 		
-		
-		return new ArrayList<AP2DXMessage>();
+		ArrayList<AP2DXMessage> list = new ArrayList<AP2DXMessage>();
+		list.add(stop);
+		return list;
 	}
 
 }
