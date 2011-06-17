@@ -19,7 +19,7 @@ public abstract class Message
     {
         AP2DX_SENSOR_ENCODER("sensorEncoder"), APD2X_SENSOR_GPS("sensorGps"), AP2DX_SENSOR_GROUNDTRUTH("sensorGroundTruth"), AP2DX_SENSOR_INS("sensorIns"), 
         AP2DX_SENSOR_ODOMETRY("sensorOdometry"), AP2DX_SENSOR_RANGESCANNER("sensorRangeScanner"), AP2DX_SENSOR_SONAR("sensorSonar"), 
-        USAR_STATE("usarState"), USAR_MISSIONSTATE("usarMissionState"), AP2DX_MOTOR_ACTION("motorAction"), AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
+        USAR_STATE("STA"), USAR_MISSIONSTATE("MISTA"), AP2DX_MOTOR_ACTION("motorAction"), AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
         AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), UNKNOWN("unknown");
 
         public final String typeString;
