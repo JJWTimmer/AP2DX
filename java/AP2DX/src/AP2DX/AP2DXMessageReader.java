@@ -54,7 +54,7 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
     {
 		String line = readLine();
 		AP2DXMessage message = new AP2DXMessage(line, source);
-        switch(message.getType())
+        switch(message.getMsgType())
         {
             case AP2DX_SENSOR_SONAR:
                 return new SonarSensorMessage(message); 

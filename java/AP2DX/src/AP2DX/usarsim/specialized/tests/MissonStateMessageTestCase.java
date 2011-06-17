@@ -109,7 +109,7 @@ public class MissonStateMessageTestCase {
 	@Test
 	public void testGetType() {
 		MissionStateMessage msg = new MissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
-		Message.MessageType type = msg.getType();
+		Message.MessageType type = msg.getMsgType();
 		assertEquals(Message.MessageType.USAR_MISSIONSTATE, type);
 	}
 

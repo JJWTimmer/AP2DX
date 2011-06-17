@@ -37,6 +37,7 @@ public class UsarSimMessage extends Message {
         
         result.put("STA", Message.MessageType.USAR_STATE);
         result.put("MISSTA", Message.MessageType.USAR_MISSIONSTATE);
+        //TODO: Add other usarmessagetypes here
         
         return Collections.unmodifiableMap(result);
     }
@@ -50,8 +51,15 @@ public class UsarSimMessage extends Message {
 		super(in, Module.UNDEFINED);
 	}
 	
+    /**
+     * make a new UsarSimMessage
+     */
+	public UsarSimMessage() {
+		super();
+	}
+	
 	@Override
-	public Message.MessageType getType() {
+	public Message.MessageType getMsgType() {
 		String startPatternStr = "^[A-Z]+";
 		Pattern startPattern = Pattern.compile(startPatternStr);
 		Matcher startMatcher = startPattern.matcher(this.getMessageString());
@@ -80,7 +88,7 @@ public class UsarSimMessage extends Message {
 	protected String compileMessage() {
 		StringBuilder output = new StringBuilder();
 		
-		output.append(this.getType());
+		output.append(this.getMsgType());
 		
 		for (Field field : this.getClass().getDeclaredFields()) {
 		    if (field.isAnnotationPresent(UsarMessageField.class)) {

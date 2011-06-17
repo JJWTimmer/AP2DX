@@ -3,6 +3,7 @@
  */
 package AP2DX.usarsim.specialized;
 
+import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -18,6 +19,10 @@ import AP2DX.usarsim.UsarSimMessage.UsarMessageField;
  */
 public final class StateMessage extends UsarSimMessage {
 
+	@UsarMessageField(name = "Type")
+	private String type;
+
+	
 	@UsarMessageField(name = "Time")
 	private float time;
 
@@ -42,22 +47,40 @@ public final class StateMessage extends UsarSimMessage {
 	@UsarMessageField(name = "RudderAngle")
 	private float rudderAngle;
 
-	public StateMessage(UsarSimMessage msg) {
+	@UsarMessageField(name = "View")
+	private float view;
+
+	public StateMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
+	public StateMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+		super(string);
+		this.parseMessage();
+	}
+
 	/**
+	 * Parses all the fields in the message and sets the values of the fields
+	 * with the same name to the values.
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
 	 * @see AP2DX.Message#parseMessage()
 	 */
 	@Override
-	public void parseMessage() {
+	public void parseMessage() throws IllegalArgumentException, IllegalAccessException {
 		String groupPatternStr = "\\{(\\w+) ([a-zA-Z0-9,._\\-]+)\\}";
 		Pattern groupPattern = Pattern.compile(groupPatternStr);
 		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
 
 		if (groupMatcher.find()) {
-			//this.links.add(new MissionStateLink(groupMatcher.group(1), groupMatcher.group(2), groupMatcher.group(3)));
+			String name = groupMatcher.group(1);
+			Object value = groupMatcher.group(2);
+			for (Field field : this.getClass().getDeclaredFields()) {
+				if (field.getAnnotation(UsarMessageField.class).name().equals(name)) {
+					field.set(this, field.getType().cast(value));
+				}
+			}
 		}
 	}
 
@@ -120,7 +143,7 @@ public final class StateMessage extends UsarSimMessage {
 	/**
 	 * @return the type
 	 */
-	public Message.MessageType getType() {
+	public String getType() {
 		return this.type;
 	}
 
@@ -134,7 +157,7 @@ public final class StateMessage extends UsarSimMessage {
 	/**
 	 * @param type the type to set
 	 */
-	public MessageType setType(Message.MessageType type) {
+	public String setType(String type) {
 		this.type = type;
 		return type;
 	}
@@ -193,6 +216,20 @@ public final class StateMessage extends UsarSimMessage {
 	 */
 	public void setRudderAngle(float rudderAngle) {
 		this.rudderAngle = rudderAngle;
+	}
+
+	/**
+	 * @param view the view to set
+	 */
+	public void setView(float view) {
+		this.view = view;
+	}
+
+	/**
+	 * @return the view
+	 */
+	public float getView() {
+		return view;
 	}
 
 }
