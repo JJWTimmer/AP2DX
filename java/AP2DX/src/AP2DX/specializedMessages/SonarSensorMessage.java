@@ -20,6 +20,11 @@ public class SonarSensorMessage extends SpecializedMessage
     private double[] rangeArray;
     private double time;
 
+	public SonarSensorMessage(Module sourceId, Module destinationId)
+	{
+		super(sourceId, destinationId);
+	}
+
     /** Creates a specialized message from a standard AP2DXMessage.
     * This constructor could be used to clone an AP2DXMessage. */
     public SonarSensorMessage(AP2DXMessage message)
