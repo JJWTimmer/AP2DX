@@ -12,6 +12,12 @@ import java.util.Map;
 public abstract class Message
 {
 
+
+    /**
+     * dictionary with key-value pairs of incoming data
+     */
+    protected Map<String, Object> values;
+
     /**
      * Enum type for the different types of messages between modules.
      * We can both define enums here and the string we use as value in a JSON string message.
@@ -19,18 +25,43 @@ public abstract class Message
      */
     public enum MessageType 
     {
-        AP2DX_SENSOR_ENCODER("sensorEncoder"), APD2X_SENSOR_GPS("sensorGps"), AP2DX_SENSOR_GROUNDTRUTH("sensorGroundTruth"), AP2DX_SENSOR_INS("sensorIns"), 
-        AP2DX_SENSOR_ODOMETRY("sensorOdometry"), AP2DX_SENSOR_RANGESCANNER("sensorRangeScanner"), AP2DX_SENSOR_SONAR("sensorSonar"), 
-        USAR_STATE("STA"), USAR_MISSIONSTATE("MISTA"), AP2DX_MOTOR_ACTION("motorAction"), AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
-        AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), UNKNOWN("unknown");
+        AP2DX_SENSOR_ENCODER("sensorEncoder"), 
+        APD2X_SENSOR_GPS("sensorGps"), 
+        AP2DX_SENSOR_GROUNDTRUTH("sensorGroundTruth"), 
+        AP2DX_SENSOR_INS("sensorIns"), 
+        AP2DX_SENSOR_ODOMETRY("sensorOdometry"), 
+        AP2DX_SENSOR_RANGESCANNER("sensorRangeScanner"), 
+        AP2DX_SENSOR_SONAR("sensorSonar"), 
+        AP2DX_MOTOR_ACTION("motorAction"), 
+        AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
+        AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), 
+        USAR_STATE("STA", true), 
+        USAR_MISSIONSTATE("MISTA", true), 
+        UNKNOWN("unknown");
 
         /** The string that defines the type when a message is being send as JSON/USAR. */
         public final String typeString;
+        /** A boolean that can be used to check if the message type is one that
+        * is one that belongs to AP2DXMessage. */
+        public final boolean isAp2dxMessage;
 
+        /** Constructor for an AP2DX message type enum. */
         private MessageType(String typeString)
         {
-            this.typeString = typeString;
+            this(typeString, false);
         }
+        
+        /** Constructor for a type enum that the user can use to define
+        * a different type of message than an AP2DX message
+        *
+        * @param isUsarMessage Set to true if this is a type that is used solely 
+        * for USAR messages. */
+        private MessageType(String typeString, boolean isUsarMessage)
+        {
+            this.typeString = typeString;
+            isAp2dxMessage = !isUsarMessage;
+        }
+
 
         /** Finds an enum by a String.
         * TODO: change this to a map for performance increase */
@@ -195,6 +226,7 @@ public abstract class Message
     public MessageType setType(MessageType type)
     {	
     	this.type = type;
+        values.put("type", type.typeString);
         return type;
     }
 }
