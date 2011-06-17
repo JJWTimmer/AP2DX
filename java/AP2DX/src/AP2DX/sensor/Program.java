@@ -39,20 +39,20 @@ public class Program extends AP2DXBase {
     {
         ArrayList<Message> messageList = new ArrayList<Message>();
 
-        if (!msg.getType().isAp2dxMessage)
+        if (!msg.getMsgType().isAp2dxMessage)
         {
             System.out.println("Unexpected message in ap2dx.sensor.Program, was not an AP2DX message type.");
             return null;
         }
         
-        switch (msg.getType())
+        switch (msg.getMsgType())
         {
             case AP2DX_SENSOR_SONAR:
                 SonarSensorMessage sonarSensorMessage = new SonarSensorMessage((AP2DXMessage)msg, IAM, Module.REFLEX);
                 messageList.add(sonarSensorMessage);
                 break;
             default:
-                System.out.println("Unexpected message type in ap2dx.sensor.Program: " + msg.getType());
+                System.out.println("Unexpected message type in ap2dx.sensor.Program: " + msg.getMsgType());
         }
 		return messageList;
 
