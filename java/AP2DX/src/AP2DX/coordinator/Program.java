@@ -81,7 +81,13 @@ public class Program extends AP2DXBase {
 
 
 	@Override
+<<<<<<< HEAD
 	public ArrayList<Message> componentLogic(Message msg) {
 		return null;
+=======
+	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
+		// TODO Auto-generated method stub
+		return new ArrayList<AP2DXMessage>();
+>>>>>>> ab442aaf6df56b0a1de06d2da33d443d54f7dd07
 	}
 }

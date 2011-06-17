@@ -5,8 +5,11 @@ package AP2DX.motor;
 
 import java.util.ArrayList;
 
+import AP2DX.specializedMessages.*;
+import AP2DX.AP2DXMessage;
 import AP2DX.InterfaceActions;
 import AP2DX.Message;
+import AP2DX.Module;
 
 /**
  * @author Wadie Assal
@@ -21,64 +24,75 @@ public class Actions implements InterfaceActions {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see AP2DX.InterfaceActions#forward(int)
+	/** 
+	 * 
 	 */
 	@Override
-	public ArrayList<Message> forward(int meter) {
+	public ArrayList<AP2DXMessage> forward(int meter) {
+		DriveCoordinatorMessage forward = 
+			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 20, 20);
+		DriveCoordinatorMessage stop = 
+			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 0, 0);
 		
+		stop.setDelay(1000 * meter);
 		
-		return new ArrayList<Message>();
+		ArrayList<AP2DXMessage> list = new ArrayList<AP2DXMessage>();
+		list.add(forward);
+		list.add(stop);
+		return list;
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#backward(int)
 	 */
 	@Override
-	public ArrayList<Message> backward(int meter) {
+	public ArrayList<AP2DXMessage> backward(int meter) {
 		
 		
-		return new ArrayList<Message>();
+		return new ArrayList<AP2DXMessage>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#left(int)
 	 */
 	@Override
-	public ArrayList<Message> left(int meter) {
+	public ArrayList<AP2DXMessage> left(int meter) {
 		
 		
-		return new ArrayList<Message>();
+		return new ArrayList<AP2DXMessage>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#right(int)
 	 */
 	@Override
-	public ArrayList<Message> right(int meter) {
+	public ArrayList<AP2DXMessage> right(int meter) {
 		
 		
-		return new ArrayList<Message>();
+		return new ArrayList<AP2DXMessage>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#turn(int)
 	 */
 	@Override
-	public ArrayList<Message> turn(int degree) {
+	public ArrayList<AP2DXMessage> turn(int degree) {
 		
 		
-		return new ArrayList<Message>();
+		return new ArrayList<AP2DXMessage>();
 	}
 
 	/* (non-Javadoc)
 	 * @see AP2DX.InterfaceActions#stop()
 	 */
 	@Override
-	public ArrayList<Message> stop() {
+	public ArrayList<AP2DXMessage> stop() {
+		DriveCoordinatorMessage stop = 
+			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 0, 0);
 		
-		
-		return new ArrayList<Message>();
+		ArrayList<AP2DXMessage> list = new ArrayList<AP2DXMessage>();
+		list.add(stop);
+		return list;
 	}
 
 }

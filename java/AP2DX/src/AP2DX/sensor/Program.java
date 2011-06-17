@@ -35,9 +35,9 @@ public class Program extends AP2DXBase {
 
 
 	@Override
-	public ArrayList<Message> componentLogic(Message msg) 
+	public ArrayList<AP2DXMessage> componentLogic(Message msg) 
     {
-        ArrayList<Message> messageList = new ArrayList<Message>();
+        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
 
         if (!msg.getMsgType().isAp2dxMessage)
         {
