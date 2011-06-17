@@ -4,6 +4,8 @@
 	<!-- The value of a property is accessed via ${} -->
 	<property name="ant.dir" location="ant" />
 	<property name="src.dir" location="src" />
+	<property name="json.dir" location="org/json" />
+	<property name="AP2DX.dir" location="AP2DX" />
 	<property name="build.dir" location="${ant.dir}/build" />
 	<property name="debug.dir" location="${ant.dir}/debug" />
 	<property name="javadoc.dir" location="${ant.dir}/javadoc" />
@@ -80,7 +82,8 @@
 	<target name="instrument" depends="compile-debug">
 		<cobertura-instrument todir="${instrumented.dir}" datafile="${ant.dir}/cobertura.ser">
 			<fileset dir="${debug.dir}">
-				<include name="**/*.class" />
+				<include name="AP2DX/**/*.class" />
+				<exclude name="org/json/*.class" />
 				<exclude name="**/*TestCase.class" />
 				<exclude name="**/*TestCase$*.class" />
 			</fileset>
