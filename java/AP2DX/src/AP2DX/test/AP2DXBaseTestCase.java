@@ -11,6 +11,7 @@ import java.util.Map;
 
 import mockit.Mock;
 import mockit.MockUp;
+import static mockit.Deencapsulation.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -116,6 +117,12 @@ public class AP2DXBaseTestCase
             myCompareString("sim_address", "127.0.0.1", config);
             myCompareInt("sim_port", 3000, config);
             myCompareInt("listen_port", 5999, config);
+        }
+
+    @Test
+        public void testOverride()
+        {
+            invoke(test, "doOverride");
         }
 
     /** Help method for testReadConfig. */
