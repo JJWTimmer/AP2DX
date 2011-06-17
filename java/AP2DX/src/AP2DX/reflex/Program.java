@@ -10,7 +10,6 @@ import AP2DX.specializedMessages.ActionMotorMessage;
 
 public class Program extends AP2DXBase {
 	
-	Actions reflex = new Actions();
     /**
 	 * Entrypoint of reflex
 	 */
@@ -36,15 +35,15 @@ public class Program extends AP2DXBase {
 
 
 	@Override
-	public ArrayList<Message> componentLogic(Message msg) {
+	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
 		/* Checks from witch module the message comes from */
 		if (msg.getMsgType().equals("")) {
 			
-			return new ArrayList<Message>();			
+			return new ArrayList<AP2DXMessage>();			
 		} else if (msg.getMsgType().equals("sensor")) {
-			return new ArrayList<Message>();
+			return new ArrayList<AP2DXMessage>();
 		} else {
-			return new ArrayList<Message>();			
+			return new ArrayList<AP2DXMessage>();			
 		}
 	}
 }

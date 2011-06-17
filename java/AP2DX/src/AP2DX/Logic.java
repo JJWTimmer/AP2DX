@@ -25,8 +25,8 @@ public class Logic extends Thread {
 	 * componentLogic to find a reaction
 	 */
 	public void run() {
-		/*while (true) {
-			Message message = null;
+		while (true) {
+			AP2DXMessage message = null;
 			// Get the message from the base
 			try {
 				message = base.getReceiveQueue().take();
@@ -55,6 +55,6 @@ public class Logic extends Thread {
 				}
 			} else
 				break;
-		}*/
+		}
 	}
 }

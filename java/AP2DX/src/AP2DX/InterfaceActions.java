@@ -15,15 +15,15 @@ import java.util.ArrayList;
 
 public interface InterfaceActions {
 	
-	public ArrayList<Message> forward(int meter);
+	public ArrayList<AP2DXMessage> forward(int meter);
 	
-	public ArrayList<Message> backward(int meter);
+	public ArrayList<AP2DXMessage> backward(int meter);
 	
-	public ArrayList<Message> left(int meter);
+	public ArrayList<AP2DXMessage> left(int meter);
 	
-	public ArrayList<Message> right(int meter);
+	public ArrayList<AP2DXMessage> right(int meter);
 	
-	public ArrayList<Message> turn(int degree);
+	public ArrayList<AP2DXMessage> turn(int degree);
 	
-	public ArrayList<Message> stop();
+	public ArrayList<AP2DXMessage> stop();
 }

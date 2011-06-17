@@ -69,7 +69,7 @@ public class LogicTestCase
         }
 
         @Override
-            public ArrayList<Message> componentLogic(Message msg) {
+            public ArrayList<AP2DXMessage> componentLogic(Message msg) {
                 // TODO Auto-generated method stub
                 return null;
             }
