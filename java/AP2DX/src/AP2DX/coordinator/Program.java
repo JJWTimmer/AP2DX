@@ -60,6 +60,8 @@ public class Program extends AP2DXBase {
         {
 			ex.printStackTrace();
 		}
+
+
 		
 		
 		try {
@@ -74,6 +76,9 @@ public class Program extends AP2DXBase {
 			//out.println("DRIVE {Left 1.0} {Right -1.0}");
 			//System.out.println(in.readLine());
 
+
+            //This should be able to initialize a robot now!
+            out.println(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
