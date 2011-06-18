@@ -1,0 +1,10 @@
+{
+	"logfile": "log/coordinator.log",
+	"sim_port": 3000,
+	"sim_address": "127.0.0.1",
+	"listen_port": 5000,
+	"outgoing" :
+		[
+
+		]
+}
