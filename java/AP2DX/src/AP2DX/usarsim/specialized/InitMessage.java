@@ -30,13 +30,13 @@ public final class InitMessage extends UsarSimMessage {
 
     /** The name of the robot in the server. Default: `Awesome P2DX'*/
     @UsarMessageField(name = "Name")
-        private String name = "Awesome P2DX";
+        private String name = "P2DX";
 
     /** The spawn location of the robot. Default: {0.76, 2.3, 1.8} 
      *  TODO: Make this not hardcoded
      */
     @UsarMessageField(name = "Location")
-        private String location = "0.76,2.3,1.8";
+        private String location = "4.5,1.9,1.8";
 
     /** The rotation of the robot. Array with three values, respectively: Roll, Pitch, Yaw*/
     @UsarMessageField(name = "Rotation")

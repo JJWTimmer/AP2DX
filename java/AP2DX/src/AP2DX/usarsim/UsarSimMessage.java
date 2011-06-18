@@ -72,7 +72,7 @@ public class UsarSimMessage extends Message {
 	protected String compileMessage() {
 		StringBuilder output = new StringBuilder();
 		
-		output.append(this.getMsgType());
+		output.append(this.getMsgType().typeString);
 		
         for (Field field : this.getClass().getDeclaredFields()) {
             System.out.println("In for loop");
@@ -98,7 +98,7 @@ public class UsarSimMessage extends Message {
                 }
             }
         }
-		
+        output.append("\r\n");
 		return output.toString();
 	}
 

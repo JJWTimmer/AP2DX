@@ -42,7 +42,7 @@ public class Program extends AP2DXBase {
 	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
 		
 		/* Checks witch type of message it is */
-		if (msg.getMsgType().equals("AP2DX_MOTOR_ACTION")) {
+		if (msg.getMsgType().equals(Message.MessageType.AP2DX_MOTOR_ACTION)) {
 			ActionMotorMessage actionMotorMessage = (ActionMotorMessage) msg;
 			
 			

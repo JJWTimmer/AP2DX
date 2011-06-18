@@ -53,7 +53,7 @@ public class Program extends AP2DXBase {
 		try 
         {
 			Socket socket = new Socket(address, port);
-			out = new PrintWriter(socket.getOutputStream(), true);
+			out = new PrintWriter(socket.getOutputStream());
 			in = new UsarSimMessageReader(socket.getInputStream());
 		}
 		catch (Exception ex) 
@@ -78,7 +78,8 @@ public class Program extends AP2DXBase {
 
 
             //This should be able to initialize a robot now!
-            out.println(message);
+            out.print(message);
+            out.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
