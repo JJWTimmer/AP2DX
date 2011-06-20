@@ -26,7 +26,7 @@ public class Logic extends Thread {
 	 */
 	public void run() {
 		while (true) {
-			AP2DXMessage message = null;
+			Message message = null;
 			// Get the message from the base
 			try {
 				message = base.getReceiveQueue().take();
@@ -37,7 +37,7 @@ public class Logic extends Thread {
 			}
 
 			// run componentLogic with the message
-			ArrayList<AP2DXMessage> actions = base.componentLogic(message);
+			ArrayList<AP2DXMessage> actions = base.componentLogicCheck(message);
 
 			if (!actions.isEmpty()) {
 				for (Message action : actions) {

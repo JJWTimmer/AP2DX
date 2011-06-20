@@ -7,12 +7,14 @@ import AP2DX.AP2DXMessage;
 import AP2DX.Message;
 import AP2DX.Module;
 
-public class Program extends AP2DXBase {
+public class Program extends AP2DXBase 
+    {
 
     /**
 	 * Entrypoint of planner
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args)
+    {
 		new Program();
 	}
 
@@ -25,17 +27,25 @@ public class Program extends AP2DXBase {
         super(Module.PLANNER); // explicitly calls base constructor
 		System.out.println(" Running Planner... ");
 
+        while (true)
+        {
+            
+        }
+
 	}
 	
 	@Override
-	protected void doOverride() {
-
-	}
-
-
-	@Override
-	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
-		// TODO Auto-generated method stub
+	public ArrayList<AP2DXMessage> componentLogic(Message msg) 
+    {
 		return new ArrayList<AP2DXMessage>();
 	}
 }
+
+
+
+
+
+
+
+
+
