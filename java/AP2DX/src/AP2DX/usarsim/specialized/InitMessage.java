@@ -3,14 +3,10 @@
  */
 package AP2DX.usarsim.specialized;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.util.ArrayList;
+import java.util.List;
 import AP2DX.Message;
 import AP2DX.usarsim.UsarSimMessage;
-import AP2DX.usarsim.UsarSimMessage.UsarMessageField;
 
 /**
  * The message that will be used to put a robot in the world of USARSim.
@@ -23,25 +19,34 @@ public final class InitMessage extends UsarSimMessage {
         super(Message.MessageType.USAR_INIT);
     }
 
-
     /** The class of the robot we want to spawn. Default is USARBot.P2DX */
     @UsarMessageField(name = "ClassName")
         private String className = "USARBot.P2DX";
 
-    /** The name of the robot in the server. Default: `Awesome P2DX'*/
-    @UsarMessageField(name = "Name")
-        private String name = "P2DX";
-
     /** The spawn location of the robot. Default: {0.76, 2.3, 1.8} 
      *  TODO: Make this not hardcoded
      */
-    @UsarMessageField(name = "Location")
-        private String location = "4.5,1.9,1.8";
+    @UsarMessageIteratorField
+        private List<ArrayFloatData> location = new ArrayList<ArrayFloatData>();
 
     /** The rotation of the robot. Array with three values, respectively: Roll, Pitch, Yaw*/
-    @UsarMessageField(name = "Rotation")
-        private String rotation = "0,0,0";
+    @UsarMessageIteratorField
+        private List<ArrayFloatData> rotation = new ArrayList<ArrayFloatData>();
 
+    /** The name of the robot in the server. Default: `Awesome P2DX'*/
+    @UsarMessageField(name = "Name")
+        private String name = "P2DX";
+    
+    
+	/**
+	 * @throws Exception 
+	 * @see AP2DX.Message#parseMessage()
+	 */
+	@Override
+	protected void parseMessage() throws Exception {
+		throw new Exception("NEVER PARSE AN INIT MESSAGE, JUST BUILD IT.");
+	}
+    
 
     /** @param classNameIn What robot we want to use */
     public  void setClassName(String classNameIn)
@@ -56,13 +61,13 @@ public final class InitMessage extends UsarSimMessage {
     }
 
     /** @param locationIn The start location */
-    public  void setLocation(String locationIn)
+    public  void setLocation(List<ArrayFloatData> locationIn)
     {
         this.location = locationIn;
     }
 
     /** @param rotationIn The starting rotation (Roll Pitch Yaw) */
-    public  void setRotation(String rotationIn)
+    public  void setRotation(List<ArrayFloatData> rotationIn)
     {
         this.rotation = rotationIn;
     }
@@ -80,13 +85,13 @@ public final class InitMessage extends UsarSimMessage {
     }
 
     /** @return location The start location */
-    public  String getLocation()
+    public  List<ArrayFloatData> getLocation()
     {
         return location;
     }
 
     /** @return rotation The starting rotation (Roll Pitch Yaw) */
-    public  String getRotation()
+    public  List<ArrayFloatData> getRotation()
     {
         return rotation;
     }

@@ -27,16 +27,15 @@ public class StateMessageTestCase {
 	public void testParseMessage() {
 		try {
 			StateMessage msg = new StateMessage("STA {Type GroundVehicle} {Time 395.38} {FrontSteer 0.0000} {RearSteer 0.0000} {LightToggle False} {LightIntensity 0} {Battery 1200} {View -1}");
-			assertEquals("Type", msg.getType());
-			assertEquals("Time", msg.getTime());
-			assertEquals("FrontSteer", msg.getFrontSteer());
-			assertEquals("RearSteer", msg.getRearSteer());
-			assertEquals("LightToggle", msg.isLightToggle());
-			assertEquals("LightIntensity", msg.getLightIntensity());
-			assertEquals("Battery", msg.getBattery());
-			assertEquals("SternPlaneAngle", msg.getSternPlaneAngle());
-			assertEquals("RudderAngle", msg.getRudderAngle());
-			assertEquals("View", msg.getView());
+			
+			assertEquals("GroundVehicle", msg.getType());
+			assertEquals(395.38, msg.getTime(), 1e-4);
+			assertEquals(0, msg.getFrontSteer(), 1e-4);
+			assertEquals(0, msg.getRearSteer(), 1e-4);
+			assertEquals(false, msg.isLightToggle());
+			assertEquals(0, msg.getLightIntensity());
+			assertEquals(1200, msg.getBattery());
+			assertEquals(-1, msg.getView(), 1e-4);
 		}
 		catch (Exception ex) {
 			fail("Constructor not working: " + ex.getMessage());

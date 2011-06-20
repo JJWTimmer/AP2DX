@@ -40,6 +40,7 @@ public abstract class Message
         USAR_MISSIONSTATE("MISTA", true), 
         USAR_INIT("INIT", true),
         USAR_DRIVE("DRIVE",true),
+        USAR_SENSOR("SEN",true),
         UNKNOWN("unknown");
 
         /** The string that defines the type when a message is being send as JSON/USAR. */
