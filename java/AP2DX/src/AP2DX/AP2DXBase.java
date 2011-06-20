@@ -159,7 +159,7 @@ public abstract class AP2DXBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.out.println("End of constructor!");
+        System.out.println("End of construc tor!");
 	}
 
 	/**
@@ -352,6 +352,17 @@ public abstract class AP2DXBase {
 			return false;
 		}
 	}
+
+
+    public ArrayList<AP2DXMessage> componentLogicCheck(Message msg)
+    {
+        if (!msg.getMsgType().isAp2dxMessage && !IAM.canAcceptJsonMessages)
+        {
+            System.err.println("Unexpected message in " + IAM + ". Received a non-AP2DX message type and cannot accept JSON messages.");
+            return null;
+        }
+        return componentLogic(msg);
+    }
 
 	/**
 	 *  List with received messages

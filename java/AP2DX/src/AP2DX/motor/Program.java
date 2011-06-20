@@ -1,36 +1,50 @@
 package AP2DX.motor;
 
 import java.util.ArrayList;
+import java.lang.Math;
 
 import AP2DX.*;
 import AP2DX.specializedMessages.*;
 
 /**
+ * This module translates commands such as "drive forward 1 metre" to something
+ * the coordinator can send (almost directly) to the USAR sim. 
  * 
- * 
+ * To "know" when the robot has moved X metres is tricky. Currently the odometry
+ * sensor data is used. This is the x and y position relative to the start position.
+ * When we want to move Z metres we simply interpolate the distance from different
+ * odometry data and calculate the distance travelled. 
+ *
+ * For turns we might be able to use the last argument of the odometry data.
+ *
  * @author Wadie Assal
- * 
+ * @author Maarten Inja
  */
 public class Program extends AP2DXBase 
 {
 
-    /** The amount of meters we want to drive forward or backward. The 
-    * x-axis is the axis paralel to the forward and backward moving direction. 
-    * See figure 18 "SAE J670 Vehicle Coordinate System" of the USAR sim manual. 
-    * Negative simply means moving backward. */
-    private double xAxisAim = 0;
-    /** The amount of degrees we want to turn left or right. See figure 18
-    * "SAE J670 Vehicle Coordiante System" of the USAR sim manual. Negative
-    * means 'rotating' (or rather turning) left. */
-    private double yawAim = 0;
+    /** The distance (measured in ???) since the last odometry data was received.*/
+    private double deltaDistanceSinceLastCommand = 0;
+    /** The distance to travel. */
+    private double distanceAim = 0;
+    
+    ///** The amount of meters we want to drive forward or backward. The 
+    //* x-axis is the axis paralel to the forward and backward moving direction. 
+    //* See figure 18 "SAE J670 Vehicle Coordinate System" of the USAR sim manual. 
+    //* Negative simply means moving backward. */
+    //private double xAxisAim = 0;
+    ///** The amount of degrees we want to turn left or right. See figure 18
+    //* "SAE J670 Vehicle Coordiante System" of the USAR sim manual. Negative
+    //* means 'rotating' (or rather turning) left. */
+    //private double yawAim = 0;
 
     /** Used to calculate if we have already moved a distance or not. */
-    private double doubleLastOdometryX = 0;
+    private double lastOdometryX = 0;
     /** Used to calculate if we have already moved a distance or not. */
-    private double doubleLastOdoMetryY = 0;
+    private double lastOdometryY = 0;
 
     /**
-	 * Entry point of motor
+	 * Entry point of motor.
 	 */
 	public static void main (String[] args)
     {
@@ -84,6 +98,20 @@ public class Program extends AP2DXBase
     private void doOdometryLogic(OdometrySensorMessage odometrySensorMessage,
         ArrayList<AP2DXMessage> messageList)
     {
+        double odometryX = odometrySensorMessage.getX();
+        double odometryY = odometrySensorMessage.getY();
+
+        // linear interpolation to calculate how much the robot has travelled 
+        double deltaX = odometryX - lastOdometryX;
+        double deltaY = odometryY - lastOdometryY;
+        deltaDistanceSinceLastCommand += Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+     
+        lastOdometryX = odometryX;
+        lastOdometryY = odometryY;
+
+        // if we've travelled enough, STOP!
+        if (deltaDistanceSinceLastCommand >= distanceAim)
+            messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 0, 0));
         
     } // }}}
 
@@ -97,6 +125,8 @@ public class Program extends AP2DXBase
 	    switch (action) 
         {
 	        case FORWARD:
+                deltaDistanceSinceLastCommand = 0;
+                distanceAim = actionMotorMessage.getValue();
                 messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 100, 100));
                 break;
 	        case BACKWARD:

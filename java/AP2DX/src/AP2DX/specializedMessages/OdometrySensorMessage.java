@@ -30,12 +30,12 @@ public class OdometrySensorMessage extends SpecializedMessage
     } 
 
    
-    public double getLeft()
+    public double getX()
     {
         return 0.0; 
     }
 
-    public double getRight()
+    public double getY()
     {
         return 0.0;
     }
