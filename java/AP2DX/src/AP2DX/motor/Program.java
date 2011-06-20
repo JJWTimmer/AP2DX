@@ -56,7 +56,7 @@ public class Program extends AP2DXBase
 	 */
 	public Program() 
     {
-        super(Module.ABSTRACTMOTOR); // explicitly calls base constructor
+        super(Module.MOTOR); // explicitly calls base constructor
 		System.out.println("Running Motor... ");
 	}
 	
@@ -70,25 +70,19 @@ public class Program extends AP2DXBase
     * have been given. 
     * 
     */
-	public ArrayList<AP2DXMessage> componentLogic(Message msg) 
+	public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
 
-        if (!msg.getMsgType().isAp2dxMessage)
-        {
-            System.out.println("Unexpected message in ap2dx.motor.Program, was not an AP2DX message type.");
-            return null;
-        }
-		
-        switch (msg.getMsgType())
+        switch (message.getMsgType())
         {
             case AP2DX_MOTOR_ACTION: 
-                doMotorActionLogic((ActionMotorMessage) msg, messageList);
+                doMotorActionLogic((ActionMotorMessage) message, messageList);
                 break;
             case AP2DX_SENSOR_ODOMETRY:
-                doOdometryLogic((OdometrySensorMessage) msg, messageList);
+                doOdometryLogic((OdometrySensorMessage) message, messageList);
             default:
-                System.out.println("Unexpected message type in ap2dx.motor.Program: " + msg.getMsgType());
+                System.out.println("Unexpected message type in ap2dx.motor.Program: " + message.getMsgType());
         }
 		return messageList;
 	}
