@@ -7,7 +7,7 @@ package AP2DX.usarsim.specialized;
  * @author Jasper Timmer
  *
  */
-public class MissionStateLink {
+public class MissionStateLink extends Object {
 	private int link;
 	private float value;
 	private float torque;

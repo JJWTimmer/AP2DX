@@ -22,7 +22,6 @@ public final class StateMessage extends UsarSimMessage {
 	@UsarMessageField(name = "Type")
 	private String type;
 
-	
 	@UsarMessageField(name = "Time")
 	private float time;
 
@@ -40,12 +39,6 @@ public final class StateMessage extends UsarSimMessage {
 
 	@UsarMessageField(name = "Battery")
 	private int battery;
-
-	@UsarMessageField(name = "SternPlaneAngle")
-	private float sternPlaneAngle;
-
-	@UsarMessageField(name = "RudderAngle")
-	private float rudderAngle;
 
 	@UsarMessageField(name = "View")
 	private float view;
@@ -69,16 +62,25 @@ public final class StateMessage extends UsarSimMessage {
 	 */
 	@Override
 	public void parseMessage() throws IllegalArgumentException, IllegalAccessException {
-		String groupPatternStr = "\\{(\\w+) ([a-zA-Z0-9,._\\-]+)\\}";
+		String groupPatternStr = "\\{(\\w+) ([a-zA-Z0-9, ._\\-]+)\\}";
 		Pattern groupPattern = Pattern.compile(groupPatternStr);
 		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
 
-		if (groupMatcher.find()) {
+		while (groupMatcher.find()) {
+			
 			String name = groupMatcher.group(1);
 			Object value = groupMatcher.group(2);
+			
 			for (Field field : this.getClass().getDeclaredFields()) {
 				if (field.getAnnotation(UsarMessageField.class).name().equals(name)) {
-					field.set(this, field.getType().cast(value));
+					if (field.getType().equals(float.class))
+						field.set(this, Float.parseFloat((String) value));
+					else if (field.getType().equals(int.class))
+						field.set(this, Integer.parseInt((String) value));
+					else if (field.getType().equals(boolean.class))
+						field.set(this, Boolean.parseBoolean((String) value));
+					else
+						field.set(this, field.getType().cast(value));
 				}
 			}
 		}
@@ -127,31 +129,10 @@ public final class StateMessage extends UsarSimMessage {
 	}
 
 	/**
-	 * @return the SternPlaneAngle
-	 */
-	public float SternPlaneAngle() {
-		return sternPlaneAngle;
-	}
-
-	/**
-	 * @return the RudderAngle
-	 */
-	public float getRudderAngle() {
-		return rudderAngle;
-	}
-
-	/**
 	 * @return the type
 	 */
 	public String getType() {
 		return this.type;
-	}
-
-	/**
-	 * @return the sternPlaneAngle
-	 */
-	public float getSternPlaneAngle() {
-		return sternPlaneAngle;
 	}
 
 	/**
@@ -202,20 +183,6 @@ public final class StateMessage extends UsarSimMessage {
 	 */
 	public void setBattery(int battery) {
 		this.battery = battery;
-	}
-
-	/**
-	 * @param sternPlaneAngle the sternPlaneAngle to set
-	 */
-	public void setSternPlaneAngle(float sternPlaneAngle) {
-		this.sternPlaneAngle = sternPlaneAngle;
-	}
-
-	/**
-	 * @param rudderAngle the rudderAngle to set
-	 */
-	public void setRudderAngle(float rudderAngle) {
-		this.rudderAngle = rudderAngle;
 	}
 
 	/**
