@@ -13,6 +13,17 @@ import org.json.JSONException;
 * An example of a USAR sonar message:
 * SEN {Time 395.7716} {Type Sonar} {Name F1 Range 4.5798} {Name F2 Range 2.1461} {Name F3 Range 1.7450} {Name F4 Range 1.5893} {Name F5 Range 0.6239} {Name F6 Range 0.7805} {Name F7 Range 1.2004} {Name F8 Range 2.0657}
 *
+* Sonars' positions are: (USER sim manual)
+* { X(mm), Y(mm), Theta(deg) } = 
+* { 155, -130, -90}
+* { 155, -115, -50}
+* { 190, -805, -30}
+* { 210, -25, -10}
+* { 210, 25, 10}
+* { 190, 80, 30}
+* { 155, 115, 50}
+* { 115, 130, 90}
+*
 * @author Maarten Inja
 */
 public class SonarSensorMessage extends SpecializedMessage 
@@ -40,16 +51,17 @@ public class SonarSensorMessage extends SpecializedMessage
     }
 
 
-    public void parseMessage()
+    public void specializedParseMessage()
     {
-        super.parseMessage();
-
         time = Double.parseDouble(values.get("time").toString());
 
         rangeArray = new double[7];
 
 		try 
-        {
+        { 
+            // this is, if I'm correct, also in the values map, which 
+            // can normally be used to extract the variables, were it not
+            // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
             JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
             for (int i = 0; i < jsonArray.length(); i ++)
@@ -57,10 +69,12 @@ public class SonarSensorMessage extends SpecializedMessage
         }
         catch (JSONException e)
         {
-            System.out.println("Error in AP2DX.specializedMessages.SonarSensorMessage.parseMessage()... things went south!");
+            System.out.println("Error in AP2DX.specializedMessages.SonarSensorMessage.specializedParseMessage()... things went south!");
             e.printStackTrace();
         }
     }
+
+    // setters and getters {{{
 
     public void setRangeArray(double[] value)
     {
@@ -85,4 +99,5 @@ public class SonarSensorMessage extends SpecializedMessage
         return time;
     }
 
+    // }}}
 }

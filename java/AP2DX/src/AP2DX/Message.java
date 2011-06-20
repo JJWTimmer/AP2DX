@@ -33,6 +33,7 @@ public abstract class Message
         AP2DX_SENSOR_RANGESCANNER("sensorRangeScanner"), 
         AP2DX_SENSOR_SONAR("sensorSonar"), 
         AP2DX_MOTOR_ACTION("motorAction"), 
+        AP2DX_MOTOR("motor"), 
         AP2DX_COORDINATOR_DRIVE("coordinatorDrive"), 
         AP2DX_COORDINATOR_SENSOR("coordinatorSensor"), 
         USAR_STATE("STA", true), 
