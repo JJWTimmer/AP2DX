@@ -14,8 +14,20 @@ import AP2DX.Module;
 /**
  * @author Wadie Assal
  * @author Jeroen Rooijmans
+ * 
+ * So, if I understand correctly, this is what is happening. The planner says 'lets go forward 1 meter', and
+ * sends an abstract 'go forward' message to the reflex. The reflex checks if this is correct, alters
+ * it if it should and forwards it to the motor. The motor then changes 'lets go forward 1 meter' to 
+ * something the usersim can understand, such as 'left and right wheel forward 1' and sends it to the 
+ * coordinator. 
+ * 
+ * Does it make sense to have an interface for the actions? I do not think so. The message from the planner
+ * to the reflex can be the same kind of message that the reflex sends to the motor. 
+ * 
+ * Also, we should make sure the motor should keep data on what it has been sending 
  */
-public class Actions implements InterfaceActions {
+public class Actions 
+{
 
 	/**
 	 * 
@@ -28,7 +40,8 @@ public class Actions implements InterfaceActions {
 	 * 
 	 */
 	@Override
-	public ArrayList<AP2DXMessage> forward(int meter) {
+	public ArrayList<AP2DXMessage> forward(int meter) 
+    {
 		DriveCoordinatorMessage forward = 
 			new DriveCoordinatorMessage(Module.ABSTRACTMOTOR, Module.COORDINATOR, CoordinatorMessage.Command.DRIVE, 20, 20);
 		DriveCoordinatorMessage stop = 
@@ -46,10 +59,9 @@ public class Actions implements InterfaceActions {
 	 * @see AP2DX.InterfaceActions#backward(int)
 	 */
 	@Override
-	public ArrayList<AP2DXMessage> backward(int meter) {
+	public ArrayList<AP2DXMessage> backward(int meter) 
+    {
 		
-		
-		return new ArrayList<AP2DXMessage>();
 	}
 
 	/* (non-Javadoc)

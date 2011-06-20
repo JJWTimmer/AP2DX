@@ -29,4 +29,9 @@ public class RangeScannerSensorMessage extends SpecializedMessage
     {
         return null;
     }
+
+    public void specializedParseMessage()
+    {
+
+    }
 }
