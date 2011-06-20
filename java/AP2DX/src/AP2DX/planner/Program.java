@@ -26,18 +26,14 @@ public class Program extends AP2DXBase
     {
         super(Module.PLANNER); // explicitly calls base constructor
 		System.out.println(" Running Planner... ");
-
-        while (true)
-        {
-            
-        }
-
 	}
 	
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message msg) 
     {
-		return new ArrayList<AP2DXMessage>();
+        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();
+        
+		return messageList;
 	}
 }
 
