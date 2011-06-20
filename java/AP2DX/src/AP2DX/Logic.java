@@ -26,7 +26,7 @@ public class Logic extends Thread {
 	 */
 	public void run() {
 		while (true) {
-			AP2DXMessage message = null;
+			Message message = null;
 			// Get the message from the base
 			try {
 				message = base.getReceiveQueue().take();

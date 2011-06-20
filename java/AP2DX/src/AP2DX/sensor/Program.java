@@ -47,7 +47,7 @@ public class Program extends AP2DXBase {
             drawer = new Drawer();
             frame.getContentPane().add(drawer);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(200,200);
+            frame.setSize(500,500);
             frame.setVisible(true);
             double[] lines = {2.0, 3.0, 4.0, 5.0, 5.0, 4.0, 3.0, 2.0};
             drawer.paintLine(lines); 
@@ -73,7 +73,6 @@ public class Program extends AP2DXBase {
                     //break;
 
                     // Do some awesome things with the sonar message we just got!
-
                     drawer.paintLine(((SonarSensorMessage) msg).getRangeArray());
                 default:
                     System.out.println("Unexpected message type in ap2dx.sensor.Program: " + msg.getMsgType());
@@ -90,7 +89,7 @@ public class Program extends AP2DXBase {
     {
         public double[] ranges;
         private int[] thetas = {0, 40, 60, 80, 100, 120, 140, 180};
-        private static final double MAX_SONAR_VALUE = 2.0;
+        private static final double MAX_SONAR_VALUE = 5.0;
 
 // I don't think we need this
 //        public Drawer()
