@@ -10,6 +10,7 @@ import AP2DX.AP2DXMessage;
 import AP2DX.ConnectionHandler;
 import AP2DX.Message;
 import AP2DX.Module;
+import AP2DX.usarsim.specialized.USonarSensorMessage;
 
 public class Program extends AP2DXBase 
 {	
@@ -56,7 +57,7 @@ public class Program extends AP2DXBase
                 messageList.add((AP2DXMessage)message);            
                 break;
             case AP2DX_SENSOR_SONAR:
-            	
+            	USonarSensorMessage msg = (USonarSensorMessage)message;
             	break;
             default:
                 System.out.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
