@@ -3,6 +3,7 @@ package AP2DX.coordinator;
 import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Map;
 
 import AP2DX.*;
 import AP2DX.specializedMessages.*;
@@ -26,7 +27,8 @@ public class UsarMessageParser extends Thread
     private ConnectionHandler sendConnection;
     /** The base class (supposed to be the AP2DXBase of coordinator */
     private AP2DXBase base;
-
+    /** The config file of the program */
+	protected Map config;
     /**
      * This constructor configures the connection with usarsim, 
      * with the data that is specified in the config file.
@@ -34,9 +36,9 @@ public class UsarMessageParser extends Thread
      * @param IAM The module from which this parser will send messages
      * @param send The module this parser will send to
      */
-    public UsarMessageParser(AP2DXBase base, Module IAM, Module send)
+    public UsarMessageParser(AP2DXBase base, Module IAM, Module send, Map config)
     {
-        config = readConfig();
+        this.config = config;
         System.out.println("Config sim port: " + config.get("sim_port"));
         String address = config.get("sim_address").toString();
         int port = Integer.parseInt(config.get("sim_port").toString());
@@ -49,24 +51,13 @@ public class UsarMessageParser extends Thread
         {
             ex.printStackTrace();
         }
-        UsarSimMessage message = new UInitMessage();
-        System.out.println("Message: " + message.toString());
-        try
-        {
-            out.println(message);
-            out.flush();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public void run()
     {
         while (true) 
         {
-            UsarSimMessage messageIn = null;
+            Message messageIn = null;
             // Get the message from the base
             try 
             {
@@ -76,12 +67,20 @@ public class UsarMessageParser extends Thread
                 base.logger
                     .severe("Error in UsarMessageParser.run, attempted to retrieve item out of messageReader");
             }
+            AP2DXMessage message = null;
             switch (messageIn.getMsgType())
             {
                 case USAR_SENSOR:
-                    UsarSimSensorMessage sensorMessage = new UsarSimSensorMessage(messageIn);
-                    // TODO: This getType should have some special name!
-                    switch (sensorMessage.getSomeType())
+                    UsarSimSensorMessage sensorMessage = null;
+                    try
+                    {
+                    sensorMessage = new UsarSimSensorMessage((UsarSimMessage) messageIn);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    switch (sensorMessage.getSensorType())
                     {
                         case USAR_SONAR:
                             try
@@ -89,9 +88,9 @@ public class UsarMessageParser extends Thread
                                 System.out.println("Trying to send Sonar Message");
                                 USonarSensorMessage sonarMessage= new USonarSensorMessage(sensorMessage);
                                 //Create a new message to the Sensor module
-                                SonarSensorMessage message = new SonarSensorMessage(IAM, Module.SENSOR);
+                                message = new SonarSensorMessage(IAM, Module.SENSOR);
                                 // Put the right values in the message
-                                message = (SonarSensorMessage) sonarMessage;
+                                message = (SonarSensorMessage) sonarMessage.toAp2dxMessage();
                             }
                             catch (Exception e)
                             {
@@ -103,7 +102,7 @@ public class UsarMessageParser extends Thread
                             System.out.println("Somethings wrong!?");
                     };
                 default:
-                    System.out.println("Unexpected message type in ap2dx.sensor.Program: " + msg.getMsgType());
+                    System.out.println("Unexpected message type in ap2dx.sensor.Program: " + messageIn.getMsgType());
             };
             //Try to send the message to the right connection.
             try 
@@ -115,7 +114,7 @@ public class UsarMessageParser extends Thread
                 e.printStackTrace();
                 base.logger
                     .severe("Error in Logic.run, attempted get the connection of action: "
-                            + action);
+                            + message);
             }
         }
     } 

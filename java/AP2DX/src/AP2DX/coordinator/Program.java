@@ -75,7 +75,7 @@ public class Program extends AP2DXBase {
             {
                 e.printStackTrace();
             }
-            parser = new UsarMessageParser(this, IAM, Module.SENSOR);
+            parser = new UsarMessageParser(this, IAM, Module.SENSOR, config);
             parser.start();
 
 
