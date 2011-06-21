@@ -92,7 +92,7 @@ public class Drawer extends JPanel
         {
             double line = (rangeScannerRanges[i] / MAX_RANGE_SCANNER_VALUE) * getSize().height;
             double theta = i * rangeScannerResolution;
-            System.out.printf("Theta = %f, for line %d\n", theta, i);
+            //System.out.printf("Theta = %f, for line %d\n", theta, i);
              
             x1 = getSize().width / 2;
             y1 = getSize().height - 10;
@@ -132,4 +132,28 @@ public class Drawer extends JPanel
         drawer.paintSonarLines(sonarDataSample); 
         drawer.paintRangeScannerLines(rangeScannerDataSample);
     }
+
+    // setters and getters {{{
+
+    public double getRangeScannerFov()
+    {
+        return rangeScannerFov;
+    }
+
+    public void setRangeScannerFov(double value)
+    {
+        rangeScannerFov = value;
+    } 
+
+    public double getRangeScannerResolution()
+    {
+        return rangeScannerResolution;
+    }
+
+    public void setRangeScannerResolution(double value)
+    {
+        rangeScannerResolution = value;
+    }
+
+    // }}}
 }
