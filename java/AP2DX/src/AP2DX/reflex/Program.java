@@ -12,12 +12,7 @@ import AP2DX.Message;
 import AP2DX.Module;
 
 public class Program extends AP2DXBase 
-{
-	/**
-	 * Field to keep all not-send motormessages. They will be queued when there is something wrong.
-	 */
-	LinkedList<AP2DXMessage> motorBacklog = new LinkedList<AP2DXMessage>();
-	 
+{	
 	
     /**
 	 * Entrypoint of reflex
@@ -86,18 +81,7 @@ public class Program extends AP2DXBase
 				e.printStackTrace();
 			}
 			
-			while (true) {
-				AP2DXMessage msg = null;
-				
-				if (!isPlannerBlocked()) {
-					msg = motorBacklog.remove();
-				}
-				if (msg != null) {
-					
-				}
-				
-				
-			}
+
 		}
 	}
 
