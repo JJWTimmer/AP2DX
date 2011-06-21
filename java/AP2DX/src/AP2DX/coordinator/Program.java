@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.io.*;
 
 import AP2DX.*;
+import AP2DX.specializedMessages.*;
 import AP2DX.usarsim.*;
 import AP2DX.usarsim.specialized.*;
 
@@ -60,7 +61,7 @@ public class Program extends AP2DXBase {
         {
 			ex.printStackTrace();
 		}
-
+        
 
 		
 		
@@ -85,10 +86,38 @@ public class Program extends AP2DXBase {
 		}
 	}
 
-
+    /**
+     * ComponentLogic (for now) creates a message from an USAR_SENSOR message, to forward
+     * the sonar sensor messages to our sensor module.
+     * @author Maarten de Waard
+     */
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
-		// TODO Auto-generated method stub
-		return new ArrayList<AP2DXMessage>();
+            ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();  
+            switch (msg.getMsgType())
+            {
+                case USAR_SENSOR:
+                    try
+                    {
+                        SonarMessage messageIn = new SonarMessage((UsarSimMessage) msg);
+                        //Create a new message to the Sensor module
+                        SonarSensorMessage message = new SonarSensorMessage(IAM, Module.SENSOR);
+                        // Put the right values in the message
+                        message.setRangeArray(messageIn.getData());
+                        message.setTime(messageIn.getTime);
+                        messageList.add(message);
+                    }
+                    catch (Exception e)
+                    {
+                        System.err.println("Some exception occured while making a SonarMessage");
+                        System.err.println(e.getMessage());
+                    }
+                default:
+                    System.out.println("Unexpected message type in ap2dx.sensor.Program: " + msg.getMsgType());
+            }
+            return messageList;
+        
+        
+        return new ArrayList<AP2DXMessage>();
 	}
 }
