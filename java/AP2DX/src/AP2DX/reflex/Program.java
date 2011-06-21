@@ -8,12 +8,14 @@ import AP2DX.Message;
 import AP2DX.Module;
 import AP2DX.specializedMessages.ActionMotorMessage;
 
-public class Program extends AP2DXBase {
+public class Program extends AP2DXBase 
+{
 	
     /**
 	 * Entrypoint of reflex
 	 */
-	public static void main (String[] args){
+	public static void main (String[] args)
+    {
 		new Program();
 	}
 
@@ -28,22 +30,22 @@ public class Program extends AP2DXBase {
 
 	}
 	
-	@Override
-	protected void doOverride() {
-
-	}
-
 
 	@Override
-	public ArrayList<AP2DXMessage> componentLogic(Message msg) {
-		/* Checks from witch module the message comes from */
-		if (msg.getMsgType().equals("")) {
-			
-			return new ArrayList<AP2DXMessage>();			
-		} else if (msg.getMsgType().equals("sensor")) {
-			return new ArrayList<AP2DXMessage>();
-		} else {
-			return new ArrayList<AP2DXMessage>();			
-		}
+	public ArrayList<AP2DXMessage> componentLogic(Message message) 
+    {
+        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();
+
+        switch(message.getMsgType())
+        {
+            case AP2DX_MOTOR_ACTION:
+                // for now, well just forward stuff to the motor, okay!?
+                message.setDestinationModuleId(Module.MOTOR);
+                messageList.add((AP2DXMessage)message);            
+                break;
+            default:
+                System.out.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
+        }
+        return messageList;
 	}
 }

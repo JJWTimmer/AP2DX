@@ -11,19 +11,17 @@ import java.util.regex.Pattern;
 import AP2DX.usarsim.UsarSimMessage;
 
 /**
+ * Not nessecary to convert this type to a new Usarsim string.
  * @author Jasper Timmer
  * 
  */
 public class SonarMessage extends UsarSimMessage {
 	
-	@UsarMessageField(name = "Type")
 	private String type;
 
-	@UsarMessageField(name = "Time")
 	private double time;
 	
-	@UsarMessageIteratorField
-	private List<SonarData> data = new ArrayList<SonarData>();
+	private double[] data = new double[8];
 
 	public SonarMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
 		super(msg.getMessageString());
@@ -66,14 +64,14 @@ public class SonarMessage extends UsarSimMessage {
 	/**
 	 * @param data the data to set
 	 */
-	public void setData(List<SonarData> data) {
+	public void setData(double[] data) {
 		this.data = data;
 	}
 
 	/**
 	 * @return the data
 	 */
-	public List<SonarData> getData() {
+	public double[] getData() {
 		return data;
 	}
 
@@ -110,17 +108,24 @@ public class SonarMessage extends UsarSimMessage {
 		String groupPatternStr = "\\{Name ([\\w\\d]+) Range ([0-9.,\\-_]+)\\}";
 		Pattern groupPattern = Pattern.compile(groupPatternStr);
 		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
-
-		List<SonarData> dataList = new ArrayList<SonarData>();
+		
+		double[] data = new double[8];
+		int i = 0;
 		
 		while (groupMatcher.find()) {
-			String name = groupMatcher.group(1);
-			String value = groupMatcher.group(2);
-			SonarData data = new SonarData(name, value);
-			
-			dataList.add(data);
+			if (data.length <= i) {
+				double[] data2 = new double[i*2];
+				for(int j = 0; j < data.length; j++) {
+					data2[j] = data[j];
+					i = j;
+				}
+				data = data2;
+			}
+			double value = Double.parseDouble(groupMatcher.group(2));
+			data[i] = value;
+			i++;
 		}
 		
-		this.setData(dataList);
+		this.setData(data);
 	}
 }

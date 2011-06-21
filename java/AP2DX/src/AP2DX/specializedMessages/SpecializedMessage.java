@@ -51,7 +51,6 @@ public abstract class SpecializedMessage extends AP2DXMessage
         super(message.getMessageString(), message.getSourceModuleId(), message.getDestinationModuleId());
         sourceModuleId = message.getSourceModuleId();
         destinationModuleId = message.getDestinationModuleId();
-        values = message.getValues();
         messageString = message.getMessageString();
         values = message.getValues();
     }

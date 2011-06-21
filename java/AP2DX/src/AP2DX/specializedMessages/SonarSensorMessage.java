@@ -50,7 +50,6 @@ public class SonarSensorMessage extends SpecializedMessage
         destinationId = destinationId;  
     }
 
-
     public void specializedParseMessage()
     {
         time = Double.parseDouble(values.get("time").toString());
