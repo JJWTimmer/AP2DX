@@ -17,27 +17,21 @@ import AP2DX.Message;
  */
 public class UsarSimMessageReader extends BufferedReader implements IMessageReader {
 	/**
-	 * 
-	 * @param in Streamreader to read from
-	 */
+	*
+	* @param in Streamreader to read from
+	*/
 	public UsarSimMessageReader(InputStream in) {
-		super(new InputStreamReader(in), 1024);
+	super(new InputStreamReader(in));
 	}
 
 	/**
-	 * Reads a message from the stream
-	 */
+	* Reads a message from the stream
+	*/
 	public Message readMessage() throws IOException {
-		String line = "";
-        for (int i=0;i < 1000; i++)
-        {
-            int a = read();
-            System.out.print(a);
-            line += "a";
-        }
-        
-		Message message = new UsarSimMessage(line);
+	String line = readLine();
 
-		return message;
+	Message message = new UsarSimMessage(line);
+
+	return message;
 	}
 }

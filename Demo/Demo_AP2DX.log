@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2011.5.12)  21 JUN 2011 16:53
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2011.5.12)  21 JUN 2011 18:26
 entering extended mode
 **Demo_AP2DX.tex
 (./Demo_AP2DX.tex
@@ -56,7 +56,7 @@ Here is how much of TeX's memory you used:
  3471 multiletter control sequences out of 10000+50000
  7280 words of font info for 26 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 23i,6n,19p,320b,199s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 23i,6n,19p,343b,199s stack positions out of 1500i,500n,5000p,200000b,5000s
 PDF statistics:
  19 PDF objects out of 300000
  0 named destinations out of 131072
@@ -64,4 +64,4 @@ PDF statistics:
 </usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf/fonts
 /type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb>
 </usr/share/texmf/fonts/type1/bluesky/cm/cmr17.pfb>
-Output written on Demo_AP2DX.pdf (2 pages, 29543 bytes).
+Output written on Demo_AP2DX.pdf (2 pages, 29696 bytes).

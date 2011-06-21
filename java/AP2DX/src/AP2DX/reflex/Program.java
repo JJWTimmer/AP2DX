@@ -116,11 +116,13 @@ public class Program extends AP2DXBase
 			
 			boolean interrupted = false;
 			while (!interrupted) {
-				while (isBotBlocked) {
-					Thread.sleep(10);
-				}
+				
 				Message msg = null;
 				try {
+					while (isBotBlocked) {
+						Thread.sleep(10);
+					}
+					
 					msg = getMotorBacklog().take();
 				} catch (InterruptedException e) {
 					interrupted = true;

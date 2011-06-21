@@ -48,12 +48,14 @@ public class Program extends AP2DXBase {
             System.out.println("Warning, security override in progress");
             config = readConfig();
             System.out.println("Config: " + config.get("sim_port"));
+            
             String address = config.get("sim_address").toString();
             int port = Integer.parseInt(config.get("sim_port").toString());
+            
             try 
             {
                 Socket socket = new Socket(address, port);
-                out = new PrintWriter(socket.getOutputStream());
+                out = new PrintWriter(socket.getOutputStream(), true);
             }
             catch (Exception ex) 
             {
@@ -64,19 +66,20 @@ public class Program extends AP2DXBase {
             try 
             {
                 //Old:
-                out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
+                //out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
                 //out.flush();
 
+            	out.println(message.toString());
+            	
                 //This should be able to initialize a robot now!
                 //out.print(message);
-                out.flush();
             }
             catch (Exception e) 
             {
                 e.printStackTrace();
             }
-            parser = new UsarMessageParser(this, IAM, Module.SENSOR, config);
-            parser.start();
+            //parser = new UsarMessageParser(this, IAM, Module.SENSOR, config);
+            //parser.start();
 
 
         }

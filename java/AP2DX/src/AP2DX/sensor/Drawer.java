@@ -20,7 +20,8 @@ import java.lang.Thread;
  */
 public class Drawer extends JPanel
 {
-    public double[] sonarRanges, rangeScannerRanges;
+    public double[] sonarRanges = new double[0];
+    public double[] rangeScannerRanges = new double[0];
     private int[] sonarThetas = {0, 40, 60, 80, 100, 120, 140, 180};
     private static final double MAX_SONAR_VALUE = 5.0;
     // VV might be the same as MAX_SONAR_VALUE, always?!
