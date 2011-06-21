@@ -38,7 +38,8 @@ public class UsarSimMessage extends Message {
 
 	@Override
 	public Message.MessageType getMsgType() {
-		if (this.type == null) {
+		if (this.type == MessageType.UNKNOWN || this.type == null) {
+            System.out.println("Parsing message type");
 			String startPatternStr = "^[A-Z]+";
 			Pattern startPattern = Pattern.compile(startPatternStr);
 			Matcher startMatcher = startPattern
@@ -51,6 +52,8 @@ public class UsarSimMessage extends Message {
 				this.type = null;
 			}
 		}
+        else
+            System.out.println("Something went wrong, message type = " + this.type);
 
 		return this.type;
 	}

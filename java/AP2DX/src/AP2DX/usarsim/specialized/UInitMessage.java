@@ -37,7 +37,7 @@ public final class UInitMessage extends UsarSimMessage {
 
     /** The name of the robot in the server. Default: `Awesome P2DX'*/
     @UsarMessageField(name = "Name")
-        private String name = "AP2DX";
+        private String name = "R1";
     
     
 	/**
