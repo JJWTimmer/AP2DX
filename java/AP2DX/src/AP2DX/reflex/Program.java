@@ -86,15 +86,14 @@ public class Program extends AP2DXBase
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			while (true) {
 				AP2DXMessage msg = motorBacklog.poll();
 				
-				if (msg != null)
-					this.base.logger.severe("Motor connection no longer alive")
+				if (msg != null) {
+					AP2DXBase.logger.severe("Motor connection no longer alive");
 				}
 			}
-
 		}
-		
 	}
 }
