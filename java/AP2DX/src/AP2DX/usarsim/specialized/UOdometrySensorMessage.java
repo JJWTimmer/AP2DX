@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import AP2DX.usarsim.UsarSimMessage;
+import AP2DX.*;
+import AP2DX.specializedMessages.*;
 
 /**
  * Not nessecary to convert this type to a new Usarsim string.
@@ -30,6 +32,16 @@ public class UOdometrySensorMessage extends UsarSimSensorMessage {
 		super(string);
 		this.parseMessage();
 	}
+
+    public AP2DXMessage toAp2dxMessage()
+    {
+        OdometrySensorMessage odometrySensorMessage = 
+            new OdometrySensorMessage(Module.COORDINATOR, Module.SENSOR);
+        odometrySensorMessage.setX(Pose[0]);
+        odometrySensorMessage.setY(Pose[1]);
+        odometrySensorMessage.setTheta(Pose[2]);
+        return odometrySensorMessage;
+    }
 
 	/**
 	 * @see AP2DX.usarsim.specialized.SensorMessage#parseMessage() Parses all
