@@ -27,7 +27,9 @@ public final class UInitMessage extends UsarSimMessage {
      *  TODO: Make this not hardcoded
      */
     @UsarMessageIteratorField
-        private List<ArrayFloatData> location = new ArrayList<ArrayFloatData>();
+        private List<ArrayFloatData> location = new ArrayList<ArrayFloatData>() {
+    	{new ArrayFloatData("Location", "0.76,2.3,1.8");}
+    };
 
     /** The rotation of the robot. Array with three values, respectively: Roll, Pitch, Yaw*/
     @UsarMessageIteratorField
