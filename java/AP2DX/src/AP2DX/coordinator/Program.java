@@ -93,12 +93,14 @@ public class Program extends AP2DXBase {
      */
     @Override
         public ArrayList<AP2DXMessage> componentLogic(Message msg) {
+            System.out.println("In componentLogic");
             ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();  
             switch (msg.getMsgType())
             {
                 case USAR_SENSOR:
                     try
-                    {
+                    {   
+                        System.out.println("Trying to send Sonar Message");
                         SonarMessage messageIn = new SonarMessage((UsarSimMessage) msg);
                         //Create a new message to the Sensor module
                         SonarSensorMessage message = new SonarSensorMessage(IAM, Module.SENSOR);
