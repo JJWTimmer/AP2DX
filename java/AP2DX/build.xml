@@ -115,7 +115,7 @@
 		<cobertura-report srcdir="${src.dir}" destdir="${coverage.dir}" format="xml" datafile="${ant.dir}/cobertura.ser" />
 	</target>
 
-	<!-- Create the javadocs 
+	<!-- Create the javadocs -->
 	<target name="javadoc">
 	    <javadoc
 	           access="public"
@@ -131,7 +131,7 @@
 	        </fileset>
 	    </javadoc>
 	</target>
-	-->
+	
 	<!-- Create executables -->
 	<target name="jar" depends="compile">
 		<macrodef name="packaging">
@@ -190,9 +190,14 @@
 		<!--<packaging package="package2"/>-->
 	</target>
 	
-	<!-- Target to run --> <!-- Removed javadoc so i can build, Wadie -->
-	<target name="main" depends="version, compile, coverage-report, jar">
+	<!-- Target to run -->
+	<target name="main" depends="version, compile, coverage-report, jar, javadoc">
 		<description>Main target</description>
+	</target>
+	
+	<!-- Target to debug -->
+	<target name="debug" depends="jar">
+		<description>Debug target</description>
 	</target>
 
 </project>
