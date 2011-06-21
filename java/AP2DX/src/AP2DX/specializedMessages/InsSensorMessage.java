@@ -2,6 +2,11 @@ package AP2DX.specializedMessages;
 
 import AP2DX.*;
 
+//import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 
 
 /**
@@ -25,15 +30,46 @@ public class InsSensorMessage extends SpecializedMessage
         super(message);
     }
 
+    public InsSensorMessage(Module sourceId, Module destinationId)
+    {
+        super(Message.MessageType.AP2DX_SENSOR_INS, sourceId, destinationId);
+    }
+
     public void specializedParseMessage()
     {   
+        try
+        {
+            JSONObject jsonObject = new JSONObject(messageString);
 
+            JSONArray jsonArray = jsonObject.getJSONArray("location");
+            location = new double[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i ++)
+                location[i] = jsonArray.getDouble(i);
+
+            jsonArray = jsonObject.getJSONArray("orientation");
+            orientation = new double[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i ++)
+                orientation[i] = jsonArray.getDouble(i);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error in AP2DX.specializedMessages.InsSensorMessage.specializedParseMessage()... things went south!");
+            e.printStackTrace();
+        }
     } 
+
+    // setters and getters {{{
 
     /** three doubles describing the location (x, y, z). */
     public double[] getLocation()
     {
         return location;
+    }
+
+    public void setLocation(double[] value)
+    {
+        values.put("location", value);
+        location = value;
     }
 
     /** Three doubles describing the orientation (r, p, y). */
@@ -42,5 +78,12 @@ public class InsSensorMessage extends SpecializedMessage
         return orientation;
     }
 
+    public void setOrientation(double[] value)
+    {
+        orientation = value;
+        values.put("orientation", value);
+    }
+
+    // }}}
 }
 
