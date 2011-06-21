@@ -17,7 +17,7 @@ import AP2DX.usarsim.UsarSimMessage;
  * @author Jasper Timmer
  * 
  */
-public final class MissionStateMessage extends UsarSimMessage {
+public final class UMissionStateMessage extends UsarSimMessage {
 	@UsarMessageField(name = "Time")
 	private float time;
 	
@@ -30,7 +30,7 @@ public final class MissionStateMessage extends UsarSimMessage {
 	/**
 	 * @param msg the UsarSimMessage
 	 */
-	public MissionStateMessage(UsarSimMessage msg) {
+	public UMissionStateMessage(UsarSimMessage msg) {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
@@ -38,7 +38,7 @@ public final class MissionStateMessage extends UsarSimMessage {
 	/**
 	 * @param msg the UsarSimMessage
 	 */
-	public MissionStateMessage(String msgstring) {
+	public UMissionStateMessage(String msgstring) {
 		super(msgstring);
 		this.parseMessage();
 	}

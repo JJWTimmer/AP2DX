@@ -17,7 +17,7 @@ import AP2DX.usarsim.UsarSimMessage.UsarMessageField;
  * @author Jasper Timmer
  * 
  */
-public final class StateMessage extends UsarSimMessage {
+public final class UStateMessage extends UsarSimMessage {
 
 	@UsarMessageField(name = "Type")
 	private String type;
@@ -43,12 +43,12 @@ public final class StateMessage extends UsarSimMessage {
 	@UsarMessageField(name = "View")
 	private float view;
 
-	public StateMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public UStateMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public StateMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public UStateMessage(String string) throws IllegalArgumentException, IllegalAccessException {
 		super(string);
 		this.parseMessage();
 	}

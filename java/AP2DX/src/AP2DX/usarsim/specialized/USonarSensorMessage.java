@@ -15,7 +15,7 @@ import AP2DX.usarsim.UsarSimMessage;
  * @author Jasper Timmer
  * 
  */
-public class SonarMessage extends UsarSimMessage {
+public class USonarSensorMessage extends UsarSimMessage {
 	
 	private String type;
 
@@ -23,12 +23,12 @@ public class SonarMessage extends UsarSimMessage {
 	
 	private double[] data = new double[8];
 
-	public SonarMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public USonarSensorMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public SonarMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public USonarSensorMessage(String string) throws IllegalArgumentException, IllegalAccessException {
 		super(string);
 		this.parseMessage();
 	}

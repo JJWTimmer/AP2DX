@@ -16,9 +16,9 @@ import AP2DX.usarsim.UsarSimMessage.UsarMessageField;
  * The message that will be sent to the robot to make it move.
  * @author Maarten de Waard
  */
-public final class DriveMessage extends UsarSimMessage {
+public final class UDriveMessage extends UsarSimMessage {
 
-    public DriveMessage()
+    public UDriveMessage()
     {
         super(Message.MessageType.USAR_DRIVE);
     }

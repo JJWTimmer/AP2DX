@@ -19,13 +19,13 @@ import mockit.Deencapsulation.*;
 import AP2DX.Message;
 import AP2DX.usarsim.UsarSimMessage;
 import AP2DX.usarsim.specialized.MissionStateLink;
-import AP2DX.usarsim.specialized.MissionStateMessage;
+import AP2DX.usarsim.specialized.UMissionStateMessage;
 
 /**
  * @author Jasper Timmer
  *
  */
-public class MissonStateMessageTestCase {
+public class UMissonStateMessageTestCase {
 
 	/**
 	 * @throws java.lang.Exception
@@ -56,11 +56,11 @@ public class MissonStateMessageTestCase {
 	}
 
 	/**
-	 * Test method for {@link AP2DX.usarsim.specialized.MissionStateMessage#parseMessage()}.
+	 * Test method for {@link AP2DX.usarsim.specialized.UMissionStateMessage#parseMessage()}.
 	 */
 	@Test
 	public void testParseMessage() {
-		MissionStateMessage msg = new MissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
+		UMissionStateMessage msg = new UMissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
 		assertEquals("CameraPanTilt", msg.getName());
 		assertEquals(395.38, msg.getTime(),1e-4);
 		assertEquals(2, msg.getLinks().size());
@@ -79,12 +79,12 @@ public class MissonStateMessageTestCase {
 	}
 
 	/**
-	 * Test method for {@link AP2DX.usarsim.specialized.MissionStateMessage#MissionStateMessage(AP2DX.usarsim.UsarSimMessage)}.
+	 * Test method for {@link AP2DX.usarsim.specialized.UMissionStateMessage#MissionStateMessage(AP2DX.usarsim.UsarSimMessage)}.
 	 */
 	@Test
 	public void testMissionStateMessage() {
 		try {
-			MissionStateMessage msg = new MissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
+			UMissionStateMessage msg = new UMissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
 			assertNotNull(msg);
 		}
 		catch (Exception ex) {
@@ -97,7 +97,7 @@ public class MissonStateMessageTestCase {
 	 */
 	@Test
 	public void testCompileMessage() {
-		MissionStateMessage msg = new MissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
+		UMissionStateMessage msg = new UMissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
 		Deencapsulation.invoke(msg, "compileMessage");
 		String s = Deencapsulation.getField(msg, "messageString");
 		assertEquals("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}", s);
@@ -108,7 +108,7 @@ public class MissonStateMessageTestCase {
 	 */
 	@Test
 	public void testGetType() {
-		MissionStateMessage msg = new MissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
+		UMissionStateMessage msg = new UMissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
 		Message.MessageType type = msg.getMsgType();
 		assertEquals(Message.MessageType.USAR_MISSIONSTATE, type);
 	}

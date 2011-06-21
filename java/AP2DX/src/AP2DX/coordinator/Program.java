@@ -44,7 +44,7 @@ public class Program extends AP2DXBase {
 		System.out.println("Warning, security override in progress");
         config = readConfig();
         System.out.println("Config: " + config.get("sim_port"));
-            UsarSimMessage message = new InitMessage();
+            UsarSimMessage message = new UInitMessage();
             System.out.println("Message: " + message.toString());
 		
 		String address = config.get("sim_address").toString();

@@ -20,15 +20,15 @@ import mockit.Deencapsulation.*;
 import AP2DX.Message;
 import AP2DX.usarsim.UsarSimMessage;
 import AP2DX.usarsim.specialized.ArrayFloatData;
-import AP2DX.usarsim.specialized.InitMessage;
+import AP2DX.usarsim.specialized.UInitMessage;
 import AP2DX.usarsim.specialized.MissionStateLink;
-import AP2DX.usarsim.specialized.MissionStateMessage;
+import AP2DX.usarsim.specialized.UMissionStateMessage;
 
 /**
  * @author Jasper Timmer
  *
  */
-public class InitMessageTestCase {
+public class UInitMessageTestCase {
 
 	/**
 	 * @throws java.lang.Exception
@@ -64,7 +64,7 @@ public class InitMessageTestCase {
 	 */
 	@Test
 	public void testCompileMessage() throws Exception {
-		InitMessage msg = new InitMessage();
+		UInitMessage msg = new UInitMessage();
 		msg.setClassName("USARBot.P2DX");
 		msg.setName("AP2DX");
 		
@@ -91,7 +91,7 @@ public class InitMessageTestCase {
 	 */
 	@Test
 	public void testGetType() throws Exception {
-		InitMessage msg = new InitMessage();
+		UInitMessage msg = new UInitMessage();
 		Message.MessageType type = msg.getMsgType();
 		assertEquals(Message.MessageType.USAR_INIT, type);
 	}

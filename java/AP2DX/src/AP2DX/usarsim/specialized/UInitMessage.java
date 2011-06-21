@@ -12,9 +12,9 @@ import AP2DX.usarsim.UsarSimMessage;
  * The message that will be used to put a robot in the world of USARSim.
  * @author Maarten de Waard
  */
-public final class InitMessage extends UsarSimMessage {
+public final class UInitMessage extends UsarSimMessage {
 
-    public InitMessage()
+    public UInitMessage()
     {
         super(Message.MessageType.USAR_INIT);
     }
