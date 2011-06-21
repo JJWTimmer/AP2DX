@@ -15,19 +15,18 @@ import AP2DX.usarsim.UsarSimMessage;
  * @author Jasper Timmer
  * 
  */
-public class UInsSensorMessage extends UsarSimSensorMessage {
+public class UOdometrySensorMessage extends UsarSimSensorMessage {
 	
 	private String type;
 	private String name;
-	private double[] location;
-	private double[] orientation;
+	private double[] Pose;
 
-	public UInsSensorMessage(UsarSimMessage msg) throws Exception {
+	public UOdometrySensorMessage(UsarSimMessage msg) throws Exception {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public UInsSensorMessage(String string) throws Exception {
+	public UOdometrySensorMessage(String string) throws Exception {
 		super(string);
 		this.parseMessage();
 	}
@@ -62,13 +61,13 @@ public class UInsSensorMessage extends UsarSimSensorMessage {
 
 		}
 		
-		String locPatternStr = "\\{Resolution ([0-9.,\\-_]+)\\}";
-		Pattern locPattern = Pattern.compile(locPatternStr);
-		Matcher locMatcher = locPattern.matcher(this.getMessageString());
+		String posPatternStr = "\\{Pose ([0-9.,\\-_]+)\\}";
+		Pattern posPattern = Pattern.compile(posPatternStr);
+		Matcher posMatcher = posPattern.matcher(this.getMessageString());
 
 		double[] data = null;
-		if (locMatcher.find()) {
-			String[] loc = locMatcher.group(1).split(",");
+		if (posMatcher.find()) {
+			String[] loc = posMatcher.group(1).split(",");
 			data = new double[loc.length];
 
 			for (int i = 0; i < data.length; i++) {
@@ -76,22 +75,7 @@ public class UInsSensorMessage extends UsarSimSensorMessage {
 			}
 			
 		}
-		this.setLocation(data);
-		
-		String oriPatternStr = "\\{Orientation ([0-9.,\\-_]+)\\}";
-		Pattern oriPattern = Pattern.compile(oriPatternStr);
-		Matcher oriMatcher = oriPattern.matcher(this.getMessageString());
-		
-		double[] data2 = null;
-		if (oriMatcher.find()) {
-			String[] ori = oriMatcher.group(1).split(",");
-			data2 = new double[ori.length];
-
-			for (int i = 0; i < data2.length; i++) {
-				data2[i] = Double.parseDouble(ori[i]);
-			}
-		}
-		this.setOrientation(data2);
+		this.setPose(data);
 	}
 
 	/**
@@ -123,30 +107,16 @@ public class UInsSensorMessage extends UsarSimSensorMessage {
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param pose the pose to set
 	 */
-	public void setLocation(double[] location) {
-		this.location = location;
+	public void setPose(double[] pose) {
+		Pose = pose;
 	}
 
 	/**
-	 * @return the location
+	 * @return the pose
 	 */
-	public double[] getLocation() {
-		return location;
-	}
-
-	/**
-	 * @param orientation the orientation to set
-	 */
-	public void setOrientation(double[] orientation) {
-		this.orientation = orientation;
-	}
-
-	/**
-	 * @return the orientation
-	 */
-	public double[] getOrientation() {
-		return orientation;
+	public double[] getPose() {
+		return Pose;
 	}
 }

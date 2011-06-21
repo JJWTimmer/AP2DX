@@ -17,7 +17,7 @@ import AP2DX.*;
  * @author Jasper Timmer
  * 
  */
-public class URangeSensorMessage extends UsarSimMessage {
+public class URangeSensorMessage extends UsarSimSensorMessage {
 	
 	private String type;
 	private String name;
@@ -25,12 +25,12 @@ public class URangeSensorMessage extends UsarSimMessage {
 	private double fov;
 	private double[] range;
 
-	public URangeSensorMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public URangeSensorMessage(UsarSimMessage msg) throws Exception {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public URangeSensorMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public URangeSensorMessage(String string) throws Exception {
 		super(string);
 		this.parseMessage();
 	}
