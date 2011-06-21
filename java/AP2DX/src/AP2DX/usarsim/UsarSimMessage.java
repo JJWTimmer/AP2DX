@@ -127,7 +127,9 @@ public class UsarSimMessage extends Message {
 
 	/**
 	 * Annotation to use on specialized usar sim message fields, that need to be
-	 * compiled in the outputstring. 'name' is the Name of the field
+	 * compiled in the outputstring. 'name' is the Name of the field.<br/>
+	 * <br/>
+	 * Only nessecary for types that need to compile into a new UsarSimString
 	 * 
 	 * @author Jasper Timmer
 	 * 
@@ -142,9 +144,10 @@ public class UsarSimMessage extends Message {
 	 * Declare this on a specialized message's field, to let the compiler know,
 	 * that type is a list of values. It should be in the form of
 	 * List<specialclass> ...; where specialclass.toString() returns the value
-	 * to be appended to the output. Example:
-	 * "{Link 1} {Value 23.3} {Torque -23.4}".
-	 * 
+	 * to be appended to the output. Example:<br/>
+	 * "{Link 1} {Value 23.3} {Torque -23.4}".<br/>
+	 * <br/>
+	 * Only nessecary for types that need to compile into a new UsarSimString
 	 * @author Jasper Timmer
 	 * 
 	 */

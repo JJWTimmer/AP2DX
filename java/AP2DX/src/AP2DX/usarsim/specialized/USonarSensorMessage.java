@@ -9,13 +9,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import AP2DX.usarsim.UsarSimMessage;
+import AP2DX.*;
+import AP2DX.specializedMessages.*;
 
 /**
  * Not nessecary to convert this type to a new Usarsim string.
  * @author Jasper Timmer
  * 
  */
-public class USonarSensorMessage extends UsarSimMessage {
+public class USonarSensorMessage extends UsarSimSensorMessage {
 	
 	private String type;
 
@@ -23,15 +25,24 @@ public class USonarSensorMessage extends UsarSimMessage {
 	
 	private double[] data = new double[8];
 
-	public USonarSensorMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public USonarSensorMessage(UsarSimMessage msg) throws Exception {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public USonarSensorMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public USonarSensorMessage(String string) throws Exception {
 		super(string);
 		this.parseMessage();
 	}
+
+    public AP2DXMessage toAp2dxMessage()
+    {
+        SonarSensorMessage sonarSensorMessage = 
+            new SonarSensorMessage(Module.COORDINATOR, Module.SENSOR);
+        sonarSensorMessage.setTime(time);   
+        sonarSensorMessage.setRangeArray(data);
+        return sonarSensorMessage;
+    }
 	
 	/**
 	 * @param type the type to set

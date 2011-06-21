@@ -17,6 +17,9 @@ import AP2DX.*;
 */
 public class OdometrySensorMessage extends SpecializedMessage 
 {
+
+    private double x, y, theta;
+
     /** Creates a specialized message from a standard AP2DXMessage.
     * This constructor could be used to clone an AP2DXMessage. */
     public OdometrySensorMessage(AP2DXMessage message)
@@ -32,12 +35,17 @@ public class OdometrySensorMessage extends SpecializedMessage
    
     public double getX()
     {
-        return 0.0; 
+        return x; 
     }
 
     public double getY()
     {
-        return 0.0;
+        return y;
+    }
+
+    public double getTheta()
+    {
+        return theta;
     }
 
 }
