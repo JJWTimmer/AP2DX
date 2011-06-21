@@ -111,15 +111,10 @@ public class Program extends AP2DXBase {
             {   
                 double line = (ranges[i] / MAX_SONAR_VALUE) * getSize().height ;
                 double theta = Math.toRadians(thetas[i]);
-                System.out.printf("Theta = %f\n", theta);
                 x1 = getSize().width / 2;
                 y1 = getSize().height - 10;
                 y2 = (int) (getSize().height - 10 - (Math.sin(theta) * line));
-                System.out.printf("sinus: %f, Cosinus: %f", Math.sin(theta), Math.cos(theta));
-                System.out.printf("y2 for line %d is %d\n", i, y2);
                 x2 = (int)(.5 * getSize().width + (10 + ( Math.cos(theta) * line)));
-
-                System.out.printf("x2 for line %d is %d\n", i, x2);
                 g.drawLine(x1, y1, x2, y2);
             }
             repaint();

@@ -20,6 +20,7 @@ import AP2DX.usarsim.specialized.*;
 public class Program extends AP2DXBase {
     PrintWriter out;
     UsarSimMessageReader in;
+    UsarMessageParser parser;
 
 
     /**
@@ -39,51 +40,45 @@ public class Program extends AP2DXBase {
         System.out.println(" Running Coordinator... ");
 
     }
-
+    /**
+     * Sets up the outgoing connection, the messageParserThread and initiates the Robot
+     */
     @Override
         protected void doOverride() {
             System.out.println("Warning, security override in progress");
             config = readConfig();
             System.out.println("Config: " + config.get("sim_port"));
-            UsarSimMessage message = new UInitMessage();
-            System.out.println("Message: " + message.toString());
-
             String address = config.get("sim_address").toString();
             int port = Integer.parseInt(config.get("sim_port").toString());
-
             try 
             {
                 Socket socket = new Socket(address, port);
                 out = new PrintWriter(socket.getOutputStream());
-                in = new UsarSimMessageReader(socket.getInputStream());
             }
             catch (Exception ex) 
             {
                 ex.printStackTrace();
             }
-
-
-
-
-            try {
-                // TODO: this was once used to test drive P2DX, but now it can not be used any longer
+            UsarSimMessage message = new UInitMessage();
+            System.out.println("Message: " + message.toString());
+            try 
+            {
+                //Old:
                 //out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
-                ////out.flush();
-                //Message msg = in.readMessage();
-                //System.out.println(msg.getValues().get("msgtype"));
-                //Thread.sleep(10);
-                //out.println("DRIVE {Left -1.0} {Right 1.0}");
-                //Thread.sleep(5000);
-                //out.println("DRIVE {Left 1.0} {Right -1.0}");
-                //System.out.println(in.readLine());
-
+                //out.flush();
 
                 //This should be able to initialize a robot now!
                 out.print(message);
                 out.flush();
-            } catch (Exception e) {
+            }
+            catch (Exception e) 
+            {
                 e.printStackTrace();
             }
+            parser = new UsarMessageParser(this, IAM, Module.SENSOR);
+            parser.start();
+
+
         }
 
     /**
