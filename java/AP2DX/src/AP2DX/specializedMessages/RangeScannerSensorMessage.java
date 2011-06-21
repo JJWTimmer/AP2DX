@@ -2,6 +2,10 @@ package AP2DX.specializedMessages;
 
 import AP2DX.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 
 
 /** USERSIM DATA:
@@ -16,6 +20,11 @@ SEN {Time 395.38} {Type RangeScanner} {Name Scanner1} {Resolution 0.0174} {FOV 3
 */
 public class RangeScannerSensorMessage extends SpecializedMessage 
 {
+
+    private double resolution;
+    private double fov;
+    private double[] dataArray;
+
     /** Creates a specialized message from a standard AP2DXMessage.
     * This constructor could be used to clone an AP2DXMessage. */
     public RangeScannerSensorMessage(AP2DXMessage message)
@@ -23,15 +32,78 @@ public class RangeScannerSensorMessage extends SpecializedMessage
         super(message);
     }
 
-    /** Retrieves a sensordata array from the values array. I don't know
-    * if we can actually use this, but it's more proof of concept. */
-    public double[] getSensorDataArray()
+    public RangeScannerSensorMessage(AP2DXMessage message, Module sourceId, Module destinationId)
     {
-        return null;
+        super(message, sourceId, destinationId);
     }
+
+	public RangeScannerSensorMessage(Module sourceId, Module destinationId)
+	{
+		super(Message.MessageType.AP2DX_SENSOR_RANGESCANNER, sourceId, destinationId);
+	}
 
     public void specializedParseMessage()
     {
+        resolution = Double.parseDouble(values.get("resolution").toString());
+        fov = Double.parseDouble(values.get("fov").toString());
 
+		try 
+        { 
+            // this is, if I'm correct, also in the values map, which 
+            // can normally be used to extract the variables, were it not
+            // for arrays ...
+            JSONObject jsonObject = new JSONObject(messageString);
+            JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
+            dataArray = new double[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i ++)
+                dataArray[i] = jsonArray.getDouble(i);
+        }
+        catch (JSONException e)
+        {
+            System.out.println("Error in AP2DX.specializedMessages.SonarSensorMessage.specializedParseMessage()... things went south!");
+            e.printStackTrace();
+        }
     }
+
+    // setters and getters {{{
+   
+    public void setFov(double value)
+    {
+        fov = value;
+        values.put("fov", value);
+    }     
+
+    public double getFov()
+    {
+        return fov;
+    }
+
+    public void setResolution(double value)
+    {
+        resolution = value;
+        values.put("resolution", value);
+    } 
+
+    public double getResolution()
+    {
+        return resolution;
+    }
+
+    public void setDataArray(double[] value)
+    {
+        dataArray = value;
+        values.put("dataArray", value);
+    }
+
+    public double[] getDataArray()
+    {
+        return dataArray;
+    }
+
+    // }}}
+
+
 }
+
+
+

@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import AP2DX.usarsim.UsarSimMessage;
+import AP2DX.*;
+import AP2DX.specializedMessages.*;
 
 /**
  * Not nessecary to convert this type to a new Usarsim string.
@@ -32,6 +34,15 @@ public class USonarSensorMessage extends UsarSimMessage {
 		super(string);
 		this.parseMessage();
 	}
+
+    public AP2DXMessage toAp2dxMessage()
+    {
+        SonarSensorMessage sonarSensorMessage = 
+            new SonarSensorMessage(Module.COORDINATOR, Module.SENSOR);
+        sonarSensorMessage.setTime(time);   
+        sonarSensorMessage.setRangeArray(data);
+        return sonarSensorMessage;
+    }
 	
 	/**
 	 * @param type the type to set
