@@ -15,20 +15,18 @@ import AP2DX.usarsim.UsarSimMessage;
  * @author Jasper Timmer
  * 
  */
-public class URangeSensorMessage extends UsarSimSensorMessage {
+public class UOdometrySensorMessage extends UsarSimSensorMessage {
 	
 	private String type;
 	private String name;
-	private double resolution;
-	private double fov;
-	private double[] range;
+	private double[] Pose;
 
-	public URangeSensorMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public UOdometrySensorMessage(UsarSimMessage msg) throws Exception {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public URangeSensorMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public UOdometrySensorMessage(String string) throws Exception {
 		super(string);
 		this.parseMessage();
 	}
@@ -62,39 +60,22 @@ public class URangeSensorMessage extends UsarSimSensorMessage {
 			this.setName(name);
 
 		}
-		String resPatternStr = "\\{Resolution ([0-9.,\\-_]+)\\}";
-		Pattern resPattern = Pattern.compile(resPatternStr);
-		Matcher resMatcher = resPattern.matcher(this.getMessageString());
-
-		if (resMatcher.find()) {
-			String res = resMatcher.group(1);
-			this.setResolution(Double.parseDouble(res));
-		}
-		String fovPatternStr = "\\{FOV ([0-9.,\\-_]+)\\}";
-		Pattern fovPattern = Pattern.compile(fovPatternStr);
-		Matcher fovMatcher = fovPattern.matcher(this.getMessageString());
-
-		if (fovMatcher.find()) {
-			String fov = fovMatcher.group(1);
-			this.setFov(Double.parseDouble(fov));
-
-		}
-
-		String groupPatternStr = "\\{Range ([0-9.,\\-_]+)\\}";
-		Pattern groupPattern = Pattern.compile(groupPatternStr);
-		Matcher groupMatcher = groupPattern.matcher(this.getMessageString());
 		
+		String posPatternStr = "\\{Pose ([0-9.,\\-_]+)\\}";
+		Pattern posPattern = Pattern.compile(posPatternStr);
+		Matcher posMatcher = posPattern.matcher(this.getMessageString());
+
 		double[] data = null;
-		if (groupMatcher.find()) {
-			String[] ranges = groupMatcher.group(1).split(",");
-			data = new double[ranges.length];
+		if (posMatcher.find()) {
+			String[] loc = posMatcher.group(1).split(",");
+			data = new double[loc.length];
 
 			for (int i = 0; i < data.length; i++) {
-				data[i] = Double.parseDouble(ranges[i]);
+				data[i] = Double.parseDouble(loc[i]);
 			}
+			
 		}
-		
-		this.setRange(data);
+		this.setPose(data);
 	}
 
 	/**
@@ -126,44 +107,16 @@ public class URangeSensorMessage extends UsarSimSensorMessage {
 	}
 
 	/**
-	 * @param resolution the resolution to set
+	 * @param pose the pose to set
 	 */
-	public void setResolution(double resolution) {
-		this.resolution = resolution;
+	public void setPose(double[] pose) {
+		Pose = pose;
 	}
 
 	/**
-	 * @return the resolution
+	 * @return the pose
 	 */
-	public double getResolution() {
-		return resolution;
-	}
-
-	/**
-	 * @param fov the fov to set
-	 */
-	public void setFov(double fov) {
-		this.fov = fov;
-	}
-
-	/**
-	 * @return the fov
-	 */
-	public double getFov() {
-		return fov;
-	}
-
-	/**
-	 * @param range the range to set
-	 */
-	public void setRange(double[] range) {
-		this.range = range;
-	}
-
-	/**
-	 * @return the range
-	 */
-	public double[] getRange() {
-		return range;
+	public double[] getPose() {
+		return Pose;
 	}
 }

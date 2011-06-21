@@ -15,7 +15,7 @@ import AP2DX.usarsim.UsarSimMessage;
  * @author Jasper Timmer
  * 
  */
-public class USonarSensorMessage extends UsarSimMessage {
+public class USonarSensorMessage extends UsarSimSensorMessage {
 	
 	private String type;
 
@@ -23,12 +23,12 @@ public class USonarSensorMessage extends UsarSimMessage {
 	
 	private double[] data = new double[8];
 
-	public USonarSensorMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public USonarSensorMessage(UsarSimMessage msg) throws Exception {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public USonarSensorMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public USonarSensorMessage(String string) throws Exception {
 		super(string);
 		this.parseMessage();
 	}

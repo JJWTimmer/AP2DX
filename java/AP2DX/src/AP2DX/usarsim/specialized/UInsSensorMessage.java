@@ -15,19 +15,19 @@ import AP2DX.usarsim.UsarSimMessage;
  * @author Jasper Timmer
  * 
  */
-public class UInsSensorMessage extends UsarSimMessage {
+public class UInsSensorMessage extends UsarSimSensorMessage {
 	
 	private String type;
 	private String name;
 	private double[] location;
 	private double[] orientation;
 
-	public UInsSensorMessage(UsarSimMessage msg) throws IllegalArgumentException, IllegalAccessException {
+	public UInsSensorMessage(UsarSimMessage msg) throws Exception {
 		super(msg.getMessageString());
 		this.parseMessage();
 	}
 
-	public UInsSensorMessage(String string) throws IllegalArgumentException, IllegalAccessException {
+	public UInsSensorMessage(String string) throws Exception {
 		super(string);
 		this.parseMessage();
 	}
