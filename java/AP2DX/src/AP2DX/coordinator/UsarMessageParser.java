@@ -57,20 +57,25 @@ public class UsarMessageParser extends Thread
     {
         while (true) 
         {
+            System.out.println("Starting to run while loop in run");
             Message messageIn = null;
             // Get the message from the base
             try 
             {
+                System.out.println("Reading message");
                 messageIn = in.readMessage();
             } catch (Exception e) {
                 e.printStackTrace();
                 base.logger
                     .severe("Error in UsarMessageParser.run, attempted to retrieve item out of messageReader");
             }
+            //Initialize the message we will return. This shouldn't stay null.
             AP2DXMessage message = null;
+            
             switch (messageIn.getMsgType())
             {
                 case USAR_SENSOR:
+                    System.out.println("USAR SENSOR message detected!");
                     UsarSimSensorMessage sensorMessage = null;
                     try
                     {
@@ -101,21 +106,28 @@ public class UsarMessageParser extends Thread
                         default: 
                             System.out.println("Somethings wrong!?");
                     };
+                    break;
                 default:
-                    System.out.println("Unexpected message type in ap2dx.sensor.Program: " + messageIn.getMsgType());
+                    System.out.println("Unexpected message type in ap2dx.coordonator.UsarMessageParser: " + messageIn.getMsgType());
             };
+            System.out.printf("After switches. The message now is %s\n", message);
             //Try to send the message to the right connection.
-            try 
+            if(message != null && message.getMsgType() != Message.MessageType.UNKNOWN)
             {
-                sendConnection.sendMessage(message);
-            } 
-            catch (Exception e) 
-            {
-                e.printStackTrace();
-                base.logger
-                    .severe("Error in Logic.run, attempted get the connection of action: "
-                            + message);
+                try 
+                {
+                    System.out.println("Trying to send message");
+                    sendConnection.sendMessage(message);
+                } 
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                    base.logger
+                        .severe("Error in UsarMessageParser.run, attempted get the connection of message: "
+                                + message);
+                }
             }
+            System.out.printf("End of while loop, message %s not sent.\n", message);
         }
     } 
 }

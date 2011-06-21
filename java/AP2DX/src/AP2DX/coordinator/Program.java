@@ -64,11 +64,11 @@ public class Program extends AP2DXBase {
             try 
             {
                 //Old:
-                //out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
+                out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
                 //out.flush();
 
                 //This should be able to initialize a robot now!
-                out.print(message);
+                //out.print(message);
                 out.flush();
             }
             catch (Exception e) 
