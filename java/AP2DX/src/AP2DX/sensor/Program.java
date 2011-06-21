@@ -78,7 +78,11 @@ public class Program extends AP2DXBase
                 //break;
 
                 // Do some awesome things with the sonar message we just got!
-                drawer.paintSonarLines(((SonarSensorMessage) message).getRangeArray());
+                SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
+                if (sonarSensorMessage.getRangeArray() == null)
+                    System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
+                else
+                    drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
                 break;
             case AP2DX_SENSOR_RANGESCANNER:
                 RangeScannerSensorMessage rangeScannerSensorMessage = 
