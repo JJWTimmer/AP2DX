@@ -12,6 +12,11 @@ import AP2DX.*;
 */
 public class EncoderSensorMessage extends SpecializedMessage 
 {
+    
+    private double left;
+    private double right;
+    private double theta;
+
     /** Creates a specialized message from a standard AP2DXMessage.
     * This constructor could be used to clone an AP2DXMessage. */
     public EncoderSensorMessage(AP2DXMessage message)
@@ -19,12 +24,6 @@ public class EncoderSensorMessage extends SpecializedMessage
         super(message);
     }
 
-    /** Retrieves a sensordata array from the values array. I don't know
-    * if we can actually use this, but it's more proof of concept. */
-    public double[] getSensorDataArray()
-    {
-        return null;
-    }
 
     public void specializedParseMessage()
     {   

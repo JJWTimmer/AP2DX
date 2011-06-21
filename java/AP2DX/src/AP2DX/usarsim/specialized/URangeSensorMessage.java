@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import AP2DX.usarsim.UsarSimMessage;
+import AP2DX.specializedMessages.*;
+import AP2DX.*;
 
 /**
  * Not nessecary to convert this type to a new Usarsim string.
@@ -32,6 +34,18 @@ public class URangeSensorMessage extends UsarSimSensorMessage {
 		super(string);
 		this.parseMessage();
 	}
+
+
+    public AP2DXMessage toAp2dxMessage()
+    {
+        // I've assumed this to be the 'range scanner sensor' and not just the 'range sensor'
+        RangeScannerSensorMessage rangeScannerSensorMessage = 
+            new RangeScannerSensorMessage(Module.COORDINATOR, Module.SENSOR); // not really generic
+        rangeScannerSensorMessage.setFov(fov);
+        rangeScannerSensorMessage.setResolution(resolution);
+        rangeScannerSensorMessage.setDataArray(range);
+        return rangeScannerSensorMessage;
+    }
 
 	/**
 	 * @see AP2DX.usarsim.specialized.SensorMessage#parseMessage() Parses all

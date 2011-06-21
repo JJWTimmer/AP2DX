@@ -48,9 +48,13 @@ public abstract class SpecializedMessage extends AP2DXMessage
      */
     public SpecializedMessage(AP2DXMessage message)
     {
-        super(message.getMessageString(), message.getSourceModuleId(), message.getDestinationModuleId());
-        sourceModuleId = message.getSourceModuleId();
-        destinationModuleId = message.getDestinationModuleId();
+        this(message, message.getSourceModuleId(), message.getDestinationModuleId());
+    }
+
+    /** Creates a specialized message form an AP2DX message with a different source and destionation ID */
+    public SpecializedMessage(AP2DXMessage message, Module sourceId, Module destinationId)
+    {
+        super(message.getMessageString(), sourceId, destinationId);
         messageString = message.getMessageString();
         values = message.getValues();
     }
@@ -61,5 +65,7 @@ public abstract class SpecializedMessage extends AP2DXMessage
         specializedParseMessage();
     }
 
+    /** Parsing the fields of 'values' that are specific for a concrete 
+    * specialized message. */
     abstract public void specializedParseMessage();
 }
