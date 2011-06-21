@@ -45,7 +45,7 @@ public class Program extends AP2DXBase {
             System.out.println("Warning, security override in progress");
             config = readConfig();
             System.out.println("Config: " + config.get("sim_port"));
-            UsarSimMessage message = new InitMessage();
+            UsarSimMessage message = new UInitMessage();
             System.out.println("Message: " + message.toString());
 
             String address = config.get("sim_address").toString();
@@ -101,7 +101,7 @@ public class Program extends AP2DXBase {
                     try
                     {   
                         System.out.println("Trying to send Sonar Message");
-                        SonarMessage messageIn = new SonarMessage((UsarSimMessage) msg);
+                        USonarSensorMessage messageIn = new USonarSensorMessage((UsarSimMessage) msg);
                         //Create a new message to the Sensor module
                         SonarSensorMessage message = new SonarSensorMessage(IAM, Module.SENSOR);
                         // Put the right values in the message

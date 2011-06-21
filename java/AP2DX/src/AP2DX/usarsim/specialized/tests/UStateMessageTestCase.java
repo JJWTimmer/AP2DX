@@ -12,21 +12,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import AP2DX.Message;
-import AP2DX.usarsim.specialized.StateMessage;
+import AP2DX.usarsim.specialized.UStateMessage;
 
 /**
  * @author jjwt
  *
  */
-public class StateMessageTestCase {
+public class UStateMessageTestCase {
 
 	/**
-	 * Test method for {@link AP2DX.usarsim.specialized.StateMessage#parseMessage()}.
+	 * Test method for {@link AP2DX.usarsim.specialized.UStateMessage#parseMessage()}.
 	 */
 	@Test
 	public void testParseMessage() {
 		try {
-			StateMessage msg = new StateMessage("STA {Type GroundVehicle} {Time 395.38} {FrontSteer 0.0000} {RearSteer 0.0000} {LightToggle False} {LightIntensity 0} {Battery 1200} {View -1}");
+			UStateMessage msg = new UStateMessage("STA {Type GroundVehicle} {Time 395.38} {FrontSteer 0.0000} {RearSteer 0.0000} {LightToggle False} {LightIntensity 0} {Battery 1200} {View -1}");
 			
 			assertEquals("GroundVehicle", msg.getType());
 			assertEquals(395.38, msg.getTime(), 1e-4);
@@ -44,12 +44,12 @@ public class StateMessageTestCase {
 	}
 
 	/**
-	 * Test method for {@link AP2DX.usarsim.specialized.StateMessage#StateMessage(AP2DX.usarsim.UsarSimMessage)}.
+	 * Test method for {@link AP2DX.usarsim.specialized.UStateMessage#StateMessage(AP2DX.usarsim.UsarSimMessage)}.
 	 */
 	@Test
 	public void testStateMessage() {
 		try {
-			Message msg = new StateMessage("STA {Type GroundVehicle} {Time 395.38} {FrontSteer 0.0000} {RearSteer 0.0000} {LightToggle False} {LightIntensity 0} {Battery 1200} {View -1}");
+			Message msg = new UStateMessage("STA {Type GroundVehicle} {Time 395.38} {FrontSteer 0.0000} {RearSteer 0.0000} {LightToggle False} {LightIntensity 0} {Battery 1200} {View -1}");
 			assertNotNull(msg);
 		}
 		catch (Exception ex) {
