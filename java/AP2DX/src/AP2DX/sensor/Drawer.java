@@ -20,7 +20,8 @@ import java.lang.Thread;
  */
 public class Drawer extends JPanel
 {
-    public double[] sonarRanges, rangeScannerRanges;
+    public double[] sonarRanges = new double[0];
+    public double[] rangeScannerRanges = new double[0];
     private int[] sonarThetas = {0, 40, 60, 80, 100, 120, 140, 180};
     private static final double MAX_SONAR_VALUE = 5.0;
     // VV might be the same as MAX_SONAR_VALUE, always?!
@@ -92,7 +93,7 @@ public class Drawer extends JPanel
         {
             double line = (rangeScannerRanges[i] / MAX_RANGE_SCANNER_VALUE) * getSize().height;
             double theta = i * rangeScannerResolution;
-            System.out.printf("Theta = %f, for line %d\n", theta, i);
+            //System.out.printf("Theta = %f, for line %d\n", theta, i);
              
             x1 = getSize().width / 2;
             y1 = getSize().height - 10;
@@ -132,4 +133,28 @@ public class Drawer extends JPanel
         drawer.paintSonarLines(sonarDataSample); 
         drawer.paintRangeScannerLines(rangeScannerDataSample);
     }
+
+    // setters and getters {{{
+
+    public double getRangeScannerFov()
+    {
+        return rangeScannerFov;
+    }
+
+    public void setRangeScannerFov(double value)
+    {
+        rangeScannerFov = value;
+    } 
+
+    public double getRangeScannerResolution()
+    {
+        return rangeScannerResolution;
+    }
+
+    public void setRangeScannerResolution(double value)
+    {
+        rangeScannerResolution = value;
+    }
+
+    // }}}
 }

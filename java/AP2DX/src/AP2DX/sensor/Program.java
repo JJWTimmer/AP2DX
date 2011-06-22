@@ -65,11 +65,11 @@ public class Program extends AP2DXBase
     }
 
     @Override
-    public ArrayList<AP2DXMessage> componentLogic(Message msg) 
+    public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
 
-        switch (msg.getMsgType())
+        switch (message.getMsgType())
         {
             case AP2DX_SENSOR_SONAR:
                 //This is deprecated, I think.
@@ -78,10 +78,29 @@ public class Program extends AP2DXBase
                 //break;
 
                 // Do some awesome things with the sonar message we just got!
-                drawer.paintSonarLines(((SonarSensorMessage) msg).getRangeArray());
+                SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
+                if (sonarSensorMessage.getRangeArray() == null)
+                    System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
+                else
+                    drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
+                break;
+            case AP2DX_SENSOR_RANGESCANNER:
+                RangeScannerSensorMessage rangeScannerSensorMessage = 
+                    (RangeScannerSensorMessage) message;
+                drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
+                drawer.setRangeScannerResolution(rangeScannerSensorMessage.getResolution());
+                drawer.paintRangeScannerLines(rangeScannerSensorMessage.getDataArray());
+                break;
+    
             default:
-                System.out.println("Unexpected message type in ap2dx.sensor.Program: " + msg.getMsgType());
+                System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
         }
         return messageList;
     }
 }
+
+
+
+
+
+

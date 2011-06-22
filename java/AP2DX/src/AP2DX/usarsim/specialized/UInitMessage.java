@@ -4,6 +4,7 @@
 package AP2DX.usarsim.specialized;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import AP2DX.Message;
 import AP2DX.usarsim.UsarSimMessage;
@@ -27,9 +28,8 @@ public final class UInitMessage extends UsarSimMessage {
      *  TODO: Make this not hardcoded
      */
     @UsarMessageIteratorField
-        private List<ArrayFloatData> location = new ArrayList<ArrayFloatData>() {
-    	{new ArrayFloatData("Location", "0.76,2.3,1.8");}
-    };
+        private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "0.76,2.3,1.8"));
+
 
     /** The rotation of the robot. Array with three values, respectively: Roll, Pitch, Yaw*/
     @UsarMessageIteratorField
