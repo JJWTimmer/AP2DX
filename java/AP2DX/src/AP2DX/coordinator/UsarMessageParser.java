@@ -118,6 +118,7 @@ public class UsarMessageParser extends Thread
                 {
                     System.out.println("Trying to send message");
                     sendConnection.sendMessage(message);
+                    System.out.println("Message sent");
                 } 
                 catch (Exception e) 
                 {
@@ -127,7 +128,7 @@ public class UsarMessageParser extends Thread
                                 + message);
                 }
             }
-            System.out.printf("End of while loop, message %s not sent.\n", message);
+            System.out.printf("End of while loop, message %s may be sent.\n", message);
         }
     } 
 }

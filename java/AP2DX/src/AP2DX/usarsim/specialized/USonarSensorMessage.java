@@ -37,14 +37,10 @@ public class USonarSensorMessage extends UsarSimSensorMessage {
 
     public AP2DXMessage toAp2dxMessage()
     {
-        System.out.println("A");
         SonarSensorMessage sonarSensorMessage = 
             new SonarSensorMessage(Module.COORDINATOR, Module.SENSOR);
-        System.out.println("B");
         sonarSensorMessage.setTime(time);   
-        System.out.println("C");
         sonarSensorMessage.setRangeArray(data);
-        System.out.println("U");
         return sonarSensorMessage;
     }
 	

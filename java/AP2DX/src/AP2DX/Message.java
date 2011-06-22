@@ -135,15 +135,10 @@ public abstract class Message
      */
     public Message(String in, Module source, Module destination, MessageType type)
     {
-        System.out.println("E");
         this.messageString = in; 
-        System.out.println("F");
         this.sourceModuleId = source;
-        System.out.println("G");
         this.destinationModuleId = destination;
-        System.out.println("H");
         this.type = type;
-        System.out.println("I");
     }
     
     /**
