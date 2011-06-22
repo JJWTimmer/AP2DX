@@ -534,6 +534,10 @@ public abstract class AP2DXBase {
 					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
+
+                    System.out.printf("Adding connection %s to connections\n", connHandler.moduleID);
+                    base.inConnections.add(connHandler);
+
 				} catch (Exception e) {
 					// something wend terribly wrong, terminate module.
 					AP2DXBase.logger.severe(String.format("Error in connectionhandler: %s\n%s", conn.getRemoteSocketAddress(), e.getMessage()));
