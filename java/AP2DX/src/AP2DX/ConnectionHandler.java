@@ -28,6 +28,7 @@ public class ConnectionHandler extends Thread {
 
 	private Socket socket;
 	private AP2DXBase base;
+    /** The module with which this ConnectionHandler has a connection */
 	public final Module moduleID;
 
 	private PrintWriter out;

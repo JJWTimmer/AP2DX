@@ -31,7 +31,6 @@ public class UsarSimMessageReader extends BufferedReader implements IMessageRead
         String line = null;
         while (line == null)
         {
-            System.out.println("Trying to read line");
             line = readLine();
         }
         Message message = new UsarSimMessage(line);

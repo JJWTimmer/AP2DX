@@ -93,6 +93,9 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
     {   
         try
         {
+            values.put("destinationModuleId", destinationModuleId.toString());
+            values.put("sourceModuleId", sourceModuleId.toString());
+            values.put("type", type.typeString.toString());
             messageString = (new JSONObject(values)).toString();
         }
         catch (Exception e)
