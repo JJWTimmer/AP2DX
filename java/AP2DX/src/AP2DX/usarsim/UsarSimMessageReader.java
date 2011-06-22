@@ -21,21 +21,15 @@ public class UsarSimMessageReader extends BufferedReader implements IMessageRead
 	 * @param in Streamreader to read from
 	 */
 	public UsarSimMessageReader(InputStream in) {
-		super(new InputStreamReader(in), 1024);
+		super(new InputStreamReader(in));
 	}
 
 	/**
 	 * Reads a message from the stream
 	 */
 	public Message readMessage() throws IOException {
-		String line = "";
-        for (int i=0;i < 1000; i++)
-        {
-            int a = read();
-            System.out.print(a);
-            line += "a";
-        }
-        
+		String line = readLine();
+		
 		Message message = new UsarSimMessage(line);
 
 		return message;
