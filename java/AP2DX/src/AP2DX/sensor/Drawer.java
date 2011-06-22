@@ -112,6 +112,7 @@ public class Drawer extends JPanel
     /** Theta is toRadians(corner of the sensor) */
     public void paint(Graphics g) 
     {
+        g.fillRect (0, 0, getWidth(), getHeight());
         paintSonarLines(g);
         paintRangeScannerLines(g);
         repaint();
