@@ -120,13 +120,18 @@ public abstract class Message
         this.type = type;
         //this.messageString = this.compileMessage();
     }
+
+    public Message(String messageString)
+    {
+        this.messageString = messageString;
+    }
     
     /**
      * constructor with sender and receiver defined
      * @param in raw data
      * @param source sending module
      * @param destination receiving module
-     * @param sets the message type
+     * @param type the message type
      */
     public Message(String in, Module source, Module destination, MessageType type)
     {

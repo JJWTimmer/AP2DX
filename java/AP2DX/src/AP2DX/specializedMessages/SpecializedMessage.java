@@ -44,7 +44,6 @@ public abstract class SpecializedMessage extends AP2DXMessage
 
     /** 
      * Creates a specialized message from a standard AP2DXMessage.
-     * This constructor could be used to clone an AP2DXMessage. 
      */
     public SpecializedMessage(AP2DXMessage message)
     {

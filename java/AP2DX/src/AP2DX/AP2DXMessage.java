@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -22,7 +21,8 @@ import AP2DX.specializedMessages.*;
  * @author Jasper Timmer
  * @author Maarten Inja
  */
-public class AP2DXMessage extends Message implements Delayed {
+public class AP2DXMessage extends Message implements Delayed, Cloneable
+{
 	
 	/** 
 	 * Delay of the message, handy if you want to send a message in the future.
@@ -47,8 +47,26 @@ public class AP2DXMessage extends Message implements Delayed {
         parseMessage();
 	}
 
+    public AP2DXMessage(String messageString)
+    {
+        super(messageString);
+        parseMessage();
+    }
+
+    /** Creates a complete new instance of an AP2DX message. Only this 
+    * objects messageString should be compiled correctly. */
+    public Object clone()
+    {
+        AP2DXMessage message = new AP2DXMessage(messageString);
+        message.parseMessage();
+        message.compileMessage();
+        return message;
+    }
+
 	/**
-     * Sets the destination and source module ID. 
+     * Parses the message string to fill the values map with stuff and also
+     * sets the type and destinationID and source moduleID. 
+     * 
 	 * @see AP2DX.Message#parseMessage()
 	 */
 	@Override
@@ -70,6 +88,9 @@ public class AP2DXMessage extends Message implements Delayed {
 		}
 	}
 
+    /** 
+    * Creates a (new) string in messageString from whatever is in the values map. 
+    */
     public String compileMessage()
     {   
         //try
@@ -150,6 +171,13 @@ public class AP2DXMessage extends Message implements Delayed {
 		delay = (System.currentTimeMillis() + millisec);
 		return delay;
 	}
+
+    public String toString()
+    {
+        compileMessage();
+        return messageString;
+    }
+
 }
 
 
