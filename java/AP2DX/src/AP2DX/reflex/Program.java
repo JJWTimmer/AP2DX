@@ -16,8 +16,7 @@ public class Program extends AP2DXBase {
 	private double[] previousDistances;
 	private double[] approaching;
 	private boolean isBotBlocked = false;
-	private ArrayBlockingQueue<AP2DXMessage> motorBacklog = new ArrayBlockingQueue<AP2DXMessage>(
-			256);
+	private ArrayBlockingQueue<AP2DXMessage> motorBacklog;
 
 	/**
 	 * Entrypoint of reflex
@@ -78,6 +77,7 @@ public class Program extends AP2DXBase {
 			}
 
 			boolean toggleBlocked = false;
+			
 			for (int i = 0; i < getCurrentDistances().length; i++) {
 				if (getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
 					setBotBlocked(true);
@@ -105,7 +105,7 @@ public class Program extends AP2DXBase {
 	 */
 	@Override
 	public void doOverride() {
-		Thread t1 = new Thread(new MotorPassthrough(this));
+		Thread t1 = new Thread(new MotorPassthrough(this, this.getMotorBacklog()));
 		t1.start();
 	}
 
@@ -118,9 +118,11 @@ public class Program extends AP2DXBase {
 	 */
 	private class MotorPassthrough implements Runnable {
 		AP2DXBase base;
+		ArrayBlockingQueue<AP2DXMessage> baseMotorBacklog;
 
-		public MotorPassthrough(AP2DXBase base) {
+		public MotorPassthrough(AP2DXBase base, ArrayBlockingQueue<AP2DXMessage> bmb) {
 			this.base = base;
+			this.baseMotorBacklog = bmb;
 		}
 
 		@Override
@@ -132,7 +134,6 @@ public class Program extends AP2DXBase {
 				while (conn == null && !interrupted)
 					conn = this.base.getSendConnection(Module.MOTOR);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				interrupted = true;
 			}
@@ -147,7 +148,7 @@ public class Program extends AP2DXBase {
 							Thread.sleep(10);
 						}
 
-						msg = getMotorBacklog().poll(50, TimeUnit.MILLISECONDS);
+						msg = baseMotorBacklog.poll(50, TimeUnit.MILLISECONDS);
 					}
 				} catch (InterruptedException e) {
 					interrupted = true;
@@ -233,6 +234,10 @@ public class Program extends AP2DXBase {
 	 * @return the motorBacklog
 	 */
 	public ArrayBlockingQueue<AP2DXMessage> getMotorBacklog() {
+		if (motorBacklog == null) {
+			motorBacklog = new ArrayBlockingQueue<AP2DXMessage>(256);
+		}
+		
 		return motorBacklog;
 	}
 }
