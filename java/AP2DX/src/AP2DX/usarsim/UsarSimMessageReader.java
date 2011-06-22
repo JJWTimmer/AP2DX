@@ -28,8 +28,12 @@ public class UsarSimMessageReader extends BufferedReader implements IMessageRead
 	* Reads a message from the stream
 	*/
     public Message readMessage() throws IOException {
-        String line = readLine();
-
+        String line = null;
+        while (line == null)
+        {
+            System.out.println("Trying to read line");
+            line = readLine();
+        }
         Message message = new UsarSimMessage(line);
 
         return message;

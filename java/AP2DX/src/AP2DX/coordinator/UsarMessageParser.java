@@ -46,6 +46,7 @@ public class UsarMessageParser extends Thread
         {
             Socket socket = new Socket(address, port);
             in = new UsarSimMessageReader(socket.getInputStream());
+
         }
         catch (Exception ex) 
         {
@@ -64,14 +65,16 @@ public class UsarMessageParser extends Thread
             {
                 System.out.println("Reading message");
                 messageIn = in.readMessage();
+                System.out.println("After read message");
+                System.out.println(messageIn.toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 base.logger
                     .severe("Error in UsarMessageParser.run, attempted to retrieve item out of messageReader");
             }
             //Initialize the message we will return. This shouldn't stay null.
-            AP2DXMessage message = null;
-            
+            //AP2DXMessage message = null;
+            /*
             switch (messageIn.getMsgType())
             {
                 case USAR_SENSOR:
@@ -128,6 +131,7 @@ public class UsarMessageParser extends Thread
                 }
             }
             System.out.printf("End of while loop, message %s not sent.\n", message);
+            */
         }
     } 
 }

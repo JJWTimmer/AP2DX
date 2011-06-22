@@ -61,6 +61,8 @@ public class Program extends AP2DXBase {
             {
                 ex.printStackTrace();
             }
+            parser = new UsarMessageParser(this, IAM, Module.SENSOR, config);
+            parser.start();
             UsarSimMessage message = new UInitMessage();
             System.out.println("Message: " + message.toString());
             try 
@@ -70,16 +72,11 @@ public class Program extends AP2DXBase {
                 //out.flush();
 
             	out.println(message.toString());
-            	
-                //This should be able to initialize a robot now!
-                //out.print(message);
             }
             catch (Exception e) 
             {
                 e.printStackTrace();
             }
-            //parser = new UsarMessageParser(this, IAM, Module.SENSOR, config);
-            //parser.start();
 
 
         }
