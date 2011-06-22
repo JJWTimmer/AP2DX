@@ -352,7 +352,7 @@ public abstract class AP2DXBase {
 	 * 
 	 * @param ipaddress
 	 * @param port
-	 * @param module Module it connects to
+	 * @param destination Module it connects to
 	 * @return true if operation succeeded false otherwise
 	 */
 	private boolean addSendConnection(String ipaddress, int port, Module destination) {
@@ -459,7 +459,7 @@ public abstract class AP2DXBase {
 				
 				HelloMessage message = new HelloMessage(IAM, this.module);
 				connHandler.sendMessage(message);
-				boolean yes = true;
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -23,6 +23,7 @@ class test:
         print "attempting to send spawn message"
         s.send(spawnMessage)
         data = s.recv(bufferSize)
+        print "done, data:\n%s" % data
         print "attempting to send forward drive message"
         while True:
             #s.send(forwardDriveMessage)
