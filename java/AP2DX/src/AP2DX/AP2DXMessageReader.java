@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import AP2DX.specializedMessages.*;
-
 
 /**
  * Specialized bufferedReader to directly parse messages from a (in our case)
@@ -15,17 +15,17 @@ import AP2DX.specializedMessages.*;
  * 
  * @author Maarten Inja
  */
-public class AP2DXMessageReader extends BufferedReader implements IMessageReader {
+public class AP2DXMessageReader extends BufferedReader implements
+		IMessageReader {
 	/**
 	 * source of messages of the stream
 	 */
 	private Module source = null;
-	
+
 	/**
 	 * destinatnion of messages of the stream, should be component self.
 	 */
 	private Module destination = null;
-
 
 	/**
 	 * 
@@ -36,7 +36,6 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
 		this.source = source;
 	}
 
-	
 	/**
 	 * 
 	 * @param in
@@ -50,42 +49,29 @@ public class AP2DXMessageReader extends BufferedReader implements IMessageReader
 	/**
 	 * Reads a message and parses it. Messag
 	 */
-	public Message readMessage() throws IOException 
-    {
-		String line = readLine();
+	public Message readMessage() throws IOException {
+		String line = null;
+		boolean succeeded = false;
+		
+		while (!succeeded) {
+			try {
+				line = readLine();
+				succeeded = true;
+			} catch (SocketTimeoutException ex) {
+				// pass
+			}
+		}
+		
 		AP2DXMessage message = new AP2DXMessage(line, source);
-        switch(message.getMsgType())
-        {
-            case AP2DX_SENSOR_SONAR:
-                return new SonarSensorMessage(message); 
-            case AP2DX_MOTOR_ACTION:
-                return new ActionMotorMessage(message);
-            default:
-                System.out.println("AP2DX.readMessage(), no specialized message could be parsed!"); 
-		        return message;
-        }
+		switch (message.getMsgType()) {
+		case AP2DX_SENSOR_SONAR:
+			return new SonarSensorMessage(message);
+		case AP2DX_MOTOR_ACTION:
+			return new ActionMotorMessage(message);
+		default:
+			System.out
+					.println("AP2DX.readMessage(), no specialized message could be parsed!");
+			return message;
+		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

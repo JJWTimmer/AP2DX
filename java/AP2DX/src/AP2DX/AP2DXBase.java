@@ -24,6 +24,8 @@ import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import AP2DX.specializedMessages.HelloMessage;
+
 /**
  * Baseclass for AP2DX components<br>
  * <br>
@@ -423,6 +425,12 @@ public abstract class AP2DXBase {
 					success = true;
 				}
 				catch (ConnectException e2) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					// keep trying!
 				}
 				catch (Exception e1) {
@@ -430,18 +438,16 @@ public abstract class AP2DXBase {
 					e1.printStackTrace();
 					//System.exit(1);
 				}
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 
 			ConnectionHandler connHandler = null;
 			
 			try {
 				connHandler = new ConnectionHandler(false, base, conn, IAM, this.module);
+				
+				
+				HelloMessage message = new HelloMessage(IAM, this.module);
+				connHandler.sendMessage(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -482,12 +488,24 @@ public abstract class AP2DXBase {
 				// check if outgoing connection has closed and attempt to reconnect
 				for (ConnectionHandler conn : base.outConnections) {
 					if (!conn.isAlive()) {
-						base.inConnections.remove(conn);
+						int port = conn.getPort();
+						String address = conn.getAddress();
+						
+						Module module = conn.getModule();
+
+						Connector connector = new Connector(this.base, address, port, module);
+						Thread t1 = new Thread(connector);
+						
+						try {
+							t1.start();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//System.exit(1);
+						}
 					}
 				}
-				
 			}
-			
 		}
 	}
 	

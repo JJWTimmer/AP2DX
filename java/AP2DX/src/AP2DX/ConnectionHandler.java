@@ -122,5 +122,17 @@ public class ConnectionHandler extends Thread {
 	private void setConnAlive(boolean value) {
 		alive = value;
 	}
+	
+	public int getPort() {
+		return this.socket.getPort();
+	}
+	
+	public String getAddress() {
+		return this.socket.getInetAddress().toString();
+	}
+	
+	public Module getModule() {
+		return this.moduleID;
+	}
 
 }
