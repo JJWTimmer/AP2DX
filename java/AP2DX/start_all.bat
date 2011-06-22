@@ -9,7 +9,7 @@ start start.bat
 cd ..
 
 cd reflex
-REM start start.bat
+start start.bat
 cd ..
 
 cd planner

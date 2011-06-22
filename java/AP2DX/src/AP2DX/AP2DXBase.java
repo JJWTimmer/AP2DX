@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,6 +23,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import AP2DX.specializedMessages.HelloMessage;
 
 /**
  * Baseclass for AP2DX components<br>
@@ -422,6 +425,12 @@ public abstract class AP2DXBase {
 					success = true;
 				}
 				catch (ConnectException e2) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					// keep trying!
 				}
 				catch (Exception e1) {
@@ -429,18 +438,16 @@ public abstract class AP2DXBase {
 					e1.printStackTrace();
 					//System.exit(1);
 				}
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 
 			ConnectionHandler connHandler = null;
 			
 			try {
 				connHandler = new ConnectionHandler(false, base, conn, IAM, this.module);
+				
+				
+				HelloMessage message = new HelloMessage(IAM, this.module);
+				connHandler.sendMessage(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -454,6 +461,54 @@ public abstract class AP2DXBase {
 		}
 	}
 
+	/**
+	 * This class is used to check the lists of incoming and outgoing connections,
+	 * for dead links. If nessecary, try to reestablish connections.
+	 * @author Jasper Timmer
+	 *
+	 */
+	private class ConnectionChecker implements Runnable {
+
+		private AP2DXBase base;
+		
+		public ConnectionChecker(AP2DXBase base) {
+			this.base = base;
+		}
+		
+		@Override
+		public void run() {
+			while (true) {
+				//check if incoming connection has closed and remove from list
+				for (ConnectionHandler conn : base.inConnections) {
+					if (!conn.isAlive()) {
+						base.inConnections.remove(conn);
+					}
+				}
+				
+				// check if outgoing connection has closed and attempt to reconnect
+				for (ConnectionHandler conn : base.outConnections) {
+					if (!conn.isAlive()) {
+						int port = conn.getPort();
+						String address = conn.getAddress();
+						
+						Module module = conn.getModule();
+
+						Connector connector = new Connector(this.base, address, port, module);
+						Thread t1 = new Thread(connector);
+						
+						try {
+							t1.start();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//System.exit(1);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Class for listening at specified port and accepting connections.
 	 * 
@@ -477,7 +532,9 @@ public abstract class AP2DXBase {
 		}
 
 		/**
-		 * Listen and accept connections forever
+		 * Listen and accept connections forever. <br/>
+		 * <br/>
+		 * Timeout on new sockets is 250 millis
 		 */
 		@Override
 		public void run() {
@@ -489,18 +546,26 @@ public abstract class AP2DXBase {
                     System.out.println("Waiting for connection");
 					conn = this.server.accept();
                     System.out.println("Connection starting");
+					
+					// important: timeout on all connections is set here
+					conn.setSoTimeout(250);
+					
+					AP2DXBase.logger.info(String.format("New connection with %s", conn.getRemoteSocketAddress()));
+					
 					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
+
                     System.out.printf("Adding connection %s to connections\n", connHandler.moduleID);
                     base.inConnections.add(connHandler);
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					// something wend terribly wrong, terminate module.
+					AP2DXBase.logger.severe(String.format("Error in connectionhandler: %s\n%s", conn.getRemoteSocketAddress(), e.getMessage()));
 					e.printStackTrace();
+					System.exit(1);
 				}
 			}
 		}
-
 	}
 }

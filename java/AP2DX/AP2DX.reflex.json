@@ -7,6 +7,11 @@
 			   "component": "MOTOR",
 			   "address": "127.0.0.1",
 			   "port": 5002
+			 },
+			{
+			   "component": "PLANNER",
+			   "address": "127.0.0.1",
+			   "port": 5003
 			 }
 		]
 }
