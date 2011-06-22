@@ -66,6 +66,8 @@ public class AP2DXMessageReader extends BufferedReader implements
 		switch (message.getMsgType()) {
 		case AP2DX_SENSOR_SONAR:
 			return new SonarSensorMessage(message);
+        case AP2DX_SENSOR_RANGESCANNER:
+            return new RangeScannerSensorMessage(message);
 		case AP2DX_MOTOR_ACTION:
 			return new ActionMotorMessage(message);
 		default:

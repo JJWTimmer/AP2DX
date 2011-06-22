@@ -55,8 +55,8 @@ public class RangeScannerSensorMessage extends SpecializedMessage
 
     public void specializedParseMessage()
     {
-        resolution = Double.parseDouble(values.get("resolution").toString());
-        fov = Double.parseDouble(values.get("fov").toString());
+        //resolution = Double.parseDouble(values.get("resolution").toString());
+        //fov = Double.parseDouble(values.get("fov").toString());
 
 		try 
         { 
@@ -68,6 +68,9 @@ public class RangeScannerSensorMessage extends SpecializedMessage
             dataArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 dataArray[i] = jsonArray.getDouble(i);
+            //time = jsonObject.getDouble("time");
+            resolution = jsonObject.getDouble("resolution");
+            fov = jsonObject.getDouble("fov");
         }
         catch (JSONException e)
         {
@@ -80,7 +83,7 @@ public class RangeScannerSensorMessage extends SpecializedMessage
    
     public void setFov(double value)
     {
-        fov = value;
+        this.fov = value;
         values.put("fov", value);
     }     
 
@@ -91,7 +94,7 @@ public class RangeScannerSensorMessage extends SpecializedMessage
 
     public void setResolution(double value)
     {
-        resolution = value;
+        this.resolution = value;
         values.put("resolution", value);
     } 
 
