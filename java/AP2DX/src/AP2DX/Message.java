@@ -16,7 +16,7 @@ public abstract class Message
     /**
      * dictionary with key-value pairs of incoming data
      */
-    protected Map<String, Object> values;
+    protected Map<String, Object> values = new Map<String, Object> ();
 
     /**
      * Enum type for the different types of messages between modules.
