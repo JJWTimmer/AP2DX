@@ -23,8 +23,7 @@ import AP2DX.usarsim.UsarSimMessageReader;
  * Besides listening for message, it can also send messages.
  * 
  * @author Maarten Inja
-<<<<<<< HEAD
- * */
+ */
 public class ConnectionHandler extends Thread {
 
 	private Socket socket;
@@ -88,7 +87,7 @@ public class ConnectionHandler extends Thread {
 
 	/** Thread logic. */
 	public void run() {
-		while (true) // TODO: make interupt variable or something
+		while (true)
 		{
 			try {
 				AP2DXMessage incomingMessage = (AP2DXMessage) in.readMessage();
