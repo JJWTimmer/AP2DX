@@ -34,7 +34,6 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
     public AP2DXMessage(Message.MessageType type, Module source, Module destination)
     {
         super(type, source, destination);
-        parseMessage();
     }
 	
 	public AP2DXMessage(String in, Module source, Module destination) 

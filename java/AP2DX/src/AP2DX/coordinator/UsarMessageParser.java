@@ -91,8 +91,9 @@ public class UsarMessageParser extends Thread
                                 System.out.println("After USonarSensorMessage");
                                 // Put the right values in the message
                                 message = (SonarSensorMessage) sonarMessage.toAp2dxMessage();
-                                message.setDestinationModuleId(send);
-                                message.setSourceModuleId(IAM);
+                                // This probably isn't needed:
+                                //message.setDestinationModuleId(send);
+                                //message.setSourceModuleId(IAM);
                                 System.out.println("After creating message");
                             }
                             catch (Exception e)

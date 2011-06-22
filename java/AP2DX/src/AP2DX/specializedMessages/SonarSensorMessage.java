@@ -33,6 +33,7 @@ public class SonarSensorMessage extends SpecializedMessage
 
 	public SonarSensorMessage(Module sourceId, Module destinationId)
 	{
+        System.out.println("In SonarSensorMessage");
 		super(Message.MessageType.AP2DX_SENSOR_SONAR, sourceId, destinationId);
 	}
 
