@@ -106,7 +106,7 @@ public class Program extends AP2DXBase {
 	@Override
 	public void doOverride() {
 		Thread t1 = new Thread(new MotorPassthrough(this));
-		t1.run();
+		t1.start();
 	}
 
 	/**
