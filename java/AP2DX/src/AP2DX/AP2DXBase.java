@@ -489,6 +489,7 @@ public abstract class AP2DXBase {
 					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
+                    System.out.printf("Adding connection %s to connections\n", connHandler.moduleID);
                     base.inConnections.add(connHandler);
 
 				} catch (Exception e) {
