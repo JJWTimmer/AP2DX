@@ -52,7 +52,6 @@ public class SonarSensorMessage extends SpecializedMessage
     {
         //time = Double.parseDouble(values.get("time").toString());
 
-        rangeArray = new double[7];
 
 		try 
         { 
@@ -61,6 +60,7 @@ public class SonarSensorMessage extends SpecializedMessage
             // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
             JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
+            rangeArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 rangeArray[i] = jsonArray.getDouble(i);
             time = jsonObject.getDouble("time");
