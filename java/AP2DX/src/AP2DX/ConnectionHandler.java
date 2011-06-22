@@ -80,9 +80,7 @@ public class ConnectionHandler extends Thread {
 		out = new PrintWriter(socket.getOutputStream(), true);
 
 		in = new AP2DXMessageReader(socket.getInputStream(), origin);
-        System.out.println("Waiting for first message on socket " + socket.getLocalPort());
 		Message firstIncomingMessage = in.readMessage();
-        System.out.println("Got it!");
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
 
 	}
@@ -114,7 +112,6 @@ public class ConnectionHandler extends Thread {
 	 * toString().
 	 */
 	public void sendMessage(Message message) {
-		System.out.printf("Printing message %s to moduleId %s on socket port %s", message.toString(), moduleID, socket.getPort());
 		out.println(message.toString());
 	}
 	
