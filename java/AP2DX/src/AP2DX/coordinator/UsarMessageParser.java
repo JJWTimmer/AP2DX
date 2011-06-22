@@ -116,7 +116,8 @@ public class UsarMessageParser extends Thread
             {
                 try 
                 {
-                    System.out.println("Trying to send message");
+                    System.out.println("Trying to send message" + message);
+                    System.out.println("Does it differ with? " + message.toString());
                     sendConnection.sendMessage(message);
                     System.out.println("Message sent");
                 } 

@@ -54,6 +54,7 @@ public class Program extends AP2DXBase
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500);
         frame.setVisible(true);
+        System.out.println("Ended override");
 
         // probably for testin' purposes? Removed either way :P
         // (In hindsight I discovered it wasn't for testing purposes but values could not be 
@@ -69,7 +70,9 @@ public class Program extends AP2DXBase
     @Override
     public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
+        System.out.println("Started componentLogic of Sensor with message " + message.getMessageString());
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
+
 
         switch (message.getMsgType())
         {
@@ -101,6 +104,7 @@ public class Program extends AP2DXBase
                 messageList.add(message2);
                 break;
             case AP2DX_SENSOR_SONAR:
+                System.out.println("AP2DX_SENSOR_SONAR message detected! ");
                 SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
                 if (sonarSensorMessage.getRangeArray() == null)
                     System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
