@@ -22,7 +22,7 @@ public class Drawer extends JPanel
 {
     public double[] sonarRanges = new double[0];
     public double[] rangeScannerRanges = new double[0];
-    private int[] sonarThetas = {0, 40, 60, 80, 100, 120, 140, 180};
+    private int[] sonarThetas = {180, 140, 120, 100, 80, 60, 40, 0};
     private static final double MAX_SONAR_VALUE = 5.0;
     // VV might be the same as MAX_SONAR_VALUE, always?!
     private static final double MAX_RANGE_SCANNER_VALUE = 5.0; 
@@ -61,11 +61,8 @@ public class Drawer extends JPanel
             x1 = getSize().width / 2;
             y1 = getSize().height - 10;
             y2 = (int) (getSize().height - 10 - (Math.sin(theta) * line));
-            //System.out.printf("sinus: %f, Cosinus: %f", Math.sin(theta), Math.cos(theta));
-            //System.out.printf("y2 for line %d is %d\n", i, y2);
             x2 = (int)(.5 * getSize().width + (10 + ( Math.cos(theta) * line)));
 
-            //System.out.printf("x2 for line %d is %d\n", i, x2);
             g.drawLine(x1, y1, x2, y2);
         }
         g.setColor(previousColor);
@@ -112,7 +109,8 @@ public class Drawer extends JPanel
     /** Theta is toRadians(corner of the sensor) */
     public void paint(Graphics g) 
     {
-        //g.fillRect (0, 0, getWidth(), getHeight());
+        g.setColor( java.awt.Color.white );
+        g.fillRect (0, 0, getWidth(), getHeight());
         paintSonarLines(g);
         paintRangeScannerLines(g);
         repaint();

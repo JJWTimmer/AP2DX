@@ -64,7 +64,7 @@ public class RangeScannerSensorMessage extends SpecializedMessage
             // can normally be used to extract the variables, were it not
             // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
-            JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
+            JSONArray jsonArray = jsonObject.getJSONArray("dataArray");
             dataArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 dataArray[i] = jsonArray.getDouble(i);

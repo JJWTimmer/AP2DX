@@ -9,8 +9,16 @@ import AP2DX.*;
 import static org.junit.Assert.*;
 
 
+/*
+ * 
+ * @author Wadie Assal
+ */
 public class AP2DXMessageTestCase {
 
+	/*
+	 * Construct AP2DXMessage with the different constructors.
+	 * Checks if they don't have NULL values
+	 */
 	@Test
 	public void testConstuctor() {
 		try {
@@ -22,6 +30,10 @@ public class AP2DXMessageTestCase {
 		}
 	}
 	
+	/*
+	 * Checks if the delay is not less then the current time and if there is
+	 * a value.
+	 */
 	@Test
 	public void testSetDelay()  {
 		try {
@@ -38,6 +50,33 @@ public class AP2DXMessageTestCase {
 		}
 	}
 	
+	/*
+	 * TODO Writing this damn thing.
+	 */
+	@Test
+	public void testClone() {
+		assertTrue(true);
+	}
+	
+	/*
+	 * TODO Writing this damn thing.
+	 */
+	@Test
+	public void testCompileMessage() {
+		assertTrue(true); 
+	}
+	
+	/*
+	 * TODO Writing this damn thing.
+	 */
+	@Test	
+	public void testCompareTo() {
+		assertTrue(true);
+	}
+	
+	/*
+	 * Checks the return values before and after the return values are set
+	 */
 	@Test
 	public void testGetDelay() {
 		try {
