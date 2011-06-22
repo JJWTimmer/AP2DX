@@ -105,11 +105,19 @@ public class Program extends AP2DXBase
                 break;
             case AP2DX_SENSOR_SONAR:
                 System.out.println("AP2DX_SENSOR_SONAR message detected! ");
+                //create the SonarSensorMessage instance
                 SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
                 if (sonarSensorMessage.getRangeArray() == null)
                     System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
                 else
+                {
+                    System.out.println("Updating the sonar lines");
                     drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
+                    // Clone it to send it to reflex
+                    //SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
+                    sonarSensorMessage.setDestinationModuleId(Module.REFLEX);
+                    messageList.add(sonarSensorMessage);
+                }
                 break;
             case AP2DX_SENSOR_RANGESCANNER:
                 RangeScannerSensorMessage rangeScannerSensorMessage = 
