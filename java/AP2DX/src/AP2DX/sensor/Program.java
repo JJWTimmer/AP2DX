@@ -120,6 +120,7 @@ public class Program extends AP2DXBase
                 }
                 break;
             case AP2DX_SENSOR_RANGESCANNER:
+                System.out.println("RangeScanner message detected");
                 RangeScannerSensorMessage rangeScannerSensorMessage = 
                     (RangeScannerSensorMessage) message;
                 drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
