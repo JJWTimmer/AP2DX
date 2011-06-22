@@ -1,6 +1,7 @@
 package AP2DX.specializedMessages;
 
 import AP2DX.*;
+import java.util.HashMap;
 
 /**
 * Specialized message for sensor data, actually only a constructor to construct
@@ -40,6 +41,7 @@ public abstract class SpecializedMessage extends AP2DXMessage
 	public SpecializedMessage(Message.MessageType type, Module sourceId, Module destinationId)
 	{
 		super(type, sourceId, destinationId);
+        values = new HashMap ();
 	}
 
     /** 
