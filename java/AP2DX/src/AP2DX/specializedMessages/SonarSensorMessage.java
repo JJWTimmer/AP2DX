@@ -65,7 +65,7 @@ public class SonarSensorMessage extends SpecializedMessage
                 rangeArray[i] = jsonArray.getDouble(i);
             time = jsonObject.getDouble("time");
         }
-        catch (JSONException e)
+        catch (Exception e)
         {
             System.out.println("Error in AP2DX.specializedMessages.SonarSensorMessage.specializedParseMessage()... things went south!");
             e.printStackTrace();
