@@ -489,6 +489,7 @@ public abstract class AP2DXBase {
 					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
+                    base.inConnections.add(connHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
