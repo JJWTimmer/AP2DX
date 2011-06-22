@@ -23,18 +23,6 @@ public class AP2DXMessageTestCase {
 	}
 	
 	@Test
-	public void testClone() {
-		try {
-		AP2DXMessage msg = 
-			new AP2DXMessage(Message.MessageType.AP2DX_COORDINATOR_DRIVE, Module.MOTOR, Module.COORDINATOR);
-		Object clone = msg.clone();
-		assertNotNull("AP2DXMessageTestCase.testClone", clone);
-		} catch (Exception e) {
-			fail();
-		}
-	}
-	
-	@Test
 	public void testSetDelay()  {
 		try {
 		AP2DXMessage msg = 
