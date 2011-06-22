@@ -1,0 +1,14 @@
+Waar is iedereen!?!!? Ah, jasper komt net binnen....
+Dick begint met lezen...
+
+Demo:
+    1. niet ``We think''.
+    2. Bij demo niet alleen ``functionaliteiten'' maar ook hoe.
+
+Final report:
+    1. Goede inleiding erbij
+    2. Architectuur kort uitleggen.
+
+Wat we moeten aanleveren
+    * verslag over het product
+    * reflectie
