@@ -3,24 +3,24 @@
  */
 package AP2DX;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.*;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -150,6 +150,18 @@ public abstract class AP2DXBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+		// Start connectionchecker to remove dead connections
+		// and restart outgoing connections
+		ConnectionChecker CC = new ConnectionChecker(this);
+		Thread t2 = new Thread(CC);
+		try {
+			t2.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//System.exit(1);
 		}
 
         System.out.println("Before override");
@@ -445,9 +457,9 @@ public abstract class AP2DXBase {
 			try {
 				connHandler = new ConnectionHandler(false, base, conn, IAM, this.module);
 				
-				
 				HelloMessage message = new HelloMessage(IAM, this.module);
 				connHandler.sendMessage(message);
+				boolean yes = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -497,11 +509,14 @@ public abstract class AP2DXBase {
 						Thread t1 = new Thread(connector);
 						
 						try {
+							base.threadCounter.incrementAndGet();
 							t1.start();
+							
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 							//System.exit(1);
+							
 						}
 					}
 				}

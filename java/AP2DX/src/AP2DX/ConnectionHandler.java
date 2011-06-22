@@ -80,8 +80,10 @@ public class ConnectionHandler extends Thread {
 		out = new PrintWriter(socket.getOutputStream(), true);
 
 		in = new AP2DXMessageReader(socket.getInputStream(), origin);
-
+		
+		this.base.logger.info("Waiting for msg in conn handler ctor");
 		Message firstIncomingMessage = in.readMessage();
+		this.base.logger.info(String.format("got msg in conn handler ctor: %s", firstIncomingMessage.messageString));
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
 
 	}
@@ -112,7 +114,7 @@ public class ConnectionHandler extends Thread {
 	 */
 	public void sendMessage(Message message) {
 		System.out.printf("Printing message %s to moduleId %s on socket port %s", message.toString(), moduleID, socket.getPort());
-		out.print(message.toString());
+		out.println(message.toString());
 	}
 	
 	public boolean isConnAlive() {
