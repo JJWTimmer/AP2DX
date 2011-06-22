@@ -41,6 +41,7 @@ public class UsarMessageParser extends Thread
         this.send = send;
         try 
         {
+            this.sendConnection = base.getSendConnection(send);
             in = new UsarSimMessageReader(socket.getInputStream());
         }
         catch (Exception ex) 
