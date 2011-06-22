@@ -152,6 +152,9 @@ public abstract class AP2DXBase {
 			}
 		}
 		
+/*
+Not working, can't change inConn and outConn while looping over them.
+
 		// Start connectionchecker to remove dead connections
 		// and restart outgoing connections
 		ConnectionChecker CC = new ConnectionChecker(this);
@@ -163,7 +166,7 @@ public abstract class AP2DXBase {
 			e.printStackTrace();
 			//System.exit(1);
 		}
-
+*/
         System.out.println("Before override");
 		// run the extra logic
 		this.doOverride();
@@ -476,6 +479,10 @@ public abstract class AP2DXBase {
 	/**
 	 * This class is used to check the lists of incoming and outgoing connections,
 	 * for dead links. If nessecary, try to reestablish connections.
+	 * 
+	 * Error: can't change the list inConnections and outConnections from other thread
+	 * while looping over it.
+	 * 
 	 * @author Jasper Timmer
 	 *
 	 */
@@ -519,6 +526,11 @@ public abstract class AP2DXBase {
 							
 						}
 					}
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					break;
 				}
 			}
 		}

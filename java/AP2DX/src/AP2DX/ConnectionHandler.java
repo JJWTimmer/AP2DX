@@ -135,7 +135,7 @@ public class ConnectionHandler extends Thread {
 	}
 	
 	public String getAddress() {
-		return this.socket.getInetAddress().toString();
+		return this.socket.getInetAddress().getHostAddress();
 	}
 	
 	public Module getModule() {
