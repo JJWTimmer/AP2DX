@@ -23,12 +23,12 @@ import AP2DX.usarsim.UsarSimMessageReader;
  * Besides listening for message, it can also send messages.
  * 
  * @author Maarten Inja
-<<<<<<< HEAD
  * */
 public class ConnectionHandler extends Thread {
 
 	private Socket socket;
 	private AP2DXBase base;
+    /** The module with which this ConnectionHandler has a connection */
 	public final Module moduleID;
 
 	private PrintWriter out;
