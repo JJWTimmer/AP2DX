@@ -77,7 +77,6 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
             destinationModuleId = Module.valueOf(jsonMessage.getString("destinationModuleId"));
             sourceModuleId = Module.valueOf(jsonMessage.getString("sourceModuleId"));
             type = MessageType.getEnumByString(jsonMessage.getString("type"));
-             
         }
         catch (JSONException e)
         {
@@ -93,6 +92,8 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
     {   
         try
         {
+            if (values == null)
+                values = new java.util.HashMap ();
             values.put("destinationModuleId", destinationModuleId.toString());
             values.put("sourceModuleId", sourceModuleId.toString());
             values.put("type", type.typeString.toString());
@@ -101,6 +102,7 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
         catch (Exception e)
         {
             System.out.println("Error in AP2DX.AP2DXMessage.compileMessage: " + e.getMessage());
+            e.printStackTrace();
         }
         return messageString;
     }

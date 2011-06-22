@@ -50,9 +50,8 @@ public class SonarSensorMessage extends SpecializedMessage
 
     public void specializedParseMessage()
     {
-        time = Double.parseDouble(values.get("time").toString());
+        //time = Double.parseDouble(values.get("time").toString());
 
-        rangeArray = new double[7];
 
 		try 
         { 
@@ -61,10 +60,12 @@ public class SonarSensorMessage extends SpecializedMessage
             // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
             JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
+            rangeArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 rangeArray[i] = jsonArray.getDouble(i);
+            time = jsonObject.getDouble("time");
         }
-        catch (JSONException e)
+        catch (Exception e)
         {
             System.out.println("Error in AP2DX.specializedMessages.SonarSensorMessage.specializedParseMessage()... things went south!");
             e.printStackTrace();

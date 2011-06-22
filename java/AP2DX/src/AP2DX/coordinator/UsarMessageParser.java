@@ -54,13 +54,11 @@ public class UsarMessageParser extends Thread
     {
         while (true) 
         {
-            System.out.println("Starting to run while loop in run");
             Message messageIn = null;
             try 
             {
                 System.out.println("Reading message");
                 messageIn = in.readMessage();
-                System.out.println("After read message");
                 System.out.println(messageIn.toString());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -87,7 +85,6 @@ public class UsarMessageParser extends Thread
                         case USAR_SONAR:
                             try
                             {   
-                                System.out.println("Trying to send Sonar Message");
                                 USonarSensorMessage sonarMessage= new USonarSensorMessage(sensorMessage);
                                 // Put the right values in the message
                                 message = (SonarSensorMessage) sonarMessage.toAp2dxMessage();
@@ -113,9 +110,8 @@ public class UsarMessageParser extends Thread
             {
                 try 
                 {
-                    System.out.println("Trying to send message" + message);
+                    System.out.println("Sending message");
                     sendConnection.sendMessage(message);
-                    System.out.println("Message sent");
                 } 
                 catch (Exception e) 
                 {
