@@ -3,6 +3,7 @@
  */
 package AP2DX;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -92,6 +93,8 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
     {   
         try
         {
+            if (values == null)
+                values = new HashMap();
             values.put("destinationModuleId", destinationModuleId.toString());
             values.put("sourceModuleId", sourceModuleId.toString());
             values.put("type", type.typeString.toString());

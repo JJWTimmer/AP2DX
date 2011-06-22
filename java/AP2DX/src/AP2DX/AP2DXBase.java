@@ -590,7 +590,7 @@ Not working, can't change inConn and outConn while looping over them.
 					// something wend terribly wrong, terminate module.
 					AP2DXBase.logger.severe(String.format("Error in connectionhandler: %s\n%s", conn.getRemoteSocketAddress(), e.getMessage()));
 					e.printStackTrace();
-					System.exit(1);
+					//System.exit(1);
 				}
 			}
 		}
