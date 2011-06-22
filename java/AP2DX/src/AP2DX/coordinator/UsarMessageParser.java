@@ -89,13 +89,11 @@ public class UsarMessageParser extends Thread
                             {   
                                 System.out.println("Trying to send Sonar Message");
                                 USonarSensorMessage sonarMessage= new USonarSensorMessage(sensorMessage);
-                                System.out.println("After USonarSensorMessage");
                                 // Put the right values in the message
                                 message = (SonarSensorMessage) sonarMessage.toAp2dxMessage();
                                 // This probably isn't needed:
                                 //message.setDestinationModuleId(send);
                                 //message.setSourceModuleId(IAM);
-                                System.out.println("After creating message");
                             }
                             catch (Exception e)
                             {
@@ -110,14 +108,12 @@ public class UsarMessageParser extends Thread
                 default:
                     System.out.println("Unexpected message type in ap2dx.coordonator.UsarMessageParser: " + messageIn.getMsgType());
             };
-            System.out.printf("After switches. The message now is %s\n", message);
             //Try to send the message to the right connection.
             if(message != null && message.getMsgType() != Message.MessageType.UNKNOWN)
             {
                 try 
                 {
                     System.out.println("Trying to send message" + message);
-                    System.out.println("Does it differ with? " + message.toString());
                     sendConnection.sendMessage(message);
                     System.out.println("Message sent");
                 } 

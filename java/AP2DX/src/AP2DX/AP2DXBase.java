@@ -482,10 +482,13 @@ public abstract class AP2DXBase {
 		@Override
 		public void run() {
 			while (true) {
+                System.out.println("Started Listener");
 				ConnectionHandler connHandler = null;
 				Socket conn = null;
 				try {
+                    System.out.println("Waiting for connection");
 					conn = this.server.accept();
+                    System.out.println("Connection starting");
 					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
