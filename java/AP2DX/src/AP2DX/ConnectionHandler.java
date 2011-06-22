@@ -80,17 +80,11 @@ public class ConnectionHandler extends Thread {
 		out = new PrintWriter(socket.getOutputStream(), true);
 
 		in = new AP2DXMessageReader(socket.getInputStream(), origin);
-<<<<<<< HEAD
 
-		System.out.println("Waiting for first message on socket " + socket.getLocalPort());
 		this.base.logger.info("Waiting for msg in conn handler ctor");
 		Message firstIncomingMessage = in.readMessage();
 		this.base.logger.info(String.format("got msg in conn handler ctor: %s", firstIncomingMessage.messageString));
-		System.out.println("Got it!");
 
-=======
-		Message firstIncomingMessage = in.readMessage();
->>>>>>> 7d30e22650b0d36301f0251af58d0a2b4088c35f
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
 
 	}
