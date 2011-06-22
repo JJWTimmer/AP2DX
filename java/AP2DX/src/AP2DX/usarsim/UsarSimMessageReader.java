@@ -21,7 +21,7 @@ public class UsarSimMessageReader extends BufferedReader implements IMessageRead
 	* @param in Streamreader to read from
 	*/
 	public UsarSimMessageReader(InputStream in) {
-	    super(new InputStreamReader(in));
+	    super(new InputStreamReader(in), 100000);
 	}
 
 	/**

@@ -54,15 +54,15 @@ public class Program extends AP2DXBase {
             {
                 Socket socket = new Socket(address, port);
                 out = new PrintWriter(socket.getOutputStream(), true);
+                parser = new UsarMessageParser(this, IAM, Module.SENSOR, socket);
+                parser.start();
             }
             catch (Exception ex) 
             {
                 ex.printStackTrace();
             }
-            parser = new UsarMessageParser(this, IAM, Module.SENSOR, config);
-            parser.start();
             UsarSimMessage message = new UInitMessage();
-            System.out.println("Message: " + message.toString());
+            System.out.println("Init Message in coordinator Program.java: " + message.toString());
             try 
             {
                 //Old:

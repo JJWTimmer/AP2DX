@@ -27,8 +27,6 @@ public class UsarMessageParser extends Thread
     private ConnectionHandler sendConnection;
     /** The base class (supposed to be the AP2DXBase of coordinator */
     private AP2DXBase base;
-    /** The config file of the program */
-	protected Map config;
     /**
      * This constructor configures the connection with usarsim, 
      * with the data that is specified in the config file.
@@ -36,17 +34,14 @@ public class UsarMessageParser extends Thread
      * @param IAM The module from which this parser will send messages
      * @param send The module this parser will send to
      */
-    public UsarMessageParser(AP2DXBase base, Module IAM, Module send, Map config)
+    public UsarMessageParser(AP2DXBase base, Module IAM, Module send, Socket socket)
     {
-        this.config = config;
-        System.out.println("Config sim port: " + config.get("sim_port"));
-        String address = config.get("sim_address").toString();
-        int port = Integer.parseInt(config.get("sim_port").toString());
+        this.base = base;
+        this.IAM = IAM;
+        this.send = send;
         try 
         {
-            Socket socket = new Socket(address, port);
             in = new UsarSimMessageReader(socket.getInputStream());
-
         }
         catch (Exception ex) 
         {
@@ -60,7 +55,6 @@ public class UsarMessageParser extends Thread
         {
             System.out.println("Starting to run while loop in run");
             Message messageIn = null;
-            // Get the message from the base
             try 
             {
                 System.out.println("Reading message");
@@ -73,8 +67,7 @@ public class UsarMessageParser extends Thread
                     .severe("Error in UsarMessageParser.run, attempted to retrieve item out of messageReader");
             }
             //Initialize the message we will return. This shouldn't stay null.
-            //AP2DXMessage message = null;
-            /*
+            AP2DXMessage message = null;
             switch (messageIn.getMsgType())
             {
                 case USAR_SENSOR:
@@ -131,7 +124,6 @@ public class UsarMessageParser extends Thread
                 }
             }
             System.out.printf("End of while loop, message %s not sent.\n", message);
-            */
         }
     } 
 }
