@@ -9,7 +9,7 @@ start start.bat
 cd ..
 
 cd reflex
-start start.bat
+REM start start.bat
 cd ..
 
 cd planner
@@ -21,5 +21,5 @@ start start.bat
 cd ..
 
 cd sensor
-REM start start.bat
+start start.bat
 cd ..\..\..\
