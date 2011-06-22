@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -454,6 +455,42 @@ public abstract class AP2DXBase {
 	}
 
 	/**
+	 * This class is used to check the lists of incoming and outgoing connections,
+	 * for dead links. If nessecary, try to reestablish connections.
+	 * @author Jasper Timmer
+	 *
+	 */
+	private class ConnectionChecker implements Runnable {
+
+		private AP2DXBase base;
+		
+		public ConnectionChecker(AP2DXBase base) {
+			this.base = base;
+		}
+		
+		@Override
+		public void run() {
+			while (true) {
+				//check if incoming connection has closed and remove from list
+				for (ConnectionHandler conn : base.inConnections) {
+					if (!conn.isAlive()) {
+						base.inConnections.remove(conn);
+					}
+				}
+				
+				// check if outgoing connection has closed and attempt to reconnect
+				for (ConnectionHandler conn : base.outConnections) {
+					if (!conn.isAlive()) {
+						base.inConnections.remove(conn);
+					}
+				}
+				
+			}
+			
+		}
+	}
+	
+	/**
 	 * Class for listening at specified port and accepting connections.
 	 * 
 	 * @author Jasper Timmer
@@ -476,7 +513,9 @@ public abstract class AP2DXBase {
 		}
 
 		/**
-		 * Listen and accept connections forever
+		 * Listen and accept connections forever. <br/>
+		 * <br/>
+		 * Timeout on new sockets is 250 millis
 		 */
 		@Override
 		public void run() {
@@ -485,16 +524,22 @@ public abstract class AP2DXBase {
 				Socket conn = null;
 				try {
 					conn = this.server.accept();
+					
+					// important: timeout on all connections is set here
+					conn.setSoTimeout(250);
+					
+					AP2DXBase.logger.info(String.format("New connection with %s", conn.getRemoteSocketAddress()));
+					
 					connHandler = new ConnectionHandler(base, conn, IAM);
 
 					connHandler.start();
-
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					// something wend terribly wrong, terminate module.
+					AP2DXBase.logger.severe(String.format("Error in connectionhandler: %s\n%s", conn.getRemoteSocketAddress(), e.getMessage()));
 					e.printStackTrace();
+					System.exit(1);
 				}
 			}
 		}
-
 	}
 }
