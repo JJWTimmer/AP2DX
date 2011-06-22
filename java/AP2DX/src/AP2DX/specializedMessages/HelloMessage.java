@@ -22,9 +22,8 @@ public class HelloMessage extends SpecializedMessage
 		super(Message.MessageType.HELLO, sourceId, destinationId);
 	}
 
-    /** Creates a specialized message from a standard AP2DXMessage.
-    * This constructor could be used to clone an AP2DXMessage. */
-    public SonarSensorMessage(AP2DXMessage message)
+    /** Creates a specialized message from a standard AP2DXMessage. */
+    public HelloMessage(AP2DXMessage message)
     {
         super(message);
     }
