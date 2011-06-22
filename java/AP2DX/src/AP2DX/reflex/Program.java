@@ -16,7 +16,6 @@ public class Program extends AP2DXBase {
 	private double[] previousDistances;
 	private double[] approaching;
 	private boolean isBotBlocked = false;
-	private ArrayBlockingQueue<AP2DXMessage> motorBacklog;
 
 	/**
 	 * Entrypoint of reflex
@@ -50,9 +49,7 @@ public class Program extends AP2DXBase {
 		case AP2DX_MOTOR_ACTION:
 
 			if (isBotBlocked) {
-				ArrayBlockingQueue<AP2DXMessage> backlog = getMotorBacklog();
-				backlog.add((AP2DXMessage) message);
-				setMotorBacklog(backlog);
+				AP2DXMessage stopMessage;
 			} else {
 				message.setDestinationModuleId(Module.MOTOR);
 				messageList.add((AP2DXMessage) message);
@@ -105,61 +102,7 @@ public class Program extends AP2DXBase {
 	 */
 	@Override
 	public void doOverride() {
-		Thread t1 = new Thread(new MotorPassthrough(this, this.getMotorBacklog()));
-		t1.start();
-	}
 
-	/**
-	 * This class represents the thread that will send backlogged messages to
-	 * the motor.
-	 * 
-	 * @author Jasper Timmer
-	 * 
-	 */
-	private class MotorPassthrough implements Runnable {
-		AP2DXBase base;
-		ArrayBlockingQueue<AP2DXMessage> baseMotorBacklog;
-
-		public MotorPassthrough(AP2DXBase base, ArrayBlockingQueue<AP2DXMessage> bmb) {
-			this.base = base;
-			this.baseMotorBacklog = bmb;
-		}
-
-		@Override
-		public void run() {
-			ConnectionHandler conn = null;
-			boolean interrupted = false;
-
-			try {
-				while (conn == null && !interrupted)
-					conn = this.base.getSendConnection(Module.MOTOR);
-			} catch (Exception e) {
-				e.printStackTrace();
-				interrupted = true;
-			}
-
-			while (!interrupted) {
-
-				Message msg = null;
-
-				try {
-					while (msg == null) {
-						while (isBotBlocked) {
-							Thread.sleep(10);
-						}
-
-						msg = baseMotorBacklog.poll(50, TimeUnit.MILLISECONDS);
-					}
-				} catch (InterruptedException e) {
-					interrupted = true;
-				}
-
-				if (!interrupted && msg != null) {
-					msg.setDestinationModuleId(Module.MOTOR);
-					conn.sendMessage(msg);
-				}
-			}
-		}
 	}
 
 	/**
@@ -220,24 +163,5 @@ public class Program extends AP2DXBase {
 	 */
 	public boolean isBotBlocked() {
 		return isBotBlocked;
-	}
-
-	/**
-	 * @param motorBacklog
-	 *            the motorBacklog to set
-	 */
-	public void setMotorBacklog(ArrayBlockingQueue<AP2DXMessage> motorBacklog) {
-		this.motorBacklog = motorBacklog;
-	}
-
-	/**
-	 * @return the motorBacklog
-	 */
-	public ArrayBlockingQueue<AP2DXMessage> getMotorBacklog() {
-		if (motorBacklog == null) {
-			motorBacklog = new ArrayBlockingQueue<AP2DXMessage>(256);
-		}
-		
-		return motorBacklog;
 	}
 }

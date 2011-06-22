@@ -152,8 +152,6 @@ public abstract class AP2DXBase {
 			}
 		}
 		
-/*
-Not working, can't change inConn and outConn while looping over them.
 
 		// Start connectionchecker to remove dead connections
 		// and restart outgoing connections
@@ -166,7 +164,7 @@ Not working, can't change inConn and outConn while looping over them.
 			e.printStackTrace();
 			//System.exit(1);
 		}
-*/
+		
         System.out.println("Before override");
 		// run the extra logic
 		this.doOverride();
@@ -497,12 +495,17 @@ Not working, can't change inConn and outConn while looping over them.
 		@Override
 		public void run() {
 			while (true) {
+				ArrayList<ConnectionHandler> incoming = (ArrayList<ConnectionHandler>) base.inConnections.clone();
+				ArrayList<ConnectionHandler> outgoing = (ArrayList<ConnectionHandler>) base.outConnections.clone();
+				
 				//check if incoming connection has closed and remove from list
 				for (ConnectionHandler conn : base.inConnections) {
 					if (!conn.isAlive()) {
-						base.inConnections.remove(conn);
+						incoming.remove(conn);
 					}
 				}
+				
+				base.inConnections = incoming;
 				
 				// check if outgoing connection has closed and attempt to reconnect
 				for (ConnectionHandler conn : base.outConnections) {
@@ -525,7 +528,12 @@ Not working, can't change inConn and outConn while looping over them.
 							//System.exit(1);
 							
 						}
+						
+						outgoing.remove(conn);
 					}
+					
+					base.outConnections = outgoing;
+					
 				}
 				try {
 					Thread.sleep(100);
