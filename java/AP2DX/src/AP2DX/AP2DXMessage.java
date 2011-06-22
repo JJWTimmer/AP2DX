@@ -8,9 +8,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
@@ -72,20 +71,19 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	@Override
 	public void parseMessage() 
     {
-		JSONParser parser = new JSONParser();
-		try 
+        try
         {
-			values = (Map)parser.parse(messageString);
-            destinationModuleId = Module.valueOf(values.get("destinationModuleId").toString());
-            sourceModuleId = Module.valueOf(values.get("sourceModuleId").toString());
-            type = MessageType.getEnumByString(values.get("type").toString());
+            JSONObject jsonMessage = new JSONObject(messageString);
+            destinationModuleId = Module.valueOf(jsonMessage.getString("destinationModuleId"));
+            sourceModuleId = Module.valueOf(jsonMessage.getString("sourceModuleId"));
+            type = MessageType.getEnumByString(jsonMessage.getString("type"));
+             
         }
-        catch (ParseException pe) 
-        {   
-            System.out.println("Error in AP2DXMessage.parseMessage()");
-			System.out.println("position: " + pe.getPosition());
-			System.out.println(pe);
-		}
+        catch (JSONException e)
+        {
+            System.out.println("Error in AP2DX.AP2DXMessage.parseMessage()... things went south!");
+            e.printStackTrace();
+        }
 	}
 
     /** 
@@ -93,27 +91,14 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
     */
     public String compileMessage()
     {   
-        //try
-        //{
-        //    // Errors are thrown even though the API says this excists.. SIGH
-        //    // WHY do we use 'simple'?
-        //    messageString = (new JSONObject(values)).toString();
-        //}
-        JSONObject jsonObject = new JSONObject();
-        for (Entry entry : values.entrySet())
+        try
         {
-            try
-            {
-                jsonObject.put(entry.getKey(), entry.getValue());
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                System.out.println("ERROR in AP2DXMessage.compileMessage(), NULL objects?");
-                System.out.println("key: " + entry.getKey() + ", value: " + entry.getValue());
-            }
+            messageString = (new JSONObject(values)).toString();
         }
-        messageString = jsonObject.toString();
+        catch (Exception e)
+        {
+            System.out.println("Error in AP2DX.AP2DXMessage.compileMessage: " + e.getMessage());
+        }
         return messageString;
     }
 
