@@ -29,8 +29,11 @@ public class Logic extends Thread {
 			Message message = null;
 			// Get the message from the base
 			try {
+                System.out.println("Waiting for messages");
 				message = base.getReceiveQueue().take();
-			} catch (Exception e) {
+                System.out.println("Message received!");
+			} catch (Exception e) 
+            {
 				e.printStackTrace();
 				base.logger
 						.severe("Error in Logic.run, attempted to retrieve item out base.receiveQueue");

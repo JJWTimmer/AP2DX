@@ -102,6 +102,7 @@ public class ConnectionHandler extends Thread
     */
     public void sendMessage(Message message)
     {
+        System.out.printf("Printing message %s to moduleId %s on socket port %s", message.toString(), moduleID, socket.getPort());
         out.print(message.toString());
     }
 
