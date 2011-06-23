@@ -54,8 +54,12 @@ public class AP2DXMessageReader extends BufferedReader implements
 		boolean succeeded = false;
 		
 		while (!succeeded) {
+			try {
 				line = readLine();
 				succeeded = true;
+			} catch (SocketTimeoutException ex) {
+				throw ex;
+			}
 		}
 		
 		AP2DXMessage message = new AP2DXMessage(line, source);
