@@ -25,6 +25,7 @@ public abstract class Message
      */
     public enum MessageType 
     {
+    	AP2DX_PLANNER_STOP("STOP"),
         AP2DX_SENSOR_ENCODER("sensorEncoder"), 
         APD2X_SENSOR_GPS("sensorGps"), 
         AP2DX_SENSOR_GROUNDTRUTH("sensorGroundTruth"), 
@@ -42,6 +43,7 @@ public abstract class Message
         USAR_DRIVE("DRIVE",true),
         USAR_SENSOR("SEN",true),
         HELLO("HELLO!!!"),
+        
         UNKNOWN("unknown");
 
         /** The string that defines the type when a message is being send as JSON/USAR. */

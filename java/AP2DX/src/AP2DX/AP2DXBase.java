@@ -3,24 +3,24 @@
  */
 package AP2DX;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.*;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -151,7 +151,20 @@ public abstract class AP2DXBase {
 				e.printStackTrace();
 			}
 		}
+		
 
+		// Start connectionchecker to remove dead connections
+		// and restart outgoing connections
+		ConnectionChecker CC = new ConnectionChecker(this);
+		Thread t2 = new Thread(CC);
+		try {
+			t2.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//System.exit(1);
+		}
+		
         System.out.println("Before override");
 		// run the extra logic
 		this.doOverride();
@@ -444,10 +457,10 @@ public abstract class AP2DXBase {
 			
 			try {
 				connHandler = new ConnectionHandler(false, base, conn, IAM, this.module);
+				
 				HelloMessage message = new HelloMessage(IAM, this.module);
+				connHandler.sendMessage(message);
 
-                Thread.sleep(150);
-                connHandler.sendMessage(message);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -464,6 +477,10 @@ public abstract class AP2DXBase {
 	/**
 	 * This class is used to check the lists of incoming and outgoing connections,
 	 * for dead links. If nessecary, try to reestablish connections.
+	 * 
+	 * Error: can't change the list inConnections and outConnections from other thread
+	 * while looping over it.
+	 * 
 	 * @author Jasper Timmer
 	 *
 	 */
@@ -478,12 +495,17 @@ public abstract class AP2DXBase {
 		@Override
 		public void run() {
 			while (true) {
+				ArrayList<ConnectionHandler> incoming = (ArrayList<ConnectionHandler>) base.inConnections.clone();
+				ArrayList<ConnectionHandler> outgoing = (ArrayList<ConnectionHandler>) base.outConnections.clone();
+				
 				//check if incoming connection has closed and remove from list
 				for (ConnectionHandler conn : base.inConnections) {
 					if (!conn.isAlive()) {
-						base.inConnections.remove(conn);
+						incoming.remove(conn);
 					}
 				}
+				
+				base.inConnections = incoming;
 				
 				// check if outgoing connection has closed and attempt to reconnect
 				for (ConnectionHandler conn : base.outConnections) {
@@ -497,13 +519,26 @@ public abstract class AP2DXBase {
 						Thread t1 = new Thread(connector);
 						
 						try {
+							base.threadCounter.incrementAndGet();
 							t1.start();
+							
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 							//System.exit(1);
+							
 						}
+						
+						outgoing.remove(conn);
 					}
+					
+					base.outConnections = outgoing;
+					
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					break;
 				}
 			}
 		}
@@ -563,7 +598,7 @@ public abstract class AP2DXBase {
 					// something wend terribly wrong, terminate module.
 					AP2DXBase.logger.severe(String.format("Error in connectionhandler: %s\n%s", conn.getRemoteSocketAddress(), e.getMessage()));
 					e.printStackTrace();
-					System.exit(1);
+					//System.exit(1);
 				}
 			}
 		}

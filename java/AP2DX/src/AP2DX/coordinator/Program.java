@@ -61,8 +61,10 @@ public class Program extends AP2DXBase {
             {
                 ex.printStackTrace();
             }
+            
             UsarSimMessage message = new UInitMessage();
             System.out.println("Init Message in coordinator Program.java: " + message.toString());
+            
             try 
             {
                 //Old:
