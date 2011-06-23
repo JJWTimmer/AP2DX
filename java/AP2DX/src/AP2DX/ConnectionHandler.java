@@ -81,9 +81,9 @@ public class ConnectionHandler extends Thread {
 
 		in = new AP2DXMessageReader(socket.getInputStream(), origin);
 
-		this.base.logger.info("Waiting for msg in conn handler ctor");
+		AP2DXBase.logger.info("Waiting for msg in conn handler ctor");
 		Message firstIncomingMessage = in.readMessage();
-		this.base.logger.info(String.format("got msg in conn handler ctor: %s", firstIncomingMessage.messageString));
+		AP2DXBase.logger.info(String.format("got msg in conn handler ctor: %s", firstIncomingMessage.messageString));
 
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
 
