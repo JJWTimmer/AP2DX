@@ -373,10 +373,10 @@ public abstract class AP2DXBase {
 
     public ArrayList<AP2DXMessage> componentLogicCheck(Message msg)
     {
-        System.out.println("In componentLogicCheck");
+        //System.out.println("In componentLogicCheck");
         if (!msg.getMsgType().isAp2dxMessage && !IAM.canAcceptJsonMessages)
         {
-            System.err.println("Unexpected message in " + IAM + ". Received a non-AP2DX message type and cannot accept JSON messages.");
+            //System.err.println("Unexpected message in " + IAM + ". Received a non-AP2DX message type and cannot accept JSON messages.");
             return null;
         }
         return componentLogic(msg);

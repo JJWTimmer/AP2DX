@@ -37,6 +37,7 @@ public class InsSensorMessage extends SpecializedMessage
 
     public void specializedParseMessage()
     {   
+        //System.out.printf("In specializedParseMessage of INS with string %s\n", messageString);
         try
         {
             JSONObject jsonObject = new JSONObject(messageString);
