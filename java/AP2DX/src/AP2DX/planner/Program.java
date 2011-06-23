@@ -35,7 +35,7 @@ public class Program extends AP2DXBase
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();
 
         // for now, lets just drive forward, OKAY?!
-        messageList.add(new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.FORWARD, 1));
+        messageList.add(new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.FORWARD, 20));
 
         switch(message.getMsgType())
         {
@@ -44,7 +44,7 @@ public class Program extends AP2DXBase
             //    messageList.add(message);            
             //    break;
             default:
-                System.out.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
+                AP2DXBase.logger.severe("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
         }
 
  

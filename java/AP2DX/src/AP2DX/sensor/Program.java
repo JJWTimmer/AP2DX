@@ -2,17 +2,15 @@ package AP2DX.sensor;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import AP2DX.AP2DXBase;
 import AP2DX.AP2DXMessage;
 import AP2DX.Message;
 import AP2DX.Module;
-import AP2DX.specializedMessages.*;
-import AP2DX.sensor.*;
-
-// Imports for the interface
-import javax.swing.*;
-import java.awt.Graphics;
-import java.lang.Thread;
+import AP2DX.specializedMessages.InsSensorMessage;
+import AP2DX.specializedMessages.RangeScannerSensorMessage;
+import AP2DX.specializedMessages.SonarSensorMessage;
 
 public class Program extends AP2DXBase 
 {
@@ -124,6 +122,11 @@ public class Program extends AP2DXBase
                         //SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
                         sonarSensorMessage.setDestinationModuleId(Module.REFLEX);
                         messageList.add(sonarSensorMessage);
+                        
+                        SonarSensorMessage message3 = (SonarSensorMessage) sonarSensorMessage.clone();
+                        message3.setDestinationModuleId(Module.MAPPER);
+                        messageList.add(message3);
+                        
                     }
                     break;
                 case AP2DX_SENSOR_RANGESCANNER:
@@ -139,6 +142,14 @@ public class Program extends AP2DXBase
                     {
                         System.out.println("Drawer does not exist");
                     }
+                    
+                    rangeScannerSensorMessage.setDestinationModuleId(Module.REFLEX);
+                    messageList.add(rangeScannerSensorMessage);
+                    
+                    SonarSensorMessage message4 = (SonarSensorMessage) rangeScannerSensorMessage.clone();
+                    message4.setDestinationModuleId(Module.MAPPER);
+                    messageList.add(message4);
+                    
                     break;
 
                 default:
