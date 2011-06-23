@@ -95,7 +95,7 @@ public class UsarMessageParser extends Thread
                                 System.err.println(e.getMessage());
                             }
                             break;
-                        case USAR_RANGE:
+                        /*case USAR_RANGE:
                             try
                             {
                                 URangeSensorMessage rangeMessage = new URangeSensorMessage(sensorMessage);
@@ -106,7 +106,7 @@ public class UsarMessageParser extends Thread
                                 System.err.println("Some exception occured while making a SonarMessage");
                                 System.err.println(e.getMessage());
                             }
-                            break;
+                            break;*/
 
                         default: 
                             System.out.println("Somethings wrong!?");
