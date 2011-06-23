@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import AP2DX.AP2DXBase;
 import AP2DX.AP2DXMessage;
 import AP2DX.Message;
+import AP2DX.Message.MessageType;
 import AP2DX.Module;
 import AP2DX.specializedMessages.*;
 
 public class Program extends AP2DXBase 
     {
+	private boolean botBlocked = false;
 
     /**
 	 * Entrypoint of planner
@@ -34,21 +36,37 @@ public class Program extends AP2DXBase
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();
 
-        // for now, lets just drive forward, OKAY?!
-        messageList.add(new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.FORWARD, 20));
-
         switch(message.getMsgType())
         {
-            //case AP2DX_MOTOR_ACTION:
-            //    message.setDestinationModuleId(Module.MOTOR);
-            //    messageList.add(message);            
-            //    break;
-            default:
-                AP2DXBase.logger.severe("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
+        case AP2DX_PLANNER_STOP:
+        	setBotBlocked(true);
+        	break;
+        default:
+        	if (!isBotBlocked()) {
+        		// for now, lets just drive forward, OKAY?!
+        		messageList.add(new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.FORWARD, 20));
+        	}
+            AP2DXBase.logger.severe("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
         }
 
  
 		return messageList;
+	}
+
+
+	/**
+	 * @param isBotBlocked the isBotBlocked to set
+	 */
+	public void setBotBlocked(boolean isBotBlocked) {
+		this.botBlocked = isBotBlocked;
+	}
+
+
+	/**
+	 * @return the isBotBlocked
+	 */
+	public boolean isBotBlocked() {
+		return botBlocked;
 	}
 }
 
