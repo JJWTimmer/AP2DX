@@ -23,9 +23,7 @@ public class Drawer extends JPanel
     public double[] sonarRanges = new double[0];
     public double[] rangeScannerRanges = new double[0];
     private int[] sonarThetas = {180, 140, 120, 100, 80, 60, 40, 0};
-    private static final double MAX_SONAR_VALUE = 5.0;
-    // VV might be the same as MAX_SONAR_VALUE, always?!
-    private static final double MAX_RANGE_SCANNER_VALUE = 5.0; 
+    private static final double MAX_VALUE = 5.0;
 
     // TODO create a getter and setter for this so range scanner messages
     // can set the value itself 
@@ -54,12 +52,11 @@ public class Drawer extends JPanel
         int y1;
         int y2;
 
-        double maxSonarValue = highestValueFromArray(sonarRanges);
-        double constant = (getSize().height/2); 
+        double constant = (getSize().height); 
 
         for (int i=0; i < sonarRanges.length; i++)
         {   
-            double line = (sonarRanges[i] / maxSonarValue) * constant; 
+            double line = (sonarRanges[i] / MAX_VALUE) * constant; 
             double theta = Math.toRadians(sonarThetas[i]);
             //System.out.printf("Theta = %f\n", theta);
             x1 = getSize().width / 2;
@@ -90,14 +87,13 @@ public class Drawer extends JPanel
         int y1;
         int y2;
 
-        double maxRangeScannerValue = highestValueFromArray(rangeScannerRanges);
         // TODO: check if 'height' here is correct
         // TODO: rewrite line '(rangeScannerRanges[i] / maxRangeScannerValue) * constant; ' further to increase performance 
-        double constant = (getSize().height/2); 
+        double constant = (getSize().height); 
 
         for (int i = 0; i < rangeScannerRanges.length; i ++)
         {
-            double line = (rangeScannerRanges[i] / maxRangeScannerValue) * constant; 
+            double line = (rangeScannerRanges[i] / MAX_VALUE) * constant; 
             double theta = i * rangeScannerResolution;
             //System.out.printf("Theta = %f, for line %d\n", theta, i);
              

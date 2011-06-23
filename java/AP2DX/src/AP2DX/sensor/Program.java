@@ -2,15 +2,17 @@ package AP2DX.sensor;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import AP2DX.AP2DXBase;
 import AP2DX.AP2DXMessage;
 import AP2DX.Message;
 import AP2DX.Module;
-import AP2DX.specializedMessages.InsSensorMessage;
-import AP2DX.specializedMessages.RangeScannerSensorMessage;
-import AP2DX.specializedMessages.SonarSensorMessage;
+import AP2DX.specializedMessages.*;
+import AP2DX.sensor.*;
+
+// Imports for the interface
+import javax.swing.*;
+import java.awt.Graphics;
+import java.lang.Thread;
 
 public class Program extends AP2DXBase 
 {
@@ -68,93 +70,95 @@ public class Program extends AP2DXBase
     @Override
         public ArrayList<AP2DXMessage> componentLogic(Message message) 
         {
-            System.out.println("Started componentLogic of Sensor with message " + message.getMessageString());
+            System.out.println("\tReceived a message in the component logic of the sensor module. The message was: " + message.getMessageString());
             ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
 
-
-            switch (message.getMsgType())
+            
+            try 
             {
-                case AP2DX_SENSOR_ODOMETRY:
-                    // Turns out odometry is something different than we had expected {{{
-                    //OdometrySensorMessage odometrySensorMessage = 
-                    //    (OdometrySensorMessage) message;
-                    //odometrySensorMessage.setSourceModuleId(IAM);
-                    //odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
-                    //messageList.add(odometrySensorMessage);
+                switch (message.getMsgType())
+                {
+                    case AP2DX_SENSOR_ODOMETRY:
+                        System.out.print("Parsing an odometry message, but we do");
+                        System.out.println(" with this data.. so pass.");
+                        // Turns out odometry is something different than we had expected {{{
+                        //OdometrySensorMessage odometrySensorMessage = 
+                        //    (OdometrySensorMessage) message;
+                        //odometrySensorMessage.setSourceModuleId(IAM);
+                        //odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
+                        //messageList.add(odometrySensorMessage);
 
-                    //// TO THE REFLEX! 
-                    //// I'm not sure if this little piece of magic works
-                    //OdometrySensorMessage message2 = new OdometrySensorMessage((AP2DXMessage) odometrySensorMessage.clone());
-                    //message2.setDestinationModuleId(Module.REFLEX);
-                    //messageList.add(message2); // }}}
-                    break;
-                case AP2DX_SENSOR_INS:
-                    // TO THE MAPPER! Said Batman
-                    InsSensorMessage insSensorMessage = (InsSensorMessage) message;
-                    insSensorMessage.setSourceModuleId(IAM);
-                    insSensorMessage.setDestinationModuleId(Module.MAPPER);
-                    messageList.add(insSensorMessage);
+                        //// TO THE REFLEX! 
+                        //// I'm not sure if this little piece of magic works
+                        //OdometrySensorMessage message2 = new OdometrySensorMessage((AP2DXMessage) odometrySensorMessage.clone());
+                        //message2.setDestinationModuleId(Module.REFLEX);
+                        //messageList.add(message2); // }}}
+                        break;
+                    case AP2DX_SENSOR_INS:
+                        System.out.print("Parsing an INS message.");
+                        // TO THE MAPPER! Said Batman
+                        InsSensorMessage insSensorMessage = (InsSensorMessage) message;
+                        insSensorMessage.setSourceModuleId(IAM);
+                        insSensorMessage.setDestinationModuleId(Module.MAPPER);
+                        messageList.add(insSensorMessage);
 
-                    // TO THE REFLEX! 
-                    InsSensorMessage message2 = new InsSensorMessage((InsSensorMessage)
-                            (AP2DXMessage) insSensorMessage.clone());
-                    message2.setDestinationModuleId(Module.REFLEX);
-                    messageList.add(message2);
-                    break;
-                case AP2DX_SENSOR_SONAR:
-                    System.out.println("AP2DX_SENSOR_SONAR message detected! ");
-                    //create the SonarSensorMessage instance
-                    SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
-                    System.out.println("Sonar data: " + sonarSensorMessage.getRangeArray());
-                    if (sonarSensorMessage.getRangeArray() == null)
-                        System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
-                    else
-                    {
-                        System.out.println("Updating the sonar lines");
-                        try{
-                            drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
-                        }
-                        catch (NullPointerException e)
+                        // TO THE REFLEX! 
+                        InsSensorMessage message2 = new InsSensorMessage((InsSensorMessage)
+                                (AP2DXMessage) insSensorMessage.clone());
+                        message2.setDestinationModuleId(Module.REFLEX);
+                        messageList.add(message2);
+                        break;
+                    case AP2DX_SENSOR_SONAR:
+                        System.out.print("Parsing an Sonar message.");
+                        //create the SonarSensorMessage instance
+                        SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
+                        System.out.println("Sonar data: " + sonarSensorMessage.getRangeArray());
+                        if (sonarSensorMessage.getRangeArray() == null)
+                            System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
+                        else
                         {
-                            System.out.println("Drawer does not exist yet");
+                            System.out.println("Updating the sonar lines");
+                            try{
+                                drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
+                            }
+                            catch (NullPointerException e)
+                            {
+                                System.out.println("Drawer does not exist yet");
+                            }
+                            // Clone it to send it to reflex
+                            //SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
+                            sonarSensorMessage.setDestinationModuleId(Module.REFLEX);
+                            messageList.add(sonarSensorMessage);
                         }
-                        // Clone it to send it to reflex
-                        //SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
-                        sonarSensorMessage.setDestinationModuleId(Module.REFLEX);
-                        messageList.add(sonarSensorMessage);
-                        
-                        SonarSensorMessage message3 = (SonarSensorMessage) sonarSensorMessage.clone();
-                        message3.setDestinationModuleId(Module.MAPPER);
-                        messageList.add(message3);
-                        
-                    }
-                    break;
-                case AP2DX_SENSOR_RANGESCANNER:
-                    System.out.println("RangeScanner message detected");
-                    RangeScannerSensorMessage rangeScannerSensorMessage = 
-                        (RangeScannerSensorMessage) message;
-                    try{
-                        drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
-                        drawer.setRangeScannerResolution(rangeScannerSensorMessage.getResolution());
-                        drawer.paintRangeScannerLines(rangeScannerSensorMessage.getDataArray());
-                    }
-                    catch(NullPointerException e)
-                    {
-                        System.out.println("Drawer does not exist");
-                    }
-                    
-                    rangeScannerSensorMessage.setDestinationModuleId(Module.REFLEX);
-                    messageList.add(rangeScannerSensorMessage);
-                    
-                    SonarSensorMessage message4 = (SonarSensorMessage) rangeScannerSensorMessage.clone();
-                    message4.setDestinationModuleId(Module.MAPPER);
-                    messageList.add(message4);
-                    
-                    break;
+                        break;
+                    case AP2DX_SENSOR_RANGESCANNER:
+                        System.out.println("RangeScanner message detected");
+                        RangeScannerSensorMessage rangeScannerSensorMessage = 
+                            (RangeScannerSensorMessage) message;
+                        try{
+                            drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
+                            drawer.setRangeScannerResolution(rangeScannerSensorMessage.getResolution());
+                            drawer.paintRangeScannerLines(rangeScannerSensorMessage.getDataArray());
+                        }
+                        catch(NullPointerException e)
+                        {
+                            System.out.println("Drawer does not exist");
+                        }
+                        break;
 
-                default:
-                    System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
+                    default:
+                        System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
+                }  
             }
+            catch (Exception e)
+            {
+                System.out.println("Something went wrong in the parsing of a message in sensor.Program.compontentLogic");
+                System.out.println("message.getMessageString() " + message.getMessageString());
+                System.out.println("message.getMsgType() " + message.getMsgType());
+                System.out.println("e.getMessage() " + e.getMessage());
+                System.out.println("Printing stacktrace:");
+                e.printStackTrace(); 
+            } 
             return messageList;
         }
 }

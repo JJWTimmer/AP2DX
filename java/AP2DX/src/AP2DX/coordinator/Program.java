@@ -101,9 +101,19 @@ public class Program extends AP2DXBase {
                             .println("Some exception occured while making a SonarMessage");
                         System.err.println(e.getMessage());
                     }
+                case AP2DX_MOTOR_ACTION:
+                    try
+                    {
+                        System.out.println("Motor action message received. Let's try to send a Motor message to UsarSim");
+
+                    }
+                    catch ( Exception e)
+                    {
+                        System.out.println("Something went wrong with the drive message in Coordinator");
+                    }
                 default:
                     System.out
-                        .println("Unexpected message type in ap2dx.sensor.Program: "
+                        .println("Unexpected message type in ap2dx.coordinator.Program: "
                                 + msg.getMsgType());
             }
             return messageList;
