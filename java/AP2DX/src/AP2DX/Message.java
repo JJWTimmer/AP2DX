@@ -217,6 +217,7 @@ public abstract class Message
     public Module setSourceModuleId(Module sourceModuleId)
     {
     	this.sourceModuleId = sourceModuleId;
+        values.put("sourceModuleId", sourceModuleId.toString());
         return sourceModuleId;
     }
     
@@ -227,6 +228,7 @@ public abstract class Message
     public Module setDestinationModuleId(Module destinationModuleId)
     {
     	this.destinationModuleId = destinationModuleId;
+        values.put("destinationModuleId", destinationModuleId.toString());
         return destinationModuleId;
     }
 

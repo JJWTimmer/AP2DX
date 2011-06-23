@@ -98,17 +98,20 @@ public class Program extends AP2DXBase
                         //System.out.println("Parsing an INS message: " + message.getMessageString());
                         // TO THE MAPPER! Said Batman
                         InsSensorMessage insSensorMessage = (InsSensorMessage) message;
+                        insSensorMessage.parseMessage();
                         insSensorMessage.setSourceModuleId(IAM);
                         insSensorMessage.setDestinationModuleId(Module.MAPPER);
+                        insSensorMessage.compileMessage();
                         messageList.add(insSensorMessage);
 
 
                         // TO THE REFLEX! 
                         //insSensorMessage.compileMessage();
                         InsSensorMessage message2 = new InsSensorMessage(
-                        insSensorMessage);
-                         //       (AP2DXMessage) insSensorMessage.clone());
+                        //insSensorMessage);
+                               (AP2DXMessage) insSensorMessage.clone());
                         message2.setDestinationModuleId(Module.REFLEX);
+                        message2.compileMessage();
                         messageList.add(message2);
                         break;
                     case AP2DX_SENSOR_SONAR:
@@ -162,6 +165,11 @@ public class Program extends AP2DXBase
                 System.out.println("Printing stacktrace:");
                 e.printStackTrace(); 
             } 
+        
+
+            for (int i = 0; i < messageList.size(); i ++)
+                System.out.println("!!!! " + i + " message: " + messageList.get(i).getMessageString());
+        
             return messageList;
         }
 }

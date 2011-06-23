@@ -23,8 +23,7 @@ public class InsSensorMessage extends SpecializedMessage
     public double[] location;
     public double[] orientation;
 
-    /** Creates a specialized message from a standard AP2DXMessage.
-    * This constructor could be used to clone an AP2DXMessage. */
+    /** Creates a specialized message from a standard AP2DXMessage.*/
     public InsSensorMessage(AP2DXMessage message)
     {
         super(message);
@@ -37,6 +36,9 @@ public class InsSensorMessage extends SpecializedMessage
 
     public void specializedParseMessage()
     {   
+
+        //System.out.println("InsSensorMessage.specializedParseMessage: messageSTring" + messageString);
+
         //System.out.printf("In specializedParseMessage of INS with string %s\n", messageString);
         try
         {
@@ -46,16 +48,18 @@ public class InsSensorMessage extends SpecializedMessage
             location = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 location[i] = jsonArray.getDouble(i);
+            setLocation(location);
 
             jsonArray = jsonObject.getJSONArray("orientation");
             orientation = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 orientation[i] = jsonArray.getDouble(i);
+            setOrientation(orientation);
         }
         catch (Exception e)
         {
             System.out.println("Error in AP2DX.specializedMessages.InsSensorMessage.specializedParseMessage()... things went south!");
-            System.out.println("e.getMessag(): " + e.getMessage());
+            System.out.println("e.getMessage(): " + e.getMessage());
             e.printStackTrace();
         }
     } 

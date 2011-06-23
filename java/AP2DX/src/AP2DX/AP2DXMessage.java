@@ -57,9 +57,15 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
     * objects messageString should be compiled correctly. */
     public Object clone()
     {
+        parseMessage();
+        compileMessage();
+
+
+        //System.out.println("AP2DXMessage.clone: messageString: " + messageString);
+        // so the problem is... some parsed variables might not be in the values map
+        // therefore, compile message might not result in a message that has every
+        // variable in it... this is.. to say the least: problematic.  
         AP2DXMessage message = new AP2DXMessage(messageString);
-        message.parseMessage();
-        message.compileMessage();
         return message;
     }
 
@@ -78,6 +84,11 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
             destinationModuleId = Module.valueOf(jsonMessage.getString("destinationModuleId"));
             sourceModuleId = Module.valueOf(jsonMessage.getString("sourceModuleId"));
             type = MessageType.getEnumByString(jsonMessage.getString("type"));
+            // BLEH FIX :(
+            values = new java.util.HashMap<String, Object> (); 
+            values.put("destinationModuleId", destinationModuleId.toString());
+            values.put("sourceModuleId", sourceModuleId.toString());
+            values.put("type", destinationModuleId.toString());
         }
         catch (JSONException e)
         {
