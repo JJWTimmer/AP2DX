@@ -155,7 +155,8 @@ public abstract class AP2DXBase {
 
 		// Start connectionchecker to remove dead connections
 		// and restart outgoing connections
-		ConnectionChecker CC = new ConnectionChecker(this);
+		/* Outcommented because I think it doesn't work
+        ConnectionChecker CC = new ConnectionChecker(this);
 		Thread t2 = new Thread(CC);
 		try {
 			t2.start();
@@ -164,6 +165,7 @@ public abstract class AP2DXBase {
 			e.printStackTrace();
 			//System.exit(1);
 		}
+        */
 		
         System.out.println("Before override");
 		// run the extra logic
