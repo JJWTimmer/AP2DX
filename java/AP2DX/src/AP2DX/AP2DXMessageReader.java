@@ -61,6 +61,7 @@ public class AP2DXMessageReader extends BufferedReader implements
 				// pass
 			}
 		}
+
 		
 		AP2DXMessage message = new AP2DXMessage(line, source);
 		switch (message.getMsgType()) {
