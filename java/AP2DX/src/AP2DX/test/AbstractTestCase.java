@@ -3,6 +3,8 @@
  */
 package AP2DX.test;
 
+import java.util.ArrayList;
+
 import mockit.Expectations;
 import mockit.Mock;
 import mockit.MockClass;
@@ -58,15 +60,6 @@ public abstract class AbstractTestCase {
 
     @Test public abstract void program();
 
-
-    /**
-     * default test method for the componentLogic method
-     * @author Maarten de Waard
-     */
-    @Test public void componentLogic()
-    {
-        test.componentLogic(new AP2DXMessage("Hoi", Module.TEST));
-    }
 
     /**
      * Default test method to test the doOverride method
