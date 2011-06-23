@@ -48,7 +48,9 @@ public class Logic extends Thread {
             catch(Exception e)
             {
                 base.logger.severe("ERROR in logicCheck");
+                continue;
             }
+
             if (!actions.isEmpty()) {
                 for (Message action : actions) {
                     try {
