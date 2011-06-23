@@ -57,10 +57,12 @@ public class UsarMessageParser extends Thread
             Message messageIn = null;
             try 
             {
-                System.out.println("Reading message");
+                System.out.println("\tReading message in UsarMessageParser.run()");
                 messageIn = in.readMessage();
-                System.out.println(messageIn.toString());
-            } catch (Exception e) {
+                //System.out.println("Read message to string: " + messageIn.toString());
+            } 
+            catch (Exception e) 
+            {
                 e.printStackTrace();
                 base.logger
                     .severe("Error in UsarMessageParser.run, attempted to retrieve item out of messageReader");
@@ -70,47 +72,51 @@ public class UsarMessageParser extends Thread
             switch (messageIn.getMsgType())
             {
                 case USAR_SENSOR:
-                    System.out.println("USAR SENSOR message detected!");
+                    System.out.println("Parsing usar sensor message ...");
                     UsarSimSensorMessage sensorMessage = null;
                     try
                     {
-                    sensorMessage = new UsarSimSensorMessage((UsarSimMessage) messageIn);
+                        sensorMessage = new UsarSimSensorMessage((UsarSimMessage) messageIn);
+                        switch (sensorMessage.getSensorType())
+                        {
+                            case USAR_ODOMETRY: 
+                                System.out.print("Ignoring odometry message");
+                                System.out.println(" as we are not using those.");
+                                break;
+                            case USAR_INS:
+                                UInsSensorMessage insMessage = 
+                                    new UInsSensorMessage(sensorMessage);
+                                message = (InsSensorMessage) 
+                                    insMessage.toAp2dxMessage();
+                                break;
+                            case USAR_SONAR:
+                                USonarSensorMessage sonarMessage = 
+                                    new USonarSensorMessage(sensorMessage);
+                                    // Put the right values in the message
+                                message = (SonarSensorMessage) 
+                                    sonarMessage.toAp2dxMessage();
+                                break;
+                            case USAR_RANGE:
+                                URangeSensorMessage rangeMessage = 
+                                    new URangeSensorMessage(sensorMessage);
+                                message = (RangeScannerSensorMessage) 
+                                    rangeMessage.toAp2dxMessage();
+                                break;
+
+                            default: 
+                                System.out.print("Ignoring unimportant or ");
+                                System.out.print(" unknown sensor message, OR "); 
+                                System.out.println("message was incorrectly parsed"); 
+                        };
                     }
                     catch (Exception e)
                     {
+                        System.err.println("Some exception occured while making a specialized Usar sensor message, or perhaps even at casting to usarsimsensormessage");
+                        System.err.println("Message.getSensorType() : " + sensorMessage.getSensorType());
+                        System.err.println("exception.getMessage(): " + e.getMessage());
+                        System.err.println("exception.printing stacktrace.");
                         e.printStackTrace();
                     }
-                    switch (sensorMessage.getSensorType())
-                    {
-                        case USAR_SONAR:
-                            try
-                            {   
-                                USonarSensorMessage sonarMessage= new USonarSensorMessage(sensorMessage);
-                                // Put the right values in the message
-                                message = (SonarSensorMessage) sonarMessage.toAp2dxMessage();
-                            }
-                            catch (Exception e)
-                            {
-                                System.err.println("Some exception occured while making a SonarMessage");
-                                System.err.println(e.getMessage());
-                            }
-                            break;
-                        case USAR_RANGE:
-                            try
-                            {
-                                URangeSensorMessage rangeMessage = new URangeSensorMessage(sensorMessage);
-                                message = (RangeScannerSensorMessage) rangeMessage.toAp2dxMessage();
-                            }
-                            catch (Exception e)
-                            {
-                                System.err.println("Some exception occured while making a SonarMessage");
-                                System.err.println(e.getMessage());
-                            }
-                            break;
-
-                        default: 
-                            System.out.println("Somethings wrong!?");
-                    };
                     break;
                 default:
                     System.out.println("Unexpected message type in ap2dx.coordonator.UsarMessageParser: " + messageIn.getMsgType());
@@ -120,7 +126,7 @@ public class UsarMessageParser extends Thread
             {
                 try 
                 {
-                    System.out.println("Sending message");
+                    System.out.println("Attempting to send a message");
                     sendConnection.sendMessage(message);
                 } 
                 catch (Exception e) 
@@ -130,8 +136,10 @@ public class UsarMessageParser extends Thread
                         .severe("Error in UsarMessageParser.run, attempted get the connection of message: "
                                 + message);
                 }
+            System.out.printf("End of UsarMessageParser.run while loop, message %s may be sent.\n", message);
             }
-            System.out.printf("End of while loop, message %s may be sent.\n", message);
+            else
+                System.out.printf("End of UsarMessageParser.run while loop. No messages sent\n");
         }
     } 
 }
