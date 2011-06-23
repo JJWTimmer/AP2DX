@@ -1,25 +1,25 @@
 cd ant\jar
 
 cd coordinator
-start start.bat
+start "Coordinator" start.bat
 cd ..
 
 cd motor
-start start.bat
+start "Motor" start.bat
 cd ..
 
 cd reflex
-start start.bat
+start "Reflex" start.bat
 cd ..
 
 cd planner
-start start.bat
+start "Planner" start.bat
 cd ..
 
 cd mapper
-start start.bat
+start "mapper" start.bat
 cd ..
 
 cd sensor
-start start.bat
+start "Sensor" start.bat
 cd ..\..\..\
