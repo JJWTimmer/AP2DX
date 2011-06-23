@@ -155,7 +155,7 @@ public abstract class AP2DXBase {
 
 		// Start connectionchecker to remove dead connections
 		// and restart outgoing connections
-		/* Outcommented because I think it doesn't work
+
         ConnectionChecker CC = new ConnectionChecker(this);
 		Thread t2 = new Thread(CC);
 		try {
@@ -165,7 +165,6 @@ public abstract class AP2DXBase {
 			e.printStackTrace();
 			//System.exit(1);
 		}
-        */
 		
         System.out.println("Before override");
 		// run the extra logic
@@ -501,17 +500,15 @@ public abstract class AP2DXBase {
 				ArrayList<ConnectionHandler> outgoing = (ArrayList<ConnectionHandler>) base.outConnections.clone();
 				
 				//check if incoming connection has closed and remove from list
-				for (ConnectionHandler conn : base.inConnections) {
-					if (!conn.isAlive()) {
-						incoming.remove(conn);
+				for (ConnectionHandler conn : incoming) {
+					if (!conn.isConnAlive()) {
+						base.inConnections.remove(conn);
 					}
 				}
 				
-				base.inConnections = incoming;
-				
 				// check if outgoing connection has closed and attempt to reconnect
-				for (ConnectionHandler conn : base.outConnections) {
-					if (!conn.isAlive()) {
+				for (ConnectionHandler conn : outgoing) {
+					if (!conn.isConnAlive()) {
 						int port = conn.getPort();
 						String address = conn.getAddress();
 						
@@ -525,16 +522,12 @@ public abstract class AP2DXBase {
 							t1.start();
 							
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
-							//System.exit(1);
 							
 						}
 						
-						outgoing.remove(conn);
+						base.outConnections.remove(conn);
 					}
-					
-					base.outConnections = outgoing;
 					
 				}
 				try {

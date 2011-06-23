@@ -58,7 +58,7 @@ public class AP2DXMessageReader extends BufferedReader implements
 				line = readLine();
 				succeeded = true;
 			} catch (SocketTimeoutException ex) {
-				// pass
+				throw ex;
 			}
 		}
 		
