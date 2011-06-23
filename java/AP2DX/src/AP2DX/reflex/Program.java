@@ -83,7 +83,7 @@ public class Program extends AP2DXBase {
 			if (!toggleBlocked) {
 				setBotBlocked(false);
 			}
-
+			
 			break;
 		default:
 			System.out
