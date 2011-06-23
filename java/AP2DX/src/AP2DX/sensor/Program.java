@@ -70,7 +70,7 @@ public class Program extends AP2DXBase
     @Override
         public ArrayList<AP2DXMessage> componentLogic(Message message) 
         {
-            System.out.println("\tReceived a message in the component logic of the sensor module. The message was: " + message.getMessageString());
+            //System.out.println("\tReceived a message in the component logic of the sensor module. The message was: " + message.getMessageString());
             ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
 
             
@@ -95,16 +95,19 @@ public class Program extends AP2DXBase
                         //messageList.add(message2); // }}}
                         break;
                     case AP2DX_SENSOR_INS:
-                        //System.out.print("Parsing an INS message.");
+                        //System.out.println("Parsing an INS message: " + message.getMessageString());
                         // TO THE MAPPER! Said Batman
                         InsSensorMessage insSensorMessage = (InsSensorMessage) message;
                         insSensorMessage.setSourceModuleId(IAM);
                         insSensorMessage.setDestinationModuleId(Module.MAPPER);
                         messageList.add(insSensorMessage);
 
+
                         // TO THE REFLEX! 
-                        InsSensorMessage message2 = new InsSensorMessage((InsSensorMessage)
-                                (AP2DXMessage) insSensorMessage.clone());
+                        //insSensorMessage.compileMessage();
+                        InsSensorMessage message2 = new InsSensorMessage(
+                        insSensorMessage);
+                         //       (AP2DXMessage) insSensorMessage.clone());
                         message2.setDestinationModuleId(Module.REFLEX);
                         messageList.add(message2);
                         break;
@@ -116,7 +119,7 @@ public class Program extends AP2DXBase
                             System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
                         else
                         {
-                            System.out.println("Updating the sonar lines");
+                            //System.out.println("Updating the sonar lines");
                             try{
                                 drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
                             }
@@ -146,7 +149,8 @@ public class Program extends AP2DXBase
                         break;
 
                     default:
-                        System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
+                        //System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
+
                 }  
             }
             catch (Exception e)

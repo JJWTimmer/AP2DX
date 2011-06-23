@@ -52,7 +52,7 @@ public class SonarSensorMessage extends SpecializedMessage
     {
         //time = Double.parseDouble(values.get("time").toString());
 
-        System.out.printf("In specializedParseMessage of Sonar with string %s\n", messageString);
+        //System.out.printf("In specializedParseMessage of Sonar with string %s\n", messageString);
 		try 
         { 
             // this is, if I'm correct, also in the values map, which 
@@ -73,7 +73,7 @@ public class SonarSensorMessage extends SpecializedMessage
         }
         //setRangeArray(rangeArray);
         //setTime(time);
-        System.out.printf("Rangearray now is %s, with first %f\n", this.rangeArray.toString(), this.rangeArray[0]);
+        //System.out.printf("Rangearray now is %s, with first %f\n", this.rangeArray.toString(), this.rangeArray[0]);
     }
 
     // setters and getters {{{
