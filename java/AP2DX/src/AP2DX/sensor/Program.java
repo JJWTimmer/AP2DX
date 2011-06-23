@@ -107,12 +107,19 @@ public class Program extends AP2DXBase
                     System.out.println("AP2DX_SENSOR_SONAR message detected! ");
                     //create the SonarSensorMessage instance
                     SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
+                    System.out.println("Sonar data: " + sonarSensorMessage.getRangeArray());
                     if (sonarSensorMessage.getRangeArray() == null)
                         System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
                     else
                     {
                         System.out.println("Updating the sonar lines");
-                        drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
+                        try{
+                            drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
+                        }
+                        catch (NullPointerException e)
+                        {
+                            System.out.println("Drawer does not exist yet");
+                        }
                         // Clone it to send it to reflex
                         //SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
                         sonarSensorMessage.setDestinationModuleId(Module.REFLEX);
@@ -123,9 +130,15 @@ public class Program extends AP2DXBase
                     System.out.println("RangeScanner message detected");
                     RangeScannerSensorMessage rangeScannerSensorMessage = 
                         (RangeScannerSensorMessage) message;
-                    drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
-                    drawer.setRangeScannerResolution(rangeScannerSensorMessage.getResolution());
-                    drawer.paintRangeScannerLines(rangeScannerSensorMessage.getDataArray());
+                    try{
+                        drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
+                        drawer.setRangeScannerResolution(rangeScannerSensorMessage.getResolution());
+                        drawer.paintRangeScannerLines(rangeScannerSensorMessage.getDataArray());
+                    }
+                    catch(NullPointerException e)
+                    {
+                        System.out.println("Drawer does not exist");
+                    }
                     break;
 
                 default:

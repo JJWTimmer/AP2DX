@@ -61,6 +61,7 @@ public class AP2DXMessageReader extends BufferedReader implements
 				throw ex;
 			}
 		}
+
 		
 		AP2DXMessage message = new AP2DXMessage(line, source);
 		switch (message.getMsgType()) {

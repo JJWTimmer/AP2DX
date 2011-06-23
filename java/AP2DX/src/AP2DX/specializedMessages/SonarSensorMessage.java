@@ -52,7 +52,7 @@ public class SonarSensorMessage extends SpecializedMessage
     {
         //time = Double.parseDouble(values.get("time").toString());
 
-
+        System.out.printf("In specializedParseMessage of Sonar with string %s\n", messageString);
 		try 
         { 
             // this is, if I'm correct, also in the values map, which 
@@ -60,16 +60,20 @@ public class SonarSensorMessage extends SpecializedMessage
             // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
             JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
-            rangeArray = new double[jsonArray.length()];
+            this.rangeArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 rangeArray[i] = jsonArray.getDouble(i);
-            time = jsonObject.getDouble("time");
+            this.time = jsonObject.getDouble("time");
+            // For testing purposes:
         }
         catch (Exception e)
         {
             System.out.println("Error in AP2DX.specializedMessages.SonarSensorMessage.specializedParseMessage()... things went south!");
             e.printStackTrace();
         }
+        //setRangeArray(rangeArray);
+        //setTime(time);
+        System.out.printf("Rangearray now is %s, with first %f\n", this.rangeArray.toString(), this.rangeArray[0]);
     }
 
     // setters and getters {{{
