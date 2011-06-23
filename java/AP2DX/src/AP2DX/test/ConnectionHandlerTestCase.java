@@ -22,6 +22,7 @@ import AP2DX.*;
 
 import java.io.*;
 import java.lang.Thread;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Map;
@@ -70,9 +71,10 @@ public class ConnectionHandlerTestCase{
         public void before() throws Exception
         {
             //Instantiate the fake base
-            fakeBase = new ConcreteBase(Module.TEST);
+            fakeBase = new ConcreteBase(Module.TEST);        
             //instantiate some socket
-            socket = new Socket("Host", 5999);
+            socket = new Socket("146.50.4.35", 8080);
+
             //Standardly, use a ConnectionHandler with no usar, 
             //after the Todo in the mocked getInputStream is done, we can uncomment this again.
             test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
