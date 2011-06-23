@@ -111,6 +111,7 @@ public class Drawer extends JPanel
     {
         g.setColor( java.awt.Color.white );
         g.fillRect (0, 0, getWidth(), getHeight());
+        g.setColor( java.awt.Color.black );
         paintSonarLines(g);
         paintRangeScannerLines(g);
         repaint();

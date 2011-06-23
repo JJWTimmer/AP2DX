@@ -41,6 +41,7 @@ public class SonarSensorMessage extends SpecializedMessage
     public SonarSensorMessage(AP2DXMessage message)
     {
         super(message);
+        specializedParseMessage();
     }
 
     public SonarSensorMessage(AP2DXMessage message, Module sourceId, Module destinationId)

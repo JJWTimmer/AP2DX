@@ -41,6 +41,7 @@ public class RangeScannerSensorMessage extends SpecializedMessage
     public RangeScannerSensorMessage(AP2DXMessage message)
     {
         super(message);
+        compileMessage();
     }
 
     public RangeScannerSensorMessage(AP2DXMessage message, Module sourceId, Module destinationId)
@@ -118,6 +119,3 @@ public class RangeScannerSensorMessage extends SpecializedMessage
 
 
 }
-
-
-
