@@ -84,7 +84,6 @@ public class ConnectionTestCase extends TestCase {
 	 * Test method for {@link AP2DX.Connection#sendMessage(java.lang.String)}.
 	 */
 	@Test
-	@Ignore("Not implemented")
 	public void testSendMessage() {
 		try {
 			Connection conn = new Connection("uva.nl", 80, Module.USARSIM);
@@ -92,7 +91,6 @@ public class ConnectionTestCase extends TestCase {
 		} catch(Exception e) {
 			fail();
 		}
-
 	}
 
 	/**
@@ -108,9 +106,13 @@ public class ConnectionTestCase extends TestCase {
 	 * Test method for {@link AP2DX.Connection#close()}.
 	 */
 	@Test
-	@Ignore("Not implemented")
 	public void testClose() {
-		fail("Not yet implemented");
+		try {
+			Connection conn = new Connection("uva.nl", 80, Module.USARSIM);
+			assertTrue(conn.close());
+		} catch(Exception e) {
+			fail();
+		}
 	}
 
 }
