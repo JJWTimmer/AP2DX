@@ -48,14 +48,18 @@ public class Drawer extends JPanel
     {
         java.awt.Color previousColor = g.getColor();
         g.setColor(java.awt.Color.red);
-    
+
         int x1;
         int x2;
         int y1;
         int y2;
+
+        double maxSonarValue = highestValueFromArray(sonarRanges);
+        double constant = (getSize().height/2); 
+
         for (int i=0; i < sonarRanges.length; i++)
         {   
-            double line = (sonarRanges[i] / MAX_SONAR_VALUE) * getSize().height ;
+            double line = (sonarRanges[i] / maxSonarValue) * constant; 
             double theta = Math.toRadians(sonarThetas[i]);
             //System.out.printf("Theta = %f\n", theta);
             x1 = getSize().width / 2;
@@ -86,9 +90,14 @@ public class Drawer extends JPanel
         int y1;
         int y2;
 
+        double maxRangeScannerValue = highestValueFromArray(rangeScannerRanges);
+        // TODO: check if 'height' here is correct
+        // TODO: rewrite line '(rangeScannerRanges[i] / maxRangeScannerValue) * constant; ' further to increase performance 
+        double constant = (getSize().height/2); 
+
         for (int i = 0; i < rangeScannerRanges.length; i ++)
         {
-            double line = (rangeScannerRanges[i] / MAX_RANGE_SCANNER_VALUE) * getSize().height;
+            double line = (rangeScannerRanges[i] / maxRangeScannerValue) * constant; 
             double theta = i * rangeScannerResolution;
             //System.out.printf("Theta = %f, for line %d\n", theta, i);
              
@@ -132,6 +141,32 @@ public class Drawer extends JPanel
 
         drawer.paintSonarLines(sonarDataSample); 
         drawer.paintRangeScannerLines(rangeScannerDataSample);
+    }
+
+    /** Finds the index of the highest double value. */
+    public int highestValuedIndexFromArray(double[] array)
+    {
+        // pffft
+        //double maxSonarValue = Collections.max(Arrays.asList(sonarRanges));       
+        double highestValue = -1;
+        int highestIndex = -1;
+        for (int i = 0; i < array.length; i ++)   
+        {
+            highestValue = highestValue < array[i] ? highestValue : array[i];
+            if (highestValue == array[i])
+                highestIndex = i;
+        }
+        return highestIndex;
+    }
+
+    /** Finds the highest value in array. */
+    public double highestValueFromArray(double[] array)
+    {     
+        double highestValue = -1;
+        for (double d : array)
+            if (highestValue < d)
+                highestValue = d;
+        return highestValue;
     }
 
     // setters and getters {{{

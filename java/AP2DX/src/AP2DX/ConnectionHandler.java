@@ -112,8 +112,10 @@ public class ConnectionHandler extends Thread {
 						"Time out receiving from: %s",
 						socket.getRemoteSocketAddress()));
 				if (!socket.isConnected())
+                { 
 					setConnAlive(false);
-				break;
+					break;
+                }
 			} catch (Exception e) {
 				AP2DXBase.logger
 						.severe(String

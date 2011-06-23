@@ -39,7 +39,6 @@ public class UsarSimMessage extends Message {
 	@Override
 	public Message.MessageType getMsgType() {
 		if (this.type == MessageType.UNKNOWN || this.type == null) {
-            System.out.println("Parsing message type");
 			String startPatternStr = "^[A-Z]+";
 			Pattern startPattern = Pattern.compile(startPatternStr);
 			Matcher startMatcher = startPattern

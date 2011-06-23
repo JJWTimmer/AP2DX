@@ -24,16 +24,19 @@ public class UsarSimSensorMessage extends UsarSimMessage {
 		super(msg);
 	}
 
-	public SensorType getSensorType() {
+	public SensorType getSensorType() 
+    {
 		String typePatternStr = "\\{Type ([a-zA-Z0-9,._\\-]+)\\}";
 		Pattern typePattern = Pattern.compile(typePatternStr);
 		Matcher typeMatcher = typePattern.matcher(this.getMessageString());
 
-		if (typeMatcher.find()) {
+		if (typeMatcher.find()) 
+        {
 			String type = typeMatcher.group(1);
 			return SensorType.getEnumByString(type);
 		}
-		else {
+		else    
+        {
 			return SensorType.USAR_UNKNOWN_SENSOR;
 		}
 		
