@@ -1,7 +1,9 @@
 /**
  * 
  */
-package AP2DX;
+package AP2DX.test;
+
+import AP2DX.*;
 
 import static org.junit.Assert.*;
 
