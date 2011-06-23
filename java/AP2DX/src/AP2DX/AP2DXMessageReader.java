@@ -75,7 +75,12 @@ public class AP2DXMessageReader extends BufferedReader implements
         case AP2DX_SENSOR_RANGESCANNER:
             return new RangeScannerSensorMessage(message);
 		case AP2DX_MOTOR_ACTION:
-			return new ActionMotorMessage(message);
+			//return new ActionMotorMessage(message);
+			ActionMotorMessage msg =  new ActionMotorMessage(message);
+            System.out.println("Encountered MOTOR_ACTION " + message);
+            return msg;
+        case AP2DX_MOTOR:
+            return new MotorMessage(message);
         case HELLO:
             return new HelloMessage(message);
 		default:

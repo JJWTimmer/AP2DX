@@ -125,9 +125,10 @@ public class Program extends AP2DXBase
                                 System.out.println("Drawer does not exist yet");
                             }
                             // Clone it to send it to reflex
-                            //SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
-                            sonarSensorMessage.setDestinationModuleId(Module.REFLEX);
-                            messageList.add(sonarSensorMessage);
+                            SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
+                            sonarSensorMessage2.setSourceModuleId(Module.SENSOR);
+                            sonarSensorMessage2.setDestinationModuleId(Module.REFLEX);
+                            messageList.add(sonarSensorMessage2);
                         }
                         break;
                     case AP2DX_SENSOR_RANGESCANNER:

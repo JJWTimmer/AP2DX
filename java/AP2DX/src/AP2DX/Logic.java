@@ -29,9 +29,7 @@ public class Logic extends Thread {
             Message message = null;
             // Get the message from the base
             try {
-                //System.out.println("Logic.run waits for a message to take out of the receive queue...");
                 message = base.getReceiveQueue().take();
-                //System.out.println("Logic.run, took message out of receive queue!");
             } catch (Exception e) 
             {
                 e.printStackTrace();

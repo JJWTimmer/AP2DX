@@ -35,6 +35,7 @@ public class Program extends AP2DXBase
 	public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();
+        System.out.println("Received message " + message.getMessageString());
 
         switch(message.getMsgType())
         {
@@ -44,7 +45,8 @@ public class Program extends AP2DXBase
         default:
         	if (!isBotBlocked()) {
         		// for now, lets just drive forward, OKAY?!
-        		messageList.add(new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.FORWARD, 20));
+        		messageList.add(new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.FORWARD, 100.0));  
+                System.out.println("Sending message "+ messageList.get(0));
         	}
             AP2DXBase.logger.severe("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: " + message.getMsgType());
         }

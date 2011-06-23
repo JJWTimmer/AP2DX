@@ -31,7 +31,7 @@ public class ActionMotorMessage extends SpecializedMessage
         super(message);
     }
     
-    public ActionMotorMessage(Module sourceId, Module destinationId, ActionType actionType, int value)
+    public ActionMotorMessage(Module sourceId, Module destinationId, ActionType actionType, double value)
     {
     	super(Message.MessageType.AP2DX_MOTOR_ACTION, sourceId, destinationId);
         setActionType(actionType);
@@ -42,8 +42,9 @@ public class ActionMotorMessage extends SpecializedMessage
     {
         try
         {
-            action = ActionType.valueOf(values.get("actionType").toString());
-            value = Double.parseDouble(values.get("value").toString());
+            JSONObject jsonObject = new JSONObject(messageString);
+            setValue(jsonObject.getDouble("value"));
+            setActionType(ActionType.valueOf(jsonObject.getString("actionType")));
         }
         catch (Exception e)
         {
@@ -63,7 +64,7 @@ public class ActionMotorMessage extends SpecializedMessage
     public ActionType setActionType(ActionType action) 
     {
     	this.action = action;
-        values.put("actionType", action);
+        values.put("actionType", action.toString());
     	return action;
     }
     

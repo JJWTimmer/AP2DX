@@ -28,7 +28,9 @@ public class Program extends AP2DXBase
     {
         // for now just freakin' forward it to the planner okay?!
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();  
+        System.out.printf("Forwarding message %s to planner\n", msg);
         msg.setDestinationModuleId(Module.PLANNER);
+        msg.setSourceModuleId(IAM);
         messageList.add(((AP2DXMessage) msg)); 
 		return messageList;
 	}

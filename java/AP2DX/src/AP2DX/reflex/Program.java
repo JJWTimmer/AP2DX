@@ -41,6 +41,7 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
+        System.out.print("Message received: " + message);
 
 		switch (message.getMsgType()) {
 		case AP2DX_MOTOR_ACTION:
@@ -50,13 +51,14 @@ public class Program extends AP2DXBase {
 				messageList.add(new StopPlannerMessage(IAM, Module.PLANNER));
 				
 			} else {
-				message.setDestinationModuleId(Module.MOTOR);
-				messageList.add((AP2DXMessage) message);
+                ActionMotorMessage msg = new ActionMotorMessage((AP2DXMessage) message);
+				msg.setDestinationModuleId(Module.MOTOR);
+				messageList.add((AP2DXMessage) msg);
 			}
 
 			break;
 		case AP2DX_SENSOR_SONAR:
-			SonarSensorMessage msg = (SonarSensorMessage) message;
+			SonarSensorMessage msg = new SonarSensorMessage((AP2DXMessage) message);
 
 			setPreviousDistances(getCurrentDistances());
 			setCurrentDistances(msg.getRangeArray());

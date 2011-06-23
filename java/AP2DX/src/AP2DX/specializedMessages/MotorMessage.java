@@ -3,6 +3,9 @@ package AP2DX.specializedMessages;
 import AP2DX.*;
 import AP2DX.usarsim.specialized.UDriveMessage;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 /**
 * Specialized message send from the motor to the coordinator.  
 * 
@@ -42,8 +45,10 @@ public class MotorMessage extends SpecializedMessage
     {
         try
         {
-            leftValue = Double.parseDouble(values.get("leftValue").toString());
-            rightValue = Double.parseDouble(values.get("rightValue").toString());
+            JSONObject jsonObject = new JSONObject(messageString);
+            setLeftValue(jsonObject.getDouble("leftValue"));
+           setRightValue(jsonObject.getDouble("rightValue"));
+            setNormalized(jsonObject.getBoolean("normalized"));
         }
         catch (Exception e)
         {
