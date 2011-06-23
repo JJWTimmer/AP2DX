@@ -107,11 +107,13 @@ public class Program extends AP2DXBase {
                             .println("Some exception occured while making a SonarMessage");
                         System.err.println(e.getMessage());
                     }
-                case AP2DX_MOTOR_ACTION:
+                case AP2DX_MOTOR:
                     try
                     {
-                        System.out.println("Motor action message received. Let's try to send a Motor message to UsarSim");
-
+                        System.out.println("Motor action message received in Coordinator. Let's try to send a Motor message to UsarSim");
+                        MotorMessage message = new MotorMessage((AP2DXMessage) msg);
+                        UDriveMessage usarMessage = message.toUsarSimMessage();
+                        out.println(usarMessage);
                     }
                     catch ( Exception e)
                     {

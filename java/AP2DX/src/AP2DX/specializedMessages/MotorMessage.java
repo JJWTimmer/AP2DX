@@ -1,6 +1,7 @@
 package AP2DX.specializedMessages;
 
 import AP2DX.*;
+import AP2DX.usarsim.specialized.UDriveMessage;
 
 /**
 * Specialized message send from the motor to the coordinator.  
@@ -51,7 +52,16 @@ public class MotorMessage extends SpecializedMessage
         }
     } 
 
-    // setters and getters {{{
+    public UDriveMessage toUsarSimMessage()
+    {
+        UDriveMessage usarMessage = new UDriveMessage();
+        usarMessage.setLeft(leftValue);
+        usarMessage.setRight(rightValue);
+        usarMessage.setNormalized(normalized);
+        return usarMessage;
+    }
+
+    // setters and getter {{{
 
     public double getLeftValue()
     {

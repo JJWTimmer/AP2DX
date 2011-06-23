@@ -28,11 +28,11 @@ public final class UDriveMessage extends UsarSimMessage {
      * this will be the spin speed in Radians per Second
      */
 	@UsarMessageField(name = "Left")
-	private float left;
+	private double left;
 
     /** Same as left, but for the right wheel */
     @UsarMessageField(name = "Right")
-    private float right;
+    private double right;
     
     /** If this is set to true (standard is false) the value of left and right should be between -100 and 100.
      * If it is set to False, left and right controll the wheel spin speed in radians per second.
@@ -49,13 +49,13 @@ public final class UDriveMessage extends UsarSimMessage {
     private boolean flip;
     
     /** Setter for the left wheel speed */
-    public  void setLeft(float leftIn)
+    public  void setLeft(double leftIn)
     {
         this.left = leftIn;
     }
 
     /** Setter for the right wheel speed */
-    public  void setRight(float rightIn)
+    public  void setRight(double rightIn)
     {
         this.right = rightIn;
     }
@@ -80,13 +80,13 @@ public final class UDriveMessage extends UsarSimMessage {
     }
 
     /** Getter for right wheel speed */
-    public  float getRight()
+    public  double getRight()
     {
         return this.right;
     }
 
     /** Getter for left wheel speed */
-    public  float getLeft()
+    public  double getLeft()
     {
         return this.left;
     }

@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import AP2DX.AP2DXBase;
-import AP2DX.AP2DXMessage;
-import AP2DX.ConnectionHandler;
-import AP2DX.Message;
-import AP2DX.Module;
+import AP2DX.*;
+import AP2DX.specializedMessages.*;
 import AP2DX.usarsim.specialized.USonarSensorMessage;
 
 public class Program extends AP2DXBase {
@@ -57,10 +54,10 @@ public class Program extends AP2DXBase {
 
 			break;
 		case AP2DX_SENSOR_SONAR:
-			USonarSensorMessage msg = (USonarSensorMessage) message;
+			SonarSensorMessage msg = (SonarSensorMessage) message;
 
 			setPreviousDistances(getCurrentDistances());
-			setCurrentDistances(msg.getData());
+			setCurrentDistances(msg.getRangeArray());
 
 			double[] approaching = new double[getCurrentDistances().length];
 			for (int i = 0; i < getCurrentDistances().length; i++) {

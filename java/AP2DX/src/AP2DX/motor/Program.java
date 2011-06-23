@@ -78,9 +78,15 @@ public class Program extends AP2DXBase
         {
             case AP2DX_MOTOR_ACTION: 
                 doMotorActionLogic((ActionMotorMessage) message, messageList);
+                System.out.println("Motor logic got an Action message. Will send:");
+                for(AP2DXMessage ms: messageList)
+                {
+                    System.out.println(ms);
+                }
                 break;
             case AP2DX_SENSOR_ODOMETRY:
                 doOdometryLogic((OdometrySensorMessage) message, messageList);
+                break;
             default:
                 System.out.println("Unexpected message type in ap2dx.motor.Program: " + message.getMsgType());
         }
