@@ -105,7 +105,11 @@ public class ConnectionHandler extends Thread {
 		while (true) {
 			try {
 				AP2DXMessage incomingMessage = (AP2DXMessage) in.readMessage();
+<<<<<<< HEAD
+                System.out.printf("Connection handler puts incoming message in the receive queue: %s\n", incomingMessage);
+=======
 				System.out.printf("Incoming message: %s\n", incomingMessage);
+>>>>>>> b6450a5f0a1335c53a418d0a0b880fcfb383a03b
 				base.getReceiveQueue().put(incomingMessage);
 			} catch (SocketTimeoutException e) {
 				AP2DXBase.logger.warning(String.format(

@@ -64,7 +64,12 @@ public class AP2DXMessageReader extends BufferedReader implements
 
 		
 		AP2DXMessage message = new AP2DXMessage(line, source);
+    
+
 		switch (message.getMsgType()) {
+        case AP2DX_SENSOR_INS:
+            System.out.println("Parsing INS message in AP2DXMessageReader.readMessage(): " + line);
+            return new InsSensorMessage(message);
 		case AP2DX_SENSOR_SONAR:
 			return new SonarSensorMessage(message);
         case AP2DX_SENSOR_RANGESCANNER:
