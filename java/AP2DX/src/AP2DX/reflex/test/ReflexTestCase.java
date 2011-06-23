@@ -1,10 +1,14 @@
 package AP2DX.reflex.test;
 
+import java.util.ArrayList;
+
 import AP2DX.*;
+import AP2DX.specializedMessages.OdometrySensorMessage;
 import AP2DX.test.*;
 import AP2DX.reflex.*;
 
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 public class ReflexTestCase extends AbstractTestCase
@@ -26,7 +30,14 @@ public class ReflexTestCase extends AbstractTestCase
 		assertNotNull(myTest);
         System.out.println("after assertNotNull()");
     }
-
+    
+    
+    @Test public void componentLogic()
+    {
+    	ArrayList<AP2DXMessage> list = 
+    		test.componentLogic(new OdometrySensorMessage(Module.REFLEX, Module.MOTOR));
+        assertNotNull(list);
+    }
    
     
     /**

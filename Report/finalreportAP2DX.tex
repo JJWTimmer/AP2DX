@@ -6,33 +6,101 @@
 \usepackage{subfig}
 
 \title{Awesomizing the P2DX\\\small AP2DX}
-\author{Wadie Assal \ 6398693 \and Jeroen Rooijmans \ 5887410 \and Jasper Timmer
-\ 5995140 \and Maarten de Waard \ 5894883 \and  Maarten Inja \ 5872464}
+\author{Wadie Assal \ 6398693 \and Jasper Timmer \ 5995140 \and Maarten de Waard \ 5894883 \and  Maarten Inja \ 5872464}
 
 \begin{document}
 \maketitle
 \newpage
 
+\section{Preface}
+As part of the course Software Engineering and Distributed Applications, of the University of Amsterdam, we are asked to program a distributed application for a virtual robot. The team consists of students with different profiles: three are from Artificial Intelligence, one from Applied Science in Software Engineering and one from pre-master Software Engineering. This melange is both a chance to create something good from different viewpoints as well as a point of attention, because none of us has followed the bachelor Computer Science at the University of Amsterdam. TODO.
+
+\newpage
+
 \section{Introduction}
-Here we will write a small introduction to the project, explaining our main goal and the used programs
-\section{Architecture}
-here we will explain how we created the architecture of our program
+For the client a robotcontroller that can autonomously map the yellow arena had to be build. This was attempted in less than four weeks. After two and three weeks there were milestones to show the client the progress.
+
 \subsection{USARSim}
-here we will discuss the USARSim part
+As simulator USARSim is used. USARSim (Unified System for Automation and Robot Simulation) is an application to simulate the real robot arena's of the IEEE, based on the Unreal engine. The robot should be able to navigate through the 'Yellow Arena'. This is a map with a few static obstacles.
+
+\subsection{Structure of this document}
+This document describes the setup of the development enviroment and the architecture of the program. In the appendices there is more technical information.
+
+\section{Goals}
+With the client there is agreed to build the following features in the robotcontroller:
+\begin{itemize}
+\item Loosely coupled modules based on network communication
+\item Robot should be safe, i.e. stop for obstacles
+\item Robot should be able to drive autonomously through the enviroment
+\item Robot should be able to create a map of the enviroment
+\end{itemize}
+
+\subsection{Milestones}
+At every agreed milestone there was a deliverable plannened. This deliverable can contain software and or documentation.
+\\\\
+The first milestone was agreed to be:
+\begin{itemize}
+\item Drive: The program should be able to direct the robot through the environment but not yet be able to follow lines or walls.
+\item Avoid collision: The robot should be able to avoid collision with objects and walls. It will stop, turn to a random angle, and drive on. This way it will cover most of the area without colliding.
+\item Experiment and content of final report: A draft of the final report, containing a description of the experiment and its contents.
+\end{itemize}
+\\
+What was actually delivered at this milestone was a program that could only spawn a robot, and Javadoc describing the API of the application. This was partly because writing tests took a lot of time and the baseclass was not yet ready. More about the baseclass later.
+\\ \\
+As second milestone there should be:
+\begin{itemize}
+\item Avoid obstacles: The robot will be able to avoid the obstacles that cross its path, in stead of stopping and turning a random corner.
+\item Navigate: The robot will be able to navigate through the room.
+\item Mapper: A class that creates a map of the room out of the sensor data. In the time of milestone two it does not have to be able to create an entire map and be very accurate, but it will be able to make some implementation
+\item Improved Sensor: The sensor class will be improved to be able to make an accurate map
+\item Improved Reflexes: The reflex class needs to be able to use some sensor data to be able to avoid objects appropriately.
+\end{itemize}
+\\
+The deliverable for this milestone also did not meet the agreed requirements. TODO.
+\\\\
+The final delivable should meet all the goals. TODO.
+
+\section{Architecture}
+\subsection{Introduction}
+AP2DX is written in the Java programming language. This was choosen as it is advertised to be reliable and fast by the company Flowtraders. This is important for AP2DX, because it should be a safe robot controller, that stops in time and does not harm anyone on it's path. The architecture of AP2DX is based on Object Oriented Programmin (OOP). To not repeat the same code again and again for every module, a baseclass was constructed. This class could do things as: read a config file, write to a logfile, accept incoming connections, start outgoing connections based on the config file, handle incoming messages and send responses. The baseclass was designed to be flexible for the needs of every module. Also, the program is heavily multithreaded, to open and check connections and to do the business logic and send messages. As for the messages: a base messageclass was build, to facilitate the communication between USARSim and AP2DX, and between modules of AP2DX. As standard for config file and communication, JSON (Javascript Object Notation) was used.
+
+TODO: Class diagram etc.
+
+\subsection{USARSim}
+The simulator exists of a virtual enviroment where different maps and different robots can be loaded. These robots have different sizes and different features. As example of features of a robot, there are different kinds of sensors and different kinds of wheels. For AP2DX, the robot P2DX was used. This robot is a three-wheel, rear swivel wheel robot. The two frontwheels can be controlled independently of eachother, so it is possible to turn almost in place. As sensors are available on the P2DX:
+\begin{itemize}
+\item 8 Sonar distance sensors
+\item 1 Laser distance sensor
+\item Odometry
+\item Internal Navigation System
+\item Camera
+\end{itemize}
+For the purpose of AP2DX only sonar and laser sensors are used.
+
+TODO: Picture.
+
 \subsection{Coordinator}
-here we will discuss the Coordinator part
+The first module a message on a journey from the USARSim to AP2DX meets, is the AP2DX Coordinator. The Coordinator is programmed to spawn the robot and translate and relay traffic between the simulator and the AP2DX System. That is all it really does. It has a connection with the Sensor module to relay the incoming sensor data and the Motor module to receive commands for the simulator.
+
 \subsection{Sensor}
-here we will discuss the Sensor part, could have two subsections for sonar and laser
-\subsection{Reflex}
-here we will discuss the Reflex part, could have two subsection for basic reflex and improved reflex strategies
+When a message is translated by the coordinator the journey continues to the AP2DX Sensor module. This module creates a visualisation of sonar and laser sensordata in a user interface window, so it is possible to see what the robot sees. Then the message is cloned: she is sent to the Mapper module and the Reflex module.
+
 \subsection{Mapper}
 here we will discuss the Mapper part
+
 \subsection{Planner}
 here we will discuss the Planner part
-\subsection{AbstractMotor}
+
+\subsection{Reflex}
+
+TODO: could have two subsection for basic reflex and improved reflex strategies
+
+\subsection{Motor}
 here we will discuss the AbstractMotor part
+
 \subsection{Base Class}
-here we will discuss the Base Class
+OBSOLETE? here we will discuss the Base Class
+
 \subsection{Communication}
 here we will discuss how our seperate modules communicate with eachother and with USARSim
 
@@ -48,7 +116,5 @@ Here we will discuss the results from our experiment and explain what it means
 \section{Future Work}
 In this section, we discuss what future work could improve our program and what kind of uses we can think of for our program.
 
-\section{Reflection}
-Here we will discuss how the project went. What kind of problems we encountered group-wise, we discuss our planning and deliverables.
 \end{document}
 
