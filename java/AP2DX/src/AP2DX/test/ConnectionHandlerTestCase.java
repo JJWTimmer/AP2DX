@@ -40,6 +40,32 @@ public class ConnectionHandlerTestCase{
         public static void beforeClass() throws Exception 
         {
             Mockit.setUpMocks(FakeBase.class);                        
+            /*new MockUp<Socket>() 
+            {
+                @Mock
+                    void $init(String host, int port) 
+                    {
+                        System.out.printf("Host: %s, Port: %d\n", host, port);
+                        //pass
+                    }
+                @Mock
+                    public InputStream getInputStream()
+                    {   
+                        //TODO: Fix this to have the right type
+                        //return new BufferedReader(new StringReader("HELLO WORLD!!!\n"));
+                        return new StringBufferInputStream("HELLO WORLD");
+                    }
+                @Mock 
+                    public boolean isClosed()
+                    {
+                        return false;
+                    }
+                @Mock
+                    public OutputStream getOutputStream()
+                    {
+                			return null;
+                    }
+            };*/
         }
     @Before
         public void before() throws Exception
