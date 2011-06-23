@@ -46,7 +46,9 @@ public class Program extends AP2DXBase {
 		case AP2DX_MOTOR_ACTION:
 
 			if (isBotBlocked) {
-				AP2DXMessage stopMessage;
+				messageList.add(new ActionMotorMessage(IAM, Module.MOTOR, ActionMotorMessage.ActionType.STOP, 666));
+				messageList.add(new StopPlannerMessage(IAM, Module.PLANNER));
+				
 			} else {
 				message.setDestinationModuleId(Module.MOTOR);
 				messageList.add((AP2DXMessage) message);

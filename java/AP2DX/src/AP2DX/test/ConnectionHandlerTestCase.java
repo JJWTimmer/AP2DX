@@ -39,8 +39,8 @@ public class ConnectionHandlerTestCase{
     @BeforeClass 
         public static void beforeClass() throws Exception 
         {
-            Mockit.setUpMocks(FakeBase.class);
-            new MockUp<Socket>() 
+            Mockit.setUpMocks(FakeBase.class);                        
+            /*new MockUp<Socket>() 
             {
                 @Mock
                     void $init(String host, int port) 
@@ -65,7 +65,7 @@ public class ConnectionHandlerTestCase{
                     {
                 			return null;
                     }
-            };
+            };*/
         }
     @Before
         public void before() throws Exception
@@ -73,7 +73,7 @@ public class ConnectionHandlerTestCase{
             //Instantiate the fake base
             fakeBase = new ConcreteBase(Module.TEST);        
             //instantiate some socket
-            socket = new Socket("146.50.4.35", 8080);
+            socket = new Socket("uva.nl", 80);
             //Standardly, use a ConnectionHandler with no usar, 
             //after the Todo in the mocked getInputStream is done, we can uncomment this again.
             ConnectionHandler test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
