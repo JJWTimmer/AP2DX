@@ -60,12 +60,15 @@ public class ConnectionTestCase extends TestCase {
 	 */
 	@Test
 	public void testConnection() {
-		new MockUp<Socket>() {
+		/*
+		 * Why do we need this????
+		 * 
+		 * new MockUp<Socket>() {
 			@Mock
 			void $init(String host, int port) {
 				//pass
 			}
-		};
+		};*/
 		
 		Connection conn = null;
 		try {
@@ -83,7 +86,13 @@ public class ConnectionTestCase extends TestCase {
 	@Test
 	@Ignore("Not implemented")
 	public void testSendMessage() {
-		fail("Not yet implemented");
+		try {
+			Connection conn = new Connection("uva.nl", 80, Module.USARSIM);
+			assertTrue(conn.sendMessage("Message to server."));
+		} catch(Exception e) {
+			fail();
+		}
+
 	}
 
 	/**
