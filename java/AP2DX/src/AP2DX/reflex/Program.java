@@ -9,6 +9,8 @@ import AP2DX.AP2DXMessage;
 import AP2DX.ConnectionHandler;
 import AP2DX.Message;
 import AP2DX.Module;
+import AP2DX.specializedMessages.ActionMotorMessage;
+import AP2DX.specializedMessages.StopPlannerMessage;
 import AP2DX.usarsim.specialized.USonarSensorMessage;
 
 public class Program extends AP2DXBase {
@@ -49,7 +51,9 @@ public class Program extends AP2DXBase {
 		case AP2DX_MOTOR_ACTION:
 
 			if (isBotBlocked) {
-				AP2DXMessage stopMessage;
+				messageList.add(new ActionMotorMessage(IAM, Module.MOTOR, ActionMotorMessage.ActionType.STOP, 666));
+				messageList.add(new StopPlannerMessage(IAM, Module.PLANNER));
+				
 			} else {
 				message.setDestinationModuleId(Module.MOTOR);
 				messageList.add((AP2DXMessage) message);

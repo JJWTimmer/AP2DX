@@ -79,8 +79,8 @@ public class Program extends AP2DXBase
                 switch (message.getMsgType())
                 {
                     case AP2DX_SENSOR_ODOMETRY:
-                        System.out.print("Parsing an odometry message, but we do");
-                        System.out.println(" with this data.. so pass.");
+                        //System.out.print("Parsing an odometry message, but we do");
+                        //System.out.println(" with this data.. so pass.");
                         // Turns out odometry is something different than we had expected {{{
                         //OdometrySensorMessage odometrySensorMessage = 
                         //    (OdometrySensorMessage) message;
@@ -95,7 +95,7 @@ public class Program extends AP2DXBase
                         //messageList.add(message2); // }}}
                         break;
                     case AP2DX_SENSOR_INS:
-                        System.out.print("Parsing an INS message.");
+                        //System.out.print("Parsing an INS message.");
                         // TO THE MAPPER! Said Batman
                         InsSensorMessage insSensorMessage = (InsSensorMessage) message;
                         insSensorMessage.setSourceModuleId(IAM);
@@ -109,10 +109,9 @@ public class Program extends AP2DXBase
                         messageList.add(message2);
                         break;
                     case AP2DX_SENSOR_SONAR:
-                        System.out.print("Parsing an Sonar message.");
                         //create the SonarSensorMessage instance
                         SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
-                        System.out.println("Sonar data: " + sonarSensorMessage.getRangeArray());
+                        //System.out.println("Sonar data: " + sonarSensorMessage.getRangeArray());
                         if (sonarSensorMessage.getRangeArray() == null)
                             System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
                         else
@@ -132,7 +131,7 @@ public class Program extends AP2DXBase
                         }
                         break;
                     case AP2DX_SENSOR_RANGESCANNER:
-                        System.out.println("RangeScanner message detected");
+                        //System.out.println("RangeScanner message detected");
                         RangeScannerSensorMessage rangeScannerSensorMessage = 
                             (RangeScannerSensorMessage) message;
                         try{

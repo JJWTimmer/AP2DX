@@ -54,6 +54,7 @@ public class InsSensorMessage extends SpecializedMessage
         catch (Exception e)
         {
             System.out.println("Error in AP2DX.specializedMessages.InsSensorMessage.specializedParseMessage()... things went south!");
+            System.out.println("e.getMessag(): " + e.getMessage());
             e.printStackTrace();
         }
     } 
@@ -68,8 +69,8 @@ public class InsSensorMessage extends SpecializedMessage
 
     public void setLocation(double[] value)
     {
-        values.put("location", value);
         location = value;
+        values.put("location", value);
     }
 
     /** Three doubles describing the orientation (r, p, y). */

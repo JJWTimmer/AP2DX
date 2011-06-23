@@ -43,9 +43,7 @@ public class Program extends AP2DXBase {
     @Override
         protected void doOverride() 
         {
-            System.out.println("Warning, security override in progress");
             config = readConfig();
-            System.out.println("Config: " + config.get("sim_port"));
 
             String address = config.get("sim_address").toString();
             int port = Integer.parseInt(config.get("sim_port").toString());
@@ -67,10 +65,6 @@ public class Program extends AP2DXBase {
             
             try 
             {
-                //Old:
-                //out.println("INIT {ClassName USARBot.P2DX} {Location 4.5,1.9,1.8} {Name R1}");
-                //out.flush();
-
                 out.println(message.toString());
             }
             catch (Exception e) 

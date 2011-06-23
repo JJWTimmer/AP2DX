@@ -109,7 +109,7 @@ public class AP2DXBaseTestCase
      */
     @Test
         public void testReadConfig() {
-            System.out.print("Startin' testReadConfig!");
+            System.out.println("Startin' testReadConfig!");
             // readConfig is called in the ctor of the base class
             Map config = test.getConfig();
 

@@ -22,13 +22,12 @@ public class Program extends AP2DXBase
     {
         super(Module.MAPPER); // explicitly calls base constructor
 		System.out.println(" Running Mapper... ");
-
 	}
 	
 	public ArrayList<AP2DXMessage> componentLogic(Message msg) 
     {
         // for now just freakin' forward it to the planner okay?!
-        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage> ();  
+        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();  
         msg.setDestinationModuleId(Module.PLANNER);
         messageList.add(((AP2DXMessage) msg)); 
 		return messageList;

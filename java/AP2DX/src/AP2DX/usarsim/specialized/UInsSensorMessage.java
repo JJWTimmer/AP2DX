@@ -39,8 +39,8 @@ public class UInsSensorMessage extends UsarSimSensorMessage {
     {
         InsSensorMessage insSensorMessage = 
             new InsSensorMessage(Module.COORDINATOR, Module.SENSOR);
-        insSensorMessage.setLocation(location);
         insSensorMessage.setOrientation(orientation);
+        insSensorMessage.setLocation(location);
         return insSensorMessage;
     }
 
@@ -74,7 +74,7 @@ public class UInsSensorMessage extends UsarSimSensorMessage {
 
 		}
 		
-		String locPatternStr = "\\{Resolution ([0-9.,\\-_]+)\\}";
+		String locPatternStr = "\\{Location ([0-9.,\\-_]+)\\}";
 		Pattern locPattern = Pattern.compile(locPatternStr);
 		Matcher locMatcher = locPattern.matcher(this.getMessageString());
 
