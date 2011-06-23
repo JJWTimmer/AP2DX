@@ -51,9 +51,6 @@ public class UsarSimMessage extends Message {
 				this.type = null;
 			}
 		}
-        //else
-            //System.out.println("Something went wrong @ UsarSimMessage.getMsgType(), message type = " + this.type); // wtf, how can we print the message type if
-        // something goes wrong if  all we want is to return the message type here
 
 		return this.type;
 	}
@@ -85,7 +82,7 @@ public class UsarSimMessage extends Message {
 					output.append(String.format(" {%s %s}", field.getAnnotation(UsarMessageField.class).name(),field.get(this)));
 					field.setAccessible(false);
 				} catch (Exception e) {
-					System.err.print(e.getMessage());
+					System.err.println(e.getMessage());
 				}
 
 			} else if (field.isAnnotationPresent(UsarMessageIteratorField.class)) {

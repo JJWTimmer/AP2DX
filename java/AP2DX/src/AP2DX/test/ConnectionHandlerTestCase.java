@@ -39,33 +39,7 @@ public class ConnectionHandlerTestCase{
     @BeforeClass 
         public static void beforeClass() throws Exception 
         {
-            Mockit.setUpMocks(FakeBase.class);
-            new MockUp<Socket>() 
-            {
-                @Mock
-                    void $init(String host, int port) 
-                    {
-                        System.out.printf("Host: %s, Port: %d\n", host, port);
-                        //pass
-                    }
-                @Mock
-                    public InputStream getInputStream()
-                    {   
-                        //TODO: Fix this to have the right type
-                        //return new BufferedReader(new StringReader("HELLO WORLD!!!\n"));
-                        return new StringBufferInputStream("HELLO WORLD");
-                    }
-                @Mock 
-                    public boolean isClosed()
-                    {
-                        return false;
-                    }
-                @Mock
-                    public OutputStream getOutputStream()
-                    {
-                        return null;
-                    }
-            };
+            Mockit.setUpMocks(FakeBase.class);                        
         }
     @Before
         public void before() throws Exception
@@ -73,11 +47,10 @@ public class ConnectionHandlerTestCase{
             //Instantiate the fake base
             fakeBase = new ConcreteBase(Module.TEST);        
             //instantiate some socket
-            socket = new Socket("146.50.4.35", 8080);
-
+            socket = new Socket("uva.nl", 80);
             //Standardly, use a ConnectionHandler with no usar, 
             //after the Todo in the mocked getInputStream is done, we can uncomment this again.
-            test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
+            ConnectionHandler test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
         }
 
     @Test

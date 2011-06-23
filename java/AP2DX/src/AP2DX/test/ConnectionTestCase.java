@@ -69,7 +69,7 @@ public class ConnectionTestCase extends TestCase {
 		
 		Connection conn = null;
 		try {
-			conn = new Connection("127.0.0.1", 9999, Module.USARSIM);
+			conn = new Connection("localhost", 3000, Module.USARSIM);
 			assertNotNull(conn);
 		}
 		catch (Exception ex) {

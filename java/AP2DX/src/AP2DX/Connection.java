@@ -30,7 +30,7 @@ public class Connection {
 	/** Sends a message to whatever this thing is connected to. */
 	public boolean sendMessage(String message) {
 		try {
-			out.print(message);
+			out.println(message);
 			return true;
 		} catch (Exception e) {
 			return false;

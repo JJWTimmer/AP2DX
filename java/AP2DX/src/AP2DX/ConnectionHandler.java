@@ -28,7 +28,7 @@ public class ConnectionHandler extends Thread {
 
 	private Socket socket;
 	private AP2DXBase base;
-    /** The module with which this ConnectionHandler has a connection */
+	/** The module with which this ConnectionHandler has a connection */
 	public final Module moduleID;
 
 	private PrintWriter out;
@@ -82,8 +82,19 @@ public class ConnectionHandler extends Thread {
 		in = new AP2DXMessageReader(socket.getInputStream(), origin);
 
 		AP2DXBase.logger.info("Waiting for msg in conn handler ctor");
-		Message firstIncomingMessage = in.readMessage();
-		AP2DXBase.logger.info(String.format("got msg in conn handler ctor: %s", firstIncomingMessage.messageString));
+
+		Message firstIncomingMessage = null;
+		boolean succeeded = false;
+		while (!succeeded) {
+			try {
+				firstIncomingMessage = in.readMessage();
+				succeeded = true;
+			} catch (SocketTimeoutException ex) {
+				AP2DXBase.logger.info("Timeout on first message");
+			}
+		}
+		AP2DXBase.logger.info(String.format("got msg in conn handler ctor: %s",
+				firstIncomingMessage.messageString));
 
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
 
@@ -91,14 +102,18 @@ public class ConnectionHandler extends Thread {
 
 	/** Thread logic. */
 	public void run() {
-		while (true)
-		{
+		while (true) {
 			try {
 				AP2DXMessage incomingMessage = (AP2DXMessage) in.readMessage();
+<<<<<<< HEAD
                 System.out.printf("Connection handler puts incoming message in the receive queue: %s\n", incomingMessage);
+=======
+				System.out.printf("Incoming message: %s\n", incomingMessage);
+>>>>>>> b6450a5f0a1335c53a418d0a0b880fcfb383a03b
 				base.getReceiveQueue().put(incomingMessage);
 			} catch (SocketTimeoutException e) {
-				AP2DXBase.logger.warning(String.format("Time out receiving from: %s",
+				AP2DXBase.logger.warning(String.format(
+						"Time out receiving from: %s",
 						socket.getRemoteSocketAddress()));
 				if (!socket.isConnected())
                 { 
@@ -107,8 +122,10 @@ public class ConnectionHandler extends Thread {
                 }
 			} catch (Exception e) {
 				AP2DXBase.logger
-						.severe(String.format("%s IN ConnectionHandler.run, attempting to read message.",e.getMessage()));
-                e.printStackTrace();
+						.severe(String
+								.format("%s IN ConnectionHandler.run, attempting to read message.",
+										e.getMessage()));
+				e.printStackTrace();
 			}
 		}
 	}
@@ -120,23 +137,23 @@ public class ConnectionHandler extends Thread {
 	public void sendMessage(Message message) {
 		out.println(message.toString());
 	}
-	
+
 	public boolean isConnAlive() {
-		return alive ;
+		return alive;
 	}
-	
+
 	private void setConnAlive(boolean value) {
 		alive = value;
 	}
-	
+
 	public int getPort() {
 		return this.socket.getPort();
 	}
-	
+
 	public String getAddress() {
 		return this.socket.getInetAddress().getHostAddress();
 	}
-	
+
 	public Module getModule() {
 		return this.moduleID;
 	}
