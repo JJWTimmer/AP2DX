@@ -1,10 +1,16 @@
 package AP2DX.coordinator.test;
 
+import java.util.ArrayList;
+
 import AP2DX.*;
+import AP2DX.specializedMessages.ActionMotorMessage;
+import AP2DX.specializedMessages.ActionMotorMessage.ActionType;
+import AP2DX.specializedMessages.MotorMessage;
 import AP2DX.test.*;
 import AP2DX.coordinator.*;
 
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 public class CoordinatorTestCase extends AbstractTestCase
@@ -25,6 +31,17 @@ public class CoordinatorTestCase extends AbstractTestCase
         System.out.println("After new program");
 		assertNotNull(myTest);
         System.out.println("after assertNotNull()");
+    }
+    
+    /**
+     * default test method for the componentLogic method
+     * @author Maarten de Waard
+     */
+    @Test public void componentLogic()
+    {
+    	ArrayList<AP2DXMessage> list = 
+    		test.componentLogic(new MotorMessage(Module.REFLEX, Module.MOTOR, 20, 20));
+        assertNotNull(list);
     }
 
    

@@ -123,7 +123,7 @@ public class AP2DXMessageTestCase {
 	 */
 	@Test	
 	public void testCompareTo() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 	
 	/*
