@@ -63,7 +63,7 @@ public class ConnectionHandlerTestCase{
                 @Mock
                     public OutputStream getOutputStream()
                     {
-                        return null;
+                			return null;
                     }
             };
         }
@@ -74,10 +74,9 @@ public class ConnectionHandlerTestCase{
             fakeBase = new ConcreteBase(Module.TEST);        
             //instantiate some socket
             socket = new Socket("146.50.4.35", 8080);
-
             //Standardly, use a ConnectionHandler with no usar, 
             //after the Todo in the mocked getInputStream is done, we can uncomment this again.
-            test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
+            ConnectionHandler test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
         }
 
     @Test
