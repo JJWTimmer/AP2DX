@@ -76,14 +76,14 @@ public class ConnectionHandlerTestCase{
             socket = new Socket("uva.nl", 80);
             //Standardly, use a ConnectionHandler with no usar, 
             //after the Todo in the mocked getInputStream is done, we can uncomment this again.
-            ConnectionHandler test = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
+            ConnectionHandler test = new ConnectionHandler(false, false, fakeBase, socket, Module.TEST, Module.TEST);
         }
 
     @Test
         public void testConstructorFalse()
         {
             try{
-                ConnectionHandler myTest = new ConnectionHandler(false, fakeBase, socket, Module.TEST, Module.TEST);
+                ConnectionHandler myTest = new ConnectionHandler(false, false, fakeBase, socket, Module.TEST, Module.TEST);
                 assertNotNull(myTest);
             }
             catch(Exception e)
@@ -97,7 +97,7 @@ public class ConnectionHandlerTestCase{
         {
             try
             {
-                ConnectionHandler myTest = new ConnectionHandler(true, fakeBase, socket, Module.TEST, Module.TEST);
+                ConnectionHandler myTest = new ConnectionHandler(true, false, fakeBase, socket, Module.TEST, Module.TEST);
                 assertNotNull(myTest);
             }
             catch(Exception e)

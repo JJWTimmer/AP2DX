@@ -53,7 +53,7 @@ public class Logic extends Thread {
                 for (Message action : actions) {
                     try {
                         ConnectionHandler connection = base
-                            .getSendConnection(action
+                            .getConnection(action
                                     .getDestinationModuleId());
                         connection.sendMessage(action);
                     } catch (Exception e) {

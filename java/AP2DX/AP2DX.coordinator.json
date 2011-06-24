@@ -8,7 +8,9 @@
 			 {
 			   "component": "SENSOR",
 			   "address": "127.0.0.1",
-			   "port": 5005
+			   "port": 5005,
+			   "bidirectional": false,
+			   "passive": false
 			 }	
 		]
 }

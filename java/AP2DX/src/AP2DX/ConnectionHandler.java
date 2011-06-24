@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 import AP2DX.*;
+import AP2DX.specializedMessages.HelloMessage;
 import AP2DX.usarsim.UsarSimMessageReader;
 
 //import com.sun.xml.internal.ws.api.message.Message;
@@ -28,6 +29,9 @@ public class ConnectionHandler extends Thread {
 
 	private Socket socket;
 	private AP2DXBase base;
+	private boolean bidirectional;
+	private boolean passive;
+	
 	/** The module with which this ConnectionHandler has a connection */
 	public final Module moduleID;
 
@@ -45,11 +49,14 @@ public class ConnectionHandler extends Thread {
 	 *            If true, handle a USARsim Connection
 	 * @throws IOException
 	 */
-	public ConnectionHandler(boolean usar, AP2DXBase base, Socket socket,
+	public ConnectionHandler(boolean usar, boolean bidirection, AP2DXBase base, Socket socket,
 			Module origin, Module destination) throws IOException {
 		this.base = base;
 		this.socket = socket;
 		this.moduleID = destination;
+		setPassive(false);
+		setBidirectional(bidirection);
+		
 		out = new PrintWriter(socket.getOutputStream(), true);
 
 		if (usar) {
@@ -76,18 +83,20 @@ public class ConnectionHandler extends Thread {
 			throws IOException, InstantiationException, IllegalAccessException {
 		this.base = base;
 		this.socket = socket;
-
+		this.setBidirectional(false);
+		setPassive(true);
+		
 		out = new PrintWriter(socket.getOutputStream(), true);
 
 		in = new AP2DXMessageReader(socket.getInputStream(), origin);
 
 		AP2DXBase.logger.info("Waiting for msg in conn handler ctor");
 
-		Message firstIncomingMessage = null;
+		HelloMessage firstIncomingMessage = null;
 		boolean succeeded = false;
 		while (!succeeded) {
 			try {
-				firstIncomingMessage = in.readMessage();
+				firstIncomingMessage = (HelloMessage) in.readMessage();
 				succeeded = true;
 			} catch (SocketTimeoutException ex) {
 				AP2DXBase.logger.info("Timeout on first message");
@@ -97,7 +106,7 @@ public class ConnectionHandler extends Thread {
 				firstIncomingMessage.messageString));
 
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
-
+		setBidirectional(firstIncomingMessage.getBidirection());
 	}
 
 	/** Thread logic. */
@@ -154,4 +163,31 @@ public class ConnectionHandler extends Thread {
 		return this.moduleID;
 	}
 
+	/**
+	 * @param bidirectional the bidirectional to set
+	 */
+	public void setBidirectional(boolean bidirectional) {
+		this.bidirectional = bidirectional;
+	}
+
+	/**
+	 * @return the bidirectional
+	 */
+	public boolean isBidirectional() {
+		return bidirectional;
+	}
+
+	/**
+	 * @param passive the passive to set
+	 */
+	public void setPassive(boolean passive) {
+		this.passive = passive;
+	}
+
+	/**
+	 * @return the passive
+	 */
+	public boolean isPassive() {
+		return passive;
+	}
 }
