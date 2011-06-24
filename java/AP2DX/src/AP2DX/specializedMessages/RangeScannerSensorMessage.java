@@ -68,9 +68,9 @@ public class RangeScannerSensorMessage extends SpecializedMessage
             dataArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 dataArray[i] = jsonArray.getDouble(i);
-            //time = jsonObject.getDouble("time");
-            resolution = jsonObject.getDouble("resolution");
-            fov = jsonObject.getDouble("fov");
+            setDataArray(dataArray);
+            setResolution(jsonObject.getDouble("resolution"));
+            setFov(jsonObject.getDouble("fov"));
         }
         catch (JSONException e)
         {

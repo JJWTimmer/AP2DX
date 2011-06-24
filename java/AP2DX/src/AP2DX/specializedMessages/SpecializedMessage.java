@@ -66,6 +66,20 @@ public abstract class SpecializedMessage extends AP2DXMessage
         specializedParseMessage();
     }
 
+    /** Clones this instance, updates the source and destination id, and
+    * returns a 'ready to send' message. 
+    */
+    public SpecializedMessage forward(Module source, Module destination) throws Exception
+    {
+        Exception e = new Exception("ERROR IN SPECIALIZEDMESSAGE.FOWARD!!! " +
+            "This method should be overriden by concrete classes of " +
+            "specializedMessage! This method should be abstract, but " +
+            "not every concrete message implemented this yet. DO this, " +
+            " then remove the 'throws exception' part and make this abstract" +
+            " in SpecializedMessage");
+        throw e;
+    }
+
     /** Parsing the fields of 'values' that are specific for a concrete 
     * specialized message. */
     abstract public void specializedParseMessage();
