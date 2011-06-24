@@ -43,6 +43,7 @@ public abstract class Message
         USAR_DRIVE("DRIVE",true),
         USAR_SENSOR("SEN",true),
         HELLO("HELLO!!!"),
+        RESET("RESET"),
         
         UNKNOWN("unknown");
 

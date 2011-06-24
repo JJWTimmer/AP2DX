@@ -132,7 +132,7 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 		if (this.delay < object.delay) {
 			return -1;
 		} else if (this.delay > object.delay) {
-			
+			return 1;
 		} else if (this.delay == object.delay) {
 			return 0;
 		} else {

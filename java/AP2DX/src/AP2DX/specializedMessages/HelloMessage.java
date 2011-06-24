@@ -46,11 +46,6 @@ public class HelloMessage extends SpecializedMessage
         }
     }
 
-	public boolean getBidirection() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	/**
 	 * @param bidirection the bidirection to set
 	 */

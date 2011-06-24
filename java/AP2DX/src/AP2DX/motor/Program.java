@@ -141,7 +141,17 @@ public class Program extends AP2DXBase
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
-
+	        	double angle = actionMotorMessage.getValue();
+	        	if (angle < 0) {
+	        		messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -5, 5));
+	        	}
+	        	else if (angle > 0) {
+	        		messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 5, -5));
+	        	}
+	        	AP2DXMessage msg = new MotorMessage(IAM, Module.COORDINATOR, 0, 0);
+	        	msg.setDelay((long)angle);
+	        	messageList.add(msg);
+	        	
                 break;
 	        case STOP:
 	        	//return motor.stop();

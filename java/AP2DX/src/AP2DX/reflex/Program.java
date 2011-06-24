@@ -13,7 +13,7 @@ public class Program extends AP2DXBase {
 	private double[] previousDistances;
 	private double[] approaching;
 	private boolean isBotBlocked = false;
-
+	private boolean reset = true;
 	/**
 	 * Entrypoint of reflex
 	 */
@@ -41,25 +41,30 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-        System.out.print("Message received: " + message.getMessageString());
+		System.out.print("Message received: " + message.getMessageString());
 
-	switch (message.getMsgType()) {
+		switch (message.getMsgType()) {
+		case RESET:
+			System.out.println("RESET Detected");
+			setBotBlocked(false);
+			this.reset = true;
+			break;
 		case AP2DX_MOTOR_ACTION:
 			System.out.println("AP2DX_MOTOR_ACTION Detected");
-			if (isBotBlocked) {
-				messageList.add(new ActionMotorMessage(IAM, Module.MOTOR, ActionMotorMessage.ActionType.STOP, 666));
-				messageList.add(new StopPlannerMessage(IAM, Module.PLANNER));
-				System.out.println("Sending stop messages to PLANNER and MOTOR");
-
-			} else {
-				ActionMotorMessage msg = new ActionMotorMessage((AP2DXMessage) message);
+			if (reset) {
+				ActionMotorMessage msg = new ActionMotorMessage(
+						(AP2DXMessage) message);
 				msg.setDestinationModuleId(Module.MOTOR);
-				System.out.printf("Sending message %s to MOTOR module\n", msg.getMessageString());
+				
+				System.out.printf("Sending message %s to MOTOR module\n",
+						msg.getMessageString());
+				
 				messageList.add((AP2DXMessage) msg);
 			}
 			break;
 		case AP2DX_SENSOR_SONAR:
-			SonarSensorMessage msg = new SonarSensorMessage((AP2DXMessage) message);
+			SonarSensorMessage msg = new SonarSensorMessage(
+					(AP2DXMessage) message);
 
 			setPreviousDistances(getCurrentDistances());
 			setCurrentDistances(msg.getRangeArray());
@@ -75,36 +80,36 @@ public class Program extends AP2DXBase {
 				}
 			}
 
-			boolean toggleBlocked = false;
-
 			for (int i = 0; i < getCurrentDistances().length; i++) {
-				if (getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
+				if (!(isBotBlocked && reset) && getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
 					setBotBlocked(true);
-					toggleBlocked = true;
+					this.reset = false;
+					
+					System.out.println("Reflex says: STOP!");
+					
+					messageList.add(new ActionMotorMessage(IAM, Module.MOTOR,
+							ActionMotorMessage.ActionType.STOP, 666));
+					messageList.add(new StopPlannerMessage(IAM, Module.PLANNER));
+					
+					System.out.println("Sending stop messages to PLANNER and MOTOR");
 				}
-			}
-			if (!toggleBlocked) {
-				setBotBlocked(false);
 			}
 
 			break;
 		default:
 			System.out
-				.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: "
-						+ message.getMsgType());
-	}
+					.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: "
+							+ message.getMsgType());
+		}
 		return messageList;
 	}
 
 	/**
-	 * Here a new thread is started that monitors the state of the bot. If there
-	 * is something in front of it, isBotBlocked will be true. Then all messages
-	 * from the planner will go to in a blocking queue. As soon as the bot is no
-	 * longer blocked, start sending the messages from the planner again.
+	 * 
 	 */
 	@Override
 	public void doOverride() {
-
+		
 	}
 
 	/**

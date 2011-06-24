@@ -106,7 +106,7 @@ public class ConnectionHandler extends Thread {
 				firstIncomingMessage.messageString));
 
 		this.moduleID = firstIncomingMessage.getSourceModuleId();
-		setBidirectional(firstIncomingMessage.getBidirection());
+		setBidirectional(firstIncomingMessage.isBidirection());
 	}
 
 	/** Thread logic. */
