@@ -110,7 +110,7 @@ public class UMissonStateMessageTestCase {
 	public void testGetType() {
 		UMissionStateMessage msg = new UMissionStateMessage("MISSTA {Time 395.38} {Name CameraPanTilt} {Link 1} {Value 0.0000} {Torque -20.00} {Link 2} {Value 0.0000} {Torque -20.00}");
 		Message.MessageType type = msg.getMsgType();
-		assertEquals(Message.MessageType.USAR_MISSIONSTATE, type);
+		assertTrue(Message.MessageType.USAR_MISSIONSTATE.equals(type));
 	}
 
 }
