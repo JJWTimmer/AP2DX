@@ -12,9 +12,10 @@ import AP2DX.*;
 * It describes the positive x,y-position (and heads theta) relative to the start location. 
 *
 * Example USAR data: SEN {Type Odometry} {Name Odometry} {Pose 0.4265,0.1643,0.9105}
-*
+* @deprecated We do not use odometry sensor message, see the INS sensor messages. Also, bugs in code exists. 
 * @author Maarten Inja
 */
+@Deprecated 
 public class OdometrySensorMessage extends SpecializedMessage 
 {
 
