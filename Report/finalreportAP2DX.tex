@@ -22,23 +22,23 @@ As part of the course Software Engineering and Distributed Applications, of the 
 \newpage
 
 \section{Introduction}
-For the client a robotcontroller that can autonomously map the yellow arena had to be build. This was attempted in less than four weeks. After two and three weeks there were milestones to show the client the progress.
+For the client a robot controller that can autonomously map the yellow arena had to be build. This was attempted in less than four weeks. After two and three weeks there were milestones to show the client the progress.
 
 \subsection{USARSim}
 As simulator USARSim is used. USARSim (Unified System for Automation and Robot Simulation) is an application to simulate the real robot arena's of the IEEE, based on the Unreal engine. The robot should be able to navigate through the 'Yellow Arena'. This is a map with a few static obstacles.
 
 \subsection{Structure of this document}
-This document describes the setup of the development enviroment and the architecture of the program. In the appendices there is more technical information.
+This document describes the setup of the development environment and the architecture of the program. In the appendices there is more technical information.
 
 \newpage
 
 \section{Goals}
-With the client there is agreed to build the following features in the robotcontroller:
+With the client there is agreed to build the following features in the robot-controller:
 \begin{itemize}
 \item Loosely coupled modules based on network communication
 \item Robot should be safe, i.e. stop for obstacles
-\item Robot should be able to drive autonomously through the enviroment
-\item Robot should be able to create a map of the enviroment
+\item Robot should be able to drive autonomously through the environment
+\item Robot should be able to create a map of the environment
 \end{itemize}
 
 \subsection{Milestones}
@@ -91,13 +91,13 @@ TODO: Picture.
 The first module a message on a journey from the USARSim to AP2DX meets, is the AP2DX Coordinator. The Coordinator is programmed to spawn the robot and translate and relay traffic between the simulator and the AP2DX System. That is all it really does. It has a connection with the Sensor module to relay the incoming sensor data and the Motor module to receive commands for the simulator.
 
 \subsection{Sensor}
-When a message is translated by the coordinator the journey continues to the AP2DX Sensor module. This module creates a visualisation of sonar and laser sensordata in a user interface window, so it is possible to see what the robot sees. Then the message is cloned: she is sent to the Mapper module and the Reflex module.
+When a message is translated by the coordinator the journey continues to the AP2DX Sensor module. This module creates a visualisation of sonar and laser sensor-data in a user interface window, so it is possible to see what the robot sees. Then the message is cloned: she is sent to the Mapper module and the Reflex module.
 
 \subsection{Mapper}
-here we will discuss the Mapper part
+In the mapper module all the sensor information comes together and here is where the information is going to make sense. The sensor information combined with the position of the robot the mapper module will construct a map. This map is then send to the planner module. If there are any irregularities with the position of the robot it will be corrected here and send to the planner.
 
 \subsection{Planner}
-here we will discuss the Planner part
+The planner module is the brain of the software. It directs the robot to unexplored places and solves problems with obstacles. It will make its decisions based on the map send from the mapper module and the obstacle information send from the reflex module. The planner is also the place where the position of the robot is saved. The position is periodically sent to the mapper so the postion can be corrected by the mapper if needed.
 
 \subsection{Reflex}
 The robot is controlled by the reflex module through the motor module. The reflex module will take the responsibility for unexpected situations that could not be foreseen by the planner module. For example low obstacles or unexpected falling object in the path of the robot. The reflex module will stop the robot so the arising situation can be handled gracefully by the planner module. The information needed to make a new route is send to the planner module from the reflex module.
@@ -109,7 +109,7 @@ The motor modules main function is to provide an abstract layer for the reflex m
 OBSOLETE? here we will discuss the Base Class
 
 \subsection{Communication}
-here we will discuss how our seperate modules communicate with eachother and with USARSim
+here we will discuss how our separate modules communicate with eachother and with USARSim
 
 \newpage
 
