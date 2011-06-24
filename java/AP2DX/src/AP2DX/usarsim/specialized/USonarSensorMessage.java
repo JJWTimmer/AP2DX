@@ -41,6 +41,7 @@ public class USonarSensorMessage extends UsarSimSensorMessage {
             new SonarSensorMessage(Module.COORDINATOR, Module.SENSOR);
         sonarSensorMessage.setTime(time);   
         sonarSensorMessage.setRangeArray(data);
+        sonarSensorMessage.compileMessage();
         return sonarSensorMessage;
     }
 	

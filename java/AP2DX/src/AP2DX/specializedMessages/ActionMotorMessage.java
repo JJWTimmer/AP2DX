@@ -43,7 +43,7 @@ public class ActionMotorMessage extends SpecializedMessage
         try
         {
             JSONObject jsonObject = new JSONObject(messageString);
-            setValue(jsonObject.getDouble("value"));
+            setValue((double)jsonObject.getInt("value"));
             setActionType(ActionType.valueOf(jsonObject.getString("actionType")));
         }
         catch (Exception e)
