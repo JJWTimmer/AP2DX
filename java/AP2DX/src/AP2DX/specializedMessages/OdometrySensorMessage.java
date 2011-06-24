@@ -33,6 +33,7 @@ public class OdometrySensorMessage extends SpecializedMessage
         super(Message.MessageType.AP2DX_SENSOR_ODOMETRY, sourceId, destinationId);
     }
 
+    @Deprecated 
     public void specializedParseMessage()
     {   
         try
