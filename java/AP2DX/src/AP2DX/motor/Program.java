@@ -73,7 +73,7 @@ public class Program extends AP2DXBase
 	public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-        System.out.println("Motor received message: " + message);
+        System.out.println("Motor received message: " + message.getMessageString());
         switch (message.getMsgType())
         {
             case AP2DX_MOTOR_ACTION: 

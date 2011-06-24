@@ -176,7 +176,8 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 
     public String toString()
     {
-        compileMessage();
+	if(this.messageString == null)
+        	compileMessage();
         return messageString;
     }
 
