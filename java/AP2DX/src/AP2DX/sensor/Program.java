@@ -104,7 +104,6 @@ public class Program extends AP2DXBase
                         insSensorMessage.compileMessage();
                         messageList.add(insSensorMessage);
 
-
                         // TO THE REFLEX! 
                         //insSensorMessage.compileMessage();
                         InsSensorMessage message2 = new InsSensorMessage(

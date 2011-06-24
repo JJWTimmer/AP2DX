@@ -6,12 +6,14 @@
 			 {
 			   "component": "MAPPER",
 			   "address": "127.0.0.1",
-			   "port": 5001
+			   "port": 5001,
+			   "bidirectional": false
 			 },
 			 {
 			   "component": "REFLEX",
 			   "address": "127.0.0.1",
-			   "port": 5004
+			   "port": 5004,
+			   "bidirectional": false
 			 }		 
 		]
 }

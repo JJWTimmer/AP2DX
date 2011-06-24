@@ -28,6 +28,9 @@ public class ConnectionHandler extends Thread {
 
 	private Socket socket;
 	private AP2DXBase base;
+	private boolean bidirectional;
+	private boolean incoming;
+	
 	/** The module with which this ConnectionHandler has a connection */
 	public final Module moduleID;
 
@@ -45,7 +48,7 @@ public class ConnectionHandler extends Thread {
 	 *            If true, handle a USARsim Connection
 	 * @throws IOException
 	 */
-	public ConnectionHandler(boolean usar, AP2DXBase base, Socket socket,
+	public ConnectionHandler(boolean usar, boolean bidireciontal, AP2DXBase base, Socket socket,
 			Module origin, Module destination) throws IOException {
 		this.base = base;
 		this.socket = socket;
@@ -72,7 +75,7 @@ public class ConnectionHandler extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	public ConnectionHandler(AP2DXBase base, Socket socket, Module origin)
+	public ConnectionHandler(AP2DXBase base, boolean bidireciontal, Socket socket, Module origin)
 			throws IOException, InstantiationException, IllegalAccessException {
 		this.base = base;
 		this.socket = socket;
@@ -152,6 +155,34 @@ public class ConnectionHandler extends Thread {
 
 	public Module getModule() {
 		return this.moduleID;
+	}
+
+	/**
+	 * @param bidirectional the bidirectional to set
+	 */
+	public void setBidirectional(boolean bidirectional) {
+		this.bidirectional = bidirectional;
+	}
+
+	/**
+	 * @return the bidirectional
+	 */
+	public boolean isBidirectional() {
+		return bidirectional;
+	}
+
+	/**
+	 * @param incoming the incoming to set
+	 */
+	public void setIncoming(boolean incoming) {
+		this.incoming = incoming;
+	}
+
+	/**
+	 * @return the incoming
+	 */
+	public boolean isIncoming() {
+		return incoming;
 	}
 
 }
