@@ -335,12 +335,12 @@ public abstract class AP2DXBase {
 	 * @param destination Module it connects to
 	 * @return true if operation succeeded false otherwise
 	 */
-	private boolean addSendConnection(String ipaddress, int port, Module destination) {
+	private boolean addConnection(String ipaddress, int port, Module destination, boolean bidirection) {
 		try {
 			Socket sock = new Socket(ipaddress, port);
 			
 			// not a usar sim connection, so first value is false
-			ConnectionHandler conn = new ConnectionHandler(false, this, sock, IAM, destination);
+			ConnectionHandler conn = new ConnectionHandler(false, bidirection, this, sock, IAM, destination);
 			connections.add(conn);
 			return true;
 		} catch (Exception e) {
@@ -439,9 +439,9 @@ public abstract class AP2DXBase {
 			ConnectionHandler connHandler = null;
 			
 			try {
-				connHandler = new ConnectionHandler(false, base, conn, IAM, this.module);
+				connHandler = new ConnectionHandler(false, bidirectional, base, conn, IAM, this.module);
 				
-				HelloMessage message = new HelloMessage(IAM, this.module);
+				HelloMessage message = new HelloMessage(IAM, this.module, bidirectional);
 				connHandler.sendMessage(message);
 
 			} catch (Exception e) {
@@ -484,20 +484,21 @@ public abstract class AP2DXBase {
 				// check if outgoing connection has closed and attempt to reconnect
 				for (ConnectionHandler conn : connections) {
 					if (!conn.isConnAlive()) {
-						int port = conn.getPort();
-						String address = conn.getAddress();
-						boolean bidirectional = conn.isBidirectional();
-						Module module = conn.getModule();
+						if (conn.isBidirectional()) {
+							int port = conn.getPort();
+							String address = conn.getAddress();
+							boolean bidirectional = conn.isBidirectional();
+							Module module = conn.getModule();
+							Connector connector = new Connector(this.base,
+									address, port, module, bidirectional);
+							Thread t1 = new Thread(connector);
+							try {
+								base.threadCounter.incrementAndGet();
+								t1.start();
 
-						Connector connector = new Connector(this.base, address, port, module, bidirectional);
-						Thread t1 = new Thread(connector);
-						
-						try {
-							base.threadCounter.incrementAndGet();
-							t1.start();
-							
-						} catch (Exception e) {
-							e.printStackTrace();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
 						base.connections.remove(conn);
 					}
@@ -559,7 +560,7 @@ public abstract class AP2DXBase {
 					connHandler.start();
 
                     System.out.printf("Adding connection %s to connections\n", connHandler.moduleID);
-                    base.inConnections.add(connHandler);
+                    base.connections.add(connHandler);
 
 				} catch (Exception e) {
 					// something wend terribly wrong, terminate module.
