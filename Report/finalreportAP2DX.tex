@@ -11,9 +11,13 @@
 \begin{document}
 \maketitle
 \newpage
+\tableofcontents
+\newpage
+
+%added a newpage after every chapter so it looks more like a report then a article. Wadie Assal
 
 \section{Preface}
-As part of the course Software Engineering and Distributed Applications, of the University of Amsterdam, we are asked to program a distributed application for a virtual robot. The team consists of students with different profiles: three are from Artificial Intelligence, one from Applied Science in Software Engineering and one from pre-master Software Engineering. This melange is both a chance to create something good from different viewpoints as well as a point of attention, because none of us has followed the bachelor Computer Science at the University of Amsterdam. TODO.
+As part of the course Software Engineering and Distributed Applications, of the University of Amsterdam, we are asked to program a distributed application for a virtual robot. The team consists of students with different profiles: three are from Artificial Intelligence, one from Computer Science and ICT at the Amsterdam University of Applied Sciences and one from the pre-master Software Engineering. This melange is both a chance to create something good from different viewpoints as well as a point of attention, because none of us has followed the bachelor Computer Science at the University of Amsterdam. TODO.
 
 \newpage
 
@@ -25,6 +29,8 @@ As simulator USARSim is used. USARSim (Unified System for Automation and Robot S
 
 \subsection{Structure of this document}
 This document describes the setup of the development enviroment and the architecture of the program. In the appendices there is more technical information.
+
+\newpage
 
 \section{Goals}
 With the client there is agreed to build the following features in the robotcontroller:
@@ -60,6 +66,8 @@ The deliverable for this milestone also did not meet the agreed requirements. TO
 \\\\
 The final delivable should meet all the goals. TODO.
 
+\newpage
+
 \section{Architecture}
 \subsection{Introduction}
 AP2DX is written in the Java programming language. This was choosen as it is advertised to be reliable and fast by the company Flowtraders. This is important for AP2DX, because it should be a safe robot controller, that stops in time and does not harm anyone on it's path. The architecture of AP2DX is based on Object Oriented Programmin (OOP). To not repeat the same code again and again for every module, a baseclass was constructed. This class could do things as: read a config file, write to a logfile, accept incoming connections, start outgoing connections based on the config file, handle incoming messages and send responses. The baseclass was designed to be flexible for the needs of every module. Also, the program is heavily multithreaded, to open and check connections and to do the business logic and send messages. As for the messages: a base messageclass was build, to facilitate the communication between USARSim and AP2DX, and between modules of AP2DX. As standard for config file and communication, JSON (Javascript Object Notation) was used.
@@ -92,11 +100,10 @@ here we will discuss the Mapper part
 here we will discuss the Planner part
 
 \subsection{Reflex}
-
-TODO: could have two subsection for basic reflex and improved reflex strategies
+The robot is controlled by the reflex module through the motor module. The reflex module will take the responsibility for unexpected situations that could not be foreseen by the planner module. For example low obstacles or unexpected falling object in the path of the robot. The reflex module will stop the robot so the arising situation can be handled gracefully by the planner module. The information needed to make a new route is send to the planner module from the reflex module.
 
 \subsection{Motor}
-here we will discuss the AbstractMotor part
+The motor modules main function is to provide an abstract layer for the reflex module to control the robot. This will disguise the complexities of controlling the robot. For example if you want to control the robot on a low level, you will have to send a message to drive forward, calculate if the desired distance is covered and then stop the wheel taking into account sliding of the robot because of the momentum. Through the motor module you can control the robot by sending a drive forward message with the desired distance that needs to be covered. The module itself will calculate the distance and stop the robot on the correct place.
 
 \subsection{Base Class}
 OBSOLETE? here we will discuss the Base Class
@@ -104,14 +111,22 @@ OBSOLETE? here we will discuss the Base Class
 \subsection{Communication}
 here we will discuss how our seperate modules communicate with eachother and with USARSim
 
+\newpage
+
 \section{Testing}
 In this section, we will explain the way we tested our program, using the testserver with Jenkins
+
+\newpage
 
 \section{Experiment}
 Here we will explain the experiment and how we did the tests. (can be more than one experiment).
 
+\newpage
+
 \section{Results}
 Here we will discuss the results from our experiment and explain what it means
+
+\newpage
 
 \section{Future Work}
 In this section, we discuss what future work could improve our program and what kind of uses we can think of for our program.
