@@ -130,9 +130,11 @@ public class Program extends AP2DXBase
                                 System.out.println("Drawer does not exist yet");
                             }
                             // Clone it to send it to reflex
-                            SonarSensorMessage sonarSensorMessage2 = (SonarSensorMessage) sonarSensorMessage.clone();
+                            SonarSensorMessage sonarSensorMessage2 = new SonarSensorMessage( (AP2DXMessage) sonarSensorMessage.clone());
+                            sonarSensorMessage2.parseMessage();
                             sonarSensorMessage2.setSourceModuleId(Module.SENSOR);
-                            sonarSensorMessage2.setDestinationModuleId(Module.REFLEX);
+                            sonarSensorMessage2.setDestinationModuleId(Module.REFLEX);  
+                            sonarSensorMessage2.compileMessage();
                             messageList.add(sonarSensorMessage2);
                         }
                         break;
@@ -167,8 +169,8 @@ public class Program extends AP2DXBase
             } 
         
 
-            for (int i = 0; i < messageList.size(); i ++)
-                System.out.println("!!!! " + i + " message: " + messageList.get(i).getMessageString());
+            //for (int i = 0; i < messageList.size(); i ++)
+            //    System.out.println("!!!! " + i + " message: " + messageList.get(i).getMessageString());
         
             return messageList;
         }

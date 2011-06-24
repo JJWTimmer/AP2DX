@@ -60,10 +60,12 @@ public class SonarSensorMessage extends SpecializedMessage
             // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
             JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
-            this.rangeArray = new double[jsonArray.length()];
+            rangeArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 rangeArray[i] = jsonArray.getDouble(i);
-            this.time = jsonObject.getDouble("time");
+            time = jsonObject.getDouble("time");
+            setRangeArray(rangeArray);
+            setTime(time);
             // For testing purposes:
         }
         catch (Exception e)
