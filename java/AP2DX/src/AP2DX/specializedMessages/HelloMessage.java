@@ -34,11 +34,14 @@ public class HelloMessage extends SpecializedMessage
     {
     	try
         {
-            setBidirection(Boolean.parseBoolean(values.get("Bidirection").toString()));
+            JSONObject jsonObject = new JSONObject(messageString);
+            setBidirection(jsonObject.getBoolean("Bidirection"));
+//Boolean.parseBoolean(values.get("Bidirection").toString()));
         }
         catch (Exception e)
         {
             System.out.println("Error in AP2DX.specializedMessages.HelloMessage.specializedParseMessage()... things went south!");
+            System.out.println("e.getMessage(): " + e.getMessage());
             e.printStackTrace();
         }
     }

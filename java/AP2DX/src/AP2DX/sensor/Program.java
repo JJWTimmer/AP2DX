@@ -117,40 +117,37 @@ public class Program extends AP2DXBase
                         //create the SonarSensorMessage instance
                         SonarSensorMessage sonarSensorMessage = (SonarSensorMessage) message;
                         //System.out.println("Sonar data: " + sonarSensorMessage.getRangeArray());
-                        if (sonarSensorMessage.getRangeArray() == null)
-                            System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), SonarSensorMessage array is null");
+                        if (drawer == null)
+                            System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), drawer == null");
                         else
-                        {
-                            //System.out.println("Updating the sonar lines");
-                            try{
-                                drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
-                            }
-                            catch (NullPointerException e)
-                            {
-                                System.out.println("Drawer does not exist yet");
-                            }
-                            // Clone it to send it to reflex
-                            SonarSensorMessage sonarSensorMessage2 = new SonarSensorMessage( (AP2DXMessage) sonarSensorMessage.clone());
-                            sonarSensorMessage2.parseMessage();
-                            sonarSensorMessage2.setSourceModuleId(Module.SENSOR);
-                            sonarSensorMessage2.setDestinationModuleId(Module.REFLEX);  
-                            sonarSensorMessage2.compileMessage();
-                            messageList.add(sonarSensorMessage2);
-                        }
+                            drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
+                        
+                        // Clone it to send it to reflex
+                        SonarSensorMessage sonarSensorMessage2 = new SonarSensorMessage( (AP2DXMessage) sonarSensorMessage.clone());
+                        sonarSensorMessage2.parseMessage();
+                        sonarSensorMessage2.setSourceModuleId(Module.SENSOR);
+                        sonarSensorMessage2.setDestinationModuleId(Module.REFLEX);  
+                        sonarSensorMessage2.compileMessage();
+                        messageList.add(sonarSensorMessage2);
                         break;
                     case AP2DX_SENSOR_RANGESCANNER:
                         //System.out.println("RangeScanner message detected");
                         RangeScannerSensorMessage rangeScannerSensorMessage = 
                             (RangeScannerSensorMessage) message;
-                        try{
-                            drawer.setRangeScannerFov(rangeScannerSensorMessage.getFov());
-                            drawer.setRangeScannerResolution(rangeScannerSensorMessage.getResolution());
-                            drawer.paintRangeScannerLines(rangeScannerSensorMessage.getDataArray());
-                        }
-                        catch(NullPointerException e)
+
+                        if (drawer == null)
+                            System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), drawer == null");
+                        else
                         {
-                            System.out.println("Drawer does not exist");
+                            drawer.setRangeScannerFov(rangeScannerSensorMessage.
+                                getFov());
+                            drawer.setRangeScannerResolution(
+                                rangeScannerSensorMessage.getResolution());
+                            drawer.paintRangeScannerLines(rangeScannerSensorMessage.
+                                getDataArray());
                         }
+
+                
                         break;
 
                     default:
