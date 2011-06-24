@@ -7,7 +7,8 @@
 			   "component": "REFLEX",
 			   "address": "127.0.0.1",
 			   "port": 5004,
-			   "bidirectional": false
+			   "bidirectional": true,
+			   "passive": false
 			 }
 		]
 }

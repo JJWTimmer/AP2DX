@@ -7,13 +7,15 @@
 			   "component": "MOTOR",
 			   "address": "127.0.0.1",
 			   "port": 5002,
-			   "bidirectional": false
+			   "bidirectional": false,
+			   "passive": false
 			 },
 			{
 			   "component": "PLANNER",
 			   "address": "127.0.0.1",
 			   "port": 5003,
-			   "bidirectional": true
+			   "bidirectional": true,
+			   "passive": true
 			 }
 		]
 }

@@ -38,7 +38,7 @@ public class HelloMessage extends SpecializedMessage
         }
         catch (Exception e)
         {
-            System.out.println("Error in AP2DX.specializedMessages.OdometrySensorMessage.specializedParseMessage()... things went south!");
+            System.out.println("Error in AP2DX.specializedMessages.HelloMessage.specializedParseMessage()... things went south!");
             e.printStackTrace();
         }
     }

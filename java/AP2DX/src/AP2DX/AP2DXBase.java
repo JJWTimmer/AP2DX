@@ -62,6 +62,8 @@ public abstract class AP2DXBase {
 	/** all received AP2DX.Messages will be stored here */
 	private DelayQueue<AP2DXMessage> receiveQueue = new DelayQueue<AP2DXMessage>();
     
+	/** All the incoming bidirectional connections */
+	private ArrayList<Module> passiveConnections = new ArrayList<Module>();
 
 	/**
 	 * Where everything happens:
@@ -125,19 +127,25 @@ public abstract class AP2DXBase {
 					.toString();
 			Module module = Module.valueOf(((JSONObject) out.get(i)).get(
 					"component").toString());
-			boolean bidirectional = Boolean.parseBoolean(((JSONObject) out.get(i)).get("port").toString());
+			boolean bidirectional = Boolean.parseBoolean(((JSONObject) out.get(i)).get("bidirectional").toString());
+			boolean passive = Boolean.parseBoolean(((JSONObject) out.get(i)).get("passive").toString());
 			
-			Connector connector = new Connector(this, address, port, module, bidirectional);
-			Thread t1 = new Thread(connector);
-			
-			try {
-				t1.start();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				//System.exit(1);
+			if (!passive) {
+				Connector connector = new Connector(this, address, port,
+						module, bidirectional);
+				Thread t1 = new Thread(connector);
+				try {
+					t1.start();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					//System.exit(1);
+				}
+				threadCounter.incrementAndGet();
 			}
-			threadCounter.incrementAndGet();
+			else {
+				passiveConnections.add(module);				
+			}
 		}
 
 		// wait for all the connectors to connect
@@ -347,6 +355,10 @@ public abstract class AP2DXBase {
 			return false;
 		}
 	}
+	
+	public ArrayList<Module> getPassiveConnections() {
+		return passiveConnections;
+	}
 
 
     public ArrayList<AP2DXMessage> componentLogicCheck(Message msg)
@@ -484,13 +496,15 @@ public abstract class AP2DXBase {
 				// check if outgoing connection has closed and attempt to reconnect
 				for (ConnectionHandler conn : connections) {
 					if (!conn.isConnAlive()) {
-						if (conn.isBidirectional()) {
+						if (conn.isBidirectional() && !getPassiveConnections().contains(conn.moduleID)) {
 							int port = conn.getPort();
 							String address = conn.getAddress();
 							boolean bidirectional = conn.isBidirectional();
 							Module module = conn.getModule();
+							
 							Connector connector = new Connector(this.base,
 									address, port, module, bidirectional);
+							
 							Thread t1 = new Thread(connector);
 							try {
 								base.threadCounter.incrementAndGet();
