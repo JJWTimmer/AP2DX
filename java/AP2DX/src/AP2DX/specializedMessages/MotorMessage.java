@@ -35,7 +35,7 @@ public class MotorMessage extends SpecializedMessage
     
     public MotorMessage(Module sourceId, Module destinationId, double leftValue, double rightValue)
     {
-    	super(Message.MessageType.AP2DX_MOTOR_ACTION, sourceId, destinationId);
+    	super(Message.MessageType.AP2DX_MOTOR, sourceId, destinationId);
         setLeftValue(leftValue);
         setRightValue(rightValue);
         setNormalized(true);

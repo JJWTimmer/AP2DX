@@ -6,7 +6,8 @@
 			 {
 			   "component": "PLANNER",
 			   "address": "127.0.0.1",
-			   "port": 5003
+			   "port": 5003,
+			   "bidirectional": false
 			 }
 		]
 }

@@ -16,10 +16,12 @@ public class HelloMessage extends SpecializedMessage
 {
     private double[] rangeArray;
     private double time;
-
-	public HelloMessage(Module sourceId, Module destinationId)
+    private boolean bidirection;
+    
+	public HelloMessage(Module sourceId, Module destinationId, boolean bidirectional)
 	{
 		super(Message.MessageType.HELLO, sourceId, destinationId);
+		setBidirection(bidirectional);
 	}
 
     /** Creates a specialized message from a standard AP2DXMessage. */
@@ -30,8 +32,36 @@ public class HelloMessage extends SpecializedMessage
 
     public void specializedParseMessage()
     {
-        // we don't do anything
+    	try
+        {
+            setBidirection(Boolean.parseBoolean(values.get("Bidirection").toString()));
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error in AP2DX.specializedMessages.OdometrySensorMessage.specializedParseMessage()... things went south!");
+            e.printStackTrace();
+        }
     }
+
+	public boolean getBidirection() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * @param bidirection the bidirection to set
+	 */
+	public void setBidirection(boolean bidirection) {
+		this.bidirection = bidirection;
+		values.put("Bidirection", bidirection);
+	}
+
+	/**
+	 * @return the bidirection
+	 */
+	public boolean isBidirection() {
+		return bidirection;
+	}
 
     // setters and getters {{{
 

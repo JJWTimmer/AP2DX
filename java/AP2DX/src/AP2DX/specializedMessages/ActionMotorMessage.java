@@ -10,7 +10,7 @@ import org.json.JSONException;
 /**
 * Specialized message send from the planner to the reflex and from the reflex to the motor.
 * The abstraction in this message allows for commands such as "left 30 degrees, forward 1 meter"
-* We could change thsi into an array to allow turns and stuff. For now, 1 message at a time.
+* We could change this into an array to allow turns and stuff. For now, 1 message at a time.
 * 
 * @author Maarten Inja
 */
@@ -43,7 +43,7 @@ public class ActionMotorMessage extends SpecializedMessage
         try
         {
             JSONObject jsonObject = new JSONObject(messageString);
-            setValue((double)jsonObject.getInt("value"));
+            setValue((double)jsonObject.getDouble("value"));
             setActionType(ActionType.valueOf(jsonObject.getString("actionType")));
         }
         catch (Exception e)

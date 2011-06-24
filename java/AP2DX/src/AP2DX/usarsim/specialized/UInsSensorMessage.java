@@ -41,7 +41,9 @@ public class UInsSensorMessage extends UsarSimSensorMessage {
             new InsSensorMessage(Module.COORDINATOR, Module.SENSOR);
         insSensorMessage.setOrientation(orientation);
         insSensorMessage.setLocation(location);
+        
         insSensorMessage.compileMessage();
+        
         return insSensorMessage;
     }
 

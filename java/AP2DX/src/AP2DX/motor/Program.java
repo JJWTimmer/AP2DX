@@ -73,18 +73,13 @@ public class Program extends AP2DXBase
 	public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-        System.out.println("Motor received message: " + message);
+        System.out.println("Motor received message: " + message.getMessageString());
         switch (message.getMsgType())
         {
             case AP2DX_MOTOR_ACTION: 
                 doMotorActionLogic(new ActionMotorMessage((AP2DXMessage) message), messageList);
-                System.out.println("Motor logic got an Action message. Will send:");
-                for(AP2DXMessage ms: messageList)
-                {
-                    System.out.println(ms);
-                }
                 break;
-            case AP2DX_SENSOR_ODOMETRY:
+            case AP2DX_SENSOR_INS:
                 doOdometryLogic((OdometrySensorMessage) message, messageList);
                 break;
             default:
@@ -127,22 +122,30 @@ public class Program extends AP2DXBase
 	        case FORWARD:
                 deltaDistanceSinceLastCommand = 0;
                 distanceAim = actionMotorMessage.getValue();
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 100, 100));
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 20, 20));
                 break;
 	        case BACKWARD:
 	        	//return motor.backward(actionMotorMessage.getValue());
+                deltaDistanceSinceLastCommand = 0;
+                distanceAim = actionMotorMessage.getValue();
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -20, -20));
                 break;
 	        case LEFT:
 	        	//return motor.left(actionMotorMessage.getValue());
+                //TODO: THere should come something here, that keeps track of how far we turned.
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -10, 10));
                 break;
 	        case RIGHT:
 	        	//return motor.right(actionMotorMessage.getValue());
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 10, -10));
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
+
                 break;
 	        case STOP:
 	        	//return motor.stop();
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 0, 0));
                 break;
             default:
                 System.out.println("Error in motor.program.componentlogic");
