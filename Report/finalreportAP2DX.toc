@@ -22,3 +22,5 @@
 \contentsline {subsubsection}{\numberline {5.4.1}Testreport}{7}{subsubsection.5.4.1}
 \contentsline {section}{\numberline {6}Final result}{8}{section.6}
 \contentsline {section}{\numberline {7}Discussion}{9}{section.7}
+\contentsline {subsection}{\numberline {7.1}Architecture}{9}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Message Protocols}{9}{subsection.7.2}
