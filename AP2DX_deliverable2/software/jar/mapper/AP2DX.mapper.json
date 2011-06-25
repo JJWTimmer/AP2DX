@@ -1,0 +1,14 @@
+{
+	"logfile": "log/mapper.log",
+	"listen_port": 5001,
+	"outgoing" :
+		[
+			 {
+			   "component": "PLANNER",
+			   "address": "127.0.0.1",
+			   "port": 5003,
+			   "bidirectional": false,
+			   "passive": false
+			 }
+		]
+}

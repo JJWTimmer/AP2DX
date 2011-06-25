@@ -1,0 +1,21 @@
+{
+	"logfile": "log/sensor.log",
+	"listen_port": 5005,
+	"outgoing" :
+		[
+			 {
+			   "component": "MAPPER",
+			   "address": "127.0.0.1",
+			   "port": 5001,
+			   "bidirectional": false,
+			   "passive": false
+			 },
+			 {
+			   "component": "REFLEX",
+			   "address": "127.0.0.1",
+			   "port": 5004,
+			   "bidirectional": false,
+			   "passive": false
+			 }		 
+		]
+}
