@@ -36,6 +36,8 @@ public class Program extends AP2DXBase {
 		switch (message.getMsgType()) {
 		case AP2DX_PLANNER_STOP:
 			
+			setBotBlocked(true);
+			
 			Random rand = new Random();
 			
 			// reset
