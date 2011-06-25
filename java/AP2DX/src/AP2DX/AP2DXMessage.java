@@ -29,7 +29,7 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	 * Time is given in the future in the format used 
 	 * by System.nanoTime(). Should stay zero if no delay is required.
 	 */
-	private long delay = 0;
+	private long delay = System.nanoTime();
 
     public AP2DXMessage(Message.MessageType type, Module source, Module destination)
     {
