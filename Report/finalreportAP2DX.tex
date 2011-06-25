@@ -5,6 +5,21 @@
 \usepackage{verbatim}
 \usepackage{color} % for todo
 \usepackage{subfig}
+%\usepackage{fancyhdr}
+
+% TODO, make this pretty!
+%\setlength{\parskip}{10pt}
+%\newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
+%%\setlength{\headheight}{15.2pt}
+%\pagestyle{fancy}
+%%\rfoot{\footnotesize{\name + \title}
+%%\lfoot{\footnotesize{\name}}
+%\cfoot{\footnotesize{Awesomizing the P2DX: AP2DX}}
+%%\lhead{\course}
+%%\rhead{\title}
+%\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0.2pt}
+%\renewcommand{\footrulewidth}{0.2pt}
 
 \title{Awesomizing the P2DX\\\small AP2DX}
 \author{Wadie Assal \ 6398693 \and Jasper Timmer \ 5995140 \and Maarten de Waard \ 5894883 \and  Maarten Inja \ 5872464}
@@ -48,7 +63,7 @@ With the client there is agreed to build the following features in the robot-con
 \subsection{Milestones}
 At every agreed milestone there was a deliverable plannened. This deliverable can contain software and or documentation.
 
-The first milestone was agreed to be:
+The first milestone:
 \begin{itemize}
 \item Drive: The program should be able to direct the robot through the environment but not yet be able to follow lines or walls.
 \item Avoid collision: The robot should be able to avoid collision with objects and walls. It will stop, turn to a random angle, and drive on. This way it will cover most of the area without colliding.
@@ -57,7 +72,7 @@ The first milestone was agreed to be:
 
 What was actually delivered at this milestone was a program that could only spawn a robot, and Javadoc describing the API of the application. This was partly because writing tests took a lot of time and the baseclass was not yet ready. More about the baseclass later.
 
-As second milestone there should be:
+The second milestone:
 \begin{itemize}
 \item Avoid obstacles: The robot will be able to avoid the obstacles that cross its path, in stead of stopping and turning a random corner.
 \item Navigate: The robot will be able to navigate through the room.
@@ -66,11 +81,13 @@ As second milestone there should be:
 \item Improved Reflexes: The reflex class needs to be able to use some sensor data to be able to avoid objects appropriately.
 \end{itemize}
 
-The deliverable for this milestone also did not meet the agreed requirements. 
-\todo{write down what we did accomplish}
+The deliverable for this milestone also did not meet the agreed requirements. It
+did not even met the requirements of the first milestone. A lot of time went to
+fix bugs in code that could only be tested when the whole framework was programmed.
+Unforseen problems and horrible bugs soaked up a lot of time. Furthermore some
+team members were sick.  
 
 The final delivable should meet all the goals. 
-\todo{write down goals?}
 
 \newpage
 
