@@ -3,11 +3,11 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{verbatim}
+\usepackage{color} % for todo
 \usepackage{subfig}
 
 \title{Awesomizing the P2DX\\\small AP2DX}
 \author{Wadie Assal \ 6398693 \and Jasper Timmer \ 5995140 \and Maarten de Waard \ 5894883 \and  Maarten Inja \ 5872464}
-
 
 
 \newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
@@ -66,9 +66,11 @@ As second milestone there should be:
 \item Improved Reflexes: The reflex class needs to be able to use some sensor data to be able to avoid objects appropriately.
 \end{itemize}
 
-The deliverable for this milestone also did not meet the agreed requirements. TODO.
+The deliverable for this milestone also did not meet the agreed requirements. 
+\todo{write down what we did accomplish}
 
-The final delivable should meet all the goals. TODO.
+The final delivable should meet all the goals. 
+\todo{write down goals?}
 
 \newpage
 
@@ -80,7 +82,7 @@ To not repeat the same code again and again for every module, a baseclass was co
 This class could do things as: read a config file, write to a logfile, accept incoming connections, start outgoing connections based on the config file, handle incoming messages and send responses. 
 The baseclass was designed to be flexible for the needs of every module. Also, the program is heavily multithreaded, to open and check connections and to do the business logic and send messages. As for the messages: a base messageclass was build, to facilitate the communication between USARSim and AP2DX, and between modules of AP2DX. As standard for config file and communication, JSON (Javascript Object Notation) was used. 
 
-TODO: Class diagram etc.
+\todo{Create class diagram}
 
 \subsection{USARSim}
 The simulator exists of a virtual enviroment where different maps and different robots can be loaded. These robots have different sizes and different features. As example of features of a robot, there are different kinds of sensors and different kinds of wheels. For AP2DX, the robot P2DX was used. This robot is a three-wheel, rear swivel wheel robot. The two frontwheels can be controlled independently of eachother, so it is possible to turn almost in place. As sensors are available on the P2DX:
@@ -93,7 +95,7 @@ The simulator exists of a virtual enviroment where different maps and different 
 \end{itemize}
 For the purpose of AP2DX only sonar, laser and INS sensors are used.
 
-TODO: Picture.
+\todo{insert picture here}
 
 \subsection{Coordinator}
 The first module a message on a journey from the USARSim to AP2DX meets, is the AP2DX Coordinator. The Coordinator is programmed to spawn the robot and translate and relay traffic between the simulator and the AP2DX System. That is all it really does. It has a connection with the Sensor module to relay the incoming sensor data and the Motor module to receive commands for the simulator.
@@ -138,7 +140,7 @@ Here we will discuss the results from our experiment and explain what it means
 \newpage
 
 \section{Future Work}
-In this section, we discuss what future work could improve our program and what kind of uses we can think of for our program.
+\input{futureWork}
 
 \end{document}
 
