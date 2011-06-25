@@ -51,7 +51,7 @@ public class Program extends AP2DXBase {
 			break;
 		case AP2DX_MOTOR_ACTION:
 			System.out.println("AP2DX_MOTOR_ACTION Detected");
-			if (reset) {
+			//if (reset) {
 				ActionMotorMessage msg = new ActionMotorMessage(
 						(AP2DXMessage) message);
 				msg.setDestinationModuleId(Module.MOTOR);
@@ -60,14 +60,14 @@ public class Program extends AP2DXBase {
 						msg.getMessageString());
 				
 				messageList.add((AP2DXMessage) msg);
-			}
+			//}
 			break;
 		case AP2DX_SENSOR_SONAR:
-			SonarSensorMessage msg = new SonarSensorMessage(
+			SonarSensorMessage msg2 = new SonarSensorMessage(
 					(AP2DXMessage) message);
 
 			setPreviousDistances(getCurrentDistances());
-			setCurrentDistances(msg.getRangeArray());
+			setCurrentDistances(msg2.getRangeArray());
 
 			double[] approaching = new double[getCurrentDistances().length];
 			for (int i = 0; i < getCurrentDistances().length; i++) {

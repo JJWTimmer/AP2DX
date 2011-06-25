@@ -1,35 +1,35 @@
-% Misschien moeten hier wat subsecties bij, kan bovendien wel netter taalkgebruik worden
+% Misschien moeten hier wat subsecties bij, kan bovendien wel netter taal gebruik worden
 There are two seperate protocols in use in AP2DX. The first protocol is the Gamebot protocol 
 used by Unreal Tournament to communicate with the simulation. The coordinator module is the 
 only module that uses these messages. First the coordinator module sends a ``spawn'' message 
 to create the robot in the simulator. Then it continues to read messages (often containing 
 sensor data) send by the simulator and to send messages (containing ``drive'' commands) to
 the simulator. 
-
+\\\\
 The second protocol is the AP2DX message protocol. These are JSON strings that \emph{always}
-contains a source module ID, a destination module ID and lastly a type, indicating what kind
-of message this it is. Other data in these messages might vary. For example; a sonar sensor
+contain a source module ID, a destination module ID and lastly a type, indicating what kind
+of message this is. Other data in these messages might vary. For example; a sonar sensor
 message has the sonar data in it. A drive message only stores the information on how to drive
 in the string. 
 This protocol is used to communicate between all the modules in 
 AP2DX.  The coordinator module is responsible for translating messages using a kind of
 protocol to a message using the other kind of protocol.
-
+\\\\
 Using two protocols meant that a lot of things had to be done twice, but also that a module 
 could deal with both protocols. Thefore the 
 base class deals with instances
-of our abstract ``Message'' class and has an interface ``IMessageParser''. Final modules \emph{knows}
-what kind of protocol a connection uses and can set up the right message parsers (``AP2DXMessageParser'' 
-or ``USARSimMessageParser'') and thuss, deal correctly with the incoming messages. 
-
+of our abstract ``Message'' class and has an interface ``IMessageParser''. Final modules \emph{know}
+what kind of protocol a connection uses and can set up the right message parser (``AP2DXMessageParser'' 
+or ``USARSimMessageParser'') and thus, deal correctly with the incoming messages. 
+\\\\
 Different kind of messages need to be dealt with as well. The source and destination module ID take care
 of getting the message to the right module. The type is used to identify a message. Once a message
 has been identified as, for example a range scanner sensor message (type: AP2DX\_SENSOR\_RANGESCANNER), 
 it becomes a ``specialized message''. 
 A specialized message parses the variables in the string and sets them in variables in the message. Now,
 simple setters and getters can be used to modify and read all the different 
-
-The hierarchy of our messages can be seen below: 
+\\\\
+The hierarchy of our messages can be seen below:
 TODO: picture; Message to AP2DXMessage and USARSimMessage. AP2DXMessage to SpecializedMessage. SpecializedMessage
 to all the sensor messages and motor messages and drive messages. USARSimMessage to Jaspers messages. 
 
