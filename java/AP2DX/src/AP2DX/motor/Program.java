@@ -128,7 +128,7 @@ public class Program extends AP2DXBase
 	        	//return motor.backward(actionMotorMessage.getValue());
                 deltaDistanceSinceLastCommand = 0;
                 distanceAim = actionMotorMessage.getValue();
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -20, -20));
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -10, -10));
                 break;
 	        case LEFT:
 	        	//return motor.left(actionMotorMessage.getValue());
@@ -141,15 +141,15 @@ public class Program extends AP2DXBase
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
-	        	double angle = actionMotorMessage.getValue();
-	        	if (angle < 0) {
+	        	double turnTime = actionMotorMessage.getValue();
+	        	if (turnTime < 0) {
 	        		messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -5, 5));
 	        	}
-	        	else if (angle > 0) {
+	        	else if (turnTime > 0) {
 	        		messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 5, -5));
 	        	}
 	        	AP2DXMessage msg = new MotorMessage(IAM, Module.COORDINATOR, 0, 0);
-	        	msg.setDelay((long)angle);
+	        	msg.setDelay(Math.abs((long)turnTime));
 	        	messageList.add(msg);
 	        	
                 break;

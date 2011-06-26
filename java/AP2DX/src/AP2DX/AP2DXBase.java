@@ -453,6 +453,11 @@ public abstract class AP2DXBase {
 			try {
 				connHandler = new ConnectionHandler(false, bidirectional, base, conn, IAM, this.module);
 				
+				if (bidirectional) {
+					connHandler.start();
+				}
+				
+				
 				HelloMessage message = new HelloMessage(IAM, this.module, bidirectional);
 				connHandler.sendMessage(message);
 

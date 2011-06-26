@@ -44,6 +44,7 @@ public abstract class Message
         USAR_SENSOR("SEN",true),
         HELLO("HELLO!!!"),
         RESET("RESET"),
+        CLEAR("CLEAR"),
         
         UNKNOWN("unknown");
 

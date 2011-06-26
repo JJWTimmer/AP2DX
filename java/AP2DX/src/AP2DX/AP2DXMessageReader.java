@@ -79,8 +79,14 @@ IMessageReader {
                 return msg;
             case AP2DX_MOTOR:
                 return new MotorMessage(message);
+            case AP2DX_PLANNER_STOP:
+                return new StopPlannerMessage(message);
             case HELLO:
                 return new HelloMessage(message);
+            case RESET:
+                return new ResetMessage(message);
+            case CLEAR:
+                return new ClearMessage(message);
             default:
                 //System.out.println("AP2DX.readMessage(), no specialized message could be parsed!");
 

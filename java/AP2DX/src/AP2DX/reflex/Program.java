@@ -13,7 +13,8 @@ public class Program extends AP2DXBase {
 	private double[] previousDistances;
 	private double[] approaching;
 	private boolean isBotBlocked = false;
-	private boolean reset = true;
+	private boolean clear = true;
+
 	/**
 	 * Entrypoint of reflex
 	 */
@@ -47,20 +48,23 @@ public class Program extends AP2DXBase {
 		case RESET:
 			System.out.println("RESET Detected");
 			setBotBlocked(false);
-			this.reset = true;
+			break;
+		case CLEAR:
+			System.out.println("CLEAR Detected");
+			this.clear = true;
 			break;
 		case AP2DX_MOTOR_ACTION:
 			System.out.println("AP2DX_MOTOR_ACTION Detected");
-			//if (reset) {
+			if (!isBotBlocked()) {
 				ActionMotorMessage msg = new ActionMotorMessage(
 						(AP2DXMessage) message);
 				msg.setDestinationModuleId(Module.MOTOR);
-				
+
 				System.out.printf("Sending message %s to MOTOR module\n",
 						msg.getMessageString());
-				
+
 				messageList.add((AP2DXMessage) msg);
-			//}
+			}
 			break;
 		case AP2DX_SENSOR_SONAR:
 			SonarSensorMessage msg2 = new SonarSensorMessage(
@@ -80,21 +84,26 @@ public class Program extends AP2DXBase {
 				}
 			}
 
-			for (int i = 0; i < getCurrentDistances().length; i++) {
-				if (!(isBotBlocked && reset) && getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
-					setBotBlocked(true);
-					this.reset = false;
-					
-					System.out.println("Reflex says: STOP!");
-					
-					messageList.add(new ActionMotorMessage(IAM, Module.MOTOR,
-							ActionMotorMessage.ActionType.STOP, 666));
-					messageList.add(new StopPlannerMessage(IAM, Module.PLANNER));
-					
-					System.out.println("Sending stop messages to PLANNER and MOTOR");
+			if (!isBotBlocked) {
+				for (int i = 0; i < getCurrentDistances().length; i++) {
+					if (getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
+						setBotBlocked(true);
+						this.clear = false;
+
+						System.out.println("Reflex says: STOP!");
+
+						messageList.add(new ActionMotorMessage(IAM,
+								Module.MOTOR,
+								ActionMotorMessage.ActionType.STOP, 666));
+						
+						messageList.add(new StopPlannerMessage(IAM,Module.PLANNER));
+
+						System.out.println("Sending stop messages to PLANNER and MOTOR");
+						
+						break;
+					}
 				}
 			}
-
 			break;
 		default:
 			System.out
@@ -109,7 +118,7 @@ public class Program extends AP2DXBase {
 	 */
 	@Override
 	public void doOverride() {
-		
+
 	}
 
 	/**
