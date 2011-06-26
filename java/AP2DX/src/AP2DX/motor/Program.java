@@ -1,6 +1,7 @@
 package AP2DX.motor;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
 import AP2DX.*;
@@ -122,40 +123,61 @@ public class Program extends AP2DXBase
 	        case FORWARD:
                 deltaDistanceSinceLastCommand = 0;
                 distanceAim = actionMotorMessage.getValue();
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 20, 20));
+                AP2DXMessage fwMsg = new MotorMessage(IAM, Module.COORDINATOR, 20, 20);
+                fwMsg.setDelay(this.getLastDelay());
+                messageList.add(fwMsg);
+                System.out.println("Driving forward");
                 break;
 	        case BACKWARD:
 	        	//return motor.backward(actionMotorMessage.getValue());
                 deltaDistanceSinceLastCommand = 0;
                 distanceAim = actionMotorMessage.getValue();
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -10, -10));
+                AP2DXMessage bwMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, -10);
+                bwMsg.setDelay(this.getLastDelay());
+                messageList.add(bwMsg);
+                System.out.println("Driving backward");
                 break;
 	        case LEFT:
 	        	//return motor.left(actionMotorMessage.getValue());
-                //TODO: THere should come something here, that keeps track of how far we turned.
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -10, 10));
+                //TODO: There should come something here, that keeps track of how far we turned.
+	        	AP2DXMessage lMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
+	        	lMsg.setDelay(this.getLastDelay());
+                messageList.add(lMsg);
+                System.out.println("Turning left");
                 break;
 	        case RIGHT:
 	        	//return motor.right(actionMotorMessage.getValue());
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 10, -10));
+	        	AP2DXMessage rMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
+	        	rMsg.setDelay(this.getLastDelay());
+                messageList.add(rMsg);
+                System.out.println("Turning right");
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
 	        	double turnTime = actionMotorMessage.getValue();
 	        	if (turnTime < 0) {
-	        		messageList.add(new MotorMessage(IAM, Module.COORDINATOR, -5, 5));
+	        		AP2DXMessage tlMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
+		        	tlMsg.setDelay(this.getLastDelay());
+	                messageList.add(tlMsg);
+	        		System.out.println("Turning left");
 	        	}
 	        	else if (turnTime > 0) {
-	        		messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 5, -5));
+	        		AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
+		        	trMsg.setDelay(this.getLastDelay());
+	                messageList.add(trMsg);
+	        		System.out.println("Turning right");
 	        	}
 	        	AP2DXMessage msg = new MotorMessage(IAM, Module.COORDINATOR, 0, 0);
-	        	msg.setDelay(Math.abs((long)turnTime));
+	        	msg.setDelay(this.getLastDelay() + Math.abs((long)turnTime));
+	        	this.setLastDelay(msg.getDelay(TimeUnit.MILLISECONDS));
 	        	messageList.add(msg);
+	        	System.out.println("Stop turning");
 	        	
                 break;
 	        case STOP:
 	        	//return motor.stop();
                 messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 0, 0));
+                System.out.println("Stop");
                 break;
             default:
                 System.out.println("Error in motor.program.componentlogic");
