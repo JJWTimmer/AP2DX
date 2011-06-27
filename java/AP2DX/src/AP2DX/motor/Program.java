@@ -141,13 +141,13 @@ public class Program extends AP2DXBase
 	        	//return motor.turn(actionMotorMessage.getValue());
 	        	double direction = actionMotorMessage.getValue();
 	        	if (direction < 0) {
-	        		AP2DXMessage tlMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
+	        		AP2DXMessage tlMsg = new MotorMessage(IAM, Module.COORDINATOR, -2, 2);
 		        	tlMsg.setDelay(this.getLastDelay());
 	                messageList.add(tlMsg);
 	        		System.out.println("Turning left");
 	        	}
 	        	else if (direction > 0) {
-	        		AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
+	        		AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR, 2, -2);
 		        	trMsg.setDelay(this.getLastDelay());
 	                messageList.add(trMsg);
 	        		System.out.println("Turning right");
