@@ -1,0 +1,24 @@
+//Wadie is er nog niet
+
+``Het zag er op zich goed uit.''
+
+Puntjes:
+- spellcheck
+- Inleiding is iets aan de korte kant
+    * Doelstellingen horen er ook een beetje bijA
+- Seperate protocols
+    * In feite spreekt maar 1 module 1 protocol, het lijkt nog alsof alle modules dat moeten kunnen
+    * Dat kan inja op zich wel iets duidelijker zetten
+- Building and testing
+    * Goed dat we het hebben gedaan.
+    * Git: Is dat meteen onze documentatie erover? We moeten daar nog wat meer over zeggen, evt. in een footnote de site.
+
+Code documentatie (hoe te runnen e.d.):
+- Nog niet veel uitgebreider dan vorige keer gedocumenteerd
+
+Wat betreft de code:
+- Dick zegt dat we als we het niet redden evt. het een en ander zouden laten vallen, zodat alles wat we opleveren iig. werkt. 
+- Het toevoegen van een andere module kan lastig worden, omdat er nu in de code staat waar de messages heen moeten. Dit staat nog niet in het verslag, maar we gaan het ook niet veranderen. (Maarten Inja weet precies waar dit moet in het verslag)
+
+Deadline:
+Zondagavond 23.55 uur. 
