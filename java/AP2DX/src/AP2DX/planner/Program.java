@@ -13,7 +13,10 @@ import AP2DX.specializedMessages.*;
 
 public class Program extends AP2DXBase {
 	private boolean botBlocked = false;
-
+	private InsLocationData locData;
+	private double travelDistance;
+	private double distanceGoal;
+	private boolean firstMessage = false;
 	/**
 	 * Entrypoint of planner
 	 */
@@ -47,11 +50,11 @@ public class Program extends AP2DXBase {
 			
 			//drive backward
 			messageList.add(new ActionMotorMessage(IAM, Module.REFLEX,
-					ActionMotorMessage.ActionType.BACKWARD, 2.0));
+					ActionMotorMessage.ActionType.BACKWARD, 15.0));
 			
 			//turn
 			double delta = rand.nextDouble() * 5000 * (rand.nextBoolean() ? 1 : -1);
-			AP2DXMessage msg1 = new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, delta);
+			AP2DXMessage msg1 = new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, delta + 2000);
 			//AP2DXMessage msg1 = new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, -5000.0);
 			msg1.setDelay(this.getLastDelay() + 2000);//let it drive backward 2 seconds
 			this.setLastDelay(msg1.getDelay(TimeUnit.MILLISECONDS));
@@ -71,9 +74,12 @@ public class Program extends AP2DXBase {
 			this.setLastDelay(msg3.getDelay(TimeUnit.MILLISECONDS));
 			messageList.add(msg3);
 			
+			setTravelDistance(0);
+			setDistanceGoal(0);
+			
 			//drive forward
 			AP2DXMessage msg2 = new ActionMotorMessage(IAM, Module.REFLEX,
-					ActionMotorMessage.ActionType.FORWARD, 100.0);
+					ActionMotorMessage.ActionType.FORWARD, 20.0);
 			msg2.setDelay(this.getLastDelay() + (long)(2000 + Math.abs(delta))); //add delta millisec to last delay: let bot turn for 2 seconds
 			this.setLastDelay(msg2.getDelay(TimeUnit.MILLISECONDS));
 			messageList.add(msg2);
@@ -81,15 +87,42 @@ public class Program extends AP2DXBase {
 			setBotBlocked(false);
 			
 			break;
+		case AP2DX_SENSOR_INS:
+			InsSensorMessage msg = (InsSensorMessage) message;
+			double[] loc = msg.getLocation();
+			double[] ori = msg.getOrientation();
+			
+			if (locData == null) {
+				
+				locData = new InsLocationData(loc, ori);
+			} else {
+				locData.setLocationData(loc, ori);
+				
+				setTravelDistance(getTravelDistance() + locData.travelDistance());
+				
+				if (getDistanceGoal() > 0) {
+					if (getDistanceGoal() >= getTravelDistance()) {
+						AP2DXMessage msg6 = new ActionMotorMessage(IAM, Module.REFLEX,
+								ActionMotorMessage.ActionType.STOP, 666);
+						msg6.setDelay(this.getLastDelay());
+						messageList.add(msg6);
+					}
+				}
+			}
 		default:
-			if (!isBotBlocked()) {
+			if (!firstMessage) {
 				// for now, lets just drive forward, OKAY?!
-				AP2DXMessage msg = new ActionMotorMessage(IAM, Module.REFLEX,
-						ActionMotorMessage.ActionType.FORWARD, 100.0);
-				msg.setDelay(this.getLastDelay());
-				messageList.add(msg);
+				AP2DXMessage msg5 = new ActionMotorMessage(IAM, Module.REFLEX,
+						ActionMotorMessage.ActionType.FORWARD, 20.0);
+				msg5.setDelay(this.getLastDelay());
+				messageList.add(msg5);
+				
+				setDistanceGoal(1.0);
+				
 				setBotBlocked(true);
 				System.out.println("Sending message " + messageList.get(0));
+				
+				firstMessage = true;
 			}
 			AP2DXBase.logger
 					.severe("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: "
@@ -112,5 +145,33 @@ public class Program extends AP2DXBase {
 	 */
 	public boolean isBotBlocked() {
 		return botBlocked;
+	}
+
+	/**
+	 * @param travelDistance the travelDistance to set
+	 */
+	public void setTravelDistance(double travelDistance) {
+		this.travelDistance = travelDistance;
+	}
+
+	/**
+	 * @return the travelDistance
+	 */
+	public double getTravelDistance() {
+		return travelDistance;
+	}
+
+	/**
+	 * @param distanceGoal the distanceGoal to set
+	 */
+	public void setDistanceGoal(double distanceGoal) {
+		this.distanceGoal = distanceGoal;
+	}
+
+	/**
+	 * @return the distanceGoal
+	 */
+	public double getDistanceGoal() {
+		return distanceGoal;
 	}
 }

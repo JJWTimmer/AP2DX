@@ -121,36 +121,21 @@ public class Program extends AP2DXBase
 	    switch (action) 
         {
 	        case FORWARD:
-                deltaDistanceSinceLastCommand = 0;
-                distanceAim = actionMotorMessage.getValue();
-                AP2DXMessage fwMsg = new MotorMessage(IAM, Module.COORDINATOR, 20, 20);
+                //deltaDistanceSinceLastCommand = 0;
+                double speed = actionMotorMessage.getValue();
+                AP2DXMessage fwMsg = new MotorMessage(IAM, Module.COORDINATOR, speed, speed);
                 fwMsg.setDelay(this.getLastDelay());
                 messageList.add(fwMsg);
                 System.out.println("Driving forward");
                 break;
 	        case BACKWARD:
 	        	//return motor.backward(actionMotorMessage.getValue());
-                deltaDistanceSinceLastCommand = 0;
-                distanceAim = actionMotorMessage.getValue();
-                AP2DXMessage bwMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, -10);
+                //deltaDistanceSinceLastCommand = 0;
+                double speedb = actionMotorMessage.getValue();
+                AP2DXMessage bwMsg = new MotorMessage(IAM, Module.COORDINATOR, -speedb, -speedb);
                 bwMsg.setDelay(this.getLastDelay());
                 messageList.add(bwMsg);
                 System.out.println("Driving backward");
-                break;
-	        case LEFT:
-	        	//return motor.left(actionMotorMessage.getValue());
-                //TODO: There should come something here, that keeps track of how far we turned.
-	        	AP2DXMessage lMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
-	        	lMsg.setDelay(this.getLastDelay());
-                messageList.add(lMsg);
-                System.out.println("Turning left");
-                break;
-	        case RIGHT:
-	        	//return motor.right(actionMotorMessage.getValue());
-	        	AP2DXMessage rMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
-	        	rMsg.setDelay(this.getLastDelay());
-                messageList.add(rMsg);
-                System.out.println("Turning right");
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
