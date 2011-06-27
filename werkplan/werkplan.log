@@ -1,15 +1,17 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  10 JUN 2011 11:28
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2011.5.11)  21 JUN 2011 14:48
 entering extended mode
- %&-line parsing enabled.
 **werkplan.tex
 (./werkplan.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, dutch, loaded.
-(/usr/share/texmf-texlive/tex/latex/base/article.cls
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texmf-texlive/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2003/12/01>
+Babel <v3.8d> and hyphenation patterns for american, french, german, ngerman, b
+ahasa, basque, bulgarian, catalan, croatian, czech, danish, dutch, esperanto, e
+stonian, finnish, greek, icelandic, irish, italian, latin, magyar, norsk, polis
+h, portuges, romanian, russian, serbian, slovak, slovene, spanish, swedish, tur
+kish, ukrainian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2004/02/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2004/02/16 v1.4f Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -23,10 +25,10 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texmf-texlive/tex/generic/xypic/xy.sty
-(/usr/share/texmf-texlive/tex/generic/xypic/xy.tex Bootstrap'ing: catcodes,
-docmode, (/usr/share/texmf-texlive/tex/generic/xypic/xyrecat.tex)
-(/usr/share/texmf-texlive/tex/generic/xypic/xyidioms.tex)
+(/usr/share/texmf/tex/generic/xypic/xy.sty
+(/usr/share/texmf/tex/generic/xypic/xy.tex Bootstrap'ing: catcodes, docmode,
+(/usr/share/texmf/tex/generic/xypic/xyrecat.tex)
+(/usr/share/texmf/tex/generic/xypic/xyidioms.tex)
 
  Xy-pic version 3.7 <1999/02/16>
  Copyright (c) 1991-1998 by Kristoffer H. Rose <krisrose@ens-lyon.fr>
@@ -83,9 +85,9 @@ kernel objects: directionals, circles, text; options; algorithms: directions,
 edges, connections;  Xy-pic loaded)
 Package: xy 1999/02/16 Xy-pic version 3.7
 
-(/usr/share/texmf-texlive/tex/generic/xypic/xyall.tex
+(/usr/share/texmf/tex/generic/xypic/xyall.tex
  Xy-pic option: All features v.3.3
-(/usr/share/texmf-texlive/tex/generic/xypic/xycurve.tex
+(/usr/share/texmf/tex/generic/xypic/xycurve.tex
  Xy-pic option: Curve and Spline extension v.3.7 curve,
 \crv@cnt@=\count91
 \crvpts@=\toks18
@@ -97,21 +99,21 @@ Package: xy 1999/02/16 Xy-pic version 3.7
  circles,
 \L@=\dimen135
  loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xyframe.tex
+(/usr/share/texmf/tex/generic/xypic/xyframe.tex
  Xy-pic option: Frame and Bracket extension v.3.7 loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xycmtip.tex
+(/usr/share/texmf/tex/generic/xypic/xycmtip.tex
  Xy-pic option: Computer Modern tip extension v.3.3
-(/usr/share/texmf-texlive/tex/generic/xypic/xytips.tex
+(/usr/share/texmf/tex/generic/xypic/xytips.tex
  Xy-pic option: More Tips extension v.3.3 loaded) loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xyline.tex
+(/usr/share/texmf/tex/generic/xypic/xyline.tex
  Xy-pic option: Line styles extension v.3.6
 \xylinethick@=\dimen136
  loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xyrotate.tex
+(/usr/share/texmf/tex/generic/xypic/xyrotate.tex
  Xy-pic option: Rotate and Scale extension v.3.3 loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xycolor.tex
+(/usr/share/texmf/tex/generic/xypic/xycolor.tex
  Xy-pic option: Colour extension v.3.3 loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xymatrix.tex
+(/usr/share/texmf/tex/generic/xypic/xymatrix.tex
  Xy-pic option: Matrix feature v.3.4
 \Row=\count92
 \Col=\count93
@@ -121,69 +123,67 @@ Package: xy 1999/02/16 Xy-pic version 3.7
 \qcount@@=\count95
 \matrixsize@=\count96
  loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xyarrow.tex
+(/usr/share/texmf/tex/generic/xypic/xyarrow.tex
  Xy-pic option: Arrow and Path feature v.3.5 path, \ar, loaded)
-(/usr/share/texmf-texlive/tex/generic/xypic/xygraph.tex
+(/usr/share/texmf/tex/generic/xypic/xygraph.tex
  Xy-pic option: Graph feature v.3.7 loaded) loaded))
-(/usr/share/texmf-texlive/tex/latex/pdfpages/pdfpages.sty
-Package: pdfpages 2009/02/07 v0.4g Insert pages of external PDF documents (AM)
+(/usr/share/texmf/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2004/01/31 v0.3e Insert pages of external PDF documents (AM)
 
-(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+(/usr/share/texmf/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks21
 )
-(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+(/usr/share/texmf/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/etc/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+(/usr/share/texmf/tex/latex/graphics/graphics.cfg
+File: graphics.cfg 2005/02/03 v1.3 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 80.
 
-(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
 \Gread@gobject=\count97
 ))
 \Gin@req@height=\dimen137
 \Gin@req@width=\dimen138
 )
-(/usr/share/texmf-texlive/tex/latex/tools/calc.sty
-Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+(/usr/share/texmf/tex/latex/tools/calc.sty
+Package: calc 1998/07/07 v4.1b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count98
 \calc@Bcount=\count99
 \calc@Adimen=\dimen139
 \calc@Bdimen=\dimen140
 \calc@Askip=\skip43
 \calc@Bskip=\skip44
-LaTeX Info: Redefining \setlength on input line 76.
-LaTeX Info: Redefining \addtolength on input line 77.
-\calc@Ccount=\count100
-\calc@Cskip=\skip45
+LaTeX Info: Redefining \setlength on input line 59.
+LaTeX Info: Redefining \addtolength on input line 60.
+\calc@denominator=\count100
 )
-(/usr/share/texmf-texlive/tex/latex/eso-pic/eso-pic.sty
-Package: eso-pic 2006/07/14 v1.1d eso-pic (RN)
+(/usr/share/texmf/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2002/11/16 v1.1b eso-pic (RN)
 
-(/usr/share/texmf-texlive/tex/latex/ms/everyshi.sty
+(/usr/share/texmf/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
-(/usr/share/texmf-texlive/tex/latex/pdfpages/pppdftex.def
-File: pppdftex.def 2009/02/07 v0.4g Pdfpages driver for pdfTeX (AM)
+(/usr/share/texmf/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2004/01/31 v0.3e Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box30
 \AM@toc@title=\toks22
 \c@AM@survey=\count101
-\AM@templatesizebox=\box31
 )
-(/usr/share/texmf-texlive/tex/latex/tools/verbatim.sty
+(/usr/share/texmf/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks23
 \verbatim@line=\toks24
@@ -204,26 +204,48 @@ LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 
-(/usr/share/texmf/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count102
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Miscellaneous (2004.10.26)
+\protectiondepth=\count102
+\scratchcounter=\count103
+\scratchtoks=\toks25
 \scratchdimen=\dimen141
-\scratchbox=\box32
-\nofMPsegments=\count103
-\nofMParguments=\count104
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count105
-\MPscratchDim=\dimen142
-\MPnumerator=\count106
-\everyMPtoPDFconversion=\toks26
-) ABD: EveryShipout initializing macros
-(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
-Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
-
-(/etc/texmf/tex/latex/config/color.cfg
-File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+\scratchskip=\skip45
+\scratchmuskip=\muskip10
+\scratchbox=\box31
+\scratchread=\read3
+\scratchwrite=\write4
+\zeropoint=\dimen142
+\onepoint=\dimen143
+\onebasepoint=\dimen144
+\minusone=\count104
+\thousandpoint=\dimen145
+\onerealpoint=\dimen146
+\emptytoks=\toks26
+\nextbox=\box32
+\nextdepth=\dimen147
+\everyline=\toks27
+\!!counta=\count105
+\!!countb=\count106
+\recursecounter=\count107
 )
-Package color Info: Driver file: pdftex.def on input line 130.
+loading : Context Support Macros / PDF (2004.03.26)
+\nofMPsegments=\count108
+\nofMParguments=\count109
+\MPscratchCnt=\count110
+\MPscratchDim=\dimen148
+\MPnumerator=\count111
+\everyMPtoPDFconversion=\toks28
+) ABD: EveryShipout initializing macros
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+LaTeX Info: Redefining \color on input line 71.
+
+(/usr/share/texmf/tex/latex/graphics/color.cfg
+File: color.cfg 2005/02/03 v1.3 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 125.
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 14.
@@ -233,7 +255,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 14.
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 32.
 
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+(/usr/share/texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
@@ -243,25 +265,24 @@ Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <xymatrix
+{/usr/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] <xymatrix
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 74.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 74.
- 3x4 370> [2] (./milestones.tex [3]
-[4])
+ 3x4 370> [2] (./milestones.tex [3] [4])
+Warning: pdflatex (file planner.pdf): pdf inclusion: found pdf version <1.5>, b
+ut at most version <1.4> allowed
 
-pdfTeX warning: pdflatex (file ./planner.pdf): PDF inclusion: found PDF version
- <1.5>, but at most version <1.4> allowed
+Warning: pdflatex (file planner.pdf): pdf inclusion: found pdf version <1.5>, b
+ut at most version <1.4> allowed
 
-
-pdfTeX warning: pdflatex (file ./planner.pdf): PDF inclusion: found PDF version
- <1.5>, but at most version <1.4> allowed
+Warning: pdflatex (file planner.pdf): pdf inclusion: found pdf version <1.5>, b
+ut at most version <1.4> allowed
 [5]
-
-pdfTeX warning: pdflatex (file ./planner.pdf): PDF inclusion: found PDF version
- <1.5>, but at most version <1.4> allowed
-<planner.pdf, id=34, page=1, 614.295pt x 794.97pt>
+Warning: pdflatex (file planner.pdf): pdf inclusion: found pdf version <1.5>, b
+ut at most version <1.4> allowed
+<planner.pdf, id=59, page=1, 614.295pt x 794.97pt>
 File: planner.pdf Graphic file (type pdf)
  <use planner.pdf, page 1>
 File: planner.pdf Graphic file (type pdf)
@@ -273,30 +294,29 @@ File: planner.pdf Graphic file (type pdf)
  <use planner.pdf, page 1>
 File: planner.pdf Graphic file (type pdf)
 
-<use planner.pdf, page 1> [6 <./planner.pdf>] (./werkplan.aux) ) 
+<use planner.pdf, page 1> [6 <./planner.pdf
+Warning: pdflatex (file ./planner.pdf): pdf inclusion: Page Group detected whic
+h pdfTeX can't handle. Ignoring it.
+>] (./werkplan.aux) ) 
 Here is how much of TeX's memory you used:
- 3937 strings out of 495006
- 50222 string characters out of 1181410
- 155142 words of memory out of 3000000
- 7079 multiletter control sequences out of 15000+50000
- 9038 words of font info for 35 fonts, out of 3000000 for 9000
- 68 hyphenation exceptions out of 8191
- 32i,16n,36p,246b,834s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
-12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xyat
-ip10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xybtip10.pfb></usr/
-share/texmf-texlive/fonts/type1/public/xypic/xydash10.pfb>
-Output written on werkplan.pdf (6 pages, 176092 bytes).
+ 3863 strings out of 94500
+ 48244 string characters out of 1176766
+ 147226 words of memory out of 1000000
+ 6993 multiletter control sequences out of 10000+50000
+ 9038 words of font info for 35 fonts, out of 500000 for 2000
+ 580 hyphenation exceptions out of 1000
+ 32i,16n,36p,231b,834s stack positions out of 1500i,500n,5000p,200000b,5000s
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 78 PDF objects out of 300000
+ 0 named destinations out of 131072
+ 21 words of extra memory for PDF output out of 65536
+</usr/share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/sh
+are/texmf/fonts/type1/bluesky/cm/cmr6.pfb></usr/share/texmf/fonts/type1/bluesky
+/cm/cmr7.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/te
+xmf/fonts/type1/public/xypic/xydash10.pfb></usr/share/texmf/fonts/type1/public/
+xypic/xybtip10.pfb></usr/share/texmf/fonts/type1/public/xypic/xyatip10.pfb></us
+r/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/b
+luesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/s
+hare/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/blue
+sky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr17.pfb>
+Output written on werkplan.pdf (6 pages, 118514 bytes).

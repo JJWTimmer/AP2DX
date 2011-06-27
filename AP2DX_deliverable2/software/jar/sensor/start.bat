@@ -1,0 +1,1 @@
+java -jar sensor.jar > ../../../sensor_output.txt

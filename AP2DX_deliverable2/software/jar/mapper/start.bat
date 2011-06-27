@@ -1,0 +1,1 @@
+java -jar mapper.jar > ../../../mapper_output.txt

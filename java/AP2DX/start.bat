@@ -1,1 +1,1 @@
-java -jar @package@.jar
+java -jar @package@.jar > ../../../@package@_output.txt

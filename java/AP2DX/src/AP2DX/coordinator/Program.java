@@ -51,6 +51,7 @@ public class Program extends AP2DXBase {
             try 
             {
                 Socket socket = new Socket(address, port);
+                System.out.println("Coordinator connected to USARsim");
                 out = new PrintWriter(socket.getOutputStream(), true);
                 parser = new UsarMessageParser(this, IAM, Module.SENSOR, socket);
                 parser.start();
@@ -59,10 +60,10 @@ public class Program extends AP2DXBase {
             {
                 ex.printStackTrace();
             }
-            
+
             UsarSimMessage message = new UInitMessage();
             System.out.println("Init Message in coordinator Program.java: " + message.toString());
-            
+
             try 
             {
                 out.println(message.toString());

@@ -1,6 +1,7 @@
 package AP2DX.motor;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
 import AP2DX.*;
@@ -73,18 +74,13 @@ public class Program extends AP2DXBase
 	public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
         ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-        System.out.println("Motor received message: " + message);
+        System.out.println("Motor received message: " + message.getMessageString());
         switch (message.getMsgType())
         {
             case AP2DX_MOTOR_ACTION: 
                 doMotorActionLogic(new ActionMotorMessage((AP2DXMessage) message), messageList);
-                System.out.println("Motor logic got an Action message. Will send:");
-                for(AP2DXMessage ms: messageList)
-                {
-                    System.out.println(ms);
-                }
                 break;
-            case AP2DX_SENSOR_ODOMETRY:
+            case AP2DX_SENSOR_INS:
                 doOdometryLogic((OdometrySensorMessage) message, messageList);
                 break;
             default:
@@ -127,22 +123,61 @@ public class Program extends AP2DXBase
 	        case FORWARD:
                 deltaDistanceSinceLastCommand = 0;
                 distanceAim = actionMotorMessage.getValue();
-                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 100, 100));
+                AP2DXMessage fwMsg = new MotorMessage(IAM, Module.COORDINATOR, 20, 20);
+                fwMsg.setDelay(this.getLastDelay());
+                messageList.add(fwMsg);
+                System.out.println("Driving forward");
                 break;
 	        case BACKWARD:
 	        	//return motor.backward(actionMotorMessage.getValue());
+                deltaDistanceSinceLastCommand = 0;
+                distanceAim = actionMotorMessage.getValue();
+                AP2DXMessage bwMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, -10);
+                bwMsg.setDelay(this.getLastDelay());
+                messageList.add(bwMsg);
+                System.out.println("Driving backward");
                 break;
 	        case LEFT:
 	        	//return motor.left(actionMotorMessage.getValue());
+                //TODO: There should come something here, that keeps track of how far we turned.
+	        	AP2DXMessage lMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
+	        	lMsg.setDelay(this.getLastDelay());
+                messageList.add(lMsg);
+                System.out.println("Turning left");
                 break;
 	        case RIGHT:
 	        	//return motor.right(actionMotorMessage.getValue());
+	        	AP2DXMessage rMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
+	        	rMsg.setDelay(this.getLastDelay());
+                messageList.add(rMsg);
+                System.out.println("Turning right");
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
+	        	double turnTime = actionMotorMessage.getValue();
+	        	if (turnTime < 0) {
+	        		AP2DXMessage tlMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
+		        	tlMsg.setDelay(this.getLastDelay());
+	                messageList.add(tlMsg);
+	        		System.out.println("Turning left");
+	        	}
+	        	else if (turnTime > 0) {
+	        		AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
+		        	trMsg.setDelay(this.getLastDelay());
+	                messageList.add(trMsg);
+	        		System.out.println("Turning right");
+	        	}
+	        	AP2DXMessage msg = new MotorMessage(IAM, Module.COORDINATOR, 0, 0);
+	        	msg.setDelay(this.getLastDelay() + Math.abs((long)turnTime));
+	        	this.setLastDelay(msg.getDelay(TimeUnit.MILLISECONDS));
+	        	messageList.add(msg);
+	        	System.out.println("Stop turning");
+	        	
                 break;
 	        case STOP:
 	        	//return motor.stop();
+                messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 0, 0));
+                System.out.println("Stop");
                 break;
             default:
                 System.out.println("Error in motor.program.componentlogic");

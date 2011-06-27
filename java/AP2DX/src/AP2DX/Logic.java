@@ -33,7 +33,7 @@ public class Logic extends Thread {
             } catch (Exception e) 
             {
                 e.printStackTrace();
-                base.logger
+                AP2DXBase.logger
                     .severe("Error in Logic.run, attempted to retrieve item out base.receiveQueue");
             }
 
@@ -45,7 +45,7 @@ public class Logic extends Thread {
             }
             catch(Exception e)
             {
-                base.logger.severe("ERROR in logicCheck");
+                AP2DXBase.logger.severe("ERROR in logicCheck");
                 continue;
             }
 
@@ -53,12 +53,12 @@ public class Logic extends Thread {
                 for (Message action : actions) {
                     try {
                         ConnectionHandler connection = base
-                            .getSendConnection(action
+                            .getConnection(action
                                     .getDestinationModuleId());
                         connection.sendMessage(action);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        base.logger
+                        AP2DXBase.logger
                             .severe("Error in Logic.run, attempted get the connection of action: "
                                     + action);
                     }

@@ -31,10 +31,6 @@ public class SonarSensorMessage extends SpecializedMessage
     private double[] rangeArray;
     private double time;
 
-	public SonarSensorMessage(Module sourceId, Module destinationId)
-	{
-		super(Message.MessageType.AP2DX_SENSOR_SONAR, sourceId, destinationId);
-	}
 
     /** Creates a specialized message from a standard AP2DXMessage.
     * This constructor could be used to clone an AP2DXMessage. */
@@ -43,10 +39,26 @@ public class SonarSensorMessage extends SpecializedMessage
         super(message);
     }
 
+	public SonarSensorMessage(Module sourceId, Module destinationId)
+	{
+		super(Message.MessageType.AP2DX_SENSOR_SONAR, sourceId, destinationId);
+	}
+
     public SonarSensorMessage(AP2DXMessage message, Module sourceId, Module destinationId)
     {
         super(message, sourceId, destinationId);
     }
+
+    /** Apparently causes Logic to throw nullpointer exceptions.... :S */
+    public SpecializedMessage forward(Module sourceId, Module destinationId)
+    {
+        SonarSensorMessage message = new SonarSensorMessage( (AP2DXMessage) clone());
+        message.parseMessage();
+        message.setSourceModuleId(sourceId);
+        message.setDestinationModuleId(sourceId);  
+        message.compileMessage();
+        return message;
+    } 
 
     public void specializedParseMessage()
     {
@@ -60,10 +72,12 @@ public class SonarSensorMessage extends SpecializedMessage
             // for arrays ...
             JSONObject jsonObject = new JSONObject(messageString);
             JSONArray jsonArray = jsonObject.getJSONArray("rangeArray");
-            this.rangeArray = new double[jsonArray.length()];
+            rangeArray = new double[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i ++)
                 rangeArray[i] = jsonArray.getDouble(i);
-            this.time = jsonObject.getDouble("time");
+            time = jsonObject.getDouble("time");
+            setRangeArray(rangeArray);
+            setTime(time);
             // For testing purposes:
         }
         catch (Exception e)

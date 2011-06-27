@@ -27,9 +27,11 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	/** 
 	 * Delay of the message, handy if you want to send a message in the future.
 	 * Time is given in the future in the format used 
-	 * by System.currentTimeMillis(). Should stay zero if no delay is required.
+	 * by System.nanoTime(). Should stay zero if no delay is required.
+	 * 
+	 * Given in nanoseconds in the future + nanaseconds now
 	 */
-	private long delay = 0;
+	private long delay = System.nanoTime();
 
     public AP2DXMessage(Message.MessageType type, Module source, Module destination)
     {
@@ -129,40 +131,17 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	public int compareTo(Delayed o) throws ClassCastException {
 			AP2DXMessage object = (AP2DXMessage) o;
 		
-		if (this.delay < object.delay) {
-			return -1;
-		} else if (this.delay > object.delay) {
-			
-		} else if (this.delay == object.delay) {
-			return 0;
-		} else {
-			System.out.println("Error in AP2DXMessage.compareTo() ");
-		}
-		return 0;
+		    if (  delay < (object.getDelay(TimeUnit.NANOSECONDS))  ) 
+		        return -1;
+		     else if (  delay > (object.getDelay(TimeUnit.NANOSECONDS)) ) 
+		        return 1;
+		     return 0;
 	}
 
 	@Override
 	public long getDelay(TimeUnit unit) {
-		/** Checks if no delay was required */
-		if (delay == 0 ) {
-			return 0; 
-		} else {
-			switch (unit) {
-				case MICROSECONDS:
-					return unit.toMicros(delay);
-				case MILLISECONDS:
-					return unit.toMillis(delay);
-				/* DAMNNN, you mad! This is not physics. */	
-				case NANOSECONDS :
-					return unit.toNanos(delay);
-				/* That is more like it :-) */	
-				case SECONDS :
-					return unit.toSeconds(delay);
-				default:
-					System.out.println("Non critical error in AP2DXMessage.getDelay() ");
-					return 0;
-			}	
-		}
+	    long n = delay - System.nanoTime();
+	    return unit.convert(n, TimeUnit.NANOSECONDS);
 	}
 	
 	/** 
@@ -170,14 +149,15 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	 * as used by System.currentTimeMillis().
 	 */
 	public long setDelay(long millisec) {
-		delay = (System.currentTimeMillis() + millisec);
+		delay = System.nanoTime() + TimeUnit.NANOSECONDS.convert(millisec, TimeUnit.MILLISECONDS);
 		return delay;
 	}
 
 @Override
     public String toString()
     {
-        compileMessage();
+	if(this.messageString == null)
+        	compileMessage();
         return messageString;
     }
 

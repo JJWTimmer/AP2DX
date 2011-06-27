@@ -1,0 +1,1 @@
+java -jar motor.jar > ../../../motor_output.txt

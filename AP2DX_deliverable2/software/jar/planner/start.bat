@@ -1,0 +1,1 @@
+java -jar planner.jar > ../../../planner_output.txt

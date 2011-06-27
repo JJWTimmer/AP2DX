@@ -1,0 +1,23 @@
+\subsection{Architecture}
+The architecture of AP2DX was well designed. What we thought off in the first week
+was nearly exactly programmed when everything started to work (give or take a few
+small details, which were easy to add). The framework is robust and more functionallity
+can easily be added. For example; sensor messages we do not use can be added in mere moments 
+by creating a specizialed message. 
+\\\\
+But, the question is: Is this a good thing? Obviously it is nice to see the framework working
+and to know new functions can be added later. But it took us a loot of time to set it up. We 
+did not need to parse all kind of special messages if only use two or three! 
+\\\\
+Also the base class disallowed us to test anything with the simulator until it was completely 
+finished. Each module could easily be programmed in another programming language, but this
+pinned us down to use Java, and the base class. 
+
+\subsection{Message Protocols}
+Parsing messages \\
+We originally thought the messages for USAR and AP2DX were quite similar, but they diverged more
+and more the further we came to working code. In the end it simply seemed as if we did the same
+thing twice, with no real advantage. The USAR messages had to be parsed either way. They also
+had to be compiled either way; there was no alternative method to communicate with the server. 
+In hindsight, we might've better programmed that well, with a nice interface to set and get
+variables rather than to program it twice. 

@@ -1,0 +1,19 @@
+Sat Jun 25 23:47:23 CEST 2011 1309038443664 <init> INFO Package: AP2DX.sensor
+Sat Jun 25 23:47:23 CEST 2011 1309038443733 <init> INFO Directory: C:\Users\Jasper\Desktop\AP2DX_deliverable2\software\jar\sensor
+Sat Jun 25 23:47:24 CEST 2011 1309038444319 run INFO New connection with /127.0.0.1:52475
+Sat Jun 25 23:47:24 CEST 2011 1309038444320 <init> INFO Waiting for msg in conn handler ctor
+Sat Jun 25 23:47:24 CEST 2011 1309038444325 <init> INFO got msg in conn handler ctor: {"Bidirection":false,"sourceModuleId":"COORDINATOR","destinationModuleId":"SENSOR","type":"HELLO!!!"}
+Sat Jun 25 23:47:24 CEST 2011 1309038444577 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:24 CEST 2011 1309038444829 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:25 CEST 2011 1309038445080 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:25 CEST 2011 1309038445332 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:25 CEST 2011 1309038445583 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:25 CEST 2011 1309038445834 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:26 CEST 2011 1309038446085 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:26 CEST 2011 1309038446336 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:26 CEST 2011 1309038446587 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:26 CEST 2011 1309038446838 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:27 CEST 2011 1309038447089 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:27 CEST 2011 1309038447340 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:27 CEST 2011 1309038447592 run WARNING Time out receiving from: /127.0.0.1:52475
+Sat Jun 25 23:47:27 CEST 2011 1309038447843 run WARNING Time out receiving from: /127.0.0.1:52475
