@@ -66,6 +66,8 @@ IMessageReader {
         AP2DXMessage message = new AP2DXMessage(line, source);
 
         switch (message.getMsgType()) {
+            case AP2DX_SENSOR_ODOMETRY:
+                return new OdometrySensorMessage(message);
             case AP2DX_SENSOR_INS:
                 return new InsSensorMessage(message);
             case AP2DX_SENSOR_SONAR:

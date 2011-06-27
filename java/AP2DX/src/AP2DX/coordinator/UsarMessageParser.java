@@ -80,8 +80,10 @@ public class UsarMessageParser extends Thread
                         switch (sensorMessage.getSensorType())
                         {
                             case USAR_ODOMETRY: 
-                                System.out.print("Ignoring odometry message");
-                                System.out.println(" as we are not using those.");
+                                UOdometrySensorMessage odometryMessage =  
+                                    new UOdometrySensorMessage(sensorMessage);
+                                message = (OdometrySensorMessage) 
+                                    odometryMessage.toAp2dxMessage();
                                 break;
                             case USAR_INS:
                                 UInsSensorMessage insMessage = 

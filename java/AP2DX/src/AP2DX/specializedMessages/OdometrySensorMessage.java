@@ -2,6 +2,8 @@ package AP2DX.specializedMessages;
 
 import AP2DX.*;
 
+import org.json.JSONObject;
+
 
 
 
@@ -15,7 +17,6 @@ import AP2DX.*;
 * @deprecated We do not use odometry sensor message, see the INS sensor messages. Also, bugs in code exists. 
 * @author Maarten Inja
 */
-@Deprecated 
 public class OdometrySensorMessage extends SpecializedMessage 
 {
 
@@ -38,9 +39,10 @@ public class OdometrySensorMessage extends SpecializedMessage
     {   
         try
         {
-            x = Double.parseDouble(values.get("x").toString());
-            y = Double.parseDouble(values.get("y").toString());
-            theta = Double.parseDouble(values.get("theta").toString());
+            JSONObject jsonObject = new JSONObject(messageString);
+            setX(jsonObject.getDouble("x"));
+            setY(jsonObject.getDouble("y"));
+            setTheta(jsonObject.getDouble("theta"));
         }
         catch (Exception e)
         {
