@@ -9,11 +9,15 @@ import AP2DX.specializedMessages.*;
 import AP2DX.usarsim.specialized.USonarSensorMessage;
 
 public class Program extends AP2DXBase {
+	/** Margin at which to stop the robot in meters */
+	public final double THRESHOLD = 1.0;
+	
 	private double[] currentDistances;
 	private double[] previousDistances;
 	private double[] approaching;
 	private boolean isBotBlocked = false;
-	private boolean clear = true;
+	private boolean clear;
+	private boolean firstMessage;
 
 	/**
 	 * Entrypoint of reflex
@@ -44,6 +48,11 @@ public class Program extends AP2DXBase {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
 		System.out.print("Message received: " + message.getMessageString());
 
+		if (!firstMessage) {
+			this.clear = true;
+			this.firstMessage = true;
+		}
+		
 		switch (message.getMsgType()) {
 		case RESET:
 			System.out.println("RESET Detected");
@@ -84,9 +93,9 @@ public class Program extends AP2DXBase {
 				}
 			}
 
-			if (!isBotBlocked) {
+			if (clear) {
 				for (int i = 0; i < getCurrentDistances().length; i++) {
-					if (getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
+					if (getCurrentDistances()[i] < THRESHOLD && approaching[i] == 1) {
 						setBotBlocked(true);
 						this.clear = false;
 

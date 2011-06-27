@@ -80,27 +80,27 @@ public class UsarMessageParser extends Thread
                         switch (sensorMessage.getSensorType())
                         {
                             case USAR_ODOMETRY: 
-                                System.out.print("Ignoring odometry message");
-                                System.out.println(" as we are not using those.");
+                            	System.out.println("parsing odometry message in usarmessageparser");
+                            	UOdometrySensorMessage odoMessage = 
+                                    new UOdometrySensorMessage(sensorMessage);
+                                message = (OdometrySensorMessage)odoMessage.toAp2dxMessage();
+                                
                                 break;
                             case USAR_INS:
                                 UInsSensorMessage insMessage = 
                                     new UInsSensorMessage(sensorMessage);
-                                message = (InsSensorMessage) 
-                                    insMessage.toAp2dxMessage();
+                                message = (InsSensorMessage)insMessage.toAp2dxMessage();
                                 break;
                             case USAR_SONAR:
                                 USonarSensorMessage sonarMessage = 
                                     new USonarSensorMessage(sensorMessage);
                                     // Put the right values in the message
-                                message = (SonarSensorMessage) 
-                                    sonarMessage.toAp2dxMessage();
+                                message = (SonarSensorMessage)sonarMessage.toAp2dxMessage();
                                 break;
                             case USAR_RANGE:
                                 URangeSensorMessage rangeMessage = 
                                     new URangeSensorMessage(sensorMessage);
-                                message = (RangeScannerSensorMessage) 
-                                    rangeMessage.toAp2dxMessage();
+                                message = (RangeScannerSensorMessage)rangeMessage.toAp2dxMessage();
                                 break;
 
                             default: 

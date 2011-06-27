@@ -383,6 +383,10 @@ public abstract class AP2DXBase {
 	 */
 	public abstract ArrayList<AP2DXMessage> componentLogic(Message msg);
 
+	/**
+	 * 
+	 * @return delayqueue with all waiting messages
+	 */
 	public DelayQueue<AP2DXMessage> getReceiveQueue() {
 		return receiveQueue;
 	}

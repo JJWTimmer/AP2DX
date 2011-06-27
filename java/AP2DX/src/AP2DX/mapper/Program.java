@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import AP2DX.*;
 import AP2DX.specializedMessages.InsSensorMessage;
+import AP2DX.specializedMessages.OdometrySensorMessage;
 import AP2DX.specializedMessages.RangeScannerSensorMessage;
 import AP2DX.specializedMessages.SonarSensorMessage;
 
@@ -38,8 +39,21 @@ public class Program extends AP2DXBase
             case AP2DX_SENSOR_INS:
                 InsSensorMessage message = (InsSensorMessage) msg;
                 message.setDestinationModuleId(Module.PLANNER);
-                message.setSourceModuleId(IAM);
                 message.compileMessage();
+                messageList.add(message);
+                break;
+            case AP2DX_SENSOR_ODOMETRY:
+            	System.out.println("parsing odometry message in the mapper");
+                OdometrySensorMessage message2 = (OdometrySensorMessage) msg;
+                message2.setDestinationModuleId(Module.PLANNER);
+                message2.compileMessage();
+                messageList.add(message2);
+                break;
+            case AP2DX_SENSOR_SONAR:
+                SonarSensorMessage message3 = (SonarSensorMessage) msg;
+                message3.setDestinationModuleId(Module.PLANNER);
+                message3.compileMessage();
+                messageList.add(message3);
                 break;
             default:
 //                msg.setDestinationModuleId(Module.PLANNER);
@@ -51,8 +65,7 @@ public class Program extends AP2DXBase
                 //System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
 
         }  
-        
-        messageList.add((AP2DXMessage) msg); 
+         
 		return messageList;
 	}
 }

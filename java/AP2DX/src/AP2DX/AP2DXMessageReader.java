@@ -72,6 +72,8 @@ IMessageReader {
                 return new SonarSensorMessage(message);
             case AP2DX_SENSOR_RANGESCANNER:
                 return new RangeScannerSensorMessage(message);
+            case AP2DX_SENSOR_ODOMETRY:
+            	return new OdometrySensorMessage(message);
             case AP2DX_MOTOR_ACTION:
                 //return new ActionMotorMessage(message);
                 ActionMotorMessage msg =  new ActionMotorMessage(message);

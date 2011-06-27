@@ -1,6 +1,15 @@
 package AP2DX.specializedMessages;
 
-import AP2DX.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import AP2DX.AP2DXMessage;
+import AP2DX.Message;
+import AP2DX.Module;
 
 
 
@@ -11,11 +20,10 @@ import AP2DX.*;
 * USAR SIM page 81 tells us it uses left and right wheel encoders to estimate the robot's pose. 
 * It describes the positive x,y-position (and heads theta) relative to the start location. 
 *
-* Example USAR data: SEN {Type Odometry} {Name Odometry} {Pose 0.4265,0.1643,0.9105}
-* @deprecated We do not use odometry sensor message, see the INS sensor messages. Also, bugs in code exists. 
+* Example USAR data: SEN {Type Odometry} {Name Odometry} {Pose 0.4265,0.1643,0.9105} 
 * @author Maarten Inja
 */
-@Deprecated 
+
 public class OdometrySensorMessage extends SpecializedMessage 
 {
 
@@ -32,15 +40,16 @@ public class OdometrySensorMessage extends SpecializedMessage
     {
         super(Message.MessageType.AP2DX_SENSOR_ODOMETRY, sourceId, destinationId);
     }
-
-    @Deprecated 
+ 
     public void specializedParseMessage()
     {   
         try
         {
-            x = Double.parseDouble(values.get("x").toString());
-            y = Double.parseDouble(values.get("y").toString());
-            theta = Double.parseDouble(values.get("theta").toString());
+        	JSONObject jsonObject = new JSONObject(messageString);
+
+            setX(jsonObject.getDouble("x"));
+            setY(jsonObject.getDouble("y"));
+            setTheta(jsonObject.getDouble("theta"));
         }
         catch (Exception e)
         {
@@ -48,12 +57,40 @@ public class OdometrySensorMessage extends SpecializedMessage
             e.printStackTrace();
         }
     } 
+    
+    /** 
+     * Creates a (new) string in messageString from whatever is in the values map. 
+     */
+    @Override
+     public String compileMessage()
+     {   
+    	specializedParseMessage();
+    	
+         try
+         {
+             if (values == null)
+                 values = new HashMap();
+             values.put("destinationModuleId", destinationModuleId.toString());
+             values.put("sourceModuleId", sourceModuleId.toString());
+             values.put("type", type.typeString.toString());
+             messageString = (new JSONObject(values)).toString();
+         }
+         catch (Exception e)
+         {
+             System.out.println("Error in AP2DX.SpecializedMessages.OdometrySensormessage.compileMessage: " + e.getMessage());
+             e.printStackTrace();
+         }
+         return messageString;
+     }
+    
 
     // setters and getters {{{
 
     public void setX(double value)
     {
         x = value;  
+        NumberFormat formatter = new DecimalFormat("###.#####");  
+           
         values.put("x", x);
     }
 
@@ -65,6 +102,7 @@ public class OdometrySensorMessage extends SpecializedMessage
     public void setY(double value)
     {
         y = value;
+        NumberFormat formatter = new DecimalFormat("###.#####");
         values.put("y", y);
     }
 
@@ -76,6 +114,7 @@ public class OdometrySensorMessage extends SpecializedMessage
     public void setTheta(double value)
     {
         theta = value;
+        NumberFormat formatter = new DecimalFormat("###.#####");
         values.put("theta", theta);   
     }
 

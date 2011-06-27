@@ -78,20 +78,17 @@ public class Program extends AP2DXBase
             switch (message.getMsgType())
             {
                 case AP2DX_SENSOR_ODOMETRY:
-                    //System.out.print("Parsing an odometry message, but we do");
-                    //System.out.println(" with this data.. so pass.");
-                    // Turns out odometry is something different than we had expected {{{
-                    //OdometrySensorMessage odometrySensorMessage = 
-                    //    (OdometrySensorMessage) message;
-                    //odometrySensorMessage.setSourceModuleId(IAM);
-                    //odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
-                    //messageList.add(odometrySensorMessage);
+                	System.out.println("parsing odometry message in sensor");
+                    
+                	OdometrySensorMessage odometrySensorMessage = (OdometrySensorMessage) message;
+                	
+                    odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
+                    odometrySensorMessage.setSourceModuleId(IAM);
+                    
+                    odometrySensorMessage.compileMessage();
+                    
+                    messageList.add(odometrySensorMessage);
 
-                    //// TO THE REFLEX! 
-                    //// I'm not sure if this little piece of magic works
-                    //OdometrySensorMessage message2 = new OdometrySensorMessage((AP2DXMessage) odometrySensorMessage.clone());
-                    //message2.setDestinationModuleId(Module.REFLEX);
-                    //messageList.add(message2); // }}}
                     break;
                 case AP2DX_SENSOR_INS:
                     doInsLogic((InsSensorMessage) message, messageList);
