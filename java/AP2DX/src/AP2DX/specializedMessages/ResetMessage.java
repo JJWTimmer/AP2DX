@@ -14,12 +14,10 @@ import org.json.JSONException;
 */
 public class ResetMessage extends SpecializedMessage 
 {
-    private double[] rangeArray;
-    private double time;
     
 	public ResetMessage(Module sourceId, Module destinationId)
 	{
-		super(Message.MessageType.HELLO, sourceId, destinationId);
+		super(Message.MessageType.RESET, sourceId, destinationId);
 	}
 
     /** Creates a specialized message from a standard AP2DXMessage. */

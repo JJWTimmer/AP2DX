@@ -28,6 +28,8 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	 * Delay of the message, handy if you want to send a message in the future.
 	 * Time is given in the future in the format used 
 	 * by System.nanoTime(). Should stay zero if no delay is required.
+	 * 
+	 * Given in nanoseconds in the future + nanaseconds now
 	 */
 	private long delay = System.nanoTime();
 
@@ -147,10 +149,11 @@ public class AP2DXMessage extends Message implements Delayed, Cloneable
 	 * as used by System.currentTimeMillis().
 	 */
 	public long setDelay(long millisec) {
-		delay = System.nanoTime() + millisec * 1000000;
+		delay = System.nanoTime() + TimeUnit.NANOSECONDS.convert(millisec, TimeUnit.MILLISECONDS);
 		return delay;
 	}
 
+@Override
     public String toString()
     {
 	if(this.messageString == null)

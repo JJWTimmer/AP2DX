@@ -1,0 +1,21 @@
+{
+	"logfile": "log/reflex.log",
+	"listen_port": 5004,
+	"outgoing" :
+		[
+			 {
+			   "component": "MOTOR",
+			   "address": "127.0.0.1",
+			   "port": 5002,
+			   "bidirectional": false,
+			   "passive": false
+			 },
+			{
+			   "component": "PLANNER",
+			   "address": "127.0.0.1",
+			   "port": 5003,
+			   "bidirectional": true,
+			   "passive": true
+			 }
+		]
+}

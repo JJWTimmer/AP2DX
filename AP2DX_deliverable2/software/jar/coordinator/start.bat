@@ -1,0 +1,1 @@
+java -jar coordinator.jar > ../../../coordinator_output.txt

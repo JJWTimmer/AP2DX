@@ -83,8 +83,9 @@ public class ConnectionHandler extends Thread {
 			throws IOException, InstantiationException, IllegalAccessException {
 		this.base = base;
 		this.socket = socket;
-		this.setBidirectional(false);
 		setPassive(true);
+		setBidirectional(false);
+		
 		
 		out = new PrintWriter(socket.getOutputStream(), true);
 

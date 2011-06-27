@@ -1,0 +1,11 @@
+AP2DX
+AP2DX.coordinator
+AP2DX.mapper
+AP2DX.motor
+AP2DX.planner
+AP2DX.reflex
+AP2DX.sensor
+AP2DX.specializedMessages
+AP2DX.usarsim
+AP2DX.usarsim.specialized
+org.json

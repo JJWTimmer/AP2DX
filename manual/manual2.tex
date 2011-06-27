@@ -1,0 +1,27 @@
+\documentclass[a4paper, notitlepage]{article}
+
+\title{Awesomizing P2DX Manual Deliverable 2}
+\author{Wadie Assal \\ 6398693 \and Jeroen Rooijmans \\ 5887410 \and Jasper Timmer \\ 5995140 \and Maarten de Waard \\ 5894883 \and Maarten Inja (vz) \\ 5872464}
+
+\begin{document}
+
+\maketitle
+
+\section{Intro}
+This manual is part of deliverable 2 of the Awesomizing P2DX team. Status of the project: far behind. What is in this release: Coordinator translates USAR messages to AP2DX messages, sends them to the sensor module that creates a visualisation window of the sensor data. Planner sends a drive message to the reflex, that sends it to the motor, coordinator and finally the simulator. If the sensordata shows that something is too close, the robot stops moving (reflex does this based on sensor data).
+
+\section{Requirements}
+To Run AP2DX Software you need Java Runtime Enviroment 1.6. 
+
+\section{How to run}
+To start the AP2DX Software, you first need to run an USARsim Server. Then change the sim\_address and sim\_port in the folder /jar/coordinator/AP2DX.coordinator.json to your setup. On windows, start all components with start\_all.bat, or start the components by starting start.bat on windows or start.sh on linux in this order:
+\begin{itemize}
+\item Coordinator
+\item Motor
+\item Reflex
+\item Planner
+\item Mapper
+\item Sensor
+\end{itemize}
+
+\end{document}

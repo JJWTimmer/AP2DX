@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.DelayQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
@@ -49,6 +50,9 @@ public abstract class AP2DXBase {
 	
 	/** The read message queue logic that calls the concrete logic */
 	private Logic baseLogic;
+	
+	/** The delay of the last message to add to the current message, given in milliseconds */	
+	private long lastDelay;
 
 	/** Threadcounter for outgoing connections */
 	private AtomicInteger threadCounter = new AtomicInteger();
@@ -384,6 +388,24 @@ public abstract class AP2DXBase {
 	}
 
 	/**
+	 * Sets the delay for the next message so it can't pass the last one.
+	 * 
+	 * @param millisec new delay in milliseconds
+	 */
+	public void setLastDelay(long millisec) {
+		this.lastDelay = System.nanoTime() + TimeUnit.NANOSECONDS.convert(millisec, TimeUnit.MILLISECONDS);
+	}
+	
+	/**
+	 * 
+	 * @return The time until last delay has expired in milliseconds
+	 */
+	public long getLastDelay() {
+		long n = lastDelay - System.nanoTime();
+	    return TimeUnit.MILLISECONDS.convert(n, TimeUnit.NANOSECONDS);
+	}
+
+	/**
 	 * Class to create outgoing connection
 	 * 
 	 * @author Jasper Timmer
@@ -452,6 +474,11 @@ public abstract class AP2DXBase {
 			
 			try {
 				connHandler = new ConnectionHandler(false, bidirectional, base, conn, IAM, this.module);
+				
+				if (bidirectional) {
+					connHandler.start();
+				}
+				
 				
 				HelloMessage message = new HelloMessage(IAM, this.module, bidirectional);
 				connHandler.sendMessage(message);

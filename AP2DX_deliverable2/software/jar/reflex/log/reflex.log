@@ -1,0 +1,419 @@
+Sat Jun 25 23:47:23 CEST 2011 1309038443354 <init> INFO Package: AP2DX.reflex
+Sat Jun 25 23:47:23 CEST 2011 1309038443449 <init> INFO Directory: C:\Users\Jasper\Desktop\AP2DX_deliverable2\software\jar\reflex
+Sat Jun 25 23:47:23 CEST 2011 1309038443594 run INFO New connection with /127.0.0.1:52473
+Sat Jun 25 23:47:23 CEST 2011 1309038443611 <init> INFO Waiting for msg in conn handler ctor
+Sat Jun 25 23:47:23 CEST 2011 1309038443619 <init> INFO got msg in conn handler ctor: {"Bidirection":true,"sourceModuleId":"PLANNER","destinationModuleId":"REFLEX","type":"HELLO!!!"}
+Sat Jun 25 23:47:23 CEST 2011 1309038443767 run INFO New connection with /127.0.0.1:52477
+Sat Jun 25 23:47:23 CEST 2011 1309038443769 <init> INFO Waiting for msg in conn handler ctor
+Sat Jun 25 23:47:23 CEST 2011 1309038443790 <init> INFO got msg in conn handler ctor: {"Bidirection":false,"sourceModuleId":"SENSOR","destinationModuleId":"REFLEX","type":"HELLO!!!"}
+Sat Jun 25 23:47:23 CEST 2011 1309038443871 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:24 CEST 2011 1309038444043 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:24 CEST 2011 1309038444122 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:24 CEST 2011 1309038444295 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:24 CEST 2011 1309038444373 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:24 CEST 2011 1309038444546 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:24 CEST 2011 1309038444651 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:24 CEST 2011 1309038444797 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:24 CEST 2011 1309038444916 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:25 CEST 2011 1309038445048 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:25 CEST 2011 1309038445168 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:25 CEST 2011 1309038445299 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:25 CEST 2011 1309038445420 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:25 CEST 2011 1309038445552 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:25 CEST 2011 1309038445671 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:25 CEST 2011 1309038445803 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:25 CEST 2011 1309038445956 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:26 CEST 2011 1309038446055 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:26 CEST 2011 1309038446207 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:26 CEST 2011 1309038446306 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:26 CEST 2011 1309038446459 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:26 CEST 2011 1309038446558 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:26 CEST 2011 1309038446711 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:26 CEST 2011 1309038446809 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:26 CEST 2011 1309038446963 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:27 CEST 2011 1309038447060 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:27 CEST 2011 1309038447215 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:27 CEST 2011 1309038447312 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:27 CEST 2011 1309038447466 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:27 CEST 2011 1309038447564 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:27 CEST 2011 1309038447717 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:27 CEST 2011 1309038447815 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:27 CEST 2011 1309038447968 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:28 CEST 2011 1309038448067 run WARNING Time out receiving from: /127.0.0.1:52477
+Sat Jun 25 23:47:28 CEST 2011 1309038448220 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:28 CEST 2011 1309038448267 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448297 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448324 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448342 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448361 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448386 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448418 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448445 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448463 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448472 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:28 CEST 2011 1309038448479 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448501 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448518 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448535 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448551 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448568 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448589 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448604 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448610 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448616 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448623 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448629 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448635 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448641 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448647 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448653 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448659 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448665 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448671 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448677 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448683 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448688 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448694 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448706 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448718 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448726 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448731 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:28 CEST 2011 1309038448736 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448745 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448753 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448762 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448771 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448780 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448788 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448797 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448803 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448810 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448817 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448825 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448832 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448839 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448845 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448852 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448858 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448865 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448871 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448878 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448884 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448890 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448897 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448904 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448911 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448917 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448924 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448931 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448937 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448943 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448950 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448956 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448963 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448969 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448976 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448984 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:28 CEST 2011 1309038448986 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:28 CEST 2011 1309038448993 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449001 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449007 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449014 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449020 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449026 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449032 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449039 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449046 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449053 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449059 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449066 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449074 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449080 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449087 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449093 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449100 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449107 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449114 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449122 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449129 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449135 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449141 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449149 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449156 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449162 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449167 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449173 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449179 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449186 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449192 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449198 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449204 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449210 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449215 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449222 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449228 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449233 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449240 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449244 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:29 CEST 2011 1309038449247 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449252 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449258 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449264 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449271 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449277 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449283 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449288 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449294 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449302 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449308 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449315 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449321 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449330 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449335 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449342 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449348 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449354 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449362 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449371 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449379 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449385 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449390 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449396 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449402 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449409 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449415 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449422 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449429 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449436 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449443 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449451 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449459 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449467 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449475 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449483 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449491 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449497 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:29 CEST 2011 1309038449498 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449504 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449510 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449519 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449525 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449532 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449538 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449543 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449550 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449556 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449563 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449569 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449575 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449582 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449589 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449596 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449603 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449609 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449615 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449622 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449628 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449634 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449641 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449646 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449653 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449659 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449665 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449671 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449677 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449683 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449689 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449696 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449702 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449710 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449720 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449735 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449743 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449749 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:29 CEST 2011 1309038449754 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449762 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449770 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449778 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449786 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449795 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449803 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449813 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449821 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449831 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449839 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449848 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449854 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449955 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449962 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449968 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449974 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449982 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449989 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:29 CEST 2011 1309038449995 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450002 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450004 run WARNING Time out receiving from: /127.0.0.1:52473
+Sat Jun 25 23:47:30 CEST 2011 1309038450008 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450015 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450021 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450027 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450033 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450040 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450046 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450053 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450060 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450066 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450072 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450079 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450086 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450092 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450098 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450104 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450110 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450117 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450123 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450130 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450135 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450142 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450149 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450156 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450162 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450169 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450174 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450181 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450187 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450193 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450199 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450205 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450210 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450217 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450222 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450228 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450234 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450242 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450242 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450249 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450263 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450270 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450276 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450281 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450286 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450291 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450297 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450302 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450307 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450312 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450316 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450320 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450324 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450330 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450336 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450340 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450346 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450350 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450354 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450358 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450362 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450367 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450371 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450376 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450381 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450386 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450392 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450397 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450402 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450408 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450413 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450420 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450425 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450431 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450436 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450441 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450445 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450451 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450455 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450460 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450465 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450470 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450474 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450480 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450485 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450491 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450497 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450504 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450510 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450516 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450522 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450527 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450531 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450535 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450540 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450545 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450549 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450553 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450557 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450562 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450566 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450570 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450574 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450578 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450583 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450589 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450594 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450599 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450603 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450607 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450612 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450617 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450621 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450626 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450630 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450636 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450640 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450645 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450649 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450653 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450658 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450662 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450666 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450670 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450674 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450680 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450685 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450690 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450694 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450698 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450702 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450706 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450710 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450714 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450718 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450723 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450727 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450731 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450735 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450739 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450744 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450748 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450753 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450758 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450762 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450766 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450770 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450774 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450780 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450784 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450788 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450792 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450796 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450800 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450805 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450809 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450814 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450818 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450823 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450828 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450832 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450838 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450842 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
+Sat Jun 25 23:47:30 CEST 2011 1309038450848 run SEVERE Connection reset IN ConnectionHandler.run, attempting to read message.
