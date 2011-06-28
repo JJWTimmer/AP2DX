@@ -27,7 +27,7 @@ public class MotorTestCase extends AbstractTestCase
     @Test public void componentLogic()
     {
     	ArrayList<AP2DXMessage> list = 
-    		test.componentLogic(new ActionMotorMessage(Module.REFLEX, Module.MOTOR, ActionType.STOP, 0));
+    		test.componentLogic(new ActionMotorMessage(Module.REFLEX, Module.MOTOR, ActionType.STOP, 5));
         assertNotNull(list);
     }
 
@@ -35,7 +35,6 @@ public class MotorTestCase extends AbstractTestCase
     /**
 	 * default test method for the Program() class in the package.
 	 */
-    @Override
 	@Test public void program() {
 		Program myTest = new Program();
         System.out.println("After new program");
