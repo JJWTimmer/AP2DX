@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import AP2DX.*;
 import AP2DX.specializedMessages.*;
 
+
 public class Program extends AP2DXBase 
 {
 
@@ -23,6 +24,7 @@ public class Program extends AP2DXBase
     public void doOverride()
     {
         slammer = new Slammer();        
+        new Thread(slammer).start();
         pictureViewer = new PictureViewer(slamDir);
     }
 	
