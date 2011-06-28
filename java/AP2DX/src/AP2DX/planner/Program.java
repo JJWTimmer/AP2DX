@@ -16,9 +16,10 @@ import AP2DX.specializedMessages.SonarSensorMessage;
 
 public class Program extends AP2DXBase {
 
-	/** 
-	 * threshold for turning in angle direction, robot should drive in a direction between
-	 * destinationAngle - ANGLEUNCERTAIN and destinationAngle + ANGLEUNCERTAIN
+	/**
+	 * threshold for turning in angle direction, robot should drive in a
+	 * direction between destinationAngle - ANGLEUNCERTAIN and destinationAngle
+	 * + ANGLEUNCERTAIN
 	 */
 	private static final double ANGLEUNCERTAIN = Math.toRadians(15);
 
@@ -53,7 +54,13 @@ public class Program extends AP2DXBase {
 	/** holds angles for sonar data */
 	private static double[] SONARANGLES;
 
-	private boolean decidedDirection = false;
+	/**
+	 * The next block of variables is used to get the robot out of situation
+	 * with low obstacles
+	 */
+	int blockCount = 0;
+	long time = System.currentTimeMillis();
+	double upperlimit;
 
 	/**
 	 * Entrypoint of planner
@@ -67,15 +74,16 @@ public class Program extends AP2DXBase {
 	 */
 	public Program() {
 		super(Module.PLANNER); // explicitly calls base constructor
-		
+
 		System.out.println(" Running Planner... ");
 	}
 
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-		//System.out.println("Received message " + message.getMessageString());
-		//System.out.println(String.format("In Queue: %s", this.getReceiveQueue().size()));
+		// System.out.println("Received message " + message.getMessageString());
+		// System.out.println(String.format("In Queue: %s",
+		// this.getReceiveQueue().size()));
 
 		switch (message.getMsgType()) {
 		case AP2DX_PLANNER_STOP:
@@ -85,33 +93,34 @@ public class Program extends AP2DXBase {
 			sonarPermission = true;
 
 			messageList.add(new ResetMessage(IAM, Module.REFLEX));
-			
-			/* First field is the value of the sonar, 
-			 * second field is the index of the value in sonarData 
+
+			/*
+			 * First field is the value of the sonar, second field is the index
+			 * of the value in sonarData
 			 */
-			double longestSonar[] = {0,0};
-			
+			double longestSonar[] = { 0, 0 };
+
 			for (int i = 0; i < sonarData.length; i++) {
 				if (sonarData[i] > longestSonar[0]) {
 					longestSonar[0] = sonarData[i];
 					longestSonar[1] = i;
 				}
 			}
-			
-			/* 
+
+			/*
 			 * Decides on the last acquired sonarData if to turn right or left
 			 * Default is right
 			 */
-			if (longestSonar[1] < sonarData.length){
-				AP2DXMessage msgt = 
-					new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, -1);
+			if (longestSonar[1] < sonarData.length) {
+				AP2DXMessage msgt = new ActionMotorMessage(IAM, Module.REFLEX,
+						ActionMotorMessage.ActionType.TURN, -1);
 				msgt.compileMessage();
-				messageList.add(msgt);				
+				messageList.add(msgt);
 			} else {
-				AP2DXMessage msgt = 
-					new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, 1);
+				AP2DXMessage msgt = new ActionMotorMessage(IAM, Module.REFLEX,
+						ActionMotorMessage.ActionType.TURN, 1);
 				msgt.compileMessage();
-				messageList.add(msgt);				
+				messageList.add(msgt);
 			}
 
 			turnCount = 0;
@@ -146,28 +155,61 @@ public class Program extends AP2DXBase {
 			break;
 		case AP2DX_SENSOR_SONAR:
 			SonarSensorMessage msgs = (SonarSensorMessage) message;
-			
+
+			//double lastsonarData[] = sonarData;
 			sonarData = msgs.getRangeArray();
-			
+
 			if (sonarPermission) {
-				
+
 				turnCount++;
-				if (sonarData[Math.round(sonarData.length/2)] >= DISTANCETHRESHOLD & (turnCount > 4))
-				{
+				if (sonarData[Math.round(sonarData.length / 2)] >= DISTANCETHRESHOLD
+						& (turnCount > 4)) {
 					AP2DXMessage msg5 = new ClearMessage(IAM, Module.REFLEX);
 					msg5.compileMessage();
 					messageList.add(msg5);
-					
-					
+
 					AP2DXMessage msg6 = new ActionMotorMessage(IAM,
 							Module.REFLEX,
 							ActionMotorMessage.ActionType.FORWARD, 10.0);
 					msg6.compileMessage();
 					messageList.add(msg6);
-					
+
 					sonarPermission = false;
+					blockCount = 0;
 				}
-			}
+			/*
+			 * Code to check if the robot is stuck on a low object
+			 * If the robot is stuck send it backwards
+			 * 
+			 * TODO: MAKE IT WORK!!	
+			 */
+			}  else if (sonarData != null){
+				//double lastSonar = lastsonarData[Math.round(lastsonarData.length / 2)];
+				double sonar = sonarData[Math.round(sonarData.length / 2)];
+				
+				if (blockCount == 0) {
+					upperlimit = sonar;
+				} else if (sonar < upperlimit) {
+					upperlimit = sonar;
+				}
+				
+				//if (sonar > (lastSonar + 0.1) & sonar < (lastSonar - 0.1)) {
+				
+				if (sonar > upperlimit) {
+					blockCount++;
+					if ((time + 1000) < System.currentTimeMillis() ) {
+						time = System.currentTimeMillis();
+						blockCount = 0;
+					}
+					if (blockCount > 100000) {
+						AP2DXMessage msg6 = new ActionMotorMessage(IAM,
+								Module.REFLEX,
+								ActionMotorMessage.ActionType.BACKWARD, 10.0);
+						msg6.compileMessage();
+						messageList.add(msg6);
+					}
+				}
+			} 
 
 			break;
 		case AP2DX_SENSOR_ODOMETRY:
@@ -187,11 +229,12 @@ public class Program extends AP2DXBase {
 				System.out.println("Sending message first message");
 
 				firstMessage = true;
-				
+
 				SONARANGLES = new double[] { 0 * Math.PI / 180,
-						20 * Math.PI / 180, 40 * Math.PI / 180, 60 * Math.PI / 180,
-						80 * Math.PI / 180, 100 * Math.PI / 180};
-				
+						20 * Math.PI / 180, 40 * Math.PI / 180,
+						60 * Math.PI / 180, 80 * Math.PI / 180,
+						100 * Math.PI / 180 };
+
 			}
 
 			break;
