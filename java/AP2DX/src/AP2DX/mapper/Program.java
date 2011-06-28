@@ -8,8 +8,9 @@ import AP2DX.specializedMessages.*;
 public class Program extends AP2DXBase 
 {
 
-    private String lastReceivedOdometry;
-    private String lastReceivedLaser;
+    private Slammer slammer; 
+    private PictureViewer pictureViewer;
+    private String slamDir;
 
     /**
 	 * Entrypoint of mapper
@@ -19,6 +20,11 @@ public class Program extends AP2DXBase
 		new Program();
 	}
 
+    public void doOverride()
+    {
+        slammer = new Slammer();        
+        pictureViewer = new PictureViewer(slamDir);
+    }
 	
 	/**
 	 * constructor
@@ -49,71 +55,65 @@ public class Program extends AP2DXBase
                 break;
             default:
                 System.out.println("Unexpected message type in ap2dx.mapper.Program: " + message.getMsgType());
-        }
-        
+
+        }  
+         
 		return messageList;
 	}
 
-    
-    private void doOdometryLogic(OdometrySensorMessage message, 
+    private void doRangeLogic(RangeScannerSensorMessage message, 
         ArrayList<AP2DXMessage> messageList)
     {
-        lastReceivedOdometry = String.format("Odometry %f %f %f", 
-            message.getX(), message.getY(), message.getTheta());
-        System.out.println(lastReceivedOdometry);
+        // just slammin'
+        if (slammer == null)
+            return;
+        slammer.addLaser(message.getDataArray());
+    }
 
-         
+    private void doInsLogic(InsSensorMessage message, 
+        ArrayList<AP2DXMessage> messageList)
+    {
+        // TO THE PLANNER! 
+        message.setDestinationModuleId(Module.PLANNER);
+        message.compileMessage();
+        messageList.add(message);
+    }
+    
+    private void doSonarLogic(SonarSensorMessage message,
+        ArrayList<AP2DXMessage> messageList)
+    {
+        // TO THE PLANNER!
         message.setDestinationModuleId(Module.PLANNER);
         message.compileMessage();
         messageList.add(message);
     }
 
-    private void doRangeLogic(RangeScannerSensorMessage message,
+    private void doOdometryLogic(OdometrySensorMessage message,
         ArrayList<AP2DXMessage> messageList)
     {
-        lastReceivedLaser = "Laser " + message.getDataArray().length; 
-        for (double d : message.getDataArray())
-            lastReceivedLaser += " " + d;
-        System.out.println(lastReceivedLaser);
+        // TO THE PLANNER!
+        message.setDestinationModuleId(Module.PLANNER);
+        message.compileMessage();
+        messageList.add(message);
+
+        // just slammin'
+        if (slammer == null)
+            return;
+        slammer.addXYTheta(message.getX(), message.getY(), message.getTheta());
     }
-
-
-    private void doInsLogic(InsSensorMessage insSensorMessage, 
-        ArrayList<AP2DXMessage> messageList)
-    {
-        insSensorMessage.setDestinationModuleId(Module.PLANNER);
-        insSensorMessage.compileMessage();
-        messageList.add(insSensorMessage);
-    }
-
-    private void doSonarLogic(SonarSensorMessage sonarSensorMessage,
-        ArrayList<AP2DXMessage> messageList)
-    {
-        sonarSensorMessage.setDestinationModuleId(Module.PLANNER);
-        sonarSensorMessage.compileMessage();
-        messageList.add(sonarSensorMessage);
-        //if (drawer == null)
-        //    System.out.println("ERROR in AP2DX.sensor.Program.ComponentLogic(), drawer == null");
-        //else
-        //    drawer.paintSonarLines(sonarSensorMessage.getRangeArray());
-        //
-        //// TO THE REFLEX! 
-        //SonarSensorMessage sonarSensorMessage2 = new SonarSensorMessage( (AP2DXMessage) sonarSensorMessage.clone());
-        //sonarSensorMessage2.parseMessage();
-        //sonarSensorMessage2.setSourceModuleId(Module.SENSOR);
-        //sonarSensorMessage2.setDestinationModuleId(Module.REFLEX);  
-        //sonarSensorMessage2.compileMessage();
-        //messageList.add(sonarSensorMessage2);
-        ////messageList.add(sonarSensorMessage.forward(Module.SENSOR, Module.REFLEX));
-        //
-        //// TO THE MAPPER
-        //SonarSensorMessage sonarSensorMessage3 = new SonarSensorMessage( (AP2DXMessage) sonarSensorMessage.clone());
-        //sonarSensorMessage3.parseMessage();
-        //sonarSensorMessage3.setSourceModuleId(Module.SENSOR);
-        //sonarSensorMessage3.setDestinationModuleId(Module.MAPPER);  
-        //sonarSensorMessage3.compileMessage();
-        //messageList.add(sonarSensorMessage3);
-    }
-
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
