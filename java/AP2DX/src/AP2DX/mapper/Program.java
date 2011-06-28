@@ -10,6 +10,8 @@ public class Program extends AP2DXBase
 {
 
     private Slammer slammer; 
+    private PictureViewer pictureViewer;
+    private String slamDir;
 
     /**
 	 * Entrypoint of mapper
@@ -23,6 +25,7 @@ public class Program extends AP2DXBase
     {
         slammer = new Slammer();        
         new Thread(slammer).start();
+        pictureViewer = new PictureViewer(slamDir);
     }
 	
 	/**

@@ -1,10 +1,11 @@
-//package AP2DX.mapper;
+package AP2DX.mapper;
 
 
 // Imports for the interface
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.lang.Thread;
 import java.io.File;
 import java.io.IOException;
@@ -14,12 +15,14 @@ import java.io.IOException;
  */
 public class PictureViewer extends JPanel
 {
-    private Image backgroundImage;
-    public int imageCounter = 0;
+    private static String pathToTheImage;
+    private BufferedImage backgroundImage;
+    public static int imageCounter = 0;
+    private static JFrame frame;
     
     public static void main(String[] args)
     {
-        JFrame frame = new JFrame("Map");
+        frame = new JFrame("Map");
         PictureViewer viewer = new PictureViewer();
         frame.setBackground(java.awt.Color.white);
 
@@ -27,21 +30,19 @@ public class PictureViewer extends JPanel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500);
         frame.setVisible(true);
-        String pathToTheImage = "../../../../c/dpslam/hmap";
+        String pathToTheImage = "../../../../../c/dpslam/hmap";
         String image;
-        Image bgImage;
+        BufferedImage bgImage;
         while(true)
         {
             try 
             {
-                image = String.format("%s, %2d, %s", pathToTheImage + viewer.imageCounter + ".png");
-                System.out.println("String image = " + image);
+                image = String.format("%s%02d%s", pathToTheImage, imageCounter, ".png");
                 bgImage = ImageIO.read(new File(image));
-                viewer.imageCounter++;
+                imageCounter++;
                 viewer.updateImage(bgImage);
             } catch (IOException ex) 
             {
-                System.out.println("No image found, will sleep for some time");
                 try{Thread.sleep(1000);}catch(Exception e){}
             }
         }
@@ -52,14 +53,17 @@ public class PictureViewer extends JPanel
         super();
     }
 
-    public PictureViewer(Image backgroundImage) {
+    public PictureViewer(String slamDir)
+    {
         super();
-        this.backgroundImage = backgroundImage;
+        this.pathToTheImage = slamDir;
     }
 
-    public void updateImage(Image backgroundImage)
+
+    public void updateImage(BufferedImage backgroundImage)
     {
         this.backgroundImage = backgroundImage;
+        frame.setSize(backgroundImage.getWidth(),backgroundImage.getHeight());
         repaint();
     }
 
