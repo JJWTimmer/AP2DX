@@ -22,7 +22,7 @@ public class Program extends AP2DXBase {
 	 */
 	private static final double ANGLEUNCERTAIN = Math.toRadians(15);
 
-	private static final double DISTANCETHRESHOLD = 2.0;
+	private static final double DISTANCETHRESHOLD = 1.5;
 
 	private InsLocationData locData;
 
@@ -48,7 +48,7 @@ public class Program extends AP2DXBase {
 	private boolean sonarPermission = false;
 
 	/** will contain sonar scan data for determining direction */
-	private double[][] sonarData;
+	private double[] sonarData;
 
 	/** holds angles for sonar data */
 	private static double[] SONARANGLES;
@@ -86,11 +86,33 @@ public class Program extends AP2DXBase {
 
 			messageList.add(new ResetMessage(IAM, Module.REFLEX));
 			
-			AP2DXMessage msgt = new ActionMotorMessage(IAM,
-					Module.REFLEX, ActionMotorMessage.ActionType.TURN,
-					1);
-			msgt.compileMessage();
-			messageList.add(msgt);
+			/* First field is the value of the sonar, 
+			 * second field is the index of the value in sonarData 
+			 */
+			double longestSonar[] = {0,0};
+			
+			for (int i = 0; i < sonarData.length; i++) {
+				if (sonarData[i] > longestSonar[0]) {
+					longestSonar[0] = sonarData[i];
+					longestSonar[1] = i;
+				}
+			}
+			
+			/* 
+			 * Decides on the last acquired sonarData if to turn right or left
+			 * Default is right
+			 */
+			if (longestSonar[1] < sonarData.length){
+				AP2DXMessage msgt = 
+					new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, -1);
+				msgt.compileMessage();
+				messageList.add(msgt);				
+			} else {
+				AP2DXMessage msgt = 
+					new ActionMotorMessage(IAM, Module.REFLEX, ActionMotorMessage.ActionType.TURN, 1);
+				msgt.compileMessage();
+				messageList.add(msgt);				
+			}
 
 			turnCount = 0;
 			break;
@@ -124,11 +146,13 @@ public class Program extends AP2DXBase {
 			break;
 		case AP2DX_SENSOR_SONAR:
 			SonarSensorMessage msgs = (SonarSensorMessage) message;
-
+			
+			sonarData = msgs.getRangeArray();
+			
 			if (sonarPermission) {
-				double[] current = msgs.getRangeArray();
 				
-				if (current[Math.round(current.length/2)] >= DISTANCETHRESHOLD)
+				turnCount++;
+				if (sonarData[Math.round(sonarData.length/2)] >= DISTANCETHRESHOLD & (turnCount > 4))
 				{
 					AP2DXMessage msg5 = new ClearMessage(IAM, Module.REFLEX);
 					msg5.compileMessage();

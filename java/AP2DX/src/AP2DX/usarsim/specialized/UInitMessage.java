@@ -29,7 +29,10 @@ public final class UInitMessage extends UsarSimMessage {
      */
     @UsarMessageIteratorField
         private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "-5,-1,1.8"));
-    	//private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "4.5,1.9,1.8"));
+    	//private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "4.5,1.7,1.8"));
+    
+    	/* The long hallway */
+    	//private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "4,-3.3,1.8"));
 
     /** The rotation of the robot. Array with three values, respectively: Roll, Pitch, Yaw*/
     @UsarMessageIteratorField
