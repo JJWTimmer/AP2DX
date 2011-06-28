@@ -28,7 +28,7 @@ public class Slammer implements Runnable
     private Process p; 
     private SensorWriter sensorWriter;
     private BufferedReader sensorReader;
-    private final String pathToSlam = "../../../../c/dpslam/slam";
+    private String pathToSlam = "N:\\stuff\\AP2DX\\c\\dpslam\\slam";
 
     /** Location and orientation last read from file. */
     private double x, y, theta;
@@ -48,7 +48,7 @@ public class Slammer implements Runnable
         try
         {
             // startin' DP SLAM
-            p = r.exec(pathToSlam  + " -p stdinOrWhatever"); 
+            p = r.exec(pathToSlam + " -p stdinOrWhatever"); 
            
             // creating a new thread to continiously write all kinds of sexeh stuff to the 
             // c program 
