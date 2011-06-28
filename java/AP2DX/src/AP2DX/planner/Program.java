@@ -1,31 +1,42 @@
 package AP2DX.planner;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import AP2DX.AP2DXBase;
 import AP2DX.AP2DXMessage;
 import AP2DX.Message;
-import AP2DX.Message.MessageType;
 import AP2DX.Module;
-import AP2DX.specializedMessages.*;
+import AP2DX.specializedMessages.ActionMotorMessage;
 import AP2DX.specializedMessages.ActionMotorMessage.ActionType;
+import AP2DX.specializedMessages.ClearMessage;
+import AP2DX.specializedMessages.InsSensorMessage;
+import AP2DX.specializedMessages.OdometrySensorMessage;
+import AP2DX.specializedMessages.ResetMessage;
+import AP2DX.specializedMessages.SonarSensorMessage;
 
 public class Program extends AP2DXBase {
+
+	/** 
+	 * threshold for turning in angle direction, robot should drive in a direction between
+	 * destinationAngle - ANGLEUNCERTAIN and destinationAngle + ANGLEUNCERTAIN
+	 */
+	private static final double ANGLEUNCERTAIN = 15*Math.PI/180;
+
 	private InsLocationData locData;
+
 	private double travelDistance;
+
 	private double distanceGoal;
-	
+
 	/** Tho start the first drive after spawning */
 	private boolean firstMessage = false;
-	
+
 	private double startAngle;
-	
+
 	private double currentAngle;
-	
+
 	private double destinationAngle;
-	
+
 	private boolean startedTurning = false;
 
 	/** counter for which turn in determining new direction */
@@ -35,8 +46,11 @@ public class Program extends AP2DXBase {
 	private boolean sonarPermission = false;
 
 	/** will contain sonar scan data for determining direction */
-	private double[] sonarData;
-	
+	private double[][] sonarData;
+
+	/** holds angles for sonar data */
+	private static double[] SONARANGLES;
+
 	private boolean decidedDirection = false;
 
 	/**
@@ -51,30 +65,29 @@ public class Program extends AP2DXBase {
 	 */
 	public Program() {
 		super(Module.PLANNER); // explicitly calls base constructor
+		
 		System.out.println(" Running Planner... ");
 	}
 
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-		System.out.println("Received message " + message.getMessageString());
-		System.out.println(String.format("In Queue: %s", this.getReceiveQueue()
-				.size()));
+		//System.out.println("Received message " + message.getMessageString());
+		//System.out.println(String.format("In Queue: %s", this.getReceiveQueue().size()));
 
 		switch (message.getMsgType()) {
 		case AP2DX_PLANNER_STOP:
-			
+
 			startAngle = currentAngle;
-			
-			sonarPermission =  true;
+
+			sonarPermission = true;
 
 			messageList.add(new ResetMessage(IAM, Module.REFLEX));
 
 			turnCount = 0;
 			break;
 		case AP2DX_SENSOR_INS:
-			
-			
+
 			InsSensorMessage msg = (InsSensorMessage) message;
 			double[] loc = msg.getLocation();
 			double[] ori = msg.getOrientation();
@@ -95,7 +108,8 @@ public class Program extends AP2DXBase {
 								ActionMotorMessage.ActionType.STOP, 666);
 						msg6.compileMessage();
 						messageList.add(msg6);
-						System.out.println("Sending stop message based on distancegoal");
+						System.out
+								.println("Sending stop message based on distancegoal");
 					}
 				}
 			}
@@ -106,117 +120,132 @@ public class Program extends AP2DXBase {
 			if (sonarPermission) {
 				switch (turnCount) {
 				case 0:
-					sonarData = new double[24];
+					sonarData = new double[4][6];
 					double[] current = msgs.getRangeArray();
 					for (int i = 1; i < 7; i++) { // don't use the outer two
-						sonarData[i-1] = current[i];
+						sonarData[0][i - 1] = current[i];
 					}
-					
-					AP2DXMessage turnMsg1 = new ActionMotorMessage(IAM, Module.REFLEX, ActionType.TURN, 1);
+
+					AP2DXMessage turnMsg1 = new ActionMotorMessage(IAM,
+							Module.REFLEX, ActionType.TURN, 1);
 					turnMsg1.compileMessage();
 					messageList.add(turnMsg1);
-					
-					System.out.println("Sending turn message based on turnCount = 0");
-					
+
+					System.out
+							.println("Sending turn message based on turnCount = 0");
+
 					sonarPermission = false;
 					startedTurning = true;
-					
+
 					turnCount++;
-					
+
 					break;
 				case 1:
 				case 2:
 					double[] current2 = msgs.getRangeArray();
 					for (int i = 1; i < 7; i++) {
 						if (turnCount == 1)
-							sonarData[i+6] = current2[i];
+							sonarData[1][i - 1] = current2[i];
 						else
-							sonarData[i+12] = current2[i];
+							sonarData[2][i - 1] = current2[i];
 					}
-					
-					AP2DXMessage turnMsg2 = new ActionMotorMessage(IAM, Module.REFLEX, ActionType.TURN, 1);
+
+					AP2DXMessage turnMsg2 = new ActionMotorMessage(IAM,
+							Module.REFLEX, ActionType.TURN, 1);
 					turnMsg2.compileMessage();
 					messageList.add(turnMsg2);
-					
-					System.out.println("Sending turn message based on turnCount = 1");
-					
+
+					if (turnCount == 1)
+						System.out
+								.println("Sending turn message based on turnCount = 1");
+					else
+						System.out
+								.println("Sending turn message based on turnCount = 2");
+
 					sonarPermission = false;
-					
+
 					startAngle = currentAngle;
 					startedTurning = true;
-					
+
 					turnCount++;
-					
+
 					break;
 				case 3:
 					double[] current3 = msgs.getRangeArray();
 					for (int i = 1; i < 7; i++) {
-						sonarData[i+18] = current3[i];
+						sonarData[3][i - 1] = current3[i];
 					}
-					
+
 					sonarPermission = false;
-					
+
 					int far_i = 0;
+					int far_j = 0;
 					double far_value = 0;
-					
+
 					for (int i = 0; i < sonarData.length; i++) {
-						if (sonarData[i] > far_value) {
-							far_value = sonarData[i];
-							far_i = i;
+						for (int j = 0; j < sonarData[i].length; j++) {
+							if (sonarData[i][j] > far_value) {
+								far_value = sonarData[i][j];
+								far_i = i;
+								far_j = j;
+							}
 						}
 					}
+
+					destinationAngle = currentAngle + (40 * Math.PI / 180) + (far_i * 0.5 * Math.PI)
+																	+ SONARANGLES[far_j];
+					if (destinationAngle > Math.PI) destinationAngle = (-1*Math.PI) + (destinationAngle - Math.PI);
 					
 					startAngle = currentAngle;
-					
-					destinationAngle = ((0.25 * Math.PI) + (2 * Math.PI / 24) * far_i) % (2 * Math.PI);
 					decidedDirection = true;
-					
-					AP2DXMessage msgt = new ActionMotorMessage(IAM, Module.REFLEX,
-							ActionMotorMessage.ActionType.TURN, 1);
+
+					System.out.println(String.format("Destination angle: %s",
+							destinationAngle));
+
+					AP2DXMessage msgt = new ActionMotorMessage(IAM,
+							Module.REFLEX, ActionMotorMessage.ActionType.TURN,
+							1);
 					msgt.compileMessage();
 					messageList.add(msgt);
-					
-					System.out.println("Sending turn message based on turnCount = 2");
-					
+
+					System.out
+							.println("Sending turn message based on turnCount = 3");
+
 					turnCount++;
-					
+
 					break;
 				default:
 					System.out.println("Uh uhw, kusje!");
 					// nothing
 				}
 			}
-			
+
 			break;
 		case AP2DX_SENSOR_ODOMETRY:
 			System.out.println("parsing odometry message in planner");
-			
+
 			OdometrySensorMessage msgo = (OdometrySensorMessage) message;
 
 			currentAngle = msgo.getTheta();
-			
+
 			if (startedTurning) {
+				System.out.println("is turning...");
 				if (Math.abs(startAngle - currentAngle) >= (Math.PI * 0.5)) {
 					sonarPermission = true;
-					AP2DXMessage stopMsg1 = new ActionMotorMessage(IAM, Module.REFLEX, ActionType.STOP, 666);
+					AP2DXMessage stopMsg1 = new ActionMotorMessage(IAM,
+							Module.REFLEX, ActionType.STOP, 666);
 					stopMsg1.compileMessage();
 					messageList.add(stopMsg1);
-					
-					System.out.println("Sending stop message based on startedTurning angle");
-					
+
+					System.out
+							.println("Sending stop message based on startedTurning angle");
+
 					startedTurning = false;
 				}
-			}
-			
-			if (decidedDirection) {
-				double angle = Math.abs(startAngle - currentAngle);
-				if (angle >= destinationAngle) {
-					sonarPermission = true;
-					AP2DXMessage stopMsg1 = new ActionMotorMessage(IAM, Module.REFLEX, ActionType.STOP, 666);
-					stopMsg1.compileMessage();
-					messageList.add(stopMsg1);
-					
-					System.out.println("Sending stop message based on decided direction");
+			} else if (decidedDirection) {
+				System.out.println("going the right direction...");
+				System.out.println(String.format("Angle data: current: %s, destination: %s, UNCERTAIN: %s", currentAngle, destinationAngle, ANGLEUNCERTAIN));
+				if (currentAngle >= (destinationAngle - ANGLEUNCERTAIN) && currentAngle <= (destinationAngle + ANGLEUNCERTAIN)) {
 					
 					startedTurning = false;
 					decidedDirection = false;
@@ -224,31 +253,38 @@ public class Program extends AP2DXBase {
 					AP2DXMessage msg5 = new ClearMessage(IAM, Module.REFLEX);
 					msg5.compileMessage();
 					messageList.add(msg5);
-					
-					System.out.println("Sending clear message based on decided direction");
-					
-					AP2DXMessage msg6 = new ActionMotorMessage(IAM, Module.REFLEX,
+
+					System.out
+							.println("Sending clear message based on decided direction");
+
+					AP2DXMessage msg6 = new ActionMotorMessage(IAM,
+							Module.REFLEX,
 							ActionMotorMessage.ActionType.FORWARD, 10.0);
 					msg6.compileMessage();
 					messageList.add(msg6);
-					
-					System.out.println("Sending forward message based on decided direction");
-					
+
+					System.out
+							.println("Sending forward message based on decided direction");
 				}
 			}
-			
+
 			if (!firstMessage) {
 				// for now, lets just drive forward, OKAY?!
 				AP2DXMessage msg5 = new ActionMotorMessage(IAM, Module.REFLEX,
 						ActionMotorMessage.ActionType.FORWARD, 10.0);
+				msg5.compileMessage();
 				messageList.add(msg5);
-				
-				System.out.println("Sending message " + messageList.get(0));
-				
+
+				System.out.println("Sending message first message");
+
 				firstMessage = true;
+				
+				SONARANGLES = new double[] { 0 * Math.PI / 180,
+						20 * Math.PI / 180, 40 * Math.PI / 180, 60 * Math.PI / 180,
+						80 * Math.PI / 180, 100 * Math.PI / 180};
+				
 			}
 
-			
 			break;
 		default:
 			AP2DXBase.logger

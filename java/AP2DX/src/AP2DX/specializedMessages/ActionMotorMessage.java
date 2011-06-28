@@ -36,6 +36,8 @@ public class ActionMotorMessage extends SpecializedMessage
     public ActionMotorMessage(Module sourceId, Module destinationId, ActionType actionType, double value)
     {
     	super(Message.MessageType.AP2DX_MOTOR_ACTION, sourceId, destinationId);
+    	if (values == null)
+            values = new HashMap();
         setActionType(actionType);
         setValue(value);
     }
@@ -61,8 +63,9 @@ public class ActionMotorMessage extends SpecializedMessage
      */
     @Override
      public String compileMessage()
-     {   
-    	specializedParseMessage();
+     {  
+    	if (messageString != null)
+    		specializedParseMessage();
     	
          try
          {
