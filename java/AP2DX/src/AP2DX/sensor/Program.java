@@ -78,7 +78,21 @@ public class Program extends AP2DXBase
             switch (message.getMsgType())
             {
                 case AP2DX_SENSOR_ODOMETRY:
+<<<<<<< HEAD
                     doOdometryLogic((OdometrySensorMessage) message, messageList);
+=======
+                	System.out.println("parsing odometry message in sensor");
+                    
+                	OdometrySensorMessage odometrySensorMessage = (OdometrySensorMessage) message;
+                	
+                    odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
+                    odometrySensorMessage.setSourceModuleId(IAM);
+                    
+                    odometrySensorMessage.compileMessage();
+                    
+                    messageList.add(odometrySensorMessage);
+
+>>>>>>> 4834462e645ddcf61d27c9359510ad57939829e4
                     break;
                 case AP2DX_SENSOR_INS:
                     doInsLogic((InsSensorMessage) message, messageList);

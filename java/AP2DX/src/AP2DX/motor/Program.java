@@ -139,24 +139,19 @@ public class Program extends AP2DXBase
                 break;
 	        case TURN:
 	        	//return motor.turn(actionMotorMessage.getValue());
-	        	double turnTime = actionMotorMessage.getValue();
-	        	if (turnTime < 0) {
-	        		AP2DXMessage tlMsg = new MotorMessage(IAM, Module.COORDINATOR, -10, 10);
+	        	double direction = actionMotorMessage.getValue();
+	        	if (direction < 0) {
+	        		AP2DXMessage tlMsg = new MotorMessage(IAM, Module.COORDINATOR, -2, 2);
 		        	tlMsg.setDelay(this.getLastDelay());
 	                messageList.add(tlMsg);
 	        		System.out.println("Turning left");
 	        	}
-	        	else if (turnTime > 0) {
-	        		AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR, 10, -10);
+	        	else if (direction > 0) {
+	        		AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR, 2, -2);
 		        	trMsg.setDelay(this.getLastDelay());
 	                messageList.add(trMsg);
 	        		System.out.println("Turning right");
 	        	}
-	        	AP2DXMessage msg = new MotorMessage(IAM, Module.COORDINATOR, 0, 0);
-	        	msg.setDelay(this.getLastDelay() + Math.abs((long)turnTime));
-	        	this.setLastDelay(msg.getDelay(TimeUnit.MILLISECONDS));
-	        	messageList.add(msg);
-	        	System.out.println("Stop turning");
 	        	
                 break;
 	        case STOP:

@@ -88,21 +88,18 @@ public class UsarMessageParser extends Thread
                             case USAR_INS:
                                 UInsSensorMessage insMessage = 
                                     new UInsSensorMessage(sensorMessage);
-                                message = (InsSensorMessage) 
-                                    insMessage.toAp2dxMessage();
+                                message = (InsSensorMessage)insMessage.toAp2dxMessage();
                                 break;
                             case USAR_SONAR:
                                 USonarSensorMessage sonarMessage = 
                                     new USonarSensorMessage(sensorMessage);
                                     // Put the right values in the message
-                                message = (SonarSensorMessage) 
-                                    sonarMessage.toAp2dxMessage();
+                                message = (SonarSensorMessage)sonarMessage.toAp2dxMessage();
                                 break;
                             case USAR_RANGE:
                                 URangeSensorMessage rangeMessage = 
                                     new URangeSensorMessage(sensorMessage);
-                                message = (RangeScannerSensorMessage) 
-                                    rangeMessage.toAp2dxMessage();
+                                message = (RangeScannerSensorMessage)rangeMessage.toAp2dxMessage();
                                 break;
 
                             default: 

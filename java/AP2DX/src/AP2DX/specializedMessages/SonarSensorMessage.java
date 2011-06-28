@@ -1,5 +1,7 @@
 package AP2DX.specializedMessages;
 
+import java.util.HashMap;
+
 import AP2DX.*;
 
 //import org.json.simple.JSONObject;
@@ -59,6 +61,31 @@ public class SonarSensorMessage extends SpecializedMessage
         message.compileMessage();
         return message;
     } 
+    
+    /** 
+     * Creates a (new) string in messageString from whatever is in the values map. 
+     */
+    @Override
+     public String compileMessage()
+     {   
+    	specializedParseMessage();
+    	
+         try
+         {
+             if (values == null)
+                 values = new HashMap();
+             values.put("destinationModuleId", destinationModuleId.toString());
+             values.put("sourceModuleId", sourceModuleId.toString());
+             values.put("type", type.typeString.toString());
+             messageString = (new JSONObject(values)).toString();
+         }
+         catch (Exception e)
+         {
+             System.out.println("Error in AP2DX.SpecializedMessages.OdometrySensormessage.compileMessage: " + e.getMessage());
+             e.printStackTrace();
+         }
+         return messageString;
+     }
 
     public void specializedParseMessage()
     {

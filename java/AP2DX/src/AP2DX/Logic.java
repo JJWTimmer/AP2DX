@@ -45,6 +45,7 @@ public class Logic extends Thread {
             }
             catch(Exception e)
             {
+            	e.printStackTrace();
                 AP2DXBase.logger.severe("ERROR in logicCheck");
                 continue;
             }

@@ -35,11 +35,16 @@ public class UOdometrySensorMessage extends UsarSimSensorMessage {
 
     public AP2DXMessage toAp2dxMessage()
     {
+    	
         OdometrySensorMessage odometrySensorMessage = 
             new OdometrySensorMessage(Module.COORDINATOR, Module.SENSOR);
+        
+        
         odometrySensorMessage.setX(Pose[0]);
         odometrySensorMessage.setY(Pose[1]);
         odometrySensorMessage.setTheta(Pose[2]);
+        
+        //odometrySensorMessage.compileMessage();
         return odometrySensorMessage;
     }
 

@@ -9,11 +9,15 @@ import AP2DX.specializedMessages.*;
 import AP2DX.usarsim.specialized.USonarSensorMessage;
 
 public class Program extends AP2DXBase {
+	/** Margin at which to stop the robot in meters */
+	public final double THRESHOLD = 0.75;
+	
 	private double[] currentDistances;
 	private double[] previousDistances;
 	private double[] approaching;
 	private boolean isBotBlocked = false;
-	private boolean clear = true;
+	private boolean clear;
+	private boolean firstMessage;
 
 	/**
 	 * Entrypoint of reflex
@@ -42,8 +46,13 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-		System.out.print("Message received: " + message.getMessageString());
+		System.out.println("Message received: " + message.getMessageString());
 
+		if (!firstMessage) {
+			this.clear = true;
+			this.firstMessage = true;
+		}
+		
 		switch (message.getMsgType()) {
 		case RESET:
 			System.out.println("RESET Detected");
@@ -59,7 +68,8 @@ public class Program extends AP2DXBase {
 				ActionMotorMessage msg = new ActionMotorMessage(
 						(AP2DXMessage) message);
 				msg.setDestinationModuleId(Module.MOTOR);
-
+				msg.compileMessage();
+				
 				System.out.printf("Sending message %s to MOTOR module\n",
 						msg.getMessageString());
 
@@ -84,9 +94,9 @@ public class Program extends AP2DXBase {
 				}
 			}
 
-			if (!isBotBlocked) {
+			if (clear) {
 				for (int i = 0; i < getCurrentDistances().length; i++) {
-					if (getCurrentDistances()[i] < 0.75 && approaching[i] == 1) {
+					if (getCurrentDistances()[i] < THRESHOLD && approaching[i] == 1) {
 						setBotBlocked(true);
 						this.clear = false;
 
@@ -106,9 +116,9 @@ public class Program extends AP2DXBase {
 			}
 			break;
 		default:
-			System.out
-					.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: "
-							+ message.getMsgType());
+//			System.out
+//					.println("Error in AP2DX.reflex.Program.componentLogic(Message message) Couldn't deal with message: "
+//							+ message.getMsgType());
 		}
 		return messageList;
 	}
@@ -133,6 +143,7 @@ public class Program extends AP2DXBase {
 	 * @return the currentDistances
 	 */
 	public double[] getCurrentDistances() {
+		if (currentDistances == null) currentDistances = new double[8];
 		return currentDistances;
 	}
 
@@ -148,6 +159,7 @@ public class Program extends AP2DXBase {
 	 * @return the previousDistances
 	 */
 	public double[] getPreviousDistances() {
+		if (previousDistances == null) previousDistances = new double[8];
 		return previousDistances;
 	}
 
