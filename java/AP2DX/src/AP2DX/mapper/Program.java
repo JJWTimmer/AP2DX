@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import AP2DX.*;
 import AP2DX.specializedMessages.*;
 
-
 public class Program extends AP2DXBase 
 {
 
@@ -35,17 +34,15 @@ public class Program extends AP2DXBase
 	
 	public ArrayList<AP2DXMessage> componentLogic(Message message) 
     {
-        // for now just freakin' forward it to the planner okay?!
-        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();  
-        System.out.printf("Forwarding message %s to planner\n", message);
+        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
         
         switch (message.getMsgType())
         {
-            case AP2DX_SENSOR_INS:
-                doInsLogic((InsSensorMessage) message, messageList);
-                break;
             case AP2DX_SENSOR_ODOMETRY:
                 doOdometryLogic((OdometrySensorMessage) message, messageList);
+                break;
+            case AP2DX_SENSOR_INS:
+                doInsLogic((InsSensorMessage) message, messageList);
                 break;
             case AP2DX_SENSOR_SONAR:
                 doSonarLogic((SonarSensorMessage) message, messageList);
@@ -101,6 +98,7 @@ public class Program extends AP2DXBase
             return;
         slammer.addXYTheta(message.getX(), message.getY(), message.getTheta());
     }
+
 }
 
 

@@ -16,8 +16,9 @@
 
 
 CC = g++
-#CFLAGS = -g -I. -I/usr/local/gcc280/lib/g++-include
-CFLAGS = -g -I. -O3 -Wall -I/usr/local/lib/g++-include
+CFLAGS = -g -m32
+#-I. -I/usr/local/gcc280/lib/g++-include
+#CFLAGS = -g -I. -O3 -Wall -I/usr/local/lib/g++-include
 # For profiling the code : 
 #CFLAGS += -pg
 
