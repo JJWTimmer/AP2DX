@@ -16,6 +16,7 @@
 
 
 #include <string.h>
+#include <stdio.h>
 
 #include "low.h"
 #include "mt-rand.h"
@@ -801,7 +802,8 @@ int ReadLog(FILE *logFile, TSense &sense, int &continueSlam) {
   int i, max;
   char line[4096];
 
-  if (fgets(line, 4096, logFile) == NULL) {
+  if (fgets(line, 4096, stdin) == NULL) {
+  //if (fgets(line, 4096, logFile) == NULL) {
     fprintf(stderr, "End of Log File.\n");
     continueSlam = 0;
     return 1;
