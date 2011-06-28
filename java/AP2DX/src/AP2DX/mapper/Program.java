@@ -3,7 +3,13 @@ package AP2DX.mapper;
 import java.util.ArrayList;
 
 import AP2DX.*;
+<<<<<<< HEAD
 import AP2DX.specializedMessages.*;
+=======
+import AP2DX.specializedMessages.InsSensorMessage;
+import AP2DX.specializedMessages.RangeScannerSensorMessage;
+import AP2DX.specializedMessages.SonarSensorMessage;
+>>>>>>> 268bc626146bb927d425e34496b76fd331421099
 
 public class Program extends AP2DXBase 
 {
@@ -51,10 +57,36 @@ public class Program extends AP2DXBase
                 System.out.println("Unexpected message type in ap2dx.mapper.Program: " + message.getMsgType());
         }
         // for now just freakin' forward it to the planner okay?!
+<<<<<<< HEAD
         //System.out.printf("Forwarding message %s to planner\n", message);
         //message.setDestinationModuleId(Module.PLANNER);
         //message.setSourceModuleId(IAM);
         //messageList.add(((AP2DXMessage) message)); 
+=======
+        ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();  
+        System.out.printf("Forwarding message %s to planner\n", msg);
+        
+        switch (msg.getMsgType())
+        {
+            case AP2DX_SENSOR_INS:
+                InsSensorMessage message = (InsSensorMessage) msg;
+                message.setDestinationModuleId(Module.PLANNER);
+                message.setSourceModuleId(IAM);
+                message.compileMessage();
+                break;
+            default:
+//                msg.setDestinationModuleId(Module.PLANNER);
+//                msg.setSourceModuleId(IAM);
+//                AP2DXMessage msg2 = (AP2DXMessage) msg;
+//                msg2.compileMessage();
+//                messageList.add(msg2); 
+            	
+                //System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
+
+        }  
+        
+        messageList.add((AP2DXMessage) msg); 
+>>>>>>> 268bc626146bb927d425e34496b76fd331421099
 		return messageList;
 	}
 
