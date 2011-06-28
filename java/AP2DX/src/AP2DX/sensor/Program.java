@@ -78,17 +78,7 @@ public class Program extends AP2DXBase
             switch (message.getMsgType())
             {
                 case AP2DX_SENSOR_ODOMETRY:
-                	System.out.println("parsing odometry message in sensor");
-                    
-                	OdometrySensorMessage odometrySensorMessage = (OdometrySensorMessage) message;
-                	
-                    odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
-                    odometrySensorMessage.setSourceModuleId(IAM);
-                    
-                    odometrySensorMessage.compileMessage();
-                    
-                    messageList.add(odometrySensorMessage);
-
+                    doOdometryLogic((OdometrySensorMessage) message, messageList);
                     break;
                 case AP2DX_SENSOR_INS:
                     doInsLogic((InsSensorMessage) message, messageList);
@@ -99,9 +89,8 @@ public class Program extends AP2DXBase
                 case AP2DX_SENSOR_RANGESCANNER:
                     doRangeLogic((RangeScannerSensorMessage) message, messageList);
                     break;
-
                 default:
-                    //System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
+                    System.out.println("Unexpected message type in ap2dx.sensor.Program: " + message.getMsgType());
 
             }  
         }
@@ -122,24 +111,31 @@ public class Program extends AP2DXBase
         return messageList;
     }
 
-    private void doInsLogic(InsSensorMessage insSensorMessage, 
+    private void doOdometryLogic(OdometrySensorMessage odometrySensorMessage, 
         ArrayList<AP2DXMessage> messageList)
     {
         // TO THE MAPPER! Said Batman
-        insSensorMessage.parseMessage();
-        insSensorMessage.setSourceModuleId(IAM);
-        insSensorMessage.setDestinationModuleId(Module.MAPPER);
-        insSensorMessage.compileMessage();
-        messageList.add(insSensorMessage);
+        odometrySensorMessage.parseMessage();
+        odometrySensorMessage.setSourceModuleId(IAM);
+        odometrySensorMessage.setDestinationModuleId(Module.MAPPER);
+        odometrySensorMessage.compileMessage();
+        messageList.add(odometrySensorMessage);
 
-        // TO THE REFLEX! 
-        //insSensorMessage.compileMessage();
-        InsSensorMessage message2 = new InsSensorMessage(
-        //insSensorMessage);
-               (AP2DXMessage) insSensorMessage.clone());
-        message2.setDestinationModuleId(Module.REFLEX);
-        message2.compileMessage();
-        messageList.add(message2);
+        //// TO THE REFLEX! 
+        ////insSensorMessage.compileMessage();
+        //InsSensorMessage message2 = new InsSensorMessage(
+        ////insSensorMessage);
+        //       (AP2DXMessage) insSensorMessage.clone());
+        //message2.setDestinationModuleId(Module.REFLEX);
+        //message2.compileMessage();
+        //messageList.add(message2);
+    }
+
+
+    private void doInsLogic(InsSensorMessage insSensorMessage, 
+        ArrayList<AP2DXMessage> messageList)
+    {
+    
     }
 
     private void doSonarLogic(SonarSensorMessage sonarSensorMessage,
@@ -198,7 +194,7 @@ public class Program extends AP2DXBase
         RangeScannerSensorMessage m3 = new RangeScannerSensorMessage( (AP2DXMessage) rangeScannerSensorMessage.clone());
         m3.parseMessage();
         m3.setSourceModuleId(Module.SENSOR);
-        m3.setDestinationModuleId(Module.REFLEX);  
+        m3.setDestinationModuleId(Module.MAPPER);  
         m3.compileMessage();
         messageList.add(m3);
     }

@@ -11,6 +11,8 @@ import AP2DX.AP2DXMessage;
 import AP2DX.Message;
 import AP2DX.Module;
 
+import org.json.JSONObject;
+
 
 
 
@@ -23,7 +25,6 @@ import AP2DX.Module;
 * Example USAR data: SEN {Type Odometry} {Name Odometry} {Pose 0.4265,0.1643,0.9105} 
 * @author Maarten Inja
 */
-
 public class OdometrySensorMessage extends SpecializedMessage 
 {
 
@@ -46,7 +47,6 @@ public class OdometrySensorMessage extends SpecializedMessage
         try
         {
         	JSONObject jsonObject = new JSONObject(messageString);
-
             setX(jsonObject.getDouble("x"));
             setY(jsonObject.getDouble("y"));
             setTheta(jsonObject.getDouble("theta"));
