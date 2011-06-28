@@ -10,7 +10,8 @@ import AP2DX.usarsim.specialized.USonarSensorMessage;
 
 public class Program extends AP2DXBase {
 	/** Margin at which to stop the robot in meters */
-	public static final double THRESHOLD = 0.3;
+	public static final double WALLTHRESHOLD = 0.3;
+	public static final double DISTANCETHRESHOLD = 2.0;
 	
 	private double[] currentDistances;
 	private double[] previousDistances;
@@ -96,7 +97,7 @@ public class Program extends AP2DXBase {
 
 			if (clear) {
 				for (int i = 1; i < getCurrentDistances().length-1; i++) {
-					if (getCurrentDistances()[i] < THRESHOLD && approaching[i] == 1) {
+					if (getCurrentDistances()[i] < WALLTHRESHOLD && approaching[i] == 1) {
 						setBotBlocked(true);
 						this.clear = false;
 
