@@ -112,7 +112,7 @@ public class Program extends AP2DXBase {
 	private int noMovementCount = 0;
 
 	private boolean stuck; 
-	
+
 	/**
 	 * Entrypoint of planner
 	 */
@@ -410,8 +410,6 @@ public class Program extends AP2DXBase {
 					setTravelDistance(0);
 				}
 			}
-			
-			
 			break;
 		case AP2DX_SENSOR_ODOMETRY:
 			//System.out.println("parsing odometry message in planner");

@@ -50,6 +50,7 @@ public class Program extends AP2DXBase {
 
             try 
             {
+                System.out.printf("Connectig to %s on %s for UsarSim\n", address, port);
                 Socket socket = new Socket(address, port);
                 System.out.println("Coordinator connected to USARsim");
                 out = new PrintWriter(socket.getOutputStream(), true);
