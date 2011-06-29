@@ -193,7 +193,8 @@ struct TParticle_struct {
   float C, D, T;  // Minor and major axis of motion, and change of facing, respectively
   double probability; // The proability of the particle
   // Which ancestor node this particle corresponds to. 
-  TAncestor_struct *ancestryNode; 
+  //TAncestor_struct ancestryNode; 
+  TAncestor* ancestryNode;
 };
 typedef struct TParticle_struct TParticle;
 
