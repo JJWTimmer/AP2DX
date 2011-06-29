@@ -52,6 +52,6 @@ int InitializeThisRobot(int argc, char *argv[]);
 int ConnectOdometry(int argc, char *argv[]);
 int ConnectLaser(int argc, char *argv[]);
 int ConnectDrive(int argc, char *argv[]);
-void GetSensation(TSense &sense);
-void GetOdometry(TOdo &odometry);
+void GetSensation(TSense sense);
+void GetOdometry(TOdo odometry);
 void Drive(double speed, double turn);

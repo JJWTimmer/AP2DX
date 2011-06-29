@@ -28,7 +28,7 @@ public class Slammer implements Runnable
     private Process p; 
     private SensorWriter sensorWriter;
     private BufferedReader sensorReader;
-    private String pathToSlam = "N:\\stuff\\AP2DX\\c\\dpslam\\slam";
+    private String pathToSlam = "/home/mpdw/uva/ap2dx/c/dpslam/slam";
 
     /** Location and orientation last read from file. */
     private double x, y, theta;
