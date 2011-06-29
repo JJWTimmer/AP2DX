@@ -16,7 +16,7 @@ public class SystemCallExample
         try
         {
             Process p = r.exec("../slam -p stdinOrWhatever");
-            String file = "../loop5.log";
+            String file = "../testLog.log";
             //String file = "SystemCallExample.java"; 
             SensorWriter sensorWriter = new SensorWriter(p, file);
             
@@ -60,7 +60,7 @@ public class SystemCallExample
     private class SensorWriter implements Runnable
     {
 
-        private ArrayList<String> lines = readLines("../loop5.log");
+        private ArrayList<String> lines = readLines("../testLog.log");
         private BufferedWriter out;
 
         public SensorWriter(Process p, String file) throws Exception

@@ -25,7 +25,7 @@ public class Program extends AP2DXBase
     {
         slammer = new Slammer();        
         new Thread(slammer).start();
-        pictureViewer = new PictureViewer(slamDir);
+        //pictureViewer = new PictureViewer(slamDir);
     }
 	
 	/**
@@ -66,6 +66,7 @@ public class Program extends AP2DXBase
     private void doRangeLogic(RangeScannerSensorMessage message, 
         ArrayList<AP2DXMessage> messageList)
     {
+        System.out.println("Range scanner sensor message: " + message.getDataArray().length);
         // just slammin'
         if (slammer == null)
             return;
