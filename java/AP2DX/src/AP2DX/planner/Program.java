@@ -55,14 +55,6 @@ public class Program extends AP2DXBase {
 	private static double[] SONARANGLES;
 
 	/**
-	 * The next block of variables is used to get the robot out of situation
-	 * with low obstacles
-	 */
-	int blockCount = 0;
-	long time = System.currentTimeMillis();
-	double upperlimit;
-
-	/**
 	 * Entrypoint of planner
 	 */
 	public static void main(String[] args) {
@@ -175,41 +167,8 @@ public class Program extends AP2DXBase {
 					messageList.add(msg6);
 
 					sonarPermission = false;
-					blockCount = 0;
 				}
-			/*
-			 * Code to check if the robot is stuck on a low object
-			 * If the robot is stuck send it backwards
-			 * 
-			 * TODO: MAKE IT WORK!!	
-			 */
-			}  else if (sonarData != null){
-				//double lastSonar = lastsonarData[Math.round(lastsonarData.length / 2)];
-				double sonar = sonarData[Math.round(sonarData.length / 2)];
-				
-				if (blockCount == 0) {
-					upperlimit = sonar;
-				} else if (sonar < upperlimit) {
-					upperlimit = sonar;
-				}
-				
-				//if (sonar > (lastSonar + 0.1) & sonar < (lastSonar - 0.1)) {
-				
-				if (sonar > upperlimit) {
-					blockCount++;
-					if ((time + 1000) < System.currentTimeMillis() ) {
-						time = System.currentTimeMillis();
-						blockCount = 0;
-					}
-					if (blockCount > 100000) {
-						AP2DXMessage msg6 = new ActionMotorMessage(IAM,
-								Module.REFLEX,
-								ActionMotorMessage.ActionType.BACKWARD, 10.0);
-						msg6.compileMessage();
-						messageList.add(msg6);
-					}
-				}
-			} 
+			}
 
 			break;
 		case AP2DX_SENSOR_ODOMETRY:
