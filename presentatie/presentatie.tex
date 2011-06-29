@@ -135,13 +135,47 @@ There are a couple of advantages and disadvantages:
 \end{block}
 \end{frame}
 
-\section{Testing and jUnit}
+\section{Developing process}
 \begin{frame}
-\frametitle{Testing - an introduction}
-We decided to use jUnit tests, since all our code is in Java.\\
-For this, we used Jenkins, an automatic build and test server\\
+\frametitle{Developing process - 1}
+\begin{block}{Test driven programming}
+\begin{itemize}
+    \item Unit test in front
+    \begin{itemize}
+        \item Smallest testable part of code
+        \item Every dependency is mocked
+    \end{itemize}
+    \item A lot of overhead for small project
+\end{itemize}
+\end{block}
+\begin{block}{File management}
+We used Git, to easily synchronize our code. There are some advantages:
+\begin{itemize}
+    \item Distributed, so it is not like subversion
+    \item It has change tracking
+    \item It automatically merges
+    \item It is installed on the UvA computers.
+\end{itemize}
+\end{block}
 \end{frame}
 
+\begin{frame}
+\frametitle{Developing process - 2}
+\begin{block}{Automatic building}
+    Ant was used to build everything. This includes compiling, testing,
+    publishing test reports, javaDoc, creating jar files.
+\end{block}
+\begin{block}{Continuous integration server}
+Jenkins was used as integration server. It uses:
+\begin{itemize}
+    \item Git checkout
+    \item Ant build
+    \item Clarifying coverage reports
+\end{itemize}
+Together this makes a nice way to discover every detail about our project.
+Screenshots will follow.
+\end{block}
+\end{frame}
 
 {
      \usebackgroundtemplate{\includegraphics[width=\paperwidth]{jenkins_project}} 
@@ -160,7 +194,14 @@ For this, we used Jenkins, an automatic build and test server\\
       \end{frame}
 }
 
-
-\section{Problems \& Solutions}
+\section{Discussion}
+\begin{frame}
+\frametitle{Discussion}
+\begin{itemize}
+\item Framework is handy and dynamic, but the connections are hardcoded. This makes it
+harder to add an entirely new module to the set.
+\item bla
+\end{itemize}
+\end{frame}
 
 \end{document}
