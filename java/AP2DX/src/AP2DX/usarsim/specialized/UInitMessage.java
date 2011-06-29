@@ -28,11 +28,15 @@ public final class UInitMessage extends UsarSimMessage {
      *  TODO: Make this not hardcoded
      */
     @UsarMessageIteratorField
-        private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "4.5,1.9,1.8"));
+        private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "-5,-1,1.8"));
+    	//private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "4.5,1.7,1.8"));
+    
+    	/* The long hallway */
+    	//private List<ArrayFloatData> location = Arrays.asList(new ArrayFloatData("Location", "4,-3.3,1.8"));
 
     /** The rotation of the robot. Array with three values, respectively: Roll, Pitch, Yaw*/
     @UsarMessageIteratorField
-        private List<ArrayFloatData> rotation = new ArrayList<ArrayFloatData>();
+        private List<ArrayFloatData> rotation = Arrays.asList(new ArrayFloatData("Rotation", "0,0,3.14"));
 
     /** The name of the robot in the server. Default: `Awesome P2DX'*/
     @UsarMessageField(name = "Name")

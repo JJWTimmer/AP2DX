@@ -28,7 +28,7 @@ public class Slammer implements Runnable
     private Process p; 
     private SensorWriter sensorWriter;
     private BufferedReader sensorReader;
-    private String pathToSlam = "/home/mpdw/uva/ap2dx/c/dpslam/slam";
+    private String pathToSlam = "N:\\stuff\\AP2DX\\c\\dpslam\\slam.exe"; // TODO: put in config file or something
 
     /** Location and orientation last read from file. */
     private double x, y, theta;
@@ -92,6 +92,7 @@ public class Slammer implements Runnable
     private void processOutputString(String line)
     {
         // TODO: set x, y, theta and precision from output
+        System.out.println(line);
     }
 
     public void addXYTheta(double x, double y, double theta)
@@ -145,6 +146,8 @@ public class Slammer implements Runnable
         public SensorWriter(Process p) throws Exception
         {
             out = new BufferedWriter( new OutputStreamWriter(p.getOutputStream()) );
+            lastSendXYTheta = lastSendLaser = "fjkldsajf";
+            toSendXYTheta = toSendLaser = "FDa";
         }
 
         public void run() 
@@ -153,13 +156,14 @@ public class Slammer implements Runnable
             {
                 while (true)
                 {
-                    if (lastSendXYTheta.equals(toSendXYTheta) ||
-                        lastSendLaser.equals(toSendLaser))
-                        continue;
-                    out.write(toSendXYTheta + "\n" + toSendLaser + "\n");
-                    out.flush();
-                    lastSendXYTheta = toSendXYTheta;
-                    lastSendLaser = toSendLaser;
+                    //if (lastSendXYTheta.equals(toSendXYTheta) ||
+                    //    lastSendLaser.equals(toSendLaser) ||
+                    //    out == null)
+                    //    continue;
+                    //out.write(toSendXYTheta + "\n" + toSendLaser + "\n");
+                    //out.flush();
+                    //lastSendXYTheta = toSendXYTheta;
+                    //lastSendLaser = toSendLaser;
                 }
             }
             catch (Exception e)

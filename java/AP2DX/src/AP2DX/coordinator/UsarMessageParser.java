@@ -12,7 +12,8 @@ import AP2DX.usarsim.specialized.*;
 
 /**
  * This is the class that will take care of receiving messages from UsarSim, and forwarding them to 
- * the Sensor module. 
+ * the Sensor module.
+ * 
  * @author Maarten de Waard
  */
 public class UsarMessageParser extends Thread
