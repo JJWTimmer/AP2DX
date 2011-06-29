@@ -111,7 +111,7 @@ public class Program extends AP2DXBase {
 			 * Decides on the last acquired sonarData if to turn right or left
 			 * Default is right
 			 */
-			if (longestSonar[1] < sonarData.length) {
+			if (longestSonar[1] < Math.round(sonarData.length / 2)) {
 				AP2DXMessage msgt = new ActionMotorMessage(IAM, Module.REFLEX,
 						ActionMotorMessage.ActionType.TURN, -1);
 				msgt.compileMessage();
