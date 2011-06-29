@@ -112,7 +112,6 @@ public class Slammer implements Runnable
 
     public void addLaser(double[] rangeArray)
     {
-        System.out.println("RangeArray: " + rangeArray.length);
         if(rangeArray.length == 181)
         {
             String tempToSendLaser = "Laser " + rangeArray.length + " ";
@@ -176,7 +175,6 @@ public class Slammer implements Runnable
                         lastSendLaser.equals(toSendLaser)) ||
                         out == null)
                     {
-                        //System.out.println("WRONG INFOOOO");
                         continue;
                     }
                     out.write(toSendXYTheta + "x"+ "\n" );
@@ -185,7 +183,6 @@ public class Slammer implements Runnable
                     out.write(toSendLaser + "x" + "\n");
                     outToFile.write(toSendLaser + "\n");
                     out.flush();
-                    System.out.println("Printin' some lines!");
                     lastSendXYTheta = toSendXYTheta;
                     lastSendLaser = toSendLaser;
                 }
