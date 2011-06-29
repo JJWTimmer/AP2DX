@@ -1,7 +1,7 @@
 {
 	"logfile": "log/coordinator.log",
 	"sim_port": 3000,
-	"sim_address": "127.0.0.1",
+	"sim_address": "146.50.51.85",
 	"listen_port": 5000,
 	"outgoing" :
 		[
