@@ -40,22 +40,30 @@ public class OdometrySensorMessage extends SpecializedMessage
     public OdometrySensorMessage(Module sourceId, Module destinationId)
     {
         super(Message.MessageType.AP2DX_SENSOR_ODOMETRY, sourceId, destinationId);
+        if (values == null)
+            values = new HashMap();
+        setY(y);
+        setX(x);
+        setTheta(theta);
+        
     }
  
     public void specializedParseMessage()
-    {   
-        try
-        {
-        	JSONObject jsonObject = new JSONObject(messageString);
-            setX(jsonObject.getDouble("x"));
-            setY(jsonObject.getDouble("y"));
-            setTheta(jsonObject.getDouble("theta"));
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error in AP2DX.specializedMessages.OdometrySensorMessage.specializedParseMessage()... things went south!");
-            e.printStackTrace();
-        }
+    {  
+    	if (messageString != null) {
+	        try
+	        {
+	        	JSONObject jsonObject = new JSONObject(messageString);
+	            setX(jsonObject.getDouble("x"));
+	            setY(jsonObject.getDouble("y"));
+	            setTheta(jsonObject.getDouble("theta"));
+	        }
+	        catch (Exception e)
+	        {
+	            System.out.println("Error in AP2DX.specializedMessages.OdometrySensorMessage.specializedParseMessage()... things went south!");
+	            e.printStackTrace();
+	        }
+    	}
     } 
     
     /** 
@@ -64,7 +72,8 @@ public class OdometrySensorMessage extends SpecializedMessage
     @Override
      public String compileMessage()
      {   
-    	specializedParseMessage();
+    	if (messageString != null)
+    		specializedParseMessage();
     	
          try
          {

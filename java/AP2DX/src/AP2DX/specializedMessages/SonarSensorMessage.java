@@ -49,6 +49,10 @@ public class SonarSensorMessage extends SpecializedMessage
     public SonarSensorMessage(AP2DXMessage message, Module sourceId, Module destinationId)
     {
         super(message, sourceId, destinationId);
+        if (values == null)
+            values = new HashMap();
+        setTime(time);
+        setRangeArray(rangeArray);
     }
 
     /** Apparently causes Logic to throw nullpointer exceptions.... :S */
@@ -68,7 +72,8 @@ public class SonarSensorMessage extends SpecializedMessage
     @Override
      public String compileMessage()
      {   
-    	specializedParseMessage();
+    	if (messageString != null)
+    		specializedParseMessage();
     	
          try
          {

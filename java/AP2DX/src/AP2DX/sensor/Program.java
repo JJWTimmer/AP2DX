@@ -135,7 +135,24 @@ public class Program extends AP2DXBase
     private void doInsLogic(InsSensorMessage insSensorMessage, 
         ArrayList<AP2DXMessage> messageList)
     {
-    
+    	// TO THE REFLEX! 
+        InsSensorMessage insSensorMessage2 = new InsSensorMessage( (AP2DXMessage) insSensorMessage.clone());
+        insSensorMessage2.parseMessage();
+        insSensorMessage2.setSourceModuleId(Module.SENSOR);
+        insSensorMessage2.setDestinationModuleId(Module.REFLEX);  
+        insSensorMessage2.compileMessage();
+        messageList.add(insSensorMessage2);
+        
+        System.out.println(insSensorMessage2.toString());
+        //messageList.add(sonarSensorMessage.forward(Module.SENSOR, Module.REFLEX));
+        
+        // TO THE MAPPER
+        InsSensorMessage insSensorMessage3 = new InsSensorMessage( (AP2DXMessage) insSensorMessage.clone());
+        insSensorMessage3.parseMessage();
+        insSensorMessage3.setSourceModuleId(Module.SENSOR);
+        insSensorMessage3.setDestinationModuleId(Module.MAPPER);  
+        insSensorMessage3.compileMessage();
+        messageList.add(insSensorMessage3);
     }
 
     private void doSonarLogic(SonarSensorMessage sonarSensorMessage,
