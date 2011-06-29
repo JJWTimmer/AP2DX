@@ -23,7 +23,7 @@ public class Program extends AP2DXBase {
 	 */
 	private static final double ANGLEUNCERTAIN = Math.toRadians(15);
 
-	private static final double DISTANCETHRESHOLD = 1.8;
+	private static final double DISTANCETHRESHOLD = 1.7;
 
 	private InsLocationData locData;
 
