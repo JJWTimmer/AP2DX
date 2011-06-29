@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.19)  30 JUN 2011 00:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.19)  30 JUN 2011 00:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -955,14 +955,16 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [4
 
-]
+] <AP2DX.jpg, id=190, 677.53125pt x 425.59pt>
+File: AP2DX.jpg Graphic file (type jpg)
+ <use AP2DX.jpg>
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
 [5
 
-]
+ <./AP2DX.jpg>]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
@@ -976,7 +978,7 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [7
 
-] <hmap00.png, id=291, 252.945pt x 343.2825pt>
+] <hmap00.png, id=292, 252.945pt x 343.2825pt>
 File: hmap00.png Graphic file (type png)
  <use hmap00.png>
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
@@ -1013,7 +1015,7 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [12
 
-] <jenkins_project.jpg, id=453, 1284.8pt x 1027.84pt>
+] <jenkins_project.jpg, id=454, 1284.8pt x 1027.84pt>
 File: jenkins_project.jpg Graphic file (type jpg)
 
 <use jenkins_project.jpg>
@@ -1024,7 +1026,7 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 [13
 
  <./jenkins_project.jpg>]
-<jenkins_coverage.jpg, id=484, 1284.8pt x 1027.84pt>
+<jenkins_coverage.jpg, id=485, 1284.8pt x 1027.84pt>
 File: jenkins_coverage.jpg Graphic file (type jpg)
 
 <use jenkins_coverage.jpg>
@@ -1035,7 +1037,7 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 [14
 
  <./jenkins_coverage.jpg>]
-<jenkins_linecoverage.jpg, id=513, 1284.8pt x 1027.84pt>
+<jenkins_linecoverage.jpg, id=514, 1284.8pt x 1027.84pt>
 File: jenkins_linecoverage.jpg Graphic file (type jpg)
 
 <use jenkins_linecoverage.jpg>
@@ -1062,10 +1064,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 15441 strings out of 493848
- 261652 string characters out of 1152823
+ 15446 strings out of 493848
+ 261716 string characters out of 1152823
  425454 words of memory out of 3000000
- 18253 multiletter control sequences out of 15000+50000
+ 18257 multiletter control sequences out of 15000+50000
  14611 words of font info for 57 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  45i,19n,57p,339b,746s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1076,9 +1078,9 @@ type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmssi10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xya
 tip10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xybtip10.pfb></usr
 /share/texmf-texlive/fonts/type1/public/xypic/xydash10.pfb>
-Output written on presentatie.pdf (15 pages, 1785430 bytes).
+Output written on presentatie.pdf (15 pages, 1847350 bytes).
 PDF statistics:
- 580 PDF objects out of 1000 (max. 8388607)
+ 581 PDF objects out of 1000 (max. 8388607)
  38 named destinations out of 1000 (max. 500000)
- 163 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
