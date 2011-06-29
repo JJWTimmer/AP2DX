@@ -12,7 +12,7 @@ import org.json.JSONException;
 
 
 /**
-* Specialized message for sensor data, Inertial Navigation System
+* Specialized message for sensor data, Internal Navigation System
 *
 * Location and angle using angular velocities 
 *
