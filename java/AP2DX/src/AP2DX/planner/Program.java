@@ -62,12 +62,12 @@ public class Program extends AP2DXBase {
 	/**
 	 * Did not move after this many INS data? Then action has to be taken.
 	 */
-	private static final int NOMOVECOUNT = 50;
+	private static final int NOMOVECOUNT = 100;
 
 	/**
 	 * If stuck, drive this much back
 	 */
-	private static final double BACKWARDDISTANCE = 0.4;
+	private static final double BACKWARDDISTANCE = 0.3;
 
 	private InsLocationData locData;
 
@@ -148,6 +148,12 @@ public class Program extends AP2DXBase {
 			stopBot = true;
 			stuck = false;
 			reverse = false;
+			
+			cruising = false;
+			passHole = false;
+			doHoleScan = false;
+			startedTurning = false;
+			startedTurningBack = false;
 			
 			break;
 		case AP2DX_SENSOR_INS:
@@ -236,12 +242,19 @@ public class Program extends AP2DXBase {
 					System.out.println("No movement, going backward");
 					
 					reverse = true;
+					
+					stopBot = false;
+					stuck = false;
 					cruising = false;
-					passHole = false; 
+					passHole = false;
+					sonarPermission = false;
+					doHoleScan = false;
+					startedTurning = false;
+					startedTurningBack = false;
 					
 					AP2DXMessage msg7 = new ActionMotorMessage(IAM,
 							Module.REFLEX,
-							ActionMotorMessage.ActionType.BACKWARD, 10.0);
+							ActionMotorMessage.ActionType.BACKWARD, 3.0);
 					msg7.compileMessage();
 					messageList.add(msg7);
 					
@@ -316,6 +329,7 @@ public class Program extends AP2DXBase {
 					msg6.compileMessage();
 					messageList.add(msg6);
 
+					cruising = true;
 					sonarPermission = false;
 				}
 			} else if (doHoleScan && !reverse) {
