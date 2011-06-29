@@ -16,20 +16,20 @@ public class SystemCallExample
         try
         {
             Process p = r.exec("../slam -p stdinOrWhatever");
-            String file = "../loop5.log";
+            String file = "../testLog.log";
             //String file = "SystemCallExample.java"; 
             SensorWriter sensorWriter = new SensorWriter(p, file);
-            
             Thread writerThread = new Thread(sensorWriter);
             writerThread.start(); 
         
+            
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-            // readin'
             String l = "a";
             while((l = reader.readLine()) != null)
                 System.out.println(l);
+            // readin'
         }
         catch (Exception e)
         {
@@ -54,13 +54,14 @@ public class SystemCallExample
         while ((strLine = br.readLine()) != null)   
             lines.add(strLine);
         in.close();
+        System.out.println("Done reading file");
         return lines;
     }
 
     private class SensorWriter implements Runnable
     {
 
-        private ArrayList<String> lines = readLines("../loop5.log");
+        private ArrayList<String> lines = readLines("../testLog.log");
         private BufferedWriter out;
 
         public SensorWriter(Process p, String file) throws Exception
@@ -76,9 +77,20 @@ public class SystemCallExample
             {
                 for (String line : lines)
                 {
-                    out.write(line + "\n");
+                    out.write(line + " x" + "\n");
                     out.flush();
                 }
+                System.out.println("Done");
+                out.write("done\n");
+                out.flush();
+                out.write("done\n");
+                out.flush();
+                out.write("done\n");
+                out.flush();
+                out.write("done\n");
+                out.flush();
+                out.write("done\n");
+                out.flush();
             }
             catch (Exception e)
             {
