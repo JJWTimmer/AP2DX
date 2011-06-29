@@ -25,7 +25,8 @@ public class Program extends AP2DXBase
     {
         slammer = new Slammer();        
         new Thread(slammer).start();
-        pictureViewer = new PictureViewer(slamDir);
+        pictureViewer = new PictureViewer();
+        new Thread(pictureViewer).start();
     }
 	
 	/**
