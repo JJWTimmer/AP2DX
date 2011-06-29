@@ -60,7 +60,7 @@ public class UsarMessageParser extends Thread
             {
                 System.out.println("\tReading message in UsarMessageParser.run()");
                 messageIn = in.readMessage();
-                //System.out.println("Read message to string: " + messageIn.toString());
+                System.out.println("Read message to string: " + messageIn.toString());
             } 
             catch (Exception e) 
             {

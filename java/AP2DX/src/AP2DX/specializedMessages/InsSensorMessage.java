@@ -34,6 +34,10 @@ public class InsSensorMessage extends SpecializedMessage
     public InsSensorMessage(Module sourceId, Module destinationId)
     {
         super(Message.MessageType.AP2DX_SENSOR_INS, sourceId, destinationId);
+        if (values == null)
+            values = new HashMap();
+        setLocation(location);
+        setOrientation(orientation);
     }
 
     public void specializedParseMessage()
@@ -72,7 +76,8 @@ public class InsSensorMessage extends SpecializedMessage
     @Override
      public String compileMessage()
      {   
-    	specializedParseMessage();
+    	if (messageString != null)
+    		specializedParseMessage();
     	
          try
          {
