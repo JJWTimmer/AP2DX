@@ -1,18 +1,11 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.19)  30 JUN 2011 01:24
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  30 JUN 2011 11:05
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **presentatie.tex
 (./presentatie.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
-ak, danish, dutch, finnish, french, basque, ngerman, german, german-x-2009-06-1
-9, ngerman-x-2009-06-19, ibycus, monogreek, greek, ancientgreek, hungarian, san
-skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
-orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
-, estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
-rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
+yphenation, dutch, loaded.
 (/usr/share/texmf/tex/latex/beamer/base/beamer.cls
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasercs.sty
 Package: beamerbasercs 2007/01/28 (rcs-revision 1.4)
@@ -925,7 +918,7 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
+] (./presentatie.toc)
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
@@ -939,12 +932,19 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [3
 
+]
+Overfull \hbox (3.00526pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[4
+
 ] <xymatrix
-LaTeX Font Info:    Try loading font information for U+msa on input line 51.
+LaTeX Font Info:    Try loading font information for U+msa on input line 53.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 51.
+LaTeX Font Info:    Try loading font information for U+msb on input line 53.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -953,62 +953,56 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[4
+[5
 
-] <AP2DX.jpg, id=199, 677.53125pt x 425.59pt>
+] <AP2DX.jpg, id=239, 677.53125pt x 425.59pt>
 File: AP2DX.jpg Graphic file (type jpg)
  <use AP2DX.jpg>
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[5
+[6
 
  <./AP2DX.jpg>]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[6
-
-]
-Overfull \hbox (3.00526pt too wide) has occurred while \output is active
- [][]  
- []
-
 [7
 
-] <hmap00.png, id=304, 252.945pt x 343.2825pt>
-File: hmap00.png Graphic file (type png)
- <use hmap00.png>
+]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
 [8
 
- <./hmap00.png (PNG copy)>]
+]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
 [9
 
-] <xymatrix 4x4 224>
+] <FirstHighMap.png, id=382, 183.68625pt x 251.94125pt>
+File: FirstHighMap.png Graphic file (type png)
+
+<use FirstHighMap.png>
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
 [10
 
-]
+ <./FirstHighMap.png (PNG copy)>]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
 [11
 
-]
+] <xymatrix 4x4 224>
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
@@ -1022,7 +1016,21 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [13
 
-] <jenkins_project.jpg, id=505, 1284.8pt x 1027.84pt>
+]
+Overfull \hbox (3.00526pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[14
+
+]
+Overfull \hbox (3.00526pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[15
+
+] <jenkins_project.jpg, id=581, 1284.8pt x 1027.84pt>
 File: jenkins_project.jpg Graphic file (type jpg)
 
 <use jenkins_project.jpg>
@@ -1030,10 +1038,10 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[14
+[16
 
  <./jenkins_project.jpg>]
-<jenkins_coverage.jpg, id=536, 1284.8pt x 1027.84pt>
+<jenkins_coverage.jpg, id=612, 1284.8pt x 1027.84pt>
 File: jenkins_coverage.jpg Graphic file (type jpg)
 
 <use jenkins_coverage.jpg>
@@ -1041,10 +1049,10 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[15
+[17
 
  <./jenkins_coverage.jpg>]
-<jenkins_linecoverage.jpg, id=566, 1284.8pt x 1027.84pt>
+<jenkins_linecoverage.jpg, id=642, 1284.8pt x 1027.84pt>
 File: jenkins_linecoverage.jpg Graphic file (type jpg)
 
 <use jenkins_linecoverage.jpg>
@@ -1052,14 +1060,14 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[16
+[18
 
  <./jenkins_linecoverage.jpg>]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
-[17
+[19
 
 ]
 \tf@nav=\write6
@@ -1078,23 +1086,25 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 15460 strings out of 493848
- 261886 string characters out of 1152823
- 425455 words of memory out of 3000000
- 18266 multiletter control sequences out of 15000+50000
- 14611 words of font info for 57 fonts, out of 3000000 for 9000
- 714 hyphenation exceptions out of 8191
- 45i,19n,57p,339b,782s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmssi10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xya
-tip10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xybtip10.pfb></usr
-/share/texmf-texlive/fonts/type1/public/xypic/xydash10.pfb>
-Output written on presentatie.pdf (17 pages, 1867124 bytes).
+ 15519 strings out of 495006
+ 263457 string characters out of 1181410
+ 424065 words of memory out of 3000000
+ 18223 multiletter control sequences out of 15000+50000
+ 16672 words of font info for 65 fonts, out of 3000000 for 9000
+ 68 hyphenation exceptions out of 8191
+ 45i,19n,62p,339b,783s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmssi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b></usr/share/texmf-texlive/fonts/type1/public/xypic/xyatip10.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/xypic/xybtip10.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/xypic/xydash10.pfb>
+Output written on presentatie.pdf (19 pages, 1904616 bytes).
 PDF statistics:
- 664 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
- 182 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 747 PDF objects out of 1000 (max. 8388607)
+ 47 named destinations out of 1000 (max. 500000)
+ 188 words of extra memory for PDF output out of 10000 (max. 10000000)
 
