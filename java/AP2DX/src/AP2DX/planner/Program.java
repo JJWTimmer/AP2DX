@@ -165,7 +165,7 @@ public class Program extends AP2DXBase {
 				setTravelDistance(getTravelDistance()
 						+ locData.travelDistance());
 
-				if (locData.travelDistance() < MOVEMENTTHRESHOLD && !stuck && !reverse) {
+				if (locData.travelDistance() < MOVEMENTTHRESHOLD && !stuck && !reverse && !sonarPermission && !stopBot && !doHoleScan) {
 					noMovementCount++;
 				} else {
 					noMovementCount = 0;

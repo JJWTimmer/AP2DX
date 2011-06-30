@@ -71,6 +71,7 @@ public class Program extends AP2DXBase
         if (slammer == null)
             return;
         slammer.addLaser(message.getDataArray());
+        System.out.println("After addLaser");
     }
 
     private void doInsLogic(InsSensorMessage message, 
