@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  30 JUN 2011 10:23
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  30 JUN 2011 11:05
 entering extended mode
  %&-line parsing enabled.
 **presentatie.tex
@@ -918,14 +918,14 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
+] (./presentatie.toc)
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
 
 [2
 
-] (./presentatie.toc)
+]
 Overfull \hbox (3.00526pt too wide) has occurred while \output is active
  [][]  
  []
@@ -940,11 +940,11 @@ Overfull \hbox (3.00526pt too wide) has occurred while \output is active
 [4
 
 ] <xymatrix
-LaTeX Font Info:    Try loading font information for U+msa on input line 54.
+LaTeX Font Info:    Try loading font information for U+msa on input line 53.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 54.
+LaTeX Font Info:    Try loading font information for U+msb on input line 53.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -1102,7 +1102,7 @@ m/cmssi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pf
 b></usr/share/texmf-texlive/fonts/type1/public/xypic/xyatip10.pfb></usr/share/t
 exmf-texlive/fonts/type1/public/xypic/xybtip10.pfb></usr/share/texmf-texlive/fo
 nts/type1/public/xypic/xydash10.pfb>
-Output written on presentatie.pdf (19 pages, 1904591 bytes).
+Output written on presentatie.pdf (19 pages, 1904616 bytes).
 PDF statistics:
  747 PDF objects out of 1000 (max. 8388607)
  47 named destinations out of 1000 (max. 500000)

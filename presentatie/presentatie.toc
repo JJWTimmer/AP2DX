@@ -1,5 +1,5 @@
 \beamer@endinputifotherversion {3.07pt}
-\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
 \beamer@sectionintoc {2}{Architecture}{5}{0}{2}
 \beamer@subsectionintoc {2}{1}{Framework}{5}{0}{2}
 \beamer@subsectionintoc {2}{2}{Movement and collision detection}{8}{0}{2}
