@@ -1,9 +1,9 @@
 \beamer@endinputifotherversion {3.07pt}
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
-\beamer@sectionintoc {2}{Architecture}{4}{0}{2}
-\beamer@subsectionintoc {2}{1}{Framework}{4}{0}{2}
-\beamer@subsectionintoc {2}{2}{Avoiding collision and driving}{7}{0}{2}
-\beamer@subsectionintoc {2}{3}{Creating a map}{8}{0}{2}
-\beamer@subsectionintoc {2}{4}{Communication}{10}{0}{2}
-\beamer@sectionintoc {3}{Developing process}{12}{0}{3}
-\beamer@sectionintoc {4}{Discussion}{17}{0}{4}
+\beamer@sectionintoc {2}{Architecture}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Framework}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{Movement and collision detection}{8}{0}{2}
+\beamer@subsectionintoc {2}{3}{Creating a map}{10}{0}{2}
+\beamer@subsectionintoc {2}{4}{Communication}{12}{0}{2}
+\beamer@sectionintoc {3}{Developing process}{14}{0}{3}
+\beamer@sectionintoc {4}{Discussion}{19}{0}{4}

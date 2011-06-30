@@ -28,6 +28,9 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\tableofcontents
+\end{frame}
 
 \begin{frame}
 \frametitle{Goals}
@@ -76,11 +79,35 @@ We decided to use an abstract class, to base all our classes on.
 \end{block}
 \end{frame}
 
-\subsection{Avoiding collision and driving}
+\subsection{Movement and collision detection}
 \begin{frame}
-\frametitle{boobs}
-%TODO: I DON"T KNOW HOW THIS WORKS!!
+\frametitle{Movement - how we do it}
+\begin{itemize}
+    \item Based on Sonar sensor data
+    \item Not using the outer two sonars (-90$^{\circ}$ and 90$^{\circ}$)
+    \begin{itemize}
+        \item Only use them for detecting ``gaps in the wall'', places we may
+        want to go
+        \item ``hey, this time the wall is $>$ 1 meter further away in one tick, maybe there is a hole!''
+        \item  Turn to the hole, scan the width, and decide to drive through or not.
+    \end{itemize}
+\end{itemize}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Movement - reflexes}
+    \begin{itemize}
+        \item If reflex stops the robot, because of an object in the way, turn
+        to the direction with the furthest view angle
+        \item If all four middle sonar sensors detect $>$ 0.5m, we can drive
+        forward.
+        \begin{itemize}
+            \item The bot's width is 38cm, angle between outer-middle 2 sonars (sensor 3 and 6) = 60 degrees, lets say the hole needs to be 45cm wide to drive through it, those two sensors need both to see at least 45cm. (cosine rule)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
 
 \subsection{Creating a map}
 \begin{frame}
@@ -90,7 +117,7 @@ Slam\footnote{http://www.cs.duke.edu/~parr/dpslam/}\footnote{Algorithm from: Aus
 Ronald Parr: DP-SLAM: Fast, Robust Simultainous Localization and Mapping Without
 Predetermined Landmarks}.\\
 The program works in C, and creates a map like this one:
-\includegraphics[height=.5\textheight]{hmap00}
+\includegraphics[height=.5\textheight]{FirstHighMap}
 \end{frame}
 
 \begin{frame}
