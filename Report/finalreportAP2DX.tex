@@ -7,34 +7,29 @@
 \usepackage{verbatim}
 \usepackage{color} % for todo
 \usepackage{subfig}
-%\usepackage{fancyhdr}
+\usepackage{fancyhdr}
 
-% TODO, make this pretty!
-%\setlength{\parskip}{10pt}
-%\newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
-%%\setlength{\headheight}{15.2pt}
-%\pagestyle{fancy}
-%%\rfoot{\footnotesize{\name + \title}
-%%\lfoot{\footnotesize{\name}}
-%\cfoot{\footnotesize{Awesomizing the P2DX: AP2DX}}
-%%\lhead{\course}
-%%\rhead{\title}
-%\pagestyle{fancy}
-%\renewcommand{\headrulewidth}{0.2pt}
-%\renewcommand{\footrulewidth}{0.2pt}
+ 
+\renewcommand{\headrulewidth}{.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
 
-\title{Awesomizing the P2DX\\\small AP2DX}
-\author{Wadie Assal \ 6398693 \and Jasper Timmer \ 5995140 \and Maarten de Waard \ 5894883 \and  Maarten Inja \ 5872464}
+\setlength{\headsep}{0.5cm}
+\setlength{\voffset}{-1cm}
 
+\pagestyle{fancy}
+\rfoot{\thepage}
+\cfoot{}
+\lfoot{\footnotesize AP2DX}
+%\addtolength{\footskip}{5pt}
 
 \newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
 
 \begin{document}
 \input{titlePageAWESOME}
 
-\tableofcontents
+%\thispagestyle{empty}
+\tableofcontents 
 \newpage
-
 %added a newpage after every chapter so it looks more like a report then a article. Wadie Assal
 
 \section{Preface}
