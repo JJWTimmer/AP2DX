@@ -133,7 +133,6 @@ public class UsarMessageParser extends Thread
                                 + message);
                 }
             }
-            else
         }
     } 
 }

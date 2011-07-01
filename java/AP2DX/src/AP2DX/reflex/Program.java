@@ -67,7 +67,7 @@ public class Program extends AP2DXBase {
 				msg.setDestinationModuleId(Module.MOTOR);
 				msg.compileMessage();
 				
-						msg.getMessageString());
+						msg.getMessageString();
 
 				messageList.add((AP2DXMessage) msg);
 			}
