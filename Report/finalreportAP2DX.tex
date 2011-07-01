@@ -10,7 +10,6 @@
 \usepackage{subfig}
 \usepackage{fancyhdr}
 
- 
 \renewcommand{\headrulewidth}{.2pt}
 \renewcommand{\footrulewidth}{0.2pt}
 
@@ -43,7 +42,7 @@ Engineering. This melange is both a chance to create something good from
 different viewpoints as well as a point of attention, because none of us has
 followed the bachelor Computer Science at the University of Amsterdam. 
 
-\section{Chairmans ``Who has written what?''}
+\subsection{Chairmans ``Who has written what?''}
 In the Blackboard document ``Huishoudelijk Reglement'' is written that the chairman should declare who has written which
 part of this report. This is not an accurate representation of the division of labor, but here it is:
 \begin{itemize}
@@ -79,15 +78,13 @@ This document is written for the client as reference about the delivered softwar
 
 \newpage
 
-\section{Architecture}
+\section{Architecture \& Results}
 \subsection{Introduction}
 AP2DX is written completely in the Java programming language. 
 This was chosen as it is advertised to be reliable and fast by the company Flowtraders, and it is platform independent. This is important for AP2DX, because it should be a safe robot controller, that stops in time and does not harm anyone on it's path. The architecture of AP2DX is based on Object Oriented Programming (OOP).
 To not repeat the same code again and again for every module, a baseclass was constructed. 
 This class could do things as: read a config file, write to a logfile, accept incoming connections, start outgoing connections based on the config file, handle incoming messages and send responses.
 The baseclass was designed to be flexible for the needs of every module. Also, the program is heavily multithreaded, to open and check connections and to do the business logic and send messages. As for the messages: a base message class was build, to facilitate the communication between USARSim and AP2DX, and between modules of AP2DX. As standard for config file and communication, JSON (Javascript Object Notation) was used. 
-
-\todo{Create class diagram}
 
 \subsection{USARSim}
 \begin{figure}[b]
@@ -186,11 +183,6 @@ In the final product the quality guideline of 80\% line testcoverage was not met
 
 \newpage
 
-\section{Final result}
-Here we will discuss the results from our experiment and explain what it means
-
-\newpage
-
 \section{Discussion}
 \input{discussion}
 
@@ -228,5 +220,7 @@ In the sourcecode of the Planner there are some constants to tweak the behaviour
 \item BACKWARDDISTANCE: If stuck, drive this much back. Given in meters. Default: 0.3
 
 \end{itemize}
+\section{UML Class diagrom}
+\includepdf{uml}
 \end{document}
 
