@@ -805,7 +805,7 @@ int ReadLog(FILE *logFile, TSense &sense, int &continueSlam) {
 
     //if (fgets(line, 4096, stdin) == "done") {
 
-    if ( !strcmp(fgets(line,4096, stdin), "done")){
+    if ( !strcmp(fgets(line,4096, stdin), "done x")){
         //if (fgets(line, 4096, logFile) == NULL) {
         fprintf(stderr, "\n\n\nReading STOP\n %s ", line);
         fprintf(stderr, "End of Log File.\n");
@@ -814,7 +814,6 @@ int ReadLog(FILE *logFile, TSense &sense, int &continueSlam) {
     }
 
     int len = strlen(line);
-    fprintf(stderr, "Reading length %d\n ", len);
     while(line[len-2] != 'x')
     {
         fprintf(stderr, "letter %c does not equal letter 'x' in line %s", line[len-2], line);
@@ -827,7 +826,6 @@ int ReadLog(FILE *logFile, TSense &sense, int &continueSlam) {
             return 1;
         }
     }
-    fprintf(stderr, "last: %c\n", line[len-2]);
 
 
     if (FILE_FORMAT == REC) {

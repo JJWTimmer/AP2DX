@@ -1,0 +1,33 @@
+\BOOKMARK [1][-]{section.1}{Preface}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{USARSim}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Goals}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Milestones}{subsection.2.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Structure of this document}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Architecture}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{USARSim}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Coordinator}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.4}{Sensor}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.5}{Mapper}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.6}{Planner}{section.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.6.1}{Behavior: Drive}{subsection.3.6}% 14
+\BOOKMARK [3][-]{subsubsection.3.6.2}{Behavior: Check hole}{subsection.3.6}% 15
+\BOOKMARK [3][-]{subsubsection.3.6.3}{Behavior: Get free}{subsection.3.6}% 16
+\BOOKMARK [2][-]{subsection.3.7}{Reflex}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.8}{Motor}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.9}{Communication}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.10}{Protocols}{section.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.10.1}{The Message class}{subsection.3.10}% 21
+\BOOKMARK [3][-]{subsubsection.3.10.2}{Dealing with messages}{subsection.3.10}% 22
+\BOOKMARK [2][-]{subsection.3.11}{Synchronization between Reflex and Planner}{section.3}% 23
+\BOOKMARK [1][-]{section.4}{Building and Testing}{}% 24
+\BOOKMARK [2][-]{subsection.4.1}{Git}{section.4}% 25
+\BOOKMARK [2][-]{subsection.4.2}{Ant}{section.4}% 26
+\BOOKMARK [2][-]{subsection.4.3}{Jenkins}{section.4}% 27
+\BOOKMARK [2][-]{subsection.4.4}{Testing}{section.4}% 28
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Testreport}{subsection.4.4}% 29
+\BOOKMARK [1][-]{section.5}{Final result}{}% 30
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 31
+\BOOKMARK [2][-]{subsection.6.1}{Architecture}{section.6}% 32
+\BOOKMARK [2][-]{subsection.6.2}{Message Protocols}{section.6}% 33

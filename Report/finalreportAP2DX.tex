@@ -1,6 +1,8 @@
 \documentclass[titlepage, a4paper,10pt]{article}
+\usepackage{appendix}
 \usepackage[margin=2.5cm, nohead]{geometry}
 \usepackage{graphicx}
+\usepackage[all]{xy}
 \usepackage{hyperref}
 \usepackage{verbatim}
 \usepackage{color} % for todo
@@ -36,7 +38,14 @@
 %added a newpage after every chapter so it looks more like a report then a article. Wadie Assal
 
 \section{Preface}
-As part of the course Software Engineering and Distributed Applications, of the University of Amsterdam, we are asked to program a distributed application for a virtual robot. The team consists of students with different profiles: three are from Artificial Intelligence, one from Computer Science and ICT at the Amsterdam University of Applied Sciences and one from the pre-master Software Engineering. This melange is both a chance to create something good from different viewpoints as well as a point of attention, because none of us has followed the bachelor Computer Science at the University of Amsterdam. 
+As a part of the course Software Engineering and Distributed Applications, of
+the University of Amsterdam, we are asked to program a distributed application
+for a virtual robot. The team consists of students with different profiles:
+three are from Artificial Intelligence, one from Computer Science and ICT at the
+Amsterdam University of Applied Sciences and one from the pre-master Software
+Engineering. This melange is both a chance to create something good from
+different viewpoints as well as a point of attention, because none of us has
+followed the bachelor Computer Science at the University of Amsterdam. 
 
 \newpage
 
@@ -47,7 +56,7 @@ For the client a robot controller that can autonomously map an area had to be bu
 As simulator USARSim is used. USARSim (Unified System for Automation and Robot Simulation) is an application to simulate the real robot arena's of the IEEE, based on the Unreal engine. The robot should be able to navigate through the 'Yellow Arena'. This is a map with a few static obstacles.
 
 \subsection{Goals}
-With the client there is agreed to build the following features in the robot-controller:
+With the client is agreed to build the following features in the robot-controller:
 \begin{itemize}
 \item Loosely coupled modules based on network communication
 \item Robot should be safe, i.e. stop for obstacles
@@ -100,7 +109,17 @@ The baseclass was designed to be flexible for the needs of every module. Also, t
 \todo{Create class diagram}
 
 \subsection{USARSim}
-The simulator exists of a virtual environment where different maps and different robots can be loaded. These robots have different sizes and different features. As example of features of a robot, there are different kinds of sensors and different kinds of wheels. For AP2DX, the robot P2DX was used. This robot is a three-wheel, rear swivel wheel robot. The two frontwheels can be controlled independently of each other, so it is possible to turn almost in place. As sensors are available on the P2DX:
+\begin{figure}
+  \centering
+  \subfloat[The original P2DX]{\label{fig:p2dxReal}\includegraphics[height=0.2\textheight]{p2dxReal}}                
+  \subfloat[The P2DX in USARSim]{\label{fig:p2dxUsar}\includegraphics[height=0.2\textheight]{p2dxUsar}}
+  \caption{The P2DX we worked with}
+  \label{fig:p2dx}
+\end{figure}
+The simulator exists of a virtual enviroment where different maps and different
+robots can be loaded. These robots have different sizes and different features.
+As example of features of a robot, there are different kinds of sensors and
+different kinds of wheels. For AP2DX, the robot P2DX (See figure \ref{fig:p2dx}) was used. This robot is a three-wheel, rear swivel wheel robot. The two frontwheels can be controlled independently of eachother, so it is possible to turn almost in place. As sensors are available on the P2DX:
 \begin{itemize}
 \item 8 Sonar distance sensors
 \item Laser distance sensor
@@ -109,18 +128,14 @@ The simulator exists of a virtual environment where different maps and different
 \item Camera
 \end{itemize}
 For the purpose of AP2DX only sonar, laser and INS sensors are used.
-
-\todo{insert picture here}
-
 \subsection{Coordinator}
 The first module a message on a journey from the USARSim to AP2DX meets, is the AP2DX Coordinator. The Coordinator is programmed to spawn the robot and translate and relay traffic between the simulator and the AP2DX System. That is all it really does. It has a connection with the Sensor module to relay the incoming sensor data and the Motor module to receive commands for the simulator.
 
 \subsection{Sensor}
-When a message is translated by the coordinator the journey continues to the AP2DX Sensor module. This module creates a visualization of sonar and laser sensor-data in a user interface window, so it is possible to see what the robot sees. Then the message is cloned: it is sent to the Mapper module and the Reflex module.
+\input{sensor}
 
 \subsection{Mapper}
-In the mapper module the odometry and laser data come together to create a map with DP-Slam. DP-Slam is a SLAM (simultaneous localization and mapping) algorithm, implemented in C. It creates an image of the environment that is only useful for the human eye. The robot can not use it to navigate the environment. The Mapper relays all sensor data to the planner.
-\todo{reference to DP-slam, http://www.cs.duke.edu/~parr/dpslam2.pdf?}
+\input{mapper}
 
 \subsection{Planner}
 The planner controls the robot movement. It uses sonar, odometry and INS data to determine the next action to take. The Planner has three behaviors: drive and turn away from obstacle, check out gaps in the wall and get free from a stuck position.
@@ -176,6 +191,8 @@ Here we will discuss the results from our experiment and explain what it means
 
 \section{Discussion}
 \input{discussion}
+
+\appendix
 
 \end{document}
 

@@ -5,3 +5,11 @@ java/.metadata/
 java/AP2DX/junit*
 java/AP2DX/cobertura.ser
 java/AP2DX/*_output.txt
+Report/*.aux
+Report/*.log
+Report/*.toc
+Report/*.out
+Report/*.bbl
+Report/*.blg
+Report/*.synctex
+Report/*.wsp
