@@ -58,9 +58,7 @@ public class UsarMessageParser extends Thread
             Message messageIn = null;
             try 
             {
-                System.out.println("\tReading message in UsarMessageParser.run()");
                 messageIn = in.readMessage();
-                System.out.println("Read message to string: " + messageIn.toString());
             } 
             catch (Exception e) 
             {
@@ -73,7 +71,6 @@ public class UsarMessageParser extends Thread
             switch (messageIn.getMsgType())
             {
                 case USAR_SENSOR:
-                    System.out.println("Parsing usar sensor message ...");
                     UsarSimSensorMessage sensorMessage = null;
                     try
                     {
@@ -119,14 +116,13 @@ public class UsarMessageParser extends Thread
                     }
                     break;
                 default:
-                    System.out.println("Unexpected message type in ap2dx.coordonator.UsarMessageParser: " + messageIn.getMsgType());
+                    System.err.println("Unexpected message type in ap2dx.coordonator.UsarMessageParser: " + messageIn.getMsgType());
             };
             //Try to send the message to the right connection.
             if(message != null && message.getMsgType() != Message.MessageType.UNKNOWN)
             {
                 try 
                 {
-                	System.out.println("Attempting to send a message");
                     sendConnection.sendMessage(message);
                 } 
                 catch (Exception e) 
@@ -136,10 +132,8 @@ public class UsarMessageParser extends Thread
                         .severe("Error in UsarMessageParser.run, attempted get the connection of message: "
                                 + message);
                 }
-            System.out.printf("End of UsarMessageParser.run while loop, message %s may be sent.\n", message);
             }
             else
-                System.out.printf("End of UsarMessageParser.run while loop. No messages sent\n");
         }
     } 
 }

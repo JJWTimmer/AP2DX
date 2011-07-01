@@ -46,7 +46,6 @@ public class Program extends AP2DXBase {
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
-		System.out.println("Message received: " + message.getMessageString());
 
 		if (!firstMessage) {
 			this.clear = true;
@@ -55,23 +54,19 @@ public class Program extends AP2DXBase {
 		
 		switch (message.getMsgType()) {
 		case RESET:
-			System.out.println("RESET Detected");
 			setBotBlocked(false);
 			this.clear = false;
 			break;
 		case CLEAR:
-			System.out.println("CLEAR Detected");
 			this.clear = true;
 			break;
 		case AP2DX_MOTOR_ACTION:
-			System.out.println("AP2DX_MOTOR_ACTION Detected");
 			if (!isBotBlocked()) {
 				ActionMotorMessage msg = new ActionMotorMessage(
 						(AP2DXMessage) message);
 				msg.setDestinationModuleId(Module.MOTOR);
 				msg.compileMessage();
 				
-				System.out.printf("Sending message %s to MOTOR module\n",
 						msg.getMessageString());
 
 				messageList.add((AP2DXMessage) msg);
@@ -109,8 +104,6 @@ public class Program extends AP2DXBase {
 						
 						messageList.add(new StopPlannerMessage(IAM,Module.PLANNER));
 
-						System.out.println("Sending stop messages to PLANNER and MOTOR");
-						
 						break;
 					}
 				}

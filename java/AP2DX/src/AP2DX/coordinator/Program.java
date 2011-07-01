@@ -50,7 +50,7 @@ public class Program extends AP2DXBase {
 
             try 
             {
-                System.out.printf("Connectig to %s on %s for UsarSim\n", address, port);
+                System.out.printf("Connectig to %s on %s for UsarSim...\n", address, port);
                 Socket socket = new Socket(address, port);
                 System.out.println("Coordinator connected to USARsim");
                 out = new PrintWriter(socket.getOutputStream(), true);
@@ -63,7 +63,6 @@ public class Program extends AP2DXBase {
             }
 
             UsarSimMessage message = new UInitMessage();
-            System.out.println("Init Message in coordinator Program.java: " + message.toString());
 
             try 
             {
@@ -83,12 +82,10 @@ public class Program extends AP2DXBase {
      */
     @Override
         public ArrayList<AP2DXMessage> componentLogic(Message msg) {
-            System.out.println("In componentLogic");
             ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
             switch (msg.getMsgType()) {
                 case USAR_SENSOR:
                     try {
-                        System.out.println("Trying to send Sonar Message");
                         USonarSensorMessage messageIn = new USonarSensorMessage(
                                 (UsarSimMessage) msg);
                         // Create a new message to the Sensor module
@@ -106,7 +103,6 @@ public class Program extends AP2DXBase {
                 case AP2DX_MOTOR:
                     try
                     {
-                        System.out.println("Motor action message received in Coordinator. Let's try to send a Motor message to UsarSim");
                         MotorMessage message = new MotorMessage((AP2DXMessage) msg);
                         UDriveMessage usarMessage = message.toUsarSimMessage();
                         out.println(usarMessage);
@@ -116,9 +112,6 @@ public class Program extends AP2DXBase {
                         System.out.println("Something went wrong with the drive message in Coordinator");
                     }
                 default:
-                    System.out
-                        .println("Unexpected message type in ap2dx.coordinator.Program: "
-                                + msg.getMsgType());
             }
             return messageList;
         }
