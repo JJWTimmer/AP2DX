@@ -121,7 +121,7 @@ The first module a message on a journey from the USARSim to AP2DX meets, is the 
 When a message is translated by the coordinator the journey continues to the AP2DX Sensor module. This module creates a visualisation of sonar and laser sensor-data in a user interface window, so it is possible to see what the robot sees. Then the message is cloned: it is sent to the Mapper module and the Reflex module.
 
 \subsection{Mapper}
-In the mapper module all the sensor information comes together and here is where the information is going to make sense. The sensor information combined with the position of the robot the mapper module will construct a map. This map is then send to the planner module. If there are any irregularities with the position of the robot it will be corrected here and send to the planner.
+\input{mapper}
 
 \subsection{Planner}
 The planner module is the brain of the software. It directs the robot to unexplored places and solves problems with obstacles. It will make its decisions based on the map send from the mapper module and the obstacle information send from the reflex module. The planner is also the place where the position of the robot is saved. The position is periodically sent to the mapper so the postion can be corrected by the mapper if needed.

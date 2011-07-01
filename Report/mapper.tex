@@ -1,0 +1,20 @@
+The task of the mapper module is to create a map of the environment and to find the position of
+the robot in this map. This will allow the planner module to plan paths and other behaviour, that is:
+if it is done correctly! 
+
+Luckily, simultaneously localizing and mapping (SLAM) 
+%creating a map and simultaneously localizing a robot 
+is a commonly encountered problem and 
+many research has been conducted to optimize algorithms. The mapper module uses the \emph{DP-SLAM}
+\footnote{\url{http://www.cs.duke.edu/~parr/dpslam/}} implementation in the C programming language.
+Starting the DP-SLAM program (which was slightly modified for compatibility with the Java module)
+is done with a system call, after which two threads are started. One to write the correct sensor 
+data to the input stream of the program, and one to read the output stream of the program. The 
+output stream contains information about for example the location of the robot, whether or not
+something went wrong or when a new map has been dumped to file.
+
+Unfortunately, the mapper module is not multi platform as the DP-SLAM program uses Linux libraries. 
+If this module is run in a non Windows system no map can be created, but sensor important data will
+still be forwarded to the planner module. 
+
+
