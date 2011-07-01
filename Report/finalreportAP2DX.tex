@@ -3,6 +3,7 @@
 \usepackage[margin=2.5cm, nohead]{geometry}
 \usepackage{graphicx}
 \usepackage[all]{xy}
+\usepackage{pdfpages}
 \usepackage{hyperref}
 \usepackage{verbatim}
 \usepackage{color} % for todo
@@ -60,34 +61,7 @@ With the client is agreed to build the following features in the robot-controlle
 \end{itemize}
 
 \subsubsection{Milestones}
-At every agreed milestone there was a deliverable planned. This deliverable can contain software and or documentation.
-
-The first milestone:
-\begin{itemize}
-\item Drive: The program should be able to direct the robot through the environment but not yet be able to follow lines or walls.
-\item Avoid collision: The robot should be able to avoid collision with objects and walls. It will stop, turn to a random angle, and drive on. This way it will cover most of the area without colliding.
-\item Experiment and content of final report: A draft of the final report, containing a description of the experiment and its contents.
-\end{itemize}
-
-What was actually delivered at this milestone was a program that could only spawn a robot, and Javadoc describing the API of the application. This was partly because writing tests took a lot of time and the baseclass was not yet ready. More about the baseclass later.
-
-The second milestone:
-\begin{itemize}
-\item Avoid obstacles: The robot will be able to avoid the obstacles that cross its path, in stead of stopping and turning a random corner.
-\item Navigate: The robot will be able to navigate through the room.
-\item Mapper: A class that creates a map of the room out of the sensor data. In the time of milestone two it does not have to be able to create an entire map and be very accurate, but it will be able to make some implementation
-\item Improved Sensor: The sensor class will be improved to be able to make an accurate map
-\item Improved Reflexes: The reflex class needs to be able to use some sensor data to be able to avoid objects appropriately.
-\end{itemize}
-
-The deliverable for this milestone also did not meet the agreed requirements. It
-did not even met the requirements of the first milestone. A lot of time went to
-fix bugs in code that could only be tested when the whole framework was programmed.
-Unforeseen problems and horrible bugs soaked up a lot of time. Furthermore some
-team members were sick.  
-
-The final deliverable should meet all the goals. 
-
+\input{milestones}
 \subsection{Structure of this document}
 This document is written for the client as reference about the delivered software. It contains information about the architecture of the program (all the components) and design desicions. Also the development and test process is described. The last part is about what is actually deliverd and what can be improved. In the appendices there is more indepth technical information.
 
@@ -188,6 +162,7 @@ Here we will discuss the results from our experiment and explain what it means
 \input{discussion}
 
 \appendix
-
+bladibla
+\includepdf{uml}
 \end{document}
 
