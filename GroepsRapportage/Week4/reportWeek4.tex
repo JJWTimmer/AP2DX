@@ -1,0 +1,56 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=2.5cm, nohead]{geometry}
+\usepackage{palatino, url, multicol}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage[english]{babel}
+
+\title{Group report for AP2DX of week 4}
+\author{Maarten de Waard}
+\date{27$^{th}$ of June - 1$^{st}$ of Juli}
+
+\begin{document}
+\maketitle
+
+\section*{Group members}
+\noindent Maarten Inja \textit{(Leader)}\\
+Maarten de Waard \textit{(Secretary)}\\
+Jasper Timmer\\
+Wadie Assal\\
+
+\section*{The week}
+\subsection*{Monday}
+Monday we started by evaluating our draft report. Most of it was fine, although there were some things we could have elaberated on a bit more. After evaluating we started programming again. 
+
+The Maartens started on the mapper, while Jasper and Wadie started programming our movement algorithm.
+The mapper would be an external program, ``DP Slam''. This was a program, programmed in C. 
+
+\subsection*{Tuesday}
+This day the Maartens continued on getting the Mapper to work. The java programs
+to be able to run DP-slam from our code and to be able to interpret the images
+it creates were made (\texttt{PictureViewer.java} and \texttt{Slammer.java}).
+Especially getting the program to work on windows was hard.
+
+Jasper and Wadie continued perfecting their movement algorithm. 
+
+\subsection*{Wednesday}
+This day we finished the movement algorithm. Unfortunately Jasper was done with
+this around 2 in the night, and forgot to push his code. We found this out the
+evening after, after the demonstration was done. 
+
+We also got the code for the mapper working, but only on linux. On a windows
+system, the mapper simply only forwards messages to the Planner. Since our
+system is distributed, it is no problem to start the mapper on another computer,
+than all the other programs.
+
+\subsection*{Thursday}
+We had to do our presentation this morning. Jasper and Maarten did the
+presentation, and that went pretty well. As a matter of fact, if we were to do
+the course ``Portfolio'', we would have gotten an eight for it!
+
+Wadie and Maarten then presented our demo, with the code of Wednesday afternoon,
+because Jasper forgot to push. This still went okay, but the navigation could have been better.
+
+\subsection*{Friday}
+On Friday we finished everything.
+\end{document}

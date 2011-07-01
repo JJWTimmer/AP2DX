@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  1 JUL 2011 14:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  1 JUL 2011 14:47
 entering extended mode
  %&-line parsing enabled.
 **finalreportAP2DX.tex
@@ -449,9 +449,13 @@ File: p2dxReal.jpg Graphic file (type jpg)
  <use p2dxReal.jpg>
 <p2dxUsar.jpg, id=172, 180.675pt x 156.585pt>
 File: p2dxUsar.jpg Graphic file (type jpg)
- <use p2dxUsar.jpg> [5 <./p2dxReal.jpg> <./p2dxUsar.jpg>] (./mapper.tex) (./com
-munication.tex [6] <xymatrix 4x4
-224>) [7]
+ <use p2dxUsar.jpg> (./sensor.tex
+
+LaTeX Warning: Reference `fig:sonarLaserData' on page 5 undefined on input line
+ 6.
+
+[5 <./p2dxReal.jpg> <./p2dxUsar.jpg>]) (./mapper.tex) (./communication.tex
+[6] <xymatrix 4x4 224>) [7]
 Underfull \hbox (badness 10000) in paragraph at lines 168--173
 
  []
@@ -471,31 +475,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--15
 
  []
 
-) [10] (./finalreportAP2DX.aux) ) 
+) [10] (./finalreportAP2DX.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 7965 strings out of 495006
- 113771 string characters out of 1181410
+ 7969 strings out of 495006
+ 113819 string characters out of 1181410
  234003 words of memory out of 3000000
- 10974 multiletter control sequences out of 15000+50000
+ 10975 multiletter control sequences out of 15000+50000
  10019 words of font info for 39 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
  44i,14n,45p,807b,490s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/
-texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmtt8.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xya
-tip10.pfb></usr/share/texmf-texlive/fonts/type1/public/xypic/xybtip10.pfb></usr
-/share/texmf-texlive/fonts/type1/public/xypic/xydash10.pfb>
-Output written on finalreportAP2DX.pdf (11 pages, 239817 bytes).
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt1
+0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/
+share/texmf-texlive/fonts/type1/public/xypic/xyatip10.pfb></usr/share/texmf-tex
+live/fonts/type1/public/xypic/xybtip10.pfb></usr/share/texmf-texlive/fonts/type
+1/public/xypic/xydash10.pfb>
+Output written on finalreportAP2DX.pdf (11 pages, 240333 bytes).
 PDF statistics:
  286 PDF objects out of 1000 (max. 8388607)
  46 named destinations out of 1000 (max. 500000)
