@@ -154,9 +154,9 @@ The original idea for the development of AP2DX was Testdriven development. This 
 It is not only important to write tests that test all methods and all possible input and output values, but another measurement instrument for the quality of the tests is line coverage. it is almost never possible to get 100\% line coverage, but about 80\% line coverage should be well tested code, if all possible input and output values are covered. There are more metrics then line coverage like package coverage or conditional coverage, but in this project the focus was on line coverage. This is expressed in the number of lines with executable code which are reached by the tests, as visible in figure \ref{fig:hits}.
 
 \begin{figure}[h]
-  \caption{Hits per line}
   \centering
     \includegraphics[width=0.5\textwidth]{hits}
+  \caption{Hits per line}
   \label{fig:hits}
 \end{figure}
 
@@ -166,16 +166,16 @@ Writing of tests was harder than planned and took to much time, so it was decide
 In the final product the quality guideline of 80\% line testcoverage was not met. This was because of a couple of before mentioned reasons. The final testresults are very good: only 30\% line coverage and 10 failing tests on a total of 58 tests (figure \ref{fig:coverage} and \ref{fig:tests}). The figures show the results of the last successful build attempt with no failing tests and the last nine build attempts, where the last one (236) is the one that is actually delivered.
 
 \begin{figure}[h]
-  \caption{Test coverage}
   \centering
     \includegraphics[width=0.5\textwidth]{coverage_graph}
+  \caption{Test coverage}
   \label{fig:coverage}
 \end{figure}
 
 \begin{figure}[h]
-  \caption{Test results}
   \centering
     \includegraphics[width=0.5\textwidth]{test_graph}
+  \caption{Test results}
   \label{fig:tests}
 \end{figure}
 
