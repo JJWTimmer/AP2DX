@@ -49,7 +49,7 @@ public class Slammer implements Runnable
         try
         {
             // startin' DP SLAM
-            System.out.println("Starting: " + pathToSlam + " -p stdinOrWhatever");
+            //System.out.println("Starting: " + pathToSlam + " -p stdinOrWhatever");
             p = r.exec(pathToSlam + " -p stdinOrWhatever"); 
            
             // creating a new thread to continiously write all kinds of sexeh stuff to the 

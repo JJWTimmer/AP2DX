@@ -77,7 +77,7 @@ IMessageReader {
             case AP2DX_MOTOR_ACTION:
                 //return new ActionMotorMessage(message);
                 ActionMotorMessage msg =  new ActionMotorMessage(message);
-                System.out.println("Encountered MOTOR_ACTION " + message.getMessageString());
+                //System.out.println("Encountered MOTOR_ACTION " + message.getMessageString());
                 return msg;
             case AP2DX_MOTOR:
                 return new MotorMessage(message);
