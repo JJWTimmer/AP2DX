@@ -39,7 +39,7 @@ public class Program extends AP2DXBase {
 	private static final double NEEDEDDEPTH = 0.5;
 
 	/**
-	 * drive this much past a hole before restarting scan of enviroment
+	 * drive this much past a hole before restarting scan of environment
 	 */
 	private static final double PASSHOLEDISTANCE = 0.3;
 
