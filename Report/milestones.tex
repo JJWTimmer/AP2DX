@@ -1,0 +1,53 @@
+At every agreed milestone there was a deliverable plannened. This deliverable can contain software and or documentation.
+
+\subsubsection*{The first milestone:}
+\begin{itemize}
+\item Drive: The program should be able to direct the robot through the environment but not yet be able to follow lines or walls.
+\item Avoid collision: The robot should be able to avoid collision with objects and walls. It will stop, turn to a random angle, and drive on. This way it will cover most of the area without colliding.
+\item Experiment and content of final report: A draft of the final report, containing a description of the experiment and its contents.
+\end{itemize}
+
+What was actually delivered at this milestone was a program that could only spawn a robot, and Javadoc describing the API of the application. This was partly because writing tests took a lot of time and the baseclass was not yet ready. More about the baseclass later.
+
+\subsubsection*{The second milestone:}
+\begin{itemize}
+\item Avoid obstacles: The robot will be able to avoid the obstacles that cross its path, in stead of stopping and turning a random corner.
+\item Navigate: The robot will be able to navigate through the room.
+\item Mapper: A class that creates a map of the room out of the sensor data. In the time of milestone two it does not have to be able to create an entire map and be very accurate, but it will be able to make some implementation
+\item Improved Sensor: The sensor class will be improved to be able to make an accurate map
+\item Improved Reflexes: The reflex class needs to be able to use some sensor data to be able to avoid objects appropriately.
+\end{itemize}
+
+The deliverable for this milestone also did not meet the agreed requirements. It
+did not even met the requirements of the first milestone. A lot of time went to
+fix bugs in code that could only be tested when the whole framework was programmed.
+Unforseen problems and horrible bugs soaked up a lot of time. Furthermore some
+team members were sick.  
+
+\subsubsection*{The last milestone:}
+Before the demonstration we will be able to do the following things:
+\begin{itemize}
+\item Planner: We will have a planner class that can specify directions
+based on the current map position and what part of the map we have not yet
+discovered.
+\item Improved Mapper: The mapper will now be able to make an accurate map
+and find our location on it, while taking the errors in sensor data into account.
+\item Tests: We will test everything thoroughly.
+\item Report: We will work on a report, describing our progress, problems
+and (test)results.
+\item Documentation: We will work on a proper documentation of our code.
+\end{itemize}
+
+This deliverable was partly reached. We did not make a Planner that uses the map
+data, but it still makes the robot drive in safe directions.
+We also have made a mapper. This mapper works real time, but misses some
+information. This could have been fixed, if we had more time.
+In the last week, we stopped focussing on the tests, because with only four of
+us left, the tests stopped being a priority. The documentation was done while
+coding, so working on a proper documentation was no problem. 
+
+
+
+
+
+

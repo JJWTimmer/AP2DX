@@ -4,11 +4,11 @@ was nearly exactly programmed when everything started to work (give or take a fe
 small details, which were easy to add). The framework is robust and more functionallity
 can easily be added. For example; sensor messages we do not use can be added in mere moments 
 by creating a specizialed message. 
-\\\\
+
 But, the question is: Is this a good thing? Obviously it is nice to see the framework working
 and to know new functions can be added later. But it took us a loot of time to set it up. We 
 did not need to parse all kind of special messages if only use two or three! 
-\\\\
+
 Also the base class disallowed us to test anything with the simulator until it was completely 
 finished. Each module could easily be programmed in another programming language, but this
 pinned us down to use Java, and the base class. 
@@ -19,5 +19,30 @@ We originally thought the messages for USAR and AP2DX were quite similar, but th
 and more the further we came to working code. In the end it simply seemed as if we did the same
 thing twice, with no real advantage. The USAR messages had to be parsed either way. They also
 had to be compiled either way; there was no alternative method to communicate with the server. 
-In hindsight, we might've better programmed that well, with a nice interface to set and get
+In hindsight, we might have better programmed that well, with a nice interface to set and get
 variables rather than to program it twice. 
+
+\subsection{Mapper}
+We downloaded a complicated, sophisticated mapper from the internet. This is
+good, but the mapper does assume that you always give it correct information.
+This way, the mapper does not always work.
+
+Also our sophisticated mapper has a slight delay, therefore it misses some
+information we would put in it.
+
+In hindsight we might have gotten a better mapper if we had downloaded a simpler
+implementation, and had used that with our program. That would have been better
+at mapping while driving.
+
+\subsection{Autonomous system}
+As AI-people, we have built an entirely autonomous system. This means that our
+robot can go where it wants, ``when it wants''. This is nice, but it does not
+come in handy, when you want it to do what you want. Sometimes it would have
+been nice to be able to provide some user input. 
+
+\subsection{Slow}
+Our program turned out to be a bit slow, over network. This could be because we
+print a lot of data, and because every communication is over network. Still,
+while running everything on one computer, the robot did not crash. This means
+that the program is fast enough.
+

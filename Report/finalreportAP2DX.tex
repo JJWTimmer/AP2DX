@@ -3,38 +3,34 @@
 \usepackage[margin=2.5cm, nohead]{geometry}
 \usepackage{graphicx}
 \usepackage[all]{xy}
+\usepackage{pdfpages}
 \usepackage{hyperref}
 \usepackage{verbatim}
 \usepackage{color} % for todo
 \usepackage{subfig}
-%\usepackage{fancyhdr}
+\usepackage{fancyhdr}
 
-% TODO, make this pretty!
-%\setlength{\parskip}{10pt}
-%\newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
-%%\setlength{\headheight}{15.2pt}
-%\pagestyle{fancy}
-%%\rfoot{\footnotesize{\name + \title}
-%%\lfoot{\footnotesize{\name}}
-%\cfoot{\footnotesize{Awesomizing the P2DX: AP2DX}}
-%%\lhead{\course}
-%%\rhead{\title}
-%\pagestyle{fancy}
-%\renewcommand{\headrulewidth}{0.2pt}
-%\renewcommand{\footrulewidth}{0.2pt}
+ 
+\renewcommand{\headrulewidth}{.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
 
-\title{Awesomizing the P2DX\\\small AP2DX}
-\author{Wadie Assal \ 6398693 \and Jasper Timmer \ 5995140 \and Maarten de Waard \ 5894883 \and  Maarten Inja \ 5872464}
+\setlength{\headsep}{1.0cm}
+\setlength{\voffset}{-1cm}
 
+\pagestyle{fancy}
+\rfoot{\thepage}
+\cfoot{}
+\lfoot{\footnotesize AP2DX}
+%\addtolength{\footskip}{5pt}
 
 \newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
 
 \begin{document}
-\maketitle
+\input{titlePageAWESOME}
 
-\tableofcontents
+%\thispagestyle{empty}
+\tableofcontents 
 \newpage
-
 %added a newpage after every chapter so it looks more like a report then a article. Wadie Assal
 
 \section{Preface}
@@ -46,6 +42,18 @@ Amsterdam University of Applied Sciences and one from the pre-master Software
 Engineering. This melange is both a chance to create something good from
 different viewpoints as well as a point of attention, because none of us has
 followed the bachelor Computer Science at the University of Amsterdam. 
+
+\section{Chairmans ``Who has written what?''}
+In the Blackboard document ``Huishoudelijk Reglement'' is written that the chairman should declare who has written which
+part of this report. This is not an accurate representation of the division of labor, but here it is:
+\begin{itemize}
+    \item Introduction. Japser Timmer
+    \item Architecture and results, everyone
+    \item Building and testing, Jasper Timmer
+    \item Discussion, Maarten de Waard and Maarten Inja
+    \item UML Diagram, Waddie Assal
+\end{itemize}
+
 
 \newpage
 
@@ -65,34 +73,7 @@ With the client is agreed to build the following features in the robot-controlle
 \end{itemize}
 
 \subsubsection{Milestones}
-At every agreed milestone there was a deliverable planned. This deliverable can contain software and or documentation.
-
-The first milestone:
-\begin{itemize}
-\item Drive: The program should be able to direct the robot through the environment but not yet be able to follow lines or walls.
-\item Avoid collision: The robot should be able to avoid collision with objects and walls. It will stop, turn to a random angle, and drive on. This way it will cover most of the area without colliding.
-\item Experiment and content of final report: A draft of the final report, containing a description of the experiment and its contents.
-\end{itemize}
-
-What was actually delivered at this milestone was a program that could only spawn a robot, and Javadoc describing the API of the application. This was partly because writing tests took a lot of time and the baseclass was not yet ready. More about the baseclass later.
-
-The second milestone:
-\begin{itemize}
-\item Avoid obstacles: The robot will be able to avoid the obstacles that cross its path, in stead of stopping and turning a random corner.
-\item Navigate: The robot will be able to navigate through the room.
-\item Mapper: A class that creates a map of the room out of the sensor data. In the time of milestone two it does not have to be able to create an entire map and be very accurate, but it will be able to make some implementation
-\item Improved Sensor: The sensor class will be improved to be able to make an accurate map
-\item Improved Reflexes: The reflex class needs to be able to use some sensor data to be able to avoid objects appropriately.
-\end{itemize}
-
-The deliverable for this milestone also did not meet the agreed requirements. It
-did not even met the requirements of the first milestone. A lot of time went to
-fix bugs in code that could only be tested when the whole framework was programmed.
-Unforeseen problems and horrible bugs soaked up a lot of time. Furthermore some
-team members were sick.  
-
-The final deliverable should meet all the goals. 
-
+\input{milestones}
 \subsection{Structure of this document}
 This document is written for the client as reference about the delivered software. It contains information about the architecture of the program (all the components) and design desicions. Also the development and test process is described. The last part is about what is actually deliverd and what can be improved. In the appendices there is more indepth technical information.
 
@@ -109,7 +90,7 @@ The baseclass was designed to be flexible for the needs of every module. Also, t
 \todo{Create class diagram}
 
 \subsection{USARSim}
-\begin{figure}
+\begin{figure}[b]
   \centering
   \subfloat[The original P2DX]{\label{fig:p2dxReal}\includegraphics[height=0.2\textheight]{p2dxReal}}                
   \subfloat[The P2DX in USARSim]{\label{fig:p2dxUsar}\includegraphics[height=0.2\textheight]{p2dxUsar}}
