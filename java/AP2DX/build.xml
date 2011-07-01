@@ -189,6 +189,8 @@
 		<packaging package="reflex"/>
 		<packaging package="sensor"/>
 		<!--<packaging package="package2"/>-->
+        <copy file="slam" tofile="${jar.dir}/mapper/slam"/>
+        <chmod file="${jar.dir}/mapper/slam" perm="a+x"/>
 	</target>
 	
 	<!-- Target to run -->

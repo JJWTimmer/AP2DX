@@ -1,8 +1,7 @@
 #!/bin/bash
-
-gnome-terminal --command "java -jar /home/mpdw/uva/ap2dx/java/AP2DX/ant/jar/coordinator/coordinator.jar" -t "coortinator" &
-gnome-terminal --command "java -jar /home/mpdw/uva/ap2dx/java/AP2DX/ant/jar/motor/motor.jar" -t "motor"&
-gnome-terminal --command "java -jar /home/mpdw/uva/ap2dx/java/AP2DX/ant/jar/reflex/reflex.jar" -t "reflex"&
-gnome-terminal --command "java -jar /home/mpdw/uva/ap2dx/java/AP2DX/ant/jar/planner/planner.jar" -t "planner"&
-gnome-terminal --command "java -jar /home/mpdw/uva/ap2dx/java/AP2DX/ant/jar/mapper/mapper.jar > /home/mpdw/uva/mapper_output.txt" -t "mapper" &
-gnome-terminal --command "java -jar /home/mpdw/uva/ap2dx/java/AP2DX/ant/jar/sensor/sensor.jar" -t "sensor" &
+gnome-terminal --working-directory=${PWD}/ant/jar/coordinator --command "java -jar coordinator.jar"
+gnome-terminal --working-directory=${PWD}/ant/jar/motor --command "java -jar motor.jar"
+gnome-terminal --working-directory=${PWD}/ant/jar/mapper --command "java -jar mapper.jar"
+gnome-terminal --working-directory=${PWD}/ant/jar/planner --command "java -jar planner.jar"
+gnome-terminal --working-directory=${PWD}/ant/jar/reflex --command "java -jar reflex.jar"
+gnome-terminal --working-directory=${PWD}/ant/jar/sensor --command "java -jar sensor.jar"
