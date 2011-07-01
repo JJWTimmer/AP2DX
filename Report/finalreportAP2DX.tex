@@ -1,4 +1,5 @@
 \documentclass[titlepage, a4paper,10pt]{article}
+\usepackage{appendix}
 \usepackage[margin=2.5cm, nohead]{geometry}
 \usepackage{graphicx}
 \usepackage[all]{xy}
@@ -29,8 +30,7 @@
 \newcommand{\todo}[1]{\colorbox{red}{\color{white}#1}}
 
 \begin{document}
-%\maketitle
-\input{titlePageAWESOME}
+\maketitle
 
 \tableofcontents
 \newpage
@@ -55,13 +55,8 @@ For the client a robot controller that can autonomously map an area had to be bu
 \subsection{USARSim}
 As simulator USARSim is used. USARSim (Unified System for Automation and Robot Simulation) is an application to simulate the real robot arena's of the IEEE, based on the Unreal engine. The robot should be able to navigate through the 'Yellow Arena'. This is a map with a few static obstacles.
 
-\subsection{Structure of this document}
-This document is written for the client as reference about the delivered software. It contains information about the architecture of the program (all the components) and design desicions. Also the development and test process is described. The last part is about what is actually deliverd and what can be improved. In the appendices there is more indepth technical information.
-
-\newpage
-
-\section{Goals}
-With the client there is agreed to build the following features in the robot-controller:
+\subsection{Goals}
+With the client is agreed to build the following features in the robot-controller:
 \begin{itemize}
 \item Loosely coupled modules based on network communication
 \item Robot should be safe, i.e. stop for obstacles
@@ -69,8 +64,8 @@ With the client there is agreed to build the following features in the robot-con
 \item Robot should be able to create a map of the environment
 \end{itemize}
 
-\subsection{Milestones}
-At every agreed milestone there was a deliverable plannened. This deliverable can contain software and or documentation.
+\subsubsection{Milestones}
+At every agreed milestone there was a deliverable planned. This deliverable can contain software and or documentation.
 
 The first milestone:
 \begin{itemize}
@@ -93,20 +88,23 @@ The second milestone:
 The deliverable for this milestone also did not meet the agreed requirements. It
 did not even met the requirements of the first milestone. A lot of time went to
 fix bugs in code that could only be tested when the whole framework was programmed.
-Unforseen problems and horrible bugs soaked up a lot of time. Furthermore some
+Unforeseen problems and horrible bugs soaked up a lot of time. Furthermore some
 team members were sick.  
 
-The final delivable should meet all the goals. 
+The final deliverable should meet all the goals. 
+
+\subsection{Structure of this document}
+This document is written for the client as reference about the delivered software. It contains information about the architecture of the program (all the components) and design desicions. Also the development and test process is described. The last part is about what is actually deliverd and what can be improved. In the appendices there is more indepth technical information.
 
 \newpage
 
 \section{Architecture}
 \subsection{Introduction}
 AP2DX is written completely in the Java programming language. 
-This was choosen as it is advertised to be reliable and fast by the company Flowtraders. This is important for AP2DX, because it should be a safe robot controller, that stops in time and does not harm anyone on it's path. The architecture of AP2DX is based on Object Oriented Programming (OOP). 
+This was chosen as it is advertised to be reliable and fast by the company Flowtraders, and it is platform independent. This is important for AP2DX, because it should be a safe robot controller, that stops in time and does not harm anyone on it's path. The architecture of AP2DX is based on Object Oriented Programming (OOP).
 To not repeat the same code again and again for every module, a baseclass was constructed. 
-This class could do things as: read a config file, write to a logfile, accept incoming connections, start outgoing connections based on the config file, handle incoming messages and send responses. 
-The baseclass was designed to be flexible for the needs of every module. Also, the program is heavily multithreaded, to open and check connections and to do the business logic and send messages. As for the messages: a base messageclass was build, to facilitate the communication between USARSim and AP2DX, and between modules of AP2DX. As standard for config file and communication, JSON (Javascript Object Notation) was used. 
+This class could do things as: read a config file, write to a logfile, accept incoming connections, start outgoing connections based on the config file, handle incoming messages and send responses.
+The baseclass was designed to be flexible for the needs of every module. Also, the program is heavily multithreaded, to open and check connections and to do the business logic and send messages. As for the messages: a base message class was build, to facilitate the communication between USARSim and AP2DX, and between modules of AP2DX. As standard for config file and communication, JSON (Javascript Object Notation) was used. 
 
 \todo{Create class diagram}
 
@@ -124,9 +122,9 @@ As example of features of a robot, there are different kinds of sensors and
 different kinds of wheels. For AP2DX, the robot P2DX (See figure \ref{fig:p2dx}) was used. This robot is a three-wheel, rear swivel wheel robot. The two frontwheels can be controlled independently of eachother, so it is possible to turn almost in place. As sensors are available on the P2DX:
 \begin{itemize}
 \item 8 Sonar distance sensors
-\item 1 Laser distance sensor
-\item Odometry
-\item Internal Navigation System
+\item Laser distance sensor
+\item Odometry sensor
+\item Inertial Navigation Sensor
 \item Camera
 \end{itemize}
 For the purpose of AP2DX only sonar, laser and INS sensors are used.
@@ -140,13 +138,22 @@ The first module a message on a journey from the USARSim to AP2DX meets, is the 
 \input{mapper}
 
 \subsection{Planner}
-The planner module is the brain of the software. It directs the robot to unexplored places and solves problems with obstacles. It will make its decisions based on the map send from the mapper module and the obstacle information send from the reflex module. The planner is also the place where the position of the robot is saved. The position is periodically sent to the mapper so the postion can be corrected by the mapper if needed.
+The planner controls the robot movement. It uses sonar, odometry and INS data to determine the next action to take. The Planner has three behaviors: drive and turn away from obstacle, check out gaps in the wall and get free from a stuck position.
+
+\subsubsection{Behavior: Drive}
+The robot starts driving when the first sonar data is received. The outer two sonar sensors are ignored, but the inner six are used to determine if the robot is approaching an obstacle and the distance is under a certain threshold constant. Then the Reflex module kicks in and sends a stopmessage to the robot and the Planner. The Planner then checks if the sonars on the left or on the right have the most far view and turns in that direction, until the robot has no obstacle in front of it anymore. This is calculated as follows: If the first of the eight sensors has number 1, and the next number 2, etc. the sensors 3 and 6 are in an angle of 60 degrees. This means it is an equilateral triangle if sensors 3 and 6 can see the same distance, and that means, if the sonars 3 and 6 can see at least as far as the robot is wide, it will be possible to drive forward. A small margin is added to the width to be sure the robot does not get stuck.
+
+\subsubsection{Behavior: Check hole}
+When the sonars 1 or 8, that are perpendicular on the robot's path see a difference between two sonardata sets, that is larger then a certain threshold, say 1 meter, the robot gets curious and wants to to know if there is a hole beside it that it can drive through. It turns 90 degrees in the direction of the hole, scans if the hole is wide enough and drives forward if it is. Is it too small, then it turns back and continues it's original path.
+
+\subsubsection{Behavior: Get free}
+Every time INS data is processed, the planner checks how much the robot has moved since the last INS data. If this is under a certain threshold, the robot increments a counter. If the robot did not move enough after a certain amount of INS data, it goes into 'stuck' mode: stop doing things, drive backwards for a small distance, turn 90 degrees left or right at random and start scanning for a new path.
 
 \subsection{Reflex}
-The robot is controlled by the reflex module through the motor module. The reflex module will take the responsibility for unexpected situations that could not be foreseen by the planner module. For example low obstacles or unexpected falling object in the path of the robot. The reflex module will stop the robot so the arising situation can be handled gracefully by the planner module. The information needed to make a new route is send to the planner module from the reflex module.
+The Reflex does only two things. Relay motor messages from the planner to the motor, and stop those messages if there is something in front of the robot, so it has to stop. If it has to stop the robot, it sends a stop message to both the motor and the planner and discards all the movement messages it receives from the planner until the planner sends an acknowledge message.
 
 \subsection{Motor}
-The motor modules main function is to provide an abstract layer for the reflex module to control the robot. This will disguise the complexities of controlling the robot. For example if you want to control the robot on a low level, you will have to send a message to drive forward, calculate if the desired distance is covered and then stop the wheel taking into account sliding of the robot because of the momentum. Through the motor module you can control the robot by sending a drive forward message with the desired distance that needs to be covered. The module itself will calculate the distance and stop the robot on the correct place.
+The motor module translates motor messages into motor messages. If it gets forward, 10, it translates to leftwheel 10, rightwheel 10. It does not yet create usarsim message, but it sends this message to the Coordinator and there it is translated and send to the simulator.
 
 \subsection{Communication}
 \input{communication}
@@ -154,19 +161,19 @@ The motor modules main function is to provide an abstract layer for the reflex m
 \newpage
 
 \section{Building and Testing}
-In this section, we will explain the way we tested our program, and automated our buildprocess. Developing and debugging involve a lot of the same actions. To make the developmentprocess less repetitive, tedious and time consuming, some manhours were spent on setting up a good working enviroment. A git repository was setup at github.com. To develop better code, there was the idea to start with building unittests before actual code. More on unittests later. To automate the compiling, testing, building of Javadoc and creating Java executables (.jar files), an Ant buildscript was created. Next a continuous integration server was set up.
+In this section, we will explain the way we tested our program, and automated our build process. Developing and debugging involve a lot of the same actions. To make the development process less repetitive, tedious and time consuming, some manhours were spent on setting up a good working environment. A git repository was setup at github.com. To develop better code, there was the idea to start with building unittests before actual code. More on unittests later. To automate the compiling, testing, building of Javadoc and creating Java executables (.jar files), an Ant buildscript was created. Next a continuous integration server was set up.
 
 \subsection{Git}
 Git is a distributed version control system, not like Subversion, but like Mercurial. Git allows the developers to work on the same file together and merge the changes. Every commit is only made local and can be reversed. A project was started at http://www.github.com that free Git versioncontrol for opensource projects. It also offers development statistics, wiki and issue management, but those features were not used.
 
 \subsection{Ant}
-Java was choosen for AP2DX, and Java has to be compiled before it can be run. Also, the build directory has to be cleaned, unittests have to be compiled and run, Javadoc has to be published and executables containing the compiled classes had to be generated. This whole process can be automated with an Makefile-like tool, called Ant. An Ant Makefile is called build.xml. When in a terminal in the directory containing build.xml, all the developer has to do it type 'ant' and the process is run. Because developers don't want to wait on javadoc and testing to be completed every time they need to compile and debug, a second build target was created that only did the compiling and generating of jar files, and this could be run with 'ant debug'. Jenkins did run the full buildscript.
+Java was chosen for AP2DX, and Java has to be compiled before it can be run. Also, the build directory has to be cleaned, unittests have to be compiled and run, Javadoc has to be published and executables containing the compiled classes had to be generated. This whole process can be automated with an Makefile-like tool, called Ant. An Ant Makefile is called build.xml. When in a terminal in the directory containing build.xml, all the developer has to do it type 'ant' and the process is run. Because developers don't want to wait on javadoc and testing to be completed every time they need to compile and debug, a second build target was created that only did the compiling and generating of jar files, and this could be run with 'ant debug'. Jenkins did run the full buildscript.
 
 \subsection{Jenkins}
-To put everything together and test if it still works, a continuous integration server can be used. Jenkins was choosen for good reviews, and personal experience. What it does, is get every whole hour a clone of the Git repository, execute the Ant script, and publish the testresults. Jenkins is a java program and was run from a student homedirectory on deze.science.uva.nl, during development hours.
+To put everything together and test if it still works, a continuous integration server can be used. Jenkins was choosen for good reviews, and personal experience. What it does, is get every whole hour a clone of the Git repository, execute the Ant script, and publish the testresults. Jenkins is a java program and was run from a student home directory on deze.science.uva.nl, during development hours.
 
 \subsection{Testing}
-The original idea for the development of AP2DX was Testdriven development. This involves writing unittests before the actual code using jUnit testing framework. The idea of a unittest is to test the smallest possible unit of code, this is a class method or constructor. A good unittest is independent of other classes. If one class fails, the test for the class that is depenent on the failing class should not fail, because this class may be written correctly. It is possible to make unittests independent on other classes, with class mockups (using the jMockit framework), that are something like dummy objects, that do exactly what you want them to, but this is subject for an other paper.
+The original idea for the development of AP2DX was Testdriven development. This involves writing unittests before the actual code using jUnit testing framework. The idea of a unittest is to test the smallest possible unit of code, this is a class method or constructor. A good unittest is independent of other classes. If one class fails, the test for the class that is dependent on the failing class should not fail, because this class may be written correctly. It is possible to make unittests independent on other classes, with class mockups (using the jMockit framework), that are something like dummy objects, that do exactly what you want them to, but this is subject for an other paper.
 \\\\
 It is not only important to write tests that test all methods and all possible input and output values, but another measurement instrument for the quality of the tests is line coverage. it is almost never possible to get 100\% line coverage, but about 80\% line coverage should be well tested code, if all possible input and output values are covered.
 \\\\
@@ -184,6 +191,8 @@ Here we will discuss the results from our experiment and explain what it means
 
 \section{Discussion}
 \input{discussion}
+
+\appendix
 
 \end{document}
 
