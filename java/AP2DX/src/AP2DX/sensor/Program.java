@@ -143,7 +143,7 @@ public class Program extends AP2DXBase
         insSensorMessage2.compileMessage();
         messageList.add(insSensorMessage2);
         
-        System.out.println(insSensorMessage2.toString());
+        //System.out.println(insSensorMessage2.toString());
         //messageList.add(sonarSensorMessage.forward(Module.SENSOR, Module.REFLEX));
         
         // TO THE MAPPER

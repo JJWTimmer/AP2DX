@@ -35,7 +35,7 @@ public class Program extends AP2DXBase
 	public Program() 
     {
         super(Module.MAPPER); // explicitly calls base constructor
-		System.out.println(" Running Mapper... ");
+		//System.out.println(" Running Mapper... ");
 	}
 	
 	public ArrayList<AP2DXMessage> componentLogic(Message message) 
@@ -71,7 +71,7 @@ public class Program extends AP2DXBase
         if (slammer == null)
             return;
         slammer.addLaser(message.getDataArray());
-        System.out.println("After addLaser");
+        //System.out.println("After addLaser");
     }
 
     private void doInsLogic(InsSensorMessage message, 

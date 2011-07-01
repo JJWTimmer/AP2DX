@@ -135,7 +135,6 @@ public class Program extends AP2DXBase {
 					speed, speed);
 			fwMsg.setDelay(this.getLastDelay());
 			messageList.add(fwMsg);
-			System.out.println("Driving forward");
 			break;
 		case BACKWARD:
 			// return motor.backward(actionMotorMessage.getValue());
@@ -145,7 +144,6 @@ public class Program extends AP2DXBase {
 					-speedb, -speedb);
 			bwMsg.setDelay(this.getLastDelay());
 			messageList.add(bwMsg);
-			System.out.println("Driving backward");
 			break;
 		case TURN:
 			// return motor.turn(actionMotorMessage.getValue());
@@ -155,20 +153,17 @@ public class Program extends AP2DXBase {
 						-2, 2);
 				tlMsg.setDelay(this.getLastDelay());
 				messageList.add(tlMsg);
-				System.out.println("Turning left");
 			} else if (direction > 0) {
 				AP2DXMessage trMsg = new MotorMessage(IAM, Module.COORDINATOR,
 						2, -2);
 				trMsg.setDelay(this.getLastDelay());
 				messageList.add(trMsg);
-				System.out.println("Turning right");
 			}
 
 			break;
 		case STOP:
 			// return motor.stop();
 			messageList.add(new MotorMessage(IAM, Module.COORDINATOR, 0, 0));
-			System.out.println("Stop");
 			break;
 		default:
 			System.out.println("Error in motor.program.componentlogic");
