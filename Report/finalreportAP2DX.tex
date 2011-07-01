@@ -174,13 +174,34 @@ To put everything together and test if it still works, a continuous integration 
 
 \subsection{Testing}
 The original idea for the development of AP2DX was Testdriven development. This involves writing unittests before the actual code using jUnit testing framework. The idea of a unittest is to test the smallest possible unit of code, this is a class method or constructor. A good unittest is independent of other classes. If one class fails, the test for the class that is dependent on the failing class should not fail, because this class may be written correctly. It is possible to make unittests independent on other classes, with class mockups (using the jMockit framework), that are something like dummy objects, that do exactly what you want them to, but this is subject for an other paper.
-\\\\
-It is not only important to write tests that test all methods and all possible input and output values, but another measurement instrument for the quality of the tests is line coverage. it is almost never possible to get 100\% line coverage, but about 80\% line coverage should be well tested code, if all possible input and output values are covered.
-\\\\
+
+It is not only important to write tests that test all methods and all possible input and output values, but another measurement instrument for the quality of the tests is line coverage. it is almost never possible to get 100\% line coverage, but about 80\% line coverage should be well tested code, if all possible input and output values are covered. There are more metrics then line coverage like package coverage or conditional coverage, but in this project the focus was on line coverage. This is expressed in the number of lines with executable code which are reached by the tests, as visible in figure \ref{fig:hits}.
+
+\begin{figure}[h]
+  \caption{Hits per line}
+  \centering
+    \includegraphics[width=0.5\textwidth]{hits}
+  \label{fig:hits}
+\end{figure}
+
 Writing of tests was harder than planned and took to much time, so it was decided to stop that and start working on the robot controller. Testing requires a specific mindset and understanding of the process, and because of the socket communications testing was not that simple. it is possible to mock a socket but mocking is difficult also, and it is possible to start a listing socket and let the class under test connect to it and then send it a message, but this requires extra threads which is not very handy for unittests.
 
 \subsubsection{Testreport}
-TODO: Get test statistics and screenshots
+In the final product the quality guideline of 80\% line testcoverage was not met. This was because of a couple of before mentioned reasons. The final testresults are very good: only 30\% line coverage and 10 failing tests on a total of 58 tests (figure \ref{fig:coverage} and \ref{fig:tests}).
+
+\begin{figure}[h]
+  \caption{Test coverage}
+  \centering
+    \includegraphics[width=0.5\textwidth]{coverage_graph}
+  \label{fig:coverage}
+\end{figure}
+
+\begin{figure}[h]
+  \caption{Test results}
+  \centering
+    \includegraphics[width=0.5\textwidth]{test_graph}
+  \label{fig:tests}
+\end{figure}
 
 \newpage
 
@@ -192,7 +213,39 @@ Here we will discuss the results from our experiment and explain what it means
 \section{Discussion}
 \input{discussion}
 
-\appendix
+\newpage
 
+\appendix
+\appendixpage
+\addappheadtotoc
+\section{Constants}
+In the sourcecode of the Planner there are some constants to tweak the behaviour of the robot, and there is one constant in the Reflex.
+
+\subsection{Reflex}
+\begin{itemize}
+\item WALLDISTANCE: Sets the distance threshold for the mid six sonarsensors. If the sensor distance gets closer between two results, and the distance is less or equal to this constant, stop the robot. Given in meters. Default: 0.3
+\end{itemize}
+
+\subsection{Planner}
+\begin{itemize}
+\item ANGLEUNCERTAIN: threshold for turning to the ``angle'' direction, robot should drive in a direction between destinationAngle - ANGLEUNCERTAIN and destinationAngle + ANGLEUNCERTAIN. Given in radians. Default: 0.0872664626 (5 degrees)
+
+\item TURNTHRESHOLD: This much should two sonardata results of one side sensor differ, before it will check the hole. In meters. Default: 1.0 
+
+\item NEEDEDDEPTH: Mid four sonar sensors should be at least this deep to drive into hole. Given in meters. Default: 0.5
+
+\item PASSHOLEDISTANCE: drive this much past a hole before restarting scan of environment. Given in meters. Default: 0.3
+
+\item PASSHOLECORNER: drive this much past a hole before scanning it, so the bot is past the corner of the hole and not still partly infront of the wall. Given in meters. Default: 0.3
+
+\item IGNOREDISTANCE: If distance from bot to wall (side sonar sensors) is larger than this, don't do hole checking. Because the bot is not following the wall. Given in meters. Default: 0.8
+
+\item MOVEMENTTHRESHOLD: if movement is only this much between two INS data, then it is 'no movement'. Given in meters. Default: 0.2
+
+\item NOMOVECOUNT: Did not move after this many INS data? Then action has to be taken. Default: 100
+
+\item BACKWARDDISTANCE: If stuck, drive this much back. Given in meters. Default: 0.3
+
+\end{itemize}
 \end{document}
 
