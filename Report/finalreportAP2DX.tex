@@ -163,7 +163,7 @@ It is not only important to write tests that test all methods and all possible i
 Writing of tests was harder than planned and took to much time, so it was decided to stop that and start working on the robot controller. Testing requires a specific mindset and understanding of the process, and because of the socket communications testing was not that simple. it is possible to mock a socket but mocking is difficult also, and it is possible to start a listing socket and let the class under test connect to it and then send it a message, but this requires extra threads which is not very handy for unittests.
 
 \subsubsection{Testreport}
-In the final product the quality guideline of 80\% line testcoverage was not met. This was because of a couple of before mentioned reasons. The final testresults are very good: only 30\% line coverage and 10 failing tests on a total of 58 tests (figure \ref{fig:coverage} and \ref{fig:tests}).
+In the final product the quality guideline of 80\% line testcoverage was not met. This was because of a couple of before mentioned reasons. The final testresults are very good: only 30\% line coverage and 10 failing tests on a total of 58 tests (figure \ref{fig:coverage} and \ref{fig:tests}). The figures show the results of the last successful build attempt with no failing tests and the last nine build attempts, where the last one (236) is the one that is actually delivered.
 
 \begin{figure}[h]
   \caption{Test coverage}
