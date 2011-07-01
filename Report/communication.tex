@@ -1,5 +1,4 @@
-% Misschien moeten hier wat subsecties bij, kan bovendien wel netter taal gebruik worden
-\subsection{Protocols}
+\subsubsection{Protocols}
 There are two separate protocols in use in AP2DX. The first protocol is the
 Gamebot
 protocol\footnote{\url{http://udn.epicgames.com/Two/UnrealScriptReference.html\#Variables}} 
@@ -50,8 +49,8 @@ values.
 
 The hierarchy of our messages can be seen in figure \ref{fig:messageHierarchy}. 
 
-\todo{create and insert picture here}
+%\todo{create and insert picture here}
 
 % add this link somewhere, for kicks and giggles: http://udn.epicgames.com/Two/UnrealScriptReference.html#Variables
-\subsection{Synchronization between Reflex and Planner}
+\subsubsection{Synchronization between Reflex and Planner}
 All modules internally use a queue to store all the received messages. Those messages are processed one by one. As soon as the reflex sends a stop message to the motor based on the distance threshold, it starts ignoring all other motor messages it gets from the planner. The planner has to work through it's queue until it reaches the stop message. At this moment, it sends a reset message to the reflex, signaling: everything from now on is meant to get us away from the wall. The Reflex sets a 'getting away from wall' flag and starts relaying again, but is does not watch the distance threshold. When the Planner finished the turn away procedure, it sends a clear message to the Reflex, and from that moment, the robot is again cruising. The Reflex will reset internal state and start again with watching the threshold.
