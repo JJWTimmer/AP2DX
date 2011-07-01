@@ -1,20 +1,43 @@
 \documentclass[a4paper, notitlepage]{article}
 
-\title{Awesomizing P2DX Manual Deliverable 2}
-\author{Wadie Assal \\ 6398693 \and Jeroen Rooijmans \\ 5887410 \and Jasper Timmer \\ 5995140 \and Maarten de Waard \\ 5894883 \and Maarten Inja (vz) \\ 5872464}
+\title{AP2DX Manual}
+\author{Wadie Assal \\ 6398693 \and Jasper Timmer \\ 5995140 \and Maarten de Waard \\ 5894883 \and Maarten Inja (vz) \\ 5872464}
 
 \begin{document}
 
 \maketitle
 
 \section{Intro}
-This manual is part of deliverable 2 of the Awesomizing P2DX team. Status of the project: far behind. What is in this release: Coordinator translates USAR messages to AP2DX messages, sends them to the sensor module that creates a visualisation window of the sensor data. Planner sends a drive message to the reflex, that sends it to the motor, coordinator and finally the simulator. If the sensordata shows that something is too close, the robot stops moving (reflex does this based on sensor data).
+This manual describes how to run and configure the complete AP2DX package. The simulated P2DX robot now maps its environment and has three behaviors: 
+\begin{itemize}
+\item Curiously driving through holes in the sensor data. If it detects a hallway, why should not the robot enter and explore it? 
+\item Cautiously drive away from walls it might bump into. Of course, we would not want the robot to mess up the odometry sensor data by slipping it wheels, 
+trying to drive through a wall it can't. Instead it stop, turns and wanders some other way.
+\item Sometimes even the best of us can't avoid ending up stuck inside a corpse. Reverse direction and get out of there! Afterwards, 
+when P2DX is once again in the clear.
+\end{itemize}
 
 \section{Requirements}
-To Run AP2DX Software you need Java Runtime Enviroment 1.6. 
+To Run AP2DX Software you need Java Runtime Enviroment 1.6. If one wants to map the robots environment on the go 
+the mapper module should be run on a Linux system. If the mapper is not run on a Linux system no map will be created
+and the mapper modules window will remain creepy white. 
+
+\section{How to configure}
+A module consists of a folder with in this folder four files: 
+a .jar file, a .json file and two ``start'' scripts to run it on Windows and Linux. The .json file is the configuration 
+file where one should change IP addresses of other modules (or the simulator) and ports. 
+
+\section{How to built}
+The build.xml contains an ant script that compiles to source code. 
+One optional argument can be given: ``debug'' which only compiles and 
+creates .jar files, without the javadoc compilation and the jUnit testing phases.
 
 \section{How to run}
-To start the AP2DX Software, you first need to run an USARsim Server. Then change the sim\_address and sim\_port in the folder /jar/coordinator/AP2DX.coordinator.json to your setup. On windows, start all components with start\_all.bat, or start the components by starting start.bat on windows or start.sh on linux in this order:
+To start the AP2DX Software, you first need to run an USARsim Server. Before running the AP2DX software be sure the configuration
+files correctly list the IP addresses and the ports of the other modules and, very importantly, the USARsim Server. 
+
+Next, the modules have to be run. If one runs all the modules on one computer one can run start\_all.bat or if one runs Linux: start\_all.sh. 
+If one runs the modules separately run the start.bat or start.sh files next to the jar files in the following order.
 \begin{itemize}
 \item Coordinator
 \item Motor
@@ -23,5 +46,6 @@ To start the AP2DX Software, you first need to run an USARsim Server. Then chang
 \item Mapper
 \item Sensor
 \end{itemize}
+
 
 \end{document}
