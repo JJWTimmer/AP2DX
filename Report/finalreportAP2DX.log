@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  1 JUL 2011 14:47
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.12)  1 JUL 2011 15:56
 entering extended mode
  %&-line parsing enabled.
 **finalreportAP2DX.tex
@@ -444,28 +444,29 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
 
-[4] <p2dxReal.jpg, id=171, 180.675pt x 236.885pt>
+(./milestones.tex [4]) [5] <p2dxReal.jpg, id=178, 180.675pt x 236.885pt>
 File: p2dxReal.jpg Graphic file (type jpg)
- <use p2dxReal.jpg>
-<p2dxUsar.jpg, id=172, 180.675pt x 156.585pt>
-File: p2dxUsar.jpg Graphic file (type jpg)
- <use p2dxUsar.jpg> (./sensor.tex
 
-LaTeX Warning: Reference `fig:sonarLaserData' on page 5 undefined on input line
+<use p2dxReal.jpg> <p2dxUsar.jpg, id=179, 180.675pt x 156.585pt>
+File: p2dxUsar.jpg Graphic file (type jpg)
+
+<use p2dxUsar.jpg> (./sensor.tex
+
+LaTeX Warning: Reference `fig:sonarLaserData' on page 6 undefined on input line
  6.
 
-[5 <./p2dxReal.jpg> <./p2dxUsar.jpg>]) (./mapper.tex) (./communication.tex
-[6] <xymatrix 4x4 224>) [7]
-Underfull \hbox (badness 10000) in paragraph at lines 168--173
+[6 <./p2dxReal.jpg> <./p2dxUsar.jpg>]) (./mapper.tex) (./communication.tex
+[7] <xymatrix 4x4 224>) [8]
+Underfull \hbox (badness 10000) in paragraph at lines 141--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--173
+Underfull \hbox (badness 10000) in paragraph at lines 141--146
 
  []
 
-[8] [9] (./discussion.tex
+[9] [10] (./discussion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--15
 
  []
@@ -475,14 +476,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--15
 
  []
 
-) [10] (./finalreportAP2DX.aux)
+) [11] (./finalreportAP2DX.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 7969 strings out of 495006
- 113819 string characters out of 1181410
+ 7976 strings out of 495006
+ 113896 string characters out of 1181410
  234003 words of memory out of 3000000
  10975 multiletter control sequences out of 15000+50000
  10019 words of font info for 39 fonts, out of 3000000 for 9000
@@ -503,9 +504,9 @@ ts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt1
 share/texmf-texlive/fonts/type1/public/xypic/xyatip10.pfb></usr/share/texmf-tex
 live/fonts/type1/public/xypic/xybtip10.pfb></usr/share/texmf-texlive/fonts/type
 1/public/xypic/xydash10.pfb>
-Output written on finalreportAP2DX.pdf (11 pages, 240333 bytes).
+Output written on finalreportAP2DX.pdf (12 pages, 242599 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 46 named destinations out of 1000 (max. 500000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
  235 words of extra memory for PDF output out of 10000 (max. 10000000)
 
