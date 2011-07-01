@@ -27,6 +27,17 @@ what kind of protocol a connection uses and can set up the right message reader
 or \texttt{USARSimMessageReader}) and thus, deal correctly with the incoming messages. 
 
 \subsubsection{Dealing with messages}
+\begin{figure}
+%\includegraphics{/name/}
+\centerline{
+\xymatrix{& Message \ar[dl] \ar[dr] &  \\
+AP2DXMessage \ar[d] && UsarSimMessage \ar[d] & \\
+SpecializedMessage\ar[d] && (individual messages) \\
+(individual messages)& &  }
+}
+\caption{The hierarchy of our message types}
+\label{fig:messageHierarchy}
+\end{figure}
 Different kind of messages need to be dealt with as well. The source and destination module ID take care
 of getting the message to the right module. The type is used to identify a message. Once a message
 has been identified as, for example a range scanner sensor message (type:
@@ -38,11 +49,6 @@ values.
 
 The hierarchy of our messages can be seen in figure \ref{fig:messageHierarchy}. 
 
-\begin{figure}
-\label{fig:messageHierarchy}
-%\includegraphics{/name/}
-\caption{The hierarchy of our message types}
-\end{figure}
 
 \todo{create and insert picture here}
 
