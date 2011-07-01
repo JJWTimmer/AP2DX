@@ -12,14 +12,14 @@
 \contentsline {subsection}{\numberline {3.5}Mapper}{6}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}Planner}{6}{subsection.3.6}
 \contentsline {subsubsection}{\numberline {3.6.1}Behavior: Drive}{6}{subsubsection.3.6.1}
-\contentsline {subsubsection}{\numberline {3.6.2}Behavior: Check hole}{6}{subsubsection.3.6.2}
-\contentsline {subsubsection}{\numberline {3.6.3}Behavior: Get free}{6}{subsubsection.3.6.3}
+\contentsline {subsubsection}{\numberline {3.6.2}Behavior: Check hole}{7}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {3.6.3}Behavior: Get free}{7}{subsubsection.3.6.3}
 \contentsline {subsection}{\numberline {3.7}Reflex}{7}{subsection.3.7}
 \contentsline {subsection}{\numberline {3.8}Motor}{7}{subsection.3.8}
 \contentsline {subsection}{\numberline {3.9}Communication}{7}{subsection.3.9}
 \contentsline {subsubsection}{\numberline {3.9.1}Protocols}{7}{subsubsection.3.9.1}
 \contentsline {subsubsection}{\numberline {3.9.2}The Message class}{7}{subsubsection.3.9.2}
-\contentsline {subsubsection}{\numberline {3.9.3}Dealing with messages}{7}{subsubsection.3.9.3}
+\contentsline {subsubsection}{\numberline {3.9.3}Dealing with messages}{8}{subsubsection.3.9.3}
 \contentsline {subsubsection}{\numberline {3.9.4}Synchronization between Reflex and Planner}{8}{subsubsection.3.9.4}
 \contentsline {section}{\numberline {4}Building and Testing}{9}{section.4}
 \contentsline {subsection}{\numberline {4.1}Git}{9}{subsection.4.1}
