@@ -2,16 +2,12 @@ package AP2DX.planner;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import sun.reflect.generics.tree.BottomSignature;
 
 import AP2DX.AP2DXBase;
 import AP2DX.AP2DXMessage;
 import AP2DX.Message;
 import AP2DX.Module;
 import AP2DX.specializedMessages.ActionMotorMessage;
-import AP2DX.specializedMessages.ActionMotorMessage.ActionType;
 import AP2DX.specializedMessages.ClearMessage;
 import AP2DX.specializedMessages.InsSensorMessage;
 import AP2DX.specializedMessages.OdometrySensorMessage;
@@ -19,6 +15,10 @@ import AP2DX.specializedMessages.ResetMessage;
 import AP2DX.specializedMessages.SonarSensorMessage;
 
 public class Program extends AP2DXBase {
+
+	private static final double BACKWARDSPEED = 3.0;
+
+	private static final double FORWARDSPEED = 10.0;
 
 	/**
 	 * threshold for turning in angle direction, robot should drive in a
@@ -31,12 +31,12 @@ public class Program extends AP2DXBase {
 	 * This much should two sonardata results of one side sensor differ,
 	 * before it will check the hole
 	 */
-	private static final double TURNTHRESHOLD = 1.0;
+	private static final double TURNTHRESHOLD = 0.75;
 	
 	/**
 	 * Mid four sonar sensors should  be at least this deep to drive into hole
 	 */
-	private static final double NEEDEDDEPTH = 0.5;
+	private static final double NEEDEDDEPTH = 0.4;
 
 	/**
 	 * drive this much past a hole before restarting scan of environment
@@ -46,28 +46,28 @@ public class Program extends AP2DXBase {
 	/**
 	 * drive this much past a hole before scanning it
 	 */
-	private static final double PASSHOLECORNER = 0.3;
+	private static final double PASSHOLECORNER = 0.4;
 
 	/**
 	 * If distance from bot to wall (side sonar sensors) is larger than this,
 	 * don't do hole checking.
 	 */
-	private static final double IGNOREDISTANCE = 0.8;
+	private static final double IGNOREDISTANCE = 0.5;
 
 	/**
 	 * if movement is only this much between two INS data, then it is 'no movement'
 	 */
-	private static final double MOVEMENTTHRESHOLD = 0.2;
+	private static final double MOVEMENTTHRESHOLD = 0.01;
 
 	/**
 	 * Did not move after this many INS data? Then action has to be taken.
 	 */
-	private static final int NOMOVECOUNT = 100;
+	private static final int NOMOVECOUNT = 10;
 
 	/**
 	 * If stuck, drive this much back
 	 */
-	private static final double BACKWARDDISTANCE = 0.3;
+	private static final double BACKWARDDISTANCE = 0.15;
 
 	private InsLocationData locData;
 
@@ -84,7 +84,7 @@ public class Program extends AP2DXBase {
 
 	private double destinationAngle;
 
-	private boolean startedTurning = false;
+	private boolean startedTurningToHole = false;
 
 	/** permission to save sonardata for direction determining */
 	private boolean sonarPermission = false;
@@ -97,11 +97,11 @@ public class Program extends AP2DXBase {
 
 	private int lastDirection;
 
-	private boolean startedTurningBack;
+	private boolean startedTurningBackFromHole;
 
-	private boolean waitPassingHole;
+	private boolean getInFrontOfHole;
 
-	private boolean passHole;
+	private boolean drivePastHole;
 
 	private boolean stopBot;
 
@@ -109,7 +109,7 @@ public class Program extends AP2DXBase {
 
 	private boolean reverse;
 	
-	private int noMovementCount = 0;
+	private int noMovementCount = -20;
 
 	private boolean stuck; 
 
@@ -126,33 +126,53 @@ public class Program extends AP2DXBase {
 	public Program() {
 		super(Module.PLANNER); // explicitly calls base constructor
 
-		System.out.println(" Running Planner... ");
+		AP2DXBase.logger.info(" Running Planner... ");
 	}
 
 	@Override
 	public ArrayList<AP2DXMessage> componentLogic(Message message) {
 		ArrayList<AP2DXMessage> messageList = new ArrayList<AP2DXMessage>();
+		// AP2DXBase.logger.info("Received message " + message.getMessageString());
+		// AP2DXBase.logger.info(String.format("In Queue: %s",
+		// this.getReceiveQueue().size()));
 
 		switch (message.getMsgType()) {
 		case AP2DX_PLANNER_STOP:
 
-			startAngle = currentAngle;
-
-			sonarPermission = true;
-
-			messageList.add(new ResetMessage(IAM, Module.REFLEX));
-
-			stopBot = true;
-			stuck = false;
-			reverse = false;
+			if (!stuck) {
+				
+				startAngle = currentAngle;
+	
+				messageList.add(new ResetMessage(IAM, Module.REFLEX));
+				
+				AP2DXMessage msg7 = new ActionMotorMessage(IAM,
+						Module.REFLEX,
+						ActionMotorMessage.ActionType.BACKWARD, BACKWARDSPEED);
+				msg7.compileMessage();
+				messageList.add(msg7);
+				
+				setDistanceGoal(BACKWARDDISTANCE);
+				setTravelDistance(0.0);
+				
+				noMovementCount = 0;
+				
+				//this changed
+				stopBot = true;
+				reverse = true;
+				
+				sonarPermission = false;
+				stuck = false;
+				cruising = false;
+				drivePastHole = false;
+				doHoleScan = false;
+				startedTurningToHole = false;
+				startedTurningBackFromHole = false;
+				getInFrontOfHole = false;
 			
-			cruising = false;
-			passHole = false;
-			doHoleScan = false;
-			startedTurning = false;
-			startedTurningBack = false;
-			
+			}
 			break;
+		
+		// INS is used to calculated distance travelled
 		case AP2DX_SENSOR_INS:
 
 			InsSensorMessage msg = (InsSensorMessage) message;
@@ -168,26 +188,54 @@ public class Program extends AP2DXBase {
 				setTravelDistance(getTravelDistance()
 						+ locData.travelDistance());
 
-				//if (locData.travelDistance() < MOVEMENTTHRESHOLD && !stuck && !reverse && !sonarPermission && !stopBot && !doHoleScan) {
-				if (locData.travelDistance() < MOVEMENTTHRESHOLD && !stuck && !reverse) {
+				if (locData.travelDistance() < MOVEMENTTHRESHOLD && !stuck && !reverse && !sonarPermission && !stopBot && !doHoleScan && !startedTurningBackFromHole) {
+				//if (locData.travelDistance() < MOVEMENTTHRESHOLD && !stuck && !stopBot) {
 					noMovementCount++;
 				} else {
 					noMovementCount = 0;
 				}
 				
 				if (getDistanceGoal() > 0) {
-					if (getTravelDistance() >= getDistanceGoal() && passHole && !reverse) {
-						passHole = false;
+					if (getTravelDistance() >= getDistanceGoal() && drivePastHole) {
+						AP2DXBase.logger.info("Passed the hole (we hope)");
+						drivePastHole = false;
 						doHoleScan = false;
 						cruising = true;
 						
 						setDistanceGoal(0);
 						
 						
-					} else if (getTravelDistance() >= getDistanceGoal() && waitPassingHole && !reverse) {
-						waitPassingHole = false;
+					} else if (getTravelDistance() >= PASSHOLECORNER && getInFrontOfHole) {
+						AP2DXBase.logger.info("Maybe infront of hole");
 
-						startedTurning = true;
+						
+						startedTurningToHole = true;
+						
+						getInFrontOfHole = false;
+						reverse = false;
+						stopBot = false;
+						stuck = false;
+						cruising = false;
+						drivePastHole = false;
+						sonarPermission = false;
+						doHoleScan = false;
+						startedTurningBackFromHole = false;
+						
+						
+						startAngle = currentAngle;
+						
+						if (lastDirection == -1) {
+							destinationAngle = startAngle - (0.5*Math.PI);
+							if (destinationAngle < -Math.PI) {
+								destinationAngle = Math.PI + (destinationAngle + Math.PI);
+							}
+						}
+						else {
+							destinationAngle = startAngle + (0.5*Math.PI);
+							if (destinationAngle > Math.PI) {
+								destinationAngle = -Math.PI + (destinationAngle - Math.PI);
+							}
+						}
 						
 						messageList.add(new ResetMessage(IAM, Module.REFLEX));
 						
@@ -200,53 +248,67 @@ public class Program extends AP2DXBase {
 						setDistanceGoal(0);
 				}
 				else if (reverse && (getTravelDistance() >= getDistanceGoal())) {
-				//else if (reverse && (getDistanceGoal() >= getTravelDistance())) {
-						startAngle = currentAngle;
+						AP2DXBase.logger.info("Wend backward for distanceGoal meters...");
 
-						sonarPermission = true;
-
-						messageList.add(new ResetMessage(IAM, Module.REFLEX));
-
-						Random rand = new Random();
-						
-						int direction = (rand.nextBoolean() ? 1 : -1);
-						
-						startAngle = currentAngle;
-						destinationAngle = startAngle + direction * 0.75 * Math.PI ;
-						
-						if (destinationAngle < -Math.PI) {
-							destinationAngle = Math.PI + (destinationAngle + Math.PI);
-						} else if (destinationAngle > Math.PI) {
-							destinationAngle = -Math.PI + (destinationAngle - Math.PI);
+						if (stopBot) {
+							reverse = false;
+							sonarPermission = true;
 						}
-						
-						AP2DXMessage msg7 = new ActionMotorMessage(IAM,
-								Module.REFLEX,
-								ActionMotorMessage.ActionType.TURN, direction);
-						msg7.compileMessage();
-						messageList.add(msg7);
-						
-						stopBot = true;
-						stuck = true;
-						reverse = false;
+						else { 
+							messageList.add(new ResetMessage(IAM, Module.REFLEX));
+	
+							Random rand = new Random();
+							
+							int direction = (rand.nextBoolean() ? 1 : -1);
+							
+							startAngle = currentAngle;
+							destinationAngle = startAngle + direction * 0.5 * Math.PI ;
+							
+							if (destinationAngle < -Math.PI) {
+								destinationAngle = Math.PI - (destinationAngle + Math.PI);
+							} else if (destinationAngle > Math.PI) {
+								destinationAngle = -Math.PI + (destinationAngle - Math.PI);
+							}
+							
+							AP2DXMessage msg7 = new ActionMotorMessage(IAM,
+									Module.REFLEX,
+									ActionMotorMessage.ActionType.TURN, direction);
+							msg7.compileMessage();
+							messageList.add(msg7);
+							
+							sonarPermission = false;
+							stuck = true;
+							
+							stopBot = false;
+							reverse = false;
+							cruising = false;
+							drivePastHole = false;
+							doHoleScan = false;
+							startedTurningToHole = false;
+							startedTurningBackFromHole = false;
+							getInFrontOfHole = false;
+						}
 					}
 				}
 				
 				if (noMovementCount > NOMOVECOUNT && !stopBot && !reverse) {
+					AP2DXBase.logger.info("No movement, going backward");
+					
 					reverse = true;
 					
 					stopBot = false;
 					stuck = false;
 					cruising = false;
-					passHole = false;
+					drivePastHole = false;
 					sonarPermission = false;
 					doHoleScan = false;
-					startedTurning = false;
-					startedTurningBack = false;
+					startedTurningToHole = false;
+					startedTurningBackFromHole = false;
+					getInFrontOfHole = false;
 					
 					AP2DXMessage msg7 = new ActionMotorMessage(IAM,
 							Module.REFLEX,
-							ActionMotorMessage.ActionType.BACKWARD, 3.0);
+							ActionMotorMessage.ActionType.BACKWARD, BACKWARDSPEED);
 					msg7.compileMessage();
 					messageList.add(msg7);
 					
@@ -257,13 +319,16 @@ public class Program extends AP2DXBase {
 				}
 			}
 			break;
+			
+		//sonar is used to calculate if path is free
 		case AP2DX_SENSOR_SONAR:
 			SonarSensorMessage msgs = (SonarSensorMessage) message;
 
 			lastSonarData = sonarData;
 			sonarData = msgs.getRangeArray();
 			
-			if (stopBot) {
+			if (stopBot && !reverse) {
+				AP2DXBase.logger.info("Bot stopped!");
 				/*
 				 * First field is the value of the sonar, second field is the index
 				 * of the value in sonarData
@@ -294,9 +359,20 @@ public class Program extends AP2DXBase {
 					messageList.add(msgt);
 				}
 				
+				sonarPermission = true;
+				
+				reverse = false;
 				stopBot = false;
+				stuck = false;
+				cruising = false;
+				drivePastHole = false;
+				doHoleScan = false;
+				startedTurningToHole = false;
+				startedTurningBackFromHole = false;
+				getInFrontOfHole = false;
 			}
 			else if (sonarPermission && !reverse) {
+				AP2DXBase.logger.info("Having sonarPermissions");
 				boolean[] space = new boolean[4];
 				for (int i = 2; i < 6; i++) {
 					space[i-2] = (sonarData[i] >= NEEDEDDEPTH);  
@@ -315,14 +391,24 @@ public class Program extends AP2DXBase {
 
 					AP2DXMessage msg6 = new ActionMotorMessage(IAM,
 							Module.REFLEX,
-							ActionMotorMessage.ActionType.FORWARD, 10.0);
+							ActionMotorMessage.ActionType.FORWARD, FORWARDSPEED);
 					msg6.compileMessage();
 					messageList.add(msg6);
 
 					cruising = true;
+					
+					reverse = false;
+					stopBot = false;
+					stuck = false;
+					drivePastHole = false;
 					sonarPermission = false;
+					doHoleScan = false;
+					startedTurningToHole = false;
+					startedTurningBackFromHole = false;
+					getInFrontOfHole = false;
 				}
 			} else if (doHoleScan && !reverse) {
+				AP2DXBase.logger.info("Doing a holescan");
 				doHoleScan = false;
 				
 				boolean[] space = new boolean[4];
@@ -337,23 +423,25 @@ public class Program extends AP2DXBase {
 					}
 				}
 				if (succeed) {
+					AP2DXBase.logger.info("Yay a hole");
 					
-					startedTurningBack = false;
-					startedTurning = false;
+					startedTurningBackFromHole = false;
+					startedTurningToHole = false;
 					
 					AP2DXMessage msg8 = new ClearMessage(IAM, Module.REFLEX);
 					msg8.compileMessage();
 					messageList.add(msg8);
 					
 					AP2DXMessage msg5 = new ActionMotorMessage(IAM, Module.REFLEX,
-							ActionMotorMessage.ActionType.FORWARD, 10.0);
+							ActionMotorMessage.ActionType.FORWARD, FORWARDSPEED);
 					msg5.compileMessage();
 					messageList.add(msg5);
 				}
 				else {
+					AP2DXBase.logger.info("Not a nice hole, going back");
 					
-					startedTurningBack = true;
-					startedTurning = false;
+					startedTurningBackFromHole = true;
+					startedTurningToHole = false;
 					
 					destinationAngle = startAngle;
 					startAngle = currentAngle;
@@ -367,6 +455,7 @@ public class Program extends AP2DXBase {
 				}
 			}
 			else if(cruising && !reverse) {
+				AP2DXBase.logger.info("Just cruising");
 				// 0 = no hole
 				int hole = 0;
 				
@@ -381,42 +470,31 @@ public class Program extends AP2DXBase {
 				
 				// there is a hole
 				if (hole != 0) {
+					AP2DXBase.logger.info("Hey, is that a hole?");
 					
-					waitPassingHole = true;
+					getInFrontOfHole = true;
 					cruising = false;
 					
-					startAngle = currentAngle;
-					
-					
-					if (hole == -1) {
-						destinationAngle = startAngle - (0.5*Math.PI);
-						if (destinationAngle < -Math.PI) {
-							destinationAngle = Math.PI + (destinationAngle + Math.PI);
-						}
-					}
-					else {
-						destinationAngle = startAngle + (0.5*Math.PI);
-						if (destinationAngle > Math.PI) {
-							destinationAngle = -Math.PI + (destinationAngle - Math.PI);
-						}
-					}
-					
 					lastDirection = hole;
-					
-					waitPassingHole = true;
 					
 					setDistanceGoal(PASSHOLECORNER);
 					setTravelDistance(0);
 				}
 			}
 			break;
+			
+		// odometry is used to calculate turn angle
 		case AP2DX_SENSOR_ODOMETRY:
+			//AP2DXBase.logger.info("parsing odometry message in planner");
 
 			OdometrySensorMessage msgo = (OdometrySensorMessage) message;
 
 			currentAngle = msgo.getTheta();
-			if (stuck && !reverse)
+			
+			if (stuck)
 			{
+				AP2DXBase.logger.info("turning away from stuck position");
+				
 				boolean success = false;
 				
 				double minAngle = destinationAngle - ANGLEUNCERTAIN;
@@ -462,13 +540,14 @@ public class Program extends AP2DXBase {
 				if (success) {
 					
 					stuck = false;
-
 					sonarPermission = true;
 
+					AP2DXBase.logger.info("turned successfully away from stuck position");
 				}
 				
 			}
-			else if (startedTurning && !reverse) {
+			else if (startedTurningToHole) {
+				AP2DXBase.logger.info("Checking hole");
 				boolean success = false;
 				
 				double minAngle = destinationAngle - ANGLEUNCERTAIN;
@@ -513,7 +592,7 @@ public class Program extends AP2DXBase {
 				
 				if (success) {
 					
-					startedTurning = false;
+					startedTurningToHole = false;
 					
 					doHoleScan  = true;
 
@@ -523,9 +602,13 @@ public class Program extends AP2DXBase {
 					msg6.compileMessage();
 					messageList.add(msg6);
 
+					System.out
+							.println("Sending stop message for scanning");
 				}
 			}
-			else if (startedTurningBack && !reverse) {
+			else if (startedTurningBackFromHole) {
+				AP2DXBase.logger.info("Hole was not interesting");
+				
 				boolean success = false;
 				
 				double minAngle = destinationAngle - ANGLEUNCERTAIN;
@@ -569,7 +652,7 @@ public class Program extends AP2DXBase {
 				}
 				
 				if (success) {	
-					startedTurningBack = false;
+					startedTurningBackFromHole = false;
 
 					AP2DXMessage msg5 = new ClearMessage(IAM, Module.REFLEX);
 					msg5.compileMessage();
@@ -577,22 +660,26 @@ public class Program extends AP2DXBase {
 					
 					AP2DXMessage msg6 = new ActionMotorMessage(IAM,
 							Module.REFLEX,
-							ActionMotorMessage.ActionType.FORWARD, 10.0);
+							ActionMotorMessage.ActionType.FORWARD, FORWARDSPEED);
 					msg6.compileMessage();
 					messageList.add(msg6);
 					
-					passHole = true;
+					drivePastHole = true;
 					
 					setDistanceGoal(PASSHOLEDISTANCE);
 					setTravelDistance(0);
+
+					AP2DXBase.logger.info("Turned back, going forward again");
 				}
 			}
 			if (!firstMessage) {
 				// for now, lets just drive forward, OKAY?!
 				AP2DXMessage msg5 = new ActionMotorMessage(IAM, Module.REFLEX,
-						ActionMotorMessage.ActionType.FORWARD, 10.0);
+						ActionMotorMessage.ActionType.FORWARD, FORWARDSPEED);
 				msg5.compileMessage();
 				messageList.add(msg5);
+
+				AP2DXBase.logger.info("Sending message first message");
 
 				cruising = true;
 				
